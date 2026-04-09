@@ -11,9 +11,7 @@ navbar_title: Home
 
         {% include widgets/profile_card_bio_only.html %}
 
-        {% include widgets/featured_cards.html title="Selected Papers" items=site.data.featured.papers %}
-
-        {% include widgets/featured_cards.html title="Game Project" items=site.data.featured.games row_class="justify-content-center" column_class="col-lg-6 col-md-8" %}
+        {% include widgets/featured_cards.html title="Papers and Projects" items=site.data.featured.works %}
 
         {% if site.data.display.homepage.show_experience %}
             {% include widgets/experience_card.html %}

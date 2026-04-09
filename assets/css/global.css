@@ -113,12 +113,16 @@ div.lazy {
 }
 
 .featured-work-image-wrap {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     max-width: 100%;
-    background: #f8f9fa;
-    height: 180px;
+    background: #ffffff;
+    height: 210px;
+    padding: 0.75rem;
     overflow: hidden;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .featured-work-image {
@@ -126,17 +130,30 @@ div.lazy {
     width: 100%;
     max-width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center center;
 }
 
-.featured-work-eyebrow {
-    letter-spacing: 0.08em;
+.featured-work-card .card-body {
+    padding: 1.15rem 1.25rem 1.2rem;
+}
+
+.featured-work-card h5 {
+    font-size: 1.05rem;
+    line-height: 1.35;
+}
+
+.featured-work-card .text-muted {
+    line-height: 1.55;
+}
+
+.featured-work-meta {
+    color: #1f2933;
 }
 
 @media (max-width: 767.98px) {
     .featured-work-image-wrap {
-        height: 160px;
+        height: 185px;
     }
 }
 
