@@ -1,13 +1,13 @@
 {% assign items = include.items %}
-<div class="my-3 p-0 bg-white shadow-sm rounded-xl">
-    <h6 class="border-bottom border-gray p-3 mb-0">
+<div class="my-2 p-0 bg-white shadow-sm border featured-work-section">
+    <h6 class="border-bottom border-gray px-3 py-2 mb-0">
         {{ include.title }}
     </h6>
-    <div class="p-3">
+    <div class="p-2">
         <div class="row featured-work-grid {% if include.row_class %}{{ include.row_class }}{% endif %}">
             {% for item in items %}
-            <div class="featured-work-col {% if include.column_class %}{{ include.column_class }}{% else %}col-lg-6 col-md-6 col-12{% endif %} mb-3">
-                <div class="card featured-work-card h-100 border-0 shadow-sm bg-white">
+            <div class="featured-work-col {% if include.column_class %}{{ include.column_class }}{% else %}col-lg-6 col-md-6 col-12{% endif %} mb-2">
+                <div class="card featured-work-card h-100 border bg-white">
                     <a class="featured-work-image-wrap" target="_blank" rel="noopener noreferrer" href="{{ item.link_url }}">
                         <img src="{{ item.image | relative_url }}" alt="{{ item.name }}" class="featured-work-image" loading="lazy">
                     </a>
@@ -16,9 +16,11 @@
                         {% if item.detail %}
                         <p class="small text-muted mb-2">{{ item.detail }}</p>
                         {% endif %}
+                        {% if item.meta_label and item.meta_value %}
                         <p class="small mb-3 featured-work-meta">
                             <span class="font-weight-bold">{{ item.meta_label }}:</span> {{ item.meta_value }}
                         </p>
+                        {% endif %}
                         <div class="mt-auto">
                             <a class="btn btn-sm btn-outline-primary no-break" target="_blank" rel="noopener noreferrer" href="{{ item.link_url }}">
                                 {{ item.link_label }}
