@@ -3,8 +3,8 @@ secondary_name: ""
 navbar_name: "Xulin Li"
 
 positions:
-- name: "Student"
-- name: "University of Science and Technology"
+- name: "PhD Student"
+- name: "University of Science and Technology of China"
 
 email: ""
 # cv_link: link-to-your-cv-file
@@ -20,7 +20,7 @@ github: kw66
 short_bio_text_justify: false
 short_bio: >-
   <p>
-    I am Xulin Li (kw66), a student interested in computer vision, person re-identification, and open-source research tooling.
+    I am Xulin Li (kw66), a PhD student at the University of Science and Technology of China (USTC).
   </p>
   <p>
     My public GitHub projects span research code, figure-making workflows, and experimental interactive systems.
