@@ -10,6 +10,11 @@ body_attr: >-
 
 <div class="row">
     <div class="col-12 col-lg-10">
+        {% if pubs_by_year.size == 0 %}
+        <div class="alert alert-light border shadow-sm mt-4" role="alert">
+            Publications will be added here.
+        </div>
+        {% endif %}
         {% for year in pubs_by_year %}
         {% assign num_papers = year.items | size %}
         <h2 class="pt-4" id="year-{{ year.name }}">{{ year.name }}</h2>
