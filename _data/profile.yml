@@ -1,0 +1,41 @@
+primary_name: "Xulin Li"
+secondary_name: ""
+navbar_name: "Xulin Li"
+
+positions:
+- name: Student Researcher
+- name: Computer Vision / Person Re-Identification / Retrieval
+
+email: ""
+# cv_link: link-to-your-cv-file
+# gscholar: your-google-scholar-id
+github: kw66
+# twitter: your_twitter_id  # Do not include the '@' symbol
+# wechat_qrcode: /assets/images/etc/wechat.jpg
+# wechat_prompt: >-
+#   Please tell me your <strong>name</strong> and <strong>affiliation</strong> (current or past) when adding my wechat. Thanks!
+# linkedin: your-linked-in-id
+# orcid: 0000-0000-0000-0000
+
+short_bio_text_justify: false
+short_bio: >-
+  <p>
+    I work on computer vision, person re-identification, retrieval, and the practical communication of research systems.
+  </p>
+  <p>
+    This site is the root homepage for my academic-facing work. Project-specific pages, such as <a href="https://kw66.github.io/PhD_Simulator/" target="_blank">PhD_Simulator</a>, remain on separate subpaths under the same domain.
+  </p>
+
+portrait_url: /assets/images/photos/portrait.jpg
+portrait_caption: >-
+  GitHub profile portrait.
+
+education: []
+
+# experience:
+# - name: Peking University
+#   logo: /assets/images/badges/PKU_red.png
+#   position: Research Intern
+#   date: Sep. 2019 - Jul. 2021
+
+awards: []
