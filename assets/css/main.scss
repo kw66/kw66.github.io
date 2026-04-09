@@ -87,6 +87,42 @@
 
 }
 
+.paper-list-item {
+    padding: 1.2em 0;
+    border-bottom: 1px #efefef solid;
+}
+
+.work-title {
+    margin: 0 0 .35em 0;
+    color: #2b5d7a;
+    font-size: 1.18em;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.work-authors,
+.work-meta,
+.work-links {
+    margin: 0 0 .3em 0;
+}
+
+.work-authors {
+    color: #555;
+    line-height: 1.6;
+}
+
+.work-authors strong {
+    color: #222;
+}
+
+.work-meta {
+    color: #666;
+}
+
+.work-links a {
+    margin-right: 1rem;
+}
+
 $scroll_offset : 2em;
 h1:before, .anchor:before { 
     content: ''; 
