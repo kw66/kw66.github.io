@@ -103,16 +103,25 @@ div.lazy {
 .featured-work-image-wrap {
     display: block;
     background: #f8f9fa;
+    height: 180px;
+    overflow: hidden;
 }
 
 .featured-work-image {
     display: block;
     width: 100%;
-    aspect-ratio: 16 / 9;
+    height: 100%;
     object-fit: cover;
+    object-position: center center;
 }
 
 .featured-work-eyebrow {
     letter-spacing: 0.08em;
+}
+
+@media (max-width: 767.98px) {
+    .featured-work-image-wrap {
+        height: 160px;
+    }
 }
 
