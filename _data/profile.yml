@@ -1,15 +1,15 @@
-primary_name: "[Your Name]"
+primary_name: "Xulin Li"
 secondary_name: ""
-navbar_name: "[Your Name]"
+navbar_name: "Xulin Li"
 
 positions:
-- name: "[Your Position]"
-- name: "[Your Affiliation]"
+- name: "Student"
+- name: "University of Science and Technology"
 
 email: ""
 # cv_link: link-to-your-cv-file
 # gscholar: your-google-scholar-id
-# github: your_github_id
+github: kw66
 # twitter: your_twitter_id  # Do not include the '@' symbol
 # wechat_qrcode: /assets/images/etc/wechat.jpg
 # wechat_prompt: >-
@@ -20,11 +20,15 @@ email: ""
 short_bio_text_justify: false
 short_bio: >-
   <p>
-    [Short biography to be added.]
+    I am Xulin Li (kw66), a student interested in computer vision, retrieval, and open-source research tools.
+  </p>
+  <p>
+    My public GitHub work currently includes <a href="https://github.com/kw66/AT-ReID" target="_blank">AT-ReID</a>, <a href="https://github.com/kw66/research-figures" target="_blank">research-figures</a>, and <a href="https://github.com/kw66/PhD_Simulator" target="_blank">PhD_Simulator</a>.
   </p>
 
-portrait_url: ""
-portrait_caption: ""
+portrait_url: /assets/images/photos/portrait.jpg
+portrait_caption: >-
+  GitHub profile portrait.
 
 education: []
 
