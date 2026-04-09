@@ -12,10 +12,6 @@ redirect_from:
 
 I am Xulin Li, a PhD student at the University of Science and Technology of China (USTC).
 
-<span class='anchor' id='papers-and-projects'></span>
-
-# Papers and Projects
-
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">IJCAI 2025</div><img src='images/works/at-reid.png' alt="AT-ReID preview" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
