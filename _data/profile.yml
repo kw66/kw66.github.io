@@ -1,15 +1,15 @@
-primary_name: "Xulin Li"
+primary_name: "[Your Name]"
 secondary_name: ""
-navbar_name: "Xulin Li"
+navbar_name: "[Your Name]"
 
 positions:
-- name: Student Researcher
-- name: Computer Vision / Person Re-Identification / Retrieval
+- name: "[Your Position]"
+- name: "[Your Affiliation]"
 
 email: ""
 # cv_link: link-to-your-cv-file
 # gscholar: your-google-scholar-id
-github: kw66
+# github: your_github_id
 # twitter: your_twitter_id  # Do not include the '@' symbol
 # wechat_qrcode: /assets/images/etc/wechat.jpg
 # wechat_prompt: >-
@@ -20,15 +20,11 @@ github: kw66
 short_bio_text_justify: false
 short_bio: >-
   <p>
-    I work on computer vision, person re-identification, retrieval, and the practical communication of research systems.
-  </p>
-  <p>
-    This site is the root homepage for my academic-facing work. Project-specific pages, such as <a href="https://kw66.github.io/PhD_Simulator/" target="_blank">PhD_Simulator</a>, remain on separate subpaths under the same domain.
+    [Short biography to be added.]
   </p>
 
-portrait_url: /assets/images/photos/portrait.jpg
-portrait_caption: >-
-  GitHub profile portrait.
+portrait_url: ""
+portrait_caption: ""
 
 education: []
 

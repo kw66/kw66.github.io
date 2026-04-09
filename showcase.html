@@ -7,6 +7,12 @@ container_class: container-xl
 
 {% assign cards_by_group = site.showcase | sort: "date" | reverse | where: "show", true | group_by_exp: "item", "item.group" %}
 
+{% if cards_by_group.size == 0 %}
+<div class="alert alert-light border shadow-sm mt-4" role="alert">
+    Showcase content will be added here.
+</div>
+{% endif %}
+
 {% for group in cards_by_group %}
 <h1>{{ group.name }}</h1>
 <div class="row grid mb-4">
