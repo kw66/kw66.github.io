@@ -1,18 +1,13 @@
 # kw66.github.io
 
-Personal academic homepage repository for `kw66`.
+Source repository for the personal academic homepage of Xulin Li.
 
-## Status
+Site URL:
+- https://kw66.github.io/
 
-This site is currently being filled section by section.
+Main files:
+- `_config.yml`: site profile and sidebar information
+- `_pages/about.md`: homepage content
+- `images/`: portrait and project preview images
 
-## Deployment
-
-The repository is published as a GitHub Pages user site at:
-
-- `https://kw66.github.io/`
-
-## Notes
-
-- The current site structure is based on the `academic-homepage` template by `luost26`
-- Repository content is being customized progressively for this homepage
+This site is based on the `AcadHomepage` Jekyll template and customized for this repository.
