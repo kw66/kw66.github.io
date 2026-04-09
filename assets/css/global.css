@@ -90,20 +90,27 @@ div.lazy {
     font-family: Source Code Pro, monospace;
 }
 
-.featured-work-section {
-    border-radius: 0 !important;
+.featured-work-list {
+    background: transparent;
+}
+
+.featured-work-list-title {
+    font-size: 1.45rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-top: 0.15rem;
 }
 
 .featured-work-entry {
     min-width: 0;
+    padding: 0.85rem 0;
 }
 
 .featured-work-image-wrap {
     display: block;
     width: 100%;
-    background: #ffffff;
+    background: transparent;
     padding: 0;
-    border-radius: 0 !important;
 }
 
 .featured-work-image {
@@ -113,7 +120,7 @@ div.lazy {
 }
 
 .featured-work-content {
-    padding: 0.65rem 0.95rem 0.65rem 0.35rem;
+    padding: 0.1rem 0 0.1rem 0.2rem;
     width: 100%;
 }
 
@@ -132,8 +139,12 @@ div.lazy {
 }
 
 @media (max-width: 767.98px) {
+    .featured-work-entry {
+        padding: 0.75rem 0;
+    }
+
     .featured-work-content {
-        padding: 0 0.85rem 0.85rem;
+        padding: 0.3rem 0 0.1rem;
     }
 }
 
