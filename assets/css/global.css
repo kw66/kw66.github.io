@@ -90,3 +90,29 @@ div.lazy {
     font-family: Source Code Pro, monospace;
 }
 
+.featured-work-card {
+    overflow: hidden;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.featured-work-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.08) !important;
+}
+
+.featured-work-image-wrap {
+    display: block;
+    background: #f8f9fa;
+}
+
+.featured-work-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.featured-work-eyebrow {
+    letter-spacing: 0.08em;
+}
+
