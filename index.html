@@ -11,187 +11,227 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="page-shell">
-      <header class="site-header reveal reveal-1">
-        <a class="site-mark" href="#top">kw66</a>
+    <div class="site-shell">
+      <header class="site-header">
+        <div class="brand-block">
+          <a class="brand-name" href="#top">Xulin Li</a>
+          <p class="brand-subtitle">Academic Homepage</p>
+        </div>
         <nav class="site-nav" aria-label="Primary">
           <a href="#research">Research</a>
-          <a href="#projects">Projects</a>
+          <a href="#work">Work</a>
           <a href="#links">Links</a>
         </nav>
       </header>
 
       <main id="top">
-        <section class="hero reveal reveal-2">
-          <div class="hero-copy">
-            <p class="eyebrow">Academic Homepage</p>
+        <section class="profile-card">
+          <div class="profile-main">
+            <p class="eyebrow">Computer Vision / Person Re-ID / Retrieval</p>
             <h1>Xulin Li</h1>
-            <p class="hero-lead">
-              Building research around computer vision, person re-identification,
-              retrieval, and the visual communication of technical ideas.
+            <p class="profile-role">
+              Student researcher working on computer vision, retrieval, and the
+              practical presentation of research systems.
             </p>
-            <p class="hero-text">
-              This is the root personal site for my academic work. It sits
-              alongside project-specific pages, including
-              <a href="https://kw66.github.io/PhD_Simulator/">PhD_Simulator</a>,
-              which remains a separate project page under the same domain.
-            </p>
-
-            <div class="hero-actions">
-              <a class="button button-primary" href="https://github.com/kw66">GitHub</a>
-              <a class="button button-secondary" href="https://github.com/kw66/AT-ReID">AT-ReID</a>
-              <a class="button button-secondary" href="https://kw66.github.io/PhD_Simulator/">PhD_Simulator</a>
-            </div>
-
-            <dl class="hero-meta">
-              <div>
-                <dt>Focus</dt>
-                <dd>Computer Vision / Re-ID / Retrieval</dd>
-              </div>
-              <div>
-                <dt>Mode</dt>
-                <dd>Research + Open Source + Visual Communication</dd>
-              </div>
-            </dl>
-          </div>
-
-          <aside class="hero-panel" aria-label="Highlights">
-            <div class="panel-card panel-card-large">
-              <span class="panel-label">Current Profile</span>
-              <strong>Research-oriented engineering with a strong bias toward clarity.</strong>
+            <div class="profile-text">
               <p>
-                I care about benchmarks, reusable assets, and tools that make
-                research easier to run and easier to explain.
+                My interests center on person re-identification, retrieval under
+                real-world variation, benchmark construction, and the visual
+                communication of technical ideas. I care about research that is
+                not only quantitatively strong, but also clearly explained and
+                easy to revisit later.
+              </p>
+              <p>
+                This site is the root homepage for my academic-facing work.
+                Project-specific pages, such as
+                <a href="https://kw66.github.io/PhD_Simulator/">PhD_Simulator</a>,
+                remain on their own subpaths under the same domain.
               </p>
             </div>
-            <div class="panel-grid">
-              <a class="panel-card" href="https://github.com/kw66/AT-ReID">
-                <span class="panel-label">Benchmark</span>
-                <strong>AT-ReID</strong>
-                <p>Anytime person re-identification across varied conditions.</p>
-              </a>
-              <a class="panel-card" href="https://github.com/kw66/research-figures">
-                <span class="panel-label">Assets</span>
-                <strong>research-figures</strong>
-                <p>Figures, posters, slides, and plotting sources.</p>
-              </a>
-              <a class="panel-card" href="https://kw66.github.io/PhD_Simulator/">
-                <span class="panel-label">Project Site</span>
-                <strong>PhD_Simulator</strong>
-                <p>A playful side project living at its own subpath.</p>
-              </a>
+            <div class="link-pills" aria-label="Primary links">
+              <a href="https://github.com/kw66">GitHub</a>
+              <a href="https://github.com/kw66/AT-ReID">AT-ReID</a>
+              <a href="https://github.com/kw66/research-figures">research-figures</a>
+              <a href="https://kw66.github.io/PhD_Simulator/">PhD_Simulator</a>
+            </div>
+          </div>
+
+          <aside class="profile-side">
+            <img
+              class="profile-portrait"
+              src="https://github.com/kw66.png"
+              alt="Portrait of Xulin Li"
+              loading="lazy"
+            />
+            <div class="profile-facts">
+              <div>
+                <span class="fact-label">Current Focus</span>
+                <strong>Re-ID / Retrieval / Research Communication</strong>
+              </div>
+              <div>
+                <span class="fact-label">Site Role</span>
+                <strong>Root academic homepage at kw66.github.io</strong>
+              </div>
             </div>
           </aside>
         </section>
 
-        <section id="research" class="split-section reveal reveal-3">
-          <div class="section-kicker">
-            <p>Research</p>
-          </div>
-          <div class="section-body">
-            <h2>Research interests that stay close to real use.</h2>
-            <p>
-              I am most interested in visual retrieval problems where the
-              setting is less tidy than a benchmark table suggests. That
-              includes person re-identification, retrieval under changing
-              conditions, and practical pipelines for turning experiments into
-              something understandable and reusable.
-            </p>
-            <p>
-              Beyond model performance, I care about how work is presented:
-              figures, posters, diagrams, and project pages are not decoration
-              to me. They are part of the research interface.
-            </p>
-            <div class="tag-row" aria-label="Research keywords">
-              <span>computer vision</span>
-              <span>person re-identification</span>
-              <span>retrieval</span>
-              <span>benchmark design</span>
-              <span>research figures</span>
-              <span>open-source tooling</span>
-            </div>
-          </div>
-        </section>
+        <div class="content-grid">
+          <section class="content-column">
+            <article id="research" class="content-card">
+              <div class="card-heading">
+                <p class="card-index">01</p>
+                <div>
+                  <h2>Research Interests</h2>
+                  <p class="card-lead">
+                    Current topics that best represent the work behind this homepage.
+                  </p>
+                </div>
+              </div>
 
-        <section id="projects" class="projects reveal reveal-4">
-          <div class="section-heading">
-            <p class="eyebrow">Selected Work</p>
-            <h2>Representative projects.</h2>
-          </div>
-
-          <div class="project-layout">
-            <article class="project project-featured">
-              <p class="project-type">Benchmark</p>
-              <h3>AT-ReID</h3>
-              <p>
-                A benchmark project for anytime person re-identification,
-                designed to cover daytime and nighttime retrieval across
-                short-term and long-term settings.
-              </p>
-              <a href="https://github.com/kw66/AT-ReID">Open repository</a>
+              <div class="entry-list">
+                <article class="entry">
+                  <h3>Person Re-Identification</h3>
+                  <p>
+                    Benchmark design, evaluation across varying conditions, and
+                    problem settings that move beyond idealized retrieval setups.
+                  </p>
+                </article>
+                <article class="entry">
+                  <h3>Visual Retrieval</h3>
+                  <p>
+                    Retrieval systems that remain useful and interpretable when
+                    environments, supervision, or evidence are imperfect.
+                  </p>
+                </article>
+                <article class="entry">
+                  <h3>Research Communication</h3>
+                  <p>
+                    Figures, posters, slides, and project pages as core research
+                    artifacts rather than decoration.
+                  </p>
+                </article>
+              </div>
             </article>
 
-            <article class="project">
-              <p class="project-type">Research Assets</p>
-              <h3>research-figures</h3>
-              <p>
-                A curated place for research visuals: figure assets, posters,
-                slides, and plotting source files that support cleaner,
-                reproducible communication.
-              </p>
-              <a href="https://github.com/kw66/research-figures">View assets</a>
+            <article id="work" class="content-card">
+              <div class="card-heading">
+                <p class="card-index">02</p>
+                <div>
+                  <h2>Selected Work</h2>
+                  <p class="card-lead">
+                    Representative repositories and project pages currently linked to this site.
+                  </p>
+                </div>
+              </div>
+
+              <div class="entry-list">
+                <article class="entry">
+                  <p class="entry-meta">Benchmark / Repository</p>
+                  <h3><a href="https://github.com/kw66/AT-ReID">AT-ReID</a></h3>
+                  <p>
+                    A benchmark project for anytime person re-identification,
+                    covering both daytime and nighttime retrieval across short-term
+                    and long-term settings.
+                  </p>
+                </article>
+                <article class="entry">
+                  <p class="entry-meta">Research Assets / Repository</p>
+                  <h3><a href="https://github.com/kw66/research-figures">research-figures</a></h3>
+                  <p>
+                    A repository for figure assets, posters, slides, and plotting
+                    sources that support clearer and more reproducible technical
+                    communication.
+                  </p>
+                </article>
+                <article class="entry">
+                  <p class="entry-meta">Project Page / GitHub Pages</p>
+                  <h3><a href="https://kw66.github.io/PhD_Simulator/">PhD_Simulator</a></h3>
+                  <p>
+                    An existing project page that remains intentionally separate
+                    from this academic homepage and continues to live under its
+                    own subpath.
+                  </p>
+                </article>
+              </div>
             </article>
 
-            <article class="project project-accent">
-              <p class="project-type">Project Page</p>
-              <h3>PhD_Simulator</h3>
-              <p>
-                An existing GitHub Pages project site that remains available at
-                <code>/PhD_Simulator/</code>. It is intentionally separate from
-                this root academic homepage.
-              </p>
-              <a href="https://kw66.github.io/PhD_Simulator/">Visit page</a>
-            </article>
-          </div>
-        </section>
+            <article id="links" class="content-card">
+              <div class="card-heading">
+                <p class="card-index">03</p>
+                <div>
+                  <h2>Links</h2>
+                  <p class="card-lead">
+                    Main entry points for code, project pages, and repository context.
+                  </p>
+                </div>
+              </div>
 
-        <section id="links" class="split-section split-section-compact reveal reveal-5">
-          <div class="section-kicker">
-            <p>Links</p>
-          </div>
-          <div class="section-body">
-            <h2>Primary entry points.</h2>
-            <div class="link-grid">
-              <a href="https://github.com/kw66">
-                <span>GitHub Profile</span>
-                <strong>github.com/kw66</strong>
-              </a>
-              <a href="https://github.com/kw66/AT-ReID">
-                <span>Repository</span>
-                <strong>AT-ReID</strong>
-              </a>
-              <a href="https://github.com/kw66/research-figures">
-                <span>Repository</span>
-                <strong>research-figures</strong>
-              </a>
-              <a href="https://kw66.github.io/PhD_Simulator/">
-                <span>Project Site</span>
-                <strong>PhD_Simulator</strong>
-              </a>
-            </div>
-          </div>
-        </section>
+              <ul class="link-table">
+                <li>
+                  <span>GitHub Profile</span>
+                  <a href="https://github.com/kw66">github.com/kw66</a>
+                </li>
+                <li>
+                  <span>Root Site</span>
+                  <a href="https://kw66.github.io/">kw66.github.io</a>
+                </li>
+                <li>
+                  <span>AT-ReID</span>
+                  <a href="https://github.com/kw66/AT-ReID">Repository</a>
+                </li>
+                <li>
+                  <span>research-figures</span>
+                  <a href="https://github.com/kw66/research-figures">Repository</a>
+                </li>
+                <li>
+                  <span>PhD_Simulator</span>
+                  <a href="https://kw66.github.io/PhD_Simulator/">Project page</a>
+                </li>
+              </ul>
+            </article>
+          </section>
+
+          <aside class="side-column">
+            <section class="side-card side-card-accent">
+              <p class="side-title">At a Glance</p>
+              <p>
+                Research-facing work in computer vision, retrieval, and the
+                design of technical artifacts that communicate clearly.
+              </p>
+            </section>
+
+            <section class="side-card">
+              <p class="side-title">Current Topics</p>
+              <ul class="plain-list">
+                <li>Person re-identification</li>
+                <li>Benchmark construction</li>
+                <li>Visual retrieval</li>
+                <li>Research figures and assets</li>
+              </ul>
+            </section>
+
+            <section class="side-card">
+              <p class="side-title">Homepage Structure</p>
+              <p class="side-note">
+                This root site functions as the academic homepage, while project
+                demos and experiments can continue to live on separate GitHub
+                Pages subpaths.
+              </p>
+            </section>
+          </aside>
+        </div>
       </main>
 
-      <footer class="site-footer reveal reveal-5">
+      <footer class="site-footer">
         <p>kw66.github.io</p>
-        <p>Academic homepage root site for Xulin Li.</p>
+        <p>Root academic homepage for Xulin Li.</p>
       </footer>
     </div>
   </body>
