@@ -21,11 +21,11 @@ baidu_site_verification  :  # get baidu_site_verification from https://ziyuan.ba
 
 # Site Author
 author:
-  name             : "Xulin Li"
+  name             : "Xulin Li（李旭霖）"
   avatar           : "images/portrait.jpg"
-  bio              : "PhD Student"
+  bio              : "PhD Student, University of Science and Technology of China"
   location         :
-  employer         : "University of Science and Technology of China"
+  employer         :
   pubmed           : 
   googlescholar    :
   email            :
