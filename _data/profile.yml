@@ -20,11 +20,16 @@ github: kw66
 short_bio_text_justify: false
 short_bio: >-
   <p>
-    I am Xulin Li (kw66), a student interested in computer vision, retrieval, and open-source research tools.
+    I am Xulin Li (kw66), a student interested in computer vision, person re-identification, and open-source research tooling.
   </p>
   <p>
-    My public GitHub work currently includes <a href="https://github.com/kw66/AT-ReID" target="_blank">AT-ReID</a>, <a href="https://github.com/kw66/research-figures" target="_blank">research-figures</a>, and <a href="https://github.com/kw66/PhD_Simulator" target="_blank">PhD_Simulator</a>.
+    My public GitHub projects span research code, figure-making workflows, and experimental interactive systems.
   </p>
+  <ul>
+    <li><a href="https://github.com/kw66/AT-ReID" target="_blank">AT-ReID</a>: a benchmark project for anytime person re-identification.</li>
+    <li><a href="https://github.com/kw66/research-figures" target="_blank">research-figures</a>: figures, posters, slides, and plotting assets for research communication.</li>
+    <li><a href="https://github.com/kw66/PhD_Simulator" target="_blank">PhD_Simulator</a>: an AI-assisted game prototype about building a "PhD Simulator".</li>
+  </ul>
 
 portrait_url: /assets/images/photos/portrait.jpg
 portrait_caption: >-

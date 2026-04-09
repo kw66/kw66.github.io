@@ -34,15 +34,16 @@
                     </div>
                 </div>
 
+                {% assign profile_email = site.data.profile.email | default: "" | strip %}
+                {% if profile_email != "" %}
                 <div class="row small">
                     <div class="col text-center">
-                        {% if site.data.profile.email %}
-                        <a class="email-text" href="mailto:{{ site.data.profile.email }}">
-                            {{ site.data.profile.email | replace: "@", "(at)" }}
+                        <a class="email-text" href="mailto:{{ profile_email }}">
+                            {{ profile_email | replace: "@", "(at)" }}
                         </a>
-                        {% endif %}
                     </div>
                 </div>
+                {% endif %}
 
                 <div class="row pt-2">
                     <div class="col text-center h4">
