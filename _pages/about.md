@@ -105,7 +105,7 @@ redirect_from:
     const config = {
       minWidth: 1280,
       size: 84,
-      gap: 84,
+      gap: 42,
       speed: 34,
       leftInset: 104,
       rightInset: 14
