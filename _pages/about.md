@@ -108,8 +108,8 @@ redirect_from:
       size: 84,
       gap: 42,
       speed: 34,
-      leftInset: 2,
-      rightInset: 14
+      leftInset: 0,
+      rightInset: 0
     };
     let rafId = null;
     let resizeTimer = null;

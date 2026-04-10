@@ -301,6 +301,16 @@
     position: relative;
 }
 
+@include breakpoint($large) {
+    .sidebar {
+        @include span(4 of 12);
+    }
+
+    .page {
+        @include span(8 of 12 last);
+    }
+}
+
 .side-mascot-rail {
     display: none;
 }
@@ -320,13 +330,13 @@
     }
 
     .side-mascot-rail--left {
-        left: -7.35rem;
-        width: 5.8rem;
+        left: -9.35rem;
+        width: 6.25rem;
     }
 
     .side-mascot-rail--right {
-        right: -7.4rem;
-        width: 6rem;
+        right: -9.1rem;
+        width: 6.25rem;
     }
 }
 
