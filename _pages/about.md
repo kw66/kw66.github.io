@@ -10,26 +10,33 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-<div class='paper-box'>
-  <div class='paper-box-image'>
-    <div><img src='images/works/phd-simulator-cover.jpg' alt="PhD Simulator cover" width="100%"></div>
+<div class='featured-grid'>
+  <div class='featured-card'>
+    <div class='featured-card-image'>
+      <img src='images/works/phd-simulator-cover.jpg' alt='PhD Simulator cover'>
+    </div>
+    <div class='featured-card-body'>
+      <p class='featured-card-title'>&#30740;&#31350;&#29983;&#27169;&#25311;&#22120;&#23567;&#28216;&#25103;</p>
+      <div class='featured-actions'>
+        <a class='featured-button featured-button--primary' href='https://kw66.github.io/PhD_Simulator/'>Play v1.0</a>
+        <a class='featured-button' href='https://github.com/kw66/PhD_Simulator'>Project</a>
+        <a class='featured-button' href='https://kw-game-graduate-simulator-v2.vercel.app/'>View v2.0</a>
+      </div>
+    </div>
   </div>
-  <div class='paper-box-text'>
-    <p class='work-title'>&#30740;&#31350;&#29983;&#27169;&#25311;&#22120; v1.0</p>
-    <p class='work-authors'><strong>Xulin Li</strong>, &#27979;&#35797;, Qinhong Yang</p>
-    <p class='work-links'><a href='https://kw66.github.io/PhD_Simulator/'>Play</a></p>
-  </div>
-</div>
 
-<div class='paper-box'>
-  <div class='paper-box-image'>
-    <div><img src='images/works/at-reid.png' alt="AT-ReID preview" width="100%"></div>
-  </div>
-  <div class='paper-box-text'>
-    <p class='work-title'>Towards Anytime Retrieval: A Benchmark for Anytime Person Re-Identification</p>
-    <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Jiaze Li, Qinhong Yang, Tao Gong, Qi Chu, Mang Ye, Nenghai Yu</p>
-    <p class='work-meta'>Venue: IJCAI 2025 (Oral)</p>
-    <p class='work-links'><a href='https://arxiv.org/abs/2509.16635'>Paper</a></p>
+  <div class='featured-card'>
+    <div class='featured-card-image'>
+      <img src='images/works/atreid-featured.png' alt='Anytime Person Re-Identification overview'>
+    </div>
+    <div class='featured-card-body'>
+      <p class='featured-card-title'>&#20840;&#26102;&#27573;&#34892;&#20154;&#37325;&#35782;&#21035;</p>
+      <div class='featured-actions'>
+        <a class='featured-button featured-button--primary' href='https://arxiv.org/pdf/2509.16635'>Paper</a>
+        <a class='featured-button' href='https://github.com/kw66/AT-ReID'>Dataset</a>
+        <a class='featured-button' href='https://github.com/kw66/AT-ReID/tree/main/AT-ReID'>Code</a>
+      </div>
+    </div>
   </div>
 </div>
 
