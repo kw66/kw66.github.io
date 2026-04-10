@@ -102,83 +102,102 @@ redirect_from:
       return `${mascotBase}${name}`;
     }).filter((src) => !src.endsWith('mascot-43.png'));
     const layerId = 'side-mascot-layer';
+    const config = {
+      minWidth: 1280,
+      size: 84,
+      gap: 84,
+      speed: 34,
+      sideInset: 12
+    };
     let rafId = null;
     let resizeTimer = null;
     let state = null;
-
-    function shuffle(items) {
-      const copy = items.slice();
-      for (let i = copy.length - 1; i > 0; i -= 1) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [copy[i], copy[j]] = [copy[j], copy[i]];
-      }
-      return copy;
-    }
 
     function randomFrom(items) {
       return items[Math.floor(Math.random() * items.length)];
     }
 
-    function styleMascot(item, side) {
-      item.size = 72 + Math.floor(Math.random() * 18);
-      item.tilt = -8 + Math.floor(Math.random() * 17);
-      item.speed = 28 + Math.random() * 12;
-      item.offset = 6 + Math.floor(Math.random() * 20);
-      item.el.src = randomFrom(mascotSources);
-      item.el.style.width = `${item.size}px`;
-      item.el.style.opacity = `${0.9 + Math.random() * 0.1}`;
-      item.el.style[side === 'left' ? 'left' : 'right'] = `${item.offset}px`;
+    function computeOpacity(y, height) {
+      const fade = config.size * 0.9;
+      const top = y;
+      const bottom = y + config.size;
+      const enter = Math.max(0, Math.min(1, bottom / fade));
+      const exit = Math.max(0, Math.min(1, (height - top) / fade));
+      return Math.min(enter, exit);
     }
 
     function paintMascot(item) {
-      item.el.style.transform = `translate3d(0, ${Math.round(item.y)}px, 0) rotate(${item.tilt}deg)`;
+      item.el.style.transform = `translate3d(0, ${Math.round(item.y)}px, 0)`;
+      item.el.style.opacity = `${computeOpacity(item.y, state.height)}`;
     }
 
-    function buildColumn(side, count, height, layer) {
+    function respawnMascot(item) {
+      item.el.src = randomFrom(mascotSources);
+    }
+
+    function buildLane(side, height, layer) {
       const items = [];
-      const spacing = Math.max(height / count, 130);
-      for (let index = 0; index < count; index += 1) {
+      const spacing = config.size + config.gap;
+      const positions = [];
+      if (side === 'left') {
+        for (let y = -(config.size + config.gap); y < height + spacing; y += spacing) {
+          positions.push(y);
+        }
+      } else {
+        for (let y = height + config.gap; y > -(spacing + config.size); y -= spacing) {
+          positions.push(y);
+        }
+      }
+
+      positions.forEach((y) => {
         const el = document.createElement('img');
         el.className = `side-mascot side-mascot--${side}`;
         el.alt = '';
         el.decoding = 'async';
         el.loading = 'eager';
+        el.src = randomFrom(mascotSources);
         layer.appendChild(el);
-
-        const item = { el, side, y: 0, size: 0, tilt: 0, speed: 0, offset: 0 };
-        styleMascot(item, side);
-        item.y = side === 'left'
-          ? index * spacing - item.size - 18
-          : height - index * spacing;
-        paintMascot(item);
+        const item = { el, side, y };
         items.push(item);
-      }
+      });
+
       return items;
+    }
+
+    function recycleLane(side) {
+      const items = state[side];
+      const spacing = state.spacing;
+      const beyond = config.gap;
+      items.forEach((item) => {
+        if (side === 'left' && item.y >= state.height + beyond) {
+          const minY = Math.min(...items.map((entry) => entry.y));
+          item.y = minY - spacing;
+          respawnMascot(item);
+        }
+        if (side === 'right' && item.y <= -(config.size + beyond)) {
+          const maxY = Math.max(...items.map((entry) => entry.y));
+          item.y = maxY + spacing;
+          respawnMascot(item);
+        }
+      });
     }
 
     function step(now) {
       if (!state) return;
       const dt = Math.min((now - state.lastTime) / 1000, 0.05);
       state.lastTime = now;
-      const lowerBound = state.height + 110;
 
       state.left.forEach((item) => {
-        item.y += item.speed * dt;
-        if (item.y > lowerBound) {
-          styleMascot(item, 'left');
-          item.y = -item.size - (24 + Math.random() * 56);
-        }
-        paintMascot(item);
+        item.y += state.speed * dt;
+      });
+      state.right.forEach((item) => {
+        item.y -= state.speed * dt;
       });
 
-      state.right.forEach((item) => {
-        item.y -= item.speed * dt;
-        if (item.y < -item.size - 110) {
-          styleMascot(item, 'right');
-          item.y = state.height + (24 + Math.random() * 56);
-        }
-        paintMascot(item);
-      });
+      recycleLane('left');
+      recycleLane('right');
+      state.left.forEach(paintMascot);
+      state.right.forEach(paintMascot);
 
       rafId = window.requestAnimationFrame(step);
     }
@@ -194,26 +213,28 @@ redirect_from:
       }
       state = null;
 
-      if (window.innerWidth < 1280) return;
+      if (window.innerWidth < config.minWidth) return;
 
       const parent = layer.parentElement;
       const height = Math.max(parent.offsetHeight, 960);
-      const count = window.innerWidth >= 1600 ? 6 : 5;
-      const ordered = shuffle(mascotSources);
 
       state = {
         height,
+        speed: config.speed,
+        spacing: config.size + config.gap,
         lastTime: performance.now(),
-        left: buildColumn('left', count, height, layer),
-        right: buildColumn('right', count, height, layer)
+        left: buildLane('left', height, layer),
+        right: buildLane('right', height, layer)
       };
 
-      state.left.forEach((item, index) => {
-        item.el.src = ordered[index % ordered.length];
+      state.left.forEach((item) => {
+        item.el.style.width = `${config.size}px`;
+        item.el.style.left = `${config.sideInset}px`;
         paintMascot(item);
       });
-      state.right.forEach((item, index) => {
-        item.el.src = ordered[(count + index) % ordered.length];
+      state.right.forEach((item) => {
+        item.el.style.width = `${config.size}px`;
+        item.el.style.right = `${config.sideInset}px`;
         paintMascot(item);
       });
 

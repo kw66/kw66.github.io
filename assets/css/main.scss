@@ -320,15 +320,16 @@
 
 .side-mascot {
     position: absolute;
-    width: var(--mascot-size, 84px);
+    width: 84px;
     height: auto;
     border-radius: 18px;
     box-shadow: 0 18px 30px rgba(28, 51, 74, 0.14);
-    transform: translate3d(0, 0, 0) rotate(0deg);
+    transform: translate3d(0, 0, 0);
     transform-origin: center center;
     will-change: transform;
     backface-visibility: hidden;
     filter: saturate(1.02);
+    opacity: 0;
 }
 
 .side-mascot--left {
