@@ -104,6 +104,7 @@ redirect_from:
     <div class='work-meta-row'>
       <p class='work-meta'>Venue: AAAI 2026</p>
       <a class='paper-link-button' href='https://doi.org/10.1609/aaai.v40i14.38151' target='_blank' rel='noopener noreferrer'>&#128196; Paper</a>
+      <a class='paper-link-button' href='https://github.com/littleYaang/MagicPaint' target='_blank' rel='noopener noreferrer'>Project</a>
     </div>
   </article>
 
@@ -122,6 +123,7 @@ redirect_from:
     <div class='work-meta-row'>
       <p class='work-meta'>Venue: IJCAI 2025 &#128266; Oral</p>
       <a class='paper-link-button' href='https://arxiv.org/pdf/2509.16635' target='_blank' rel='noopener noreferrer'>&#128196; Paper</a>
+      <a class='paper-link-button' href='https://github.com/kw66/AT-ReID' target='_blank' rel='noopener noreferrer'>Project</a>
     </div>
     <div class='paper-tags'>
       <span class='paper-tag'>MoE</span>
@@ -175,8 +177,6 @@ redirect_from:
       const name = `mascot-${String(index + 1).padStart(2, '0')}.png`;
       return `${mascotBase}${name}`;
     }).filter((src) => !src.endsWith('mascot-43.png'));
-    const motionModeStorageKey = 'kw66-homepage-mascot-mode';
-    const speedStorageKey = 'kw66-homepage-mascot-speed';
     const leftLayerId = 'side-mascot-layer-left';
     const rightLayerId = 'side-mascot-layer-right';
     const activePaperFilters = new Set(['first-author']);
@@ -192,30 +192,14 @@ redirect_from:
       minWidth: 1280,
       size: 84,
       gap: 42,
-      speed: 34,
-      minSpeedPercent: 0,
-      maxSpeedPercent: 400,
-      speedStepPercent: 25,
+      speed: 136,
       leftInset: 0,
       rightInset: 0,
-      preloadCount: 6,
-      springAmplitude: 42,
-      springIndexStep: 2.02,
-      springTravelRate: 0.0104
-    };
-    const motionModes = {
-      steady: {
-        spring: false
-      },
-      spring: {
-        spring: true
-      }
+      preloadCount: 6
     };
     let mascotRafId = null;
     let resizeTimer = null;
     let mascotState = null;
-    let currentMotionMode = readStoredMotionMode();
-    let currentSpeedPercent = readStoredSpeedPercent();
 
     function clamp(value, min, max) {
       return Math.min(Math.max(value, min), max);
@@ -223,43 +207,6 @@ redirect_from:
 
     function randomFrom(items) {
       return items[Math.floor(Math.random() * items.length)];
-    }
-
-    function readStoredMotionMode() {
-      try {
-        const stored = window.localStorage.getItem(motionModeStorageKey);
-        return motionModes[stored] ? stored : 'steady';
-      } catch (error) {
-        return 'steady';
-      }
-    }
-
-    function readStoredSpeedPercent() {
-      try {
-        const stored = Number(window.localStorage.getItem(speedStorageKey));
-        if (Number.isFinite(stored)) {
-          return clamp(stored, mascotConfig.minSpeedPercent, mascotConfig.maxSpeedPercent);
-        }
-      } catch (error) {
-        // Ignore storage failures.
-      }
-      return prefersReducedMotion ? 0 : 100;
-    }
-
-    function storeMotionMode(mode) {
-      try {
-        window.localStorage.setItem(motionModeStorageKey, mode);
-      } catch (error) {
-        // Ignore storage failures.
-      }
-    }
-
-    function storeSpeedPercent(speedPercent) {
-      try {
-        window.localStorage.setItem(speedStorageKey, String(speedPercent));
-      } catch (error) {
-        // Ignore storage failures.
-      }
     }
 
     function resetPageScroll() {
@@ -276,15 +223,6 @@ redirect_from:
 
     function respawnMascot(item) {
       item.el.src = randomFrom(mascotSources);
-    }
-
-    function springOffsetFor(lane, index) {
-      const motion = motionModes[currentMotionMode] || motionModes.steady;
-      if (!motion.spring) {
-        return 0;
-      }
-      const phase = lane.phaseBias + index * mascotConfig.springIndexStep + lane.travel * mascotConfig.springTravelRate;
-      return mascotConfig.springAmplitude * Math.sin(phase);
     }
 
     function buildLane(side, height, layer) {
@@ -309,18 +247,14 @@ redirect_from:
         side,
         items,
         direction: side === 'left' ? 1 : -1,
-        phaseBias: side === 'left' ? 0.38 : 1.26,
         baseSpacing,
-        headY: -baseSpacing,
-        sequenceStart: 0,
-        travel: 0
+        headY: -baseSpacing
       };
     }
 
     function paintLane(lane) {
       lane.items.forEach((item, index) => {
-        const globalIndex = lane.sequenceStart + index;
-        item.y = lane.headY + index * lane.baseSpacing + springOffsetFor(lane, globalIndex);
+        item.y = lane.headY + index * lane.baseSpacing;
         paintMascot(item);
       });
     }
@@ -329,7 +263,6 @@ redirect_from:
       const recycled = lane.items.pop();
       respawnMascot(recycled);
       lane.items.unshift(recycled);
-      lane.sequenceStart -= 1;
       lane.headY -= lane.baseSpacing;
     }
 
@@ -337,12 +270,10 @@ redirect_from:
       const recycled = lane.items.shift();
       respawnMascot(recycled);
       lane.items.push(recycled);
-      lane.sequenceStart += 1;
       lane.headY += lane.baseSpacing;
     }
 
     function advanceLane(lane, distance) {
-      lane.travel += distance;
       lane.headY += lane.direction * distance;
 
       if (lane.direction === 1) {
@@ -361,7 +292,7 @@ redirect_from:
       if (!mascotState) return;
       const dt = Math.min((now - mascotState.lastTime) / 1000, 0.05);
       mascotState.lastTime = now;
-      const distance = mascotState.speed * (currentSpeedPercent / 100) * dt;
+      const distance = mascotState.speed * dt;
 
       advanceLane(mascotState.left, distance);
       advanceLane(mascotState.right, distance);
@@ -412,64 +343,6 @@ redirect_from:
       paintLane(mascotState.left);
       paintLane(mascotState.right);
       mascotRafId = window.requestAnimationFrame(mascotStep);
-    }
-
-    function updateMotionButtons() {
-      document.querySelectorAll('[data-mascot-mode]').forEach((button) => {
-        const isActive = button.dataset.mascotMode === currentMotionMode;
-        button.classList.toggle('is-active', isActive);
-        button.setAttribute('aria-pressed', String(isActive));
-      });
-    }
-
-    function updateSpeedControls() {
-      const readout = document.getElementById('mascot-speed-readout');
-      if (readout) {
-        readout.textContent = `${currentSpeedPercent}%`;
-      }
-      document.querySelectorAll('[data-speed-action]').forEach((button) => {
-        const isDecrease = button.dataset.speedAction === 'decrease';
-        const disabled = isDecrease
-          ? currentSpeedPercent <= mascotConfig.minSpeedPercent
-          : currentSpeedPercent >= mascotConfig.maxSpeedPercent;
-        button.disabled = disabled;
-        button.classList.toggle('is-disabled', disabled);
-      });
-    }
-
-    function setMotionMode(mode) {
-      if (!motionModes[mode]) return;
-      currentMotionMode = mode;
-      storeMotionMode(mode);
-      updateMotionButtons();
-      if (mascotState) {
-        paintLane(mascotState.left);
-        paintLane(mascotState.right);
-      }
-    }
-
-    function setSpeedPercent(nextPercent) {
-      currentSpeedPercent = clamp(nextPercent, mascotConfig.minSpeedPercent, mascotConfig.maxSpeedPercent);
-      storeSpeedPercent(currentSpeedPercent);
-      updateSpeedControls();
-    }
-
-    function initMotionControls() {
-      updateMotionButtons();
-      updateSpeedControls();
-      document.querySelectorAll('[data-mascot-mode]').forEach((button) => {
-        button.addEventListener('click', () => {
-          setMotionMode(button.dataset.mascotMode);
-        });
-      });
-      document.querySelectorAll('[data-speed-action]').forEach((button) => {
-        button.addEventListener('click', () => {
-          const delta = button.dataset.speedAction === 'increase'
-            ? mascotConfig.speedStepPercent
-            : -mascotConfig.speedStepPercent;
-          setSpeedPercent(currentSpeedPercent + delta);
-        });
-      });
     }
 
     function updatePaperFilterButtons() {
@@ -694,7 +567,6 @@ redirect_from:
     resetPageScroll();
     window.addEventListener('pageshow', resetPageScroll);
 
-    initMotionControls();
     initPaperFilters();
     initFeaturedCarousel();
     initSlotMachine();
