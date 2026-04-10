@@ -189,8 +189,7 @@ redirect_from:
       timers: []
     };
     const slotVisual = {
-      itemRatio: 0.38,
-      gapRatio: 0.04
+      gapPx: 12
     };
     const slotImageCache = new Map();
     const slotImageJobs = new Map();
@@ -582,14 +581,12 @@ redirect_from:
 
     function getSlotMetrics(reel) {
       const reelWidth = Math.max(reel.clientWidth, 180);
-      const itemWidth = reelWidth * slotVisual.itemRatio;
-      const gap = reelWidth * slotVisual.gapRatio;
-      const sidePadding = (reelWidth - itemWidth) / 2;
+      const gap = Math.min(slotVisual.gapPx, reelWidth * 0.05);
+      const itemWidth = (reelWidth - gap * 2) / 3;
       const pitch = itemWidth + gap;
       return {
         itemWidth,
         gap,
-        sidePadding,
         pitch
       };
     }
@@ -598,7 +595,6 @@ redirect_from:
       const metrics = getSlotMetrics(reel);
       reel.style.setProperty('--slot-item-width', `${metrics.itemWidth}px`);
       reel.style.setProperty('--slot-gap', `${metrics.gap}px`);
-      reel.style.setProperty('--slot-side-padding', `${metrics.sidePadding}px`);
       return metrics;
     }
 
@@ -612,9 +608,9 @@ redirect_from:
     function setSlotResult(reel, track, src) {
       const neighbors = [randomFrom(mascotSources), src, randomFrom(mascotSources)];
       renderSlotTrack(track, neighbors);
-      const metrics = applySlotMetrics(reel, track);
+      applySlotMetrics(reel, track);
       track.style.transition = 'none';
-      track.style.transform = `translate3d(${-metrics.pitch}px, 0, 0)`;
+      track.style.transform = 'translate3d(0, 0, 0)';
       track.dataset.currentSource = src;
     }
 
