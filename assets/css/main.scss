@@ -89,8 +89,9 @@
 
 .featured-carousel {
     position: relative;
+    --homepage-content-inset: 3rem;
     margin: 0 0 1.3rem;
-    padding: 0 3rem 1rem;
+    padding: 0 var(--homepage-content-inset) 1rem;
     border-bottom: 1px solid #e6ecef;
 }
 
@@ -219,6 +220,8 @@
 
 .paper-filter-toolbar {
     margin-bottom: 0.82rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
     padding-bottom: 0.86rem;
     border-bottom: 1px solid #e6ecef;
 }
@@ -263,6 +266,8 @@
 
 .paper-list {
     position: relative;
+    padding-left: 3rem;
+    padding-right: 3rem;
 }
 
 .paper-list-item {
@@ -363,6 +368,8 @@
 
 .paper-filter-empty {
     margin: 0.92rem 0 0;
+    padding-left: 3rem;
+    padding-right: 3rem;
     color: #6f8190;
     font-size: 0.9rem;
 }
