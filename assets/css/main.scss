@@ -644,7 +644,7 @@
     inset: 0;
     display: flex;
     align-items: stretch;
-    width: 300%;
+    width: 700%;
     height: 100%;
     transform: translateX(0);
     will-change: transform;
@@ -652,8 +652,8 @@
 
 .author__avatar-slot .author__avatar-frame {
     display: block;
-    flex: 0 0 33.3333%;
-    width: 33.3333%;
+    flex: 0 0 14.2857%;
+    width: 14.2857%;
     max-width: none;
     min-width: 0;
     height: 100%;

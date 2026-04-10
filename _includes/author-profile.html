@@ -10,9 +10,13 @@
     {% if page.permalink == "/" or page.url == "/" %}
       <div class="author__avatar-slot" id="author-avatar-slot" role="img" aria-label="{{ author.name }}">
         <div class="author__avatar-reel" id="author-avatar-reel">
-          <img src="{{ primary_avatar }}" class="author__avatar-frame author__avatar-frame--primary" alt="" aria-hidden="true">
+          <img src="{{ primary_avatar }}" class="author__avatar-frame author__avatar-frame--primary author__avatar-frame--primary-1" alt="" aria-hidden="true">
           <img src="{{ secondary_avatar }}" class="author__avatar-frame author__avatar-frame--secondary" alt="" aria-hidden="true">
-          <img src="{{ primary_avatar }}" class="author__avatar-frame author__avatar-frame--primary-clone" alt="" aria-hidden="true">
+          <img src="{{ primary_avatar }}" class="author__avatar-frame author__avatar-frame--primary author__avatar-frame--primary-2" alt="" aria-hidden="true">
+          <img src="{{ secondary_avatar }}" class="author__avatar-frame author__avatar-frame--secondary author__avatar-frame--secondary-2" alt="" aria-hidden="true">
+          <img src="{{ primary_avatar }}" class="author__avatar-frame author__avatar-frame--primary author__avatar-frame--primary-3" alt="" aria-hidden="true">
+          <img src="{{ secondary_avatar }}" class="author__avatar-frame author__avatar-frame--secondary author__avatar-frame--secondary-3" alt="" aria-hidden="true">
+          <img src="{{ primary_avatar }}" class="author__avatar-frame author__avatar-frame--primary author__avatar-frame--primary-4" alt="" aria-hidden="true">
         </div>
       </div>
     {% else %}

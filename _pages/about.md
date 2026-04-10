@@ -421,28 +421,28 @@ redirect_from:
         avatarState.animation = null;
       }
 
-      const finalOffset = '-66.6667%';
+      const finalOffset = '-85.7143%';
       if (prefersReducedMotion || typeof reel.animate !== 'function') {
-        reel.style.transition = 'transform 420ms cubic-bezier(0.22, 1, 0.36, 1)';
+        reel.style.transition = 'transform 620ms cubic-bezier(0.22, 1, 0.36, 1)';
         reel.style.transform = `translateX(${finalOffset})`;
         avatarState.timerId = window.setTimeout(() => {
           finishAuthorAvatarSpin();
           avatarState.timerId = null;
-        }, 460);
+        }, 680);
         return;
       }
 
       const animation = reel.animate([
         { transform: 'translateX(0%)', offset: 0 },
-        { transform: 'translateX(-28%)', offset: 0.14 },
-        { transform: 'translateX(-66.6667%)', offset: 0.3 },
-        { transform: 'translateX(-33.3333%)', offset: 0.48 },
-        { transform: 'translateX(-66.6667%)', offset: 0.66 },
-        { transform: 'translateX(-33.3333%)', offset: 0.84 },
+        { transform: 'translateX(-14.2857%)', offset: 0.14 },
+        { transform: 'translateX(-28.5714%)', offset: 0.3 },
+        { transform: 'translateX(-42.8571%)', offset: 0.48 },
+        { transform: 'translateX(-57.1429%)', offset: 0.66 },
+        { transform: 'translateX(-71.4286%)', offset: 0.84 },
         { transform: `translateX(${finalOffset})`, offset: 1 }
       ], {
-        duration: 1560,
-        easing: 'cubic-bezier(0.18, 0.88, 0.24, 1)',
+        duration: 1720,
+        easing: 'cubic-bezier(0.16, 0.88, 0.24, 1)',
         fill: 'forwards'
       });
 
