@@ -90,26 +90,46 @@
 .featured-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.6rem;
+    gap: 0;
     margin-bottom: 1.8rem;
+    border-top: 1px solid #e6ecef;
+    border-bottom: 1px solid #e6ecef;
 
     @include breakpoint($medium) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1.8rem;
     }
 }
 
 .featured-card {
     display: flex;
     flex-direction: column;
-    border: 1px solid #e8ebee;
-    background: #fff;
-    box-shadow: 0 10px 24px rgba(28, 46, 66, 0.08);
+    background: transparent;
+    box-shadow: none;
+    padding: 1.25rem 0 1.35rem;
+}
+
+.featured-card + .featured-card {
+    border-top: 1px solid #e6ecef;
+}
+
+@include breakpoint($medium) {
+    .featured-card {
+        padding: 1.25rem 0 1.35rem;
+    }
+
+    .featured-card:first-child {
+        padding-right: 1.3rem;
+    }
+
+    .featured-card + .featured-card {
+        border-top: 0;
+        border-left: 1px solid #e6ecef;
+        padding-left: 1.3rem;
+        margin-left: 1.3rem;
+    }
 }
 
 .featured-card-image {
-    background: #f6f8fb;
-    border-bottom: 1px solid #e8ebee;
     padding: 0;
 
     img {
@@ -122,7 +142,7 @@
 }
 
 .featured-card-body {
-    padding: 1.05rem 1.1rem 1.15rem;
+    padding: 0.95rem 0 0;
 }
 
 .featured-card-title {
@@ -143,20 +163,20 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 2.35rem;
-    padding: 0.52rem 1rem;
-    border: 1px solid #c8d3dc;
-    background: #f7fafc;
+    min-height: 2rem;
+    padding: 0.15rem 0 0.38rem;
+    border: 0;
+    border-bottom: 2px solid rgba(31, 79, 163, 0.22);
+    background: transparent;
     color: #234f69;
     font-size: 0.92em;
     font-weight: 600;
     line-height: 1;
     text-decoration: none !important;
-    transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+    transition: border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
 
     &:hover {
-        background: #edf4f8;
-        border-color: #9eb5c4;
+        border-bottom-color: rgba(23, 63, 132, 0.55);
         color: #17384d;
         text-decoration: none;
         transform: translateY(-1px);
@@ -164,14 +184,12 @@
 }
 
 .featured-button--primary {
-    background: #1f4fa3;
-    border-color: #1f4fa3;
-    color: #fff;
+    border-bottom-color: #1f4fa3;
+    color: #1f4fa3;
 
     &:hover {
-        background: #173f84;
-        border-color: #173f84;
-        color: #fff;
+        border-bottom-color: #173f84;
+        color: #173f84;
     }
 }
 
