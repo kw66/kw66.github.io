@@ -12,148 +12,106 @@ redirect_from:
 
 <div class='side-mascot-rail side-mascot-rail--right' id='side-mascot-layer-right' aria-hidden='true'></div>
 
-<section class='featured-section' aria-labelledby='featured-works-title'>
-  <div class='featured-section-head'>
-    <p class='featured-section-kicker' id='featured-works-title'>Featured Works</p>
-  </div>
-  <div class='featured-carousel' id='featured-carousel'>
-    <button class='featured-carousel-nav featured-carousel-nav--prev' id='featured-carousel-prev' type='button' aria-label='Show previous featured work'>&lt;</button>
-    <div class='featured-carousel-window'>
-      <div class='featured-carousel-track' id='featured-carousel-track'>
-        <article class='featured-work'>
-          <div class='featured-work-media'>
-            <img src='images/works/atreid-featured.png' alt='Anytime person re-identification overview'>
-          </div>
-          <div class='featured-work-body'>
-            <p class='featured-work-title'>全时段行人重识别</p>
-            <p class='featured-work-meta'>Anytime person re-identification benchmark, dataset, and codebase.</p>
-            <div class='featured-actions'>
-              <a class='featured-button featured-button--primary' href='https://arxiv.org/pdf/2509.16635' target='_blank' rel='noopener noreferrer'>Paper</a>
-              <a class='featured-button' href='https://github.com/kw66/AT-ReID' target='_blank' rel='noopener noreferrer'>Dataset</a>
-              <a class='featured-button' href='https://github.com/kw66/AT-ReID/tree/main/AT-ReID' target='_blank' rel='noopener noreferrer'>Code</a>
-            </div>
-          </div>
-        </article>
-
-        <article class='featured-work'>
-          <div class='featured-work-media'>
-            <img src='images/works/phd-simulator-cover.jpg' alt='PhD Simulator cover'>
-          </div>
-          <div class='featured-work-body'>
-            <p class='featured-work-title'>研究生模拟器小游戏</p>
-            <p class='featured-work-meta'>Interactive prototype about graduate-school life and AI-assisted choices.</p>
-            <div class='featured-actions'>
-              <a class='featured-button featured-button--primary' href='https://kw66.github.io/PhD_Simulator/' target='_blank' rel='noopener noreferrer'>Play v1.0</a>
-              <a class='featured-button' href='https://github.com/kw66/PhD_Simulator' target='_blank' rel='noopener noreferrer'>Project</a>
-              <a class='featured-button' href='https://kw-game-graduate-simulator-v2.vercel.app/' target='_blank' rel='noopener noreferrer'>View v2.0</a>
-            </div>
-          </div>
-        </article>
-
-        <article class='featured-work'>
-          <div class='featured-work-media'>
-            <img src='images/works/cift.png' alt='Counterfactual intervention feature transfer overview'>
-          </div>
-          <div class='featured-work-body'>
-            <p class='featured-work-title'>Counterfactual Intervention Feature Transfer</p>
-            <p class='featured-work-meta'>Venue: ECCV 2022</p>
-            <div class='featured-actions'>
-              <a class='featured-button featured-button--primary' href='https://arxiv.org/abs/2208.00967' target='_blank' rel='noopener noreferrer'>Paper</a>
-            </div>
-          </div>
-        </article>
-
-        <article class='featured-work'>
-          <div class='featured-work-media'>
-            <img src='images/works/cacc.png' alt='Cloth-aware center cluster loss overview'>
-          </div>
-          <div class='featured-work-body'>
-            <p class='featured-work-title'>Cloth-aware Center Cluster Loss</p>
-            <p class='featured-work-meta'>Venue: PRCV 2022</p>
-            <div class='featured-actions'>
-              <a class='featured-button featured-button--primary' href='https://link.springer.com/chapter/10.1007/978-3-031-18907-4_41' target='_blank' rel='noopener noreferrer'>Paper</a>
-            </div>
-          </div>
-        </article>
-      </div>
+<div class='featured-grid'>
+  <div class='featured-card'>
+    <div class='featured-card-image'>
+      <img src='images/works/atreid-featured.png' alt='Anytime person re-identification overview'>
     </div>
-    <button class='featured-carousel-nav featured-carousel-nav--next' id='featured-carousel-next' type='button' aria-label='Show next featured work'>&gt;</button>
-  </div>
-</section>
-
-<section class='paper-filter-section' aria-labelledby='paper-filter-title'>
-  <div class='paper-filter-toolbar'>
-    <p class='paper-filter-title' id='paper-filter-title'>Filter Papers</p>
-    <div class='paper-filter-row' id='paper-filter-row' role='group' aria-label='Filter papers by tags'>
-      <button class='paper-filter-chip' type='button' data-filter-tag='all' aria-pressed='true'>All</button>
-      <button class='paper-filter-chip' type='button' data-filter-tag='first-author' aria-pressed='false'>First Author</button>
-      <button class='paper-filter-chip' type='button' data-filter-tag='reid' aria-pressed='false'>ReID</button>
-      <button class='paper-filter-chip' type='button' data-filter-tag='mixture-of-experts' aria-pressed='false'>Mixture of Experts</button>
-      <button class='paper-filter-chip' type='button' data-filter-tag='frequency-domain' aria-pressed='false'>Frequency-Domain</button>
-      <button class='paper-filter-chip' type='button' data-filter-tag='multi-task-learning' aria-pressed='false'>Multi-Task Learning</button>
-      <button class='paper-filter-chip' type='button' data-filter-tag='causal-inference' aria-pressed='false'>Causal Inference</button>
-      <button class='paper-filter-chip' type='button' data-filter-tag='counterfactual' aria-pressed='false'>Counterfactual</button>
-      <button class='paper-filter-chip' type='button' data-filter-tag='heterogeneous-graph' aria-pressed='false'>Heterogeneous Graph</button>
-      <button class='paper-filter-chip' type='button' data-filter-tag='metric-learning' aria-pressed='false'>Metric Learning</button>
+    <div class='featured-card-body'>
+      <p class='featured-card-title'>&#128340; &#20840;&#26102;&#27573;&#34892;&#20154;&#37325;&#35782;&#21035;</p>
+      <div class='featured-actions'>
+        <a class='featured-button featured-button--primary' href='https://arxiv.org/pdf/2509.16635' target='_blank' rel='noopener noreferrer'>Paper</a>
+        <a class='featured-button' href='https://github.com/kw66/AT-ReID' target='_blank' rel='noopener noreferrer'>Dataset</a>
+        <a class='featured-button' href='https://github.com/kw66/AT-ReID/tree/main/AT-ReID' target='_blank' rel='noopener noreferrer'>Code</a>
+      </div>
     </div>
   </div>
 
-  <div class='paper-list' id='paper-list'>
-    <article class='paper-list-item' data-paper-tags='first-author,reid,mixture-of-experts,frequency-domain'>
-      <p class='work-title'>MFEN: Multi-Frequency Expert Network for Visible-Infrared Person Re-ID</p>
-      <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Qinhong Yang, Qi Chu, Tao Gong, Nenghai Yu</p>
-      <div class='work-meta-row'>
-        <p class='work-meta'>Venue: CVPR 2026 ✨ Highlight</p>
-        <span class='paper-link-button paper-link-button--disabled' aria-disabled='true'>📄 Paper</span>
+  <div class='featured-card'>
+    <div class='featured-card-image'>
+      <img src='images/works/phd-simulator-cover.jpg' alt='PhD Simulator cover'>
+    </div>
+    <div class='featured-card-body'>
+      <p class='featured-card-title'>&#127918; &#30740;&#31350;&#29983;&#27169;&#25311;&#22120;&#23567;&#28216;&#25103;</p>
+      <div class='featured-actions'>
+        <a class='featured-button featured-button--primary' href='https://kw66.github.io/PhD_Simulator/' target='_blank' rel='noopener noreferrer'>Play v1.0</a>
+        <a class='featured-button' href='https://github.com/kw66/PhD_Simulator' target='_blank' rel='noopener noreferrer'>Project</a>
+        <a class='featured-button' href='https://kw-game-graduate-simulator-v2.vercel.app/' target='_blank' rel='noopener noreferrer'>View v2.0</a>
       </div>
-      <div class='paper-tags'>
-        <span class='paper-tag'>Mixture of Experts</span>
-        <span class='paper-tag'>Frequency-Domain</span>
-      </div>
-    </article>
-
-    <article class='paper-list-item' data-paper-tags='first-author,reid,mixture-of-experts,multi-task-learning'>
-      <p class='work-title'>Towards Anytime Retrieval: A Benchmark for Anytime Person Re-Identification</p>
-      <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Jiaze Li, Qinhong Yang, Tao Gong, Qi Chu, Mang Ye, Nenghai Yu</p>
-      <div class='work-meta-row'>
-        <p class='work-meta'>Venue: IJCAI 2025 🔥 Oral</p>
-        <a class='paper-link-button' href='https://arxiv.org/pdf/2509.16635' target='_blank' rel='noopener noreferrer'>📄 Paper</a>
-      </div>
-      <div class='paper-tags'>
-        <span class='paper-tag'>Mixture of Experts</span>
-        <span class='paper-tag'>Multi-Task Learning</span>
-      </div>
-    </article>
-
-    <article class='paper-list-item' data-paper-tags='first-author,reid,causal-inference,counterfactual,heterogeneous-graph'>
-      <p class='work-title'>Counterfactual Intervention Feature Transfer for Visible-Infrared Person Re-identification</p>
-      <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Yating Liu, Guojun Yin, Qi Chu, Jingyang Huang, Feng Zhu, Rui Zhao, Nenghai Yu</p>
-      <div class='work-meta-row'>
-        <p class='work-meta'>Venue: ECCV 2022</p>
-        <a class='paper-link-button' href='https://arxiv.org/abs/2208.00967' target='_blank' rel='noopener noreferrer'>📄 Paper</a>
-      </div>
-      <div class='paper-tags'>
-        <span class='paper-tag'>Causal Inference</span>
-        <span class='paper-tag'>Counterfactual</span>
-        <span class='paper-tag'>Heterogeneous Graph</span>
-      </div>
-    </article>
-
-    <article class='paper-list-item' data-paper-tags='first-author,reid,metric-learning'>
-      <p class='work-title'>Cloth-aware Center Cluster Loss for Cloth-Changing Person Re-identification</p>
-      <p class='work-authors'><strong>Xulin Li</strong>, Bin Liu, Yan Lu, Qi Chu, Nenghai Yu</p>
-      <div class='work-meta-row'>
-        <p class='work-meta'>Venue: PRCV 2022</p>
-        <a class='paper-link-button' href='https://link.springer.com/chapter/10.1007/978-3-031-18907-4_41' target='_blank' rel='noopener noreferrer'>📄 Paper</a>
-      </div>
-      <div class='paper-tags'>
-        <span class='paper-tag'>Metric Learning</span>
-      </div>
-    </article>
+    </div>
   </div>
+</div>
 
-  <p class='paper-filter-empty' id='paper-filter-empty' hidden>No papers match the selected tags.</p>
-</section>
+<div class='paper-filter-toolbar'>
+  <div class='paper-filter-row' id='paper-filter-row' role='group' aria-label='Filter papers by tags'>
+    <button class='paper-filter-chip' type='button' data-filter-tag='all' aria-pressed='true'>All</button>
+    <button class='paper-filter-chip' type='button' data-filter-tag='first-author' aria-pressed='false'>First Author</button>
+    <button class='paper-filter-chip' type='button' data-filter-tag='reid' aria-pressed='false'>ReID</button>
+    <button class='paper-filter-chip' type='button' data-filter-tag='mixture-of-experts' aria-pressed='false'>Mixture of Experts</button>
+    <button class='paper-filter-chip' type='button' data-filter-tag='frequency-domain' aria-pressed='false'>Frequency-Domain</button>
+    <button class='paper-filter-chip' type='button' data-filter-tag='multi-task-learning' aria-pressed='false'>Multi-Task Learning</button>
+    <button class='paper-filter-chip' type='button' data-filter-tag='causal-inference' aria-pressed='false'>Causal Inference</button>
+    <button class='paper-filter-chip' type='button' data-filter-tag='counterfactual' aria-pressed='false'>Counterfactual</button>
+    <button class='paper-filter-chip' type='button' data-filter-tag='heterogeneous-graph' aria-pressed='false'>Heterogeneous Graph</button>
+    <button class='paper-filter-chip' type='button' data-filter-tag='metric-learning' aria-pressed='false'>Metric Learning</button>
+  </div>
+</div>
+
+<div class='paper-list' id='paper-list'>
+  <article class='paper-list-item' data-paper-tags='first-author,reid,mixture-of-experts,frequency-domain'>
+    <p class='work-title'>MFEN: Multi-Frequency Expert Network for Visible-Infrared Person Re-ID</p>
+    <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Qinhong Yang, Qi Chu, Tao Gong, Nenghai Yu</p>
+    <div class='work-meta-row'>
+      <p class='work-meta'>Venue: CVPR 2026 ✨ Highlight</p>
+      <span class='paper-link-button paper-link-button--disabled' aria-disabled='true'>📄 Paper</span>
+    </div>
+    <div class='paper-tags'>
+      <span class='paper-tag'>Mixture of Experts</span>
+      <span class='paper-tag'>Frequency-Domain</span>
+    </div>
+  </article>
+
+  <article class='paper-list-item' data-paper-tags='first-author,reid,mixture-of-experts,multi-task-learning'>
+    <p class='work-title'>Towards Anytime Retrieval: A Benchmark for Anytime Person Re-Identification</p>
+    <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Jiaze Li, Qinhong Yang, Tao Gong, Qi Chu, Mang Ye, Nenghai Yu</p>
+    <div class='work-meta-row'>
+      <p class='work-meta'>Venue: IJCAI 2025 🔥 Oral</p>
+      <a class='paper-link-button' href='https://arxiv.org/pdf/2509.16635' target='_blank' rel='noopener noreferrer'>📄 Paper</a>
+    </div>
+    <div class='paper-tags'>
+      <span class='paper-tag'>Mixture of Experts</span>
+      <span class='paper-tag'>Multi-Task Learning</span>
+    </div>
+  </article>
+
+  <article class='paper-list-item' data-paper-tags='first-author,reid,causal-inference,counterfactual,heterogeneous-graph'>
+    <p class='work-title'>Counterfactual Intervention Feature Transfer for Visible-Infrared Person Re-identification</p>
+    <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Yating Liu, Guojun Yin, Qi Chu, Jingyang Huang, Feng Zhu, Rui Zhao, Nenghai Yu</p>
+    <div class='work-meta-row'>
+      <p class='work-meta'>Venue: ECCV 2022</p>
+      <a class='paper-link-button' href='https://arxiv.org/abs/2208.00967' target='_blank' rel='noopener noreferrer'>📄 Paper</a>
+    </div>
+    <div class='paper-tags'>
+      <span class='paper-tag'>Causal Inference</span>
+      <span class='paper-tag'>Counterfactual</span>
+      <span class='paper-tag'>Heterogeneous Graph</span>
+    </div>
+  </article>
+
+  <article class='paper-list-item' data-paper-tags='first-author,reid,metric-learning'>
+    <p class='work-title'>Cloth-aware Center Cluster Loss for Cloth-Changing Person Re-identification</p>
+    <p class='work-authors'><strong>Xulin Li</strong>, Bin Liu, Yan Lu, Qi Chu, Nenghai Yu</p>
+    <div class='work-meta-row'>
+      <p class='work-meta'>Venue: PRCV 2022</p>
+      <a class='paper-link-button' href='https://link.springer.com/chapter/10.1007/978-3-031-18907-4_41' target='_blank' rel='noopener noreferrer'>📄 Paper</a>
+    </div>
+    <div class='paper-tags'>
+      <span class='paper-tag'>Metric Learning</span>
+    </div>
+  </article>
+</div>
+
+<p class='paper-filter-empty' id='paper-filter-empty' hidden>No papers match the selected tags.</p>
 
 <script>
   (function () {
@@ -166,59 +124,37 @@ redirect_from:
     }).filter((src) => !src.endsWith('mascot-43.png'));
     const leftLayerId = 'side-mascot-layer-left';
     const rightLayerId = 'side-mascot-layer-right';
-    const motionStorageKey = 'kw66-homepage-mascot-mode';
+    const motionModeStorageKey = 'kw66-homepage-mascot-mode';
+    const speedStorageKey = 'kw66-homepage-mascot-speed';
     const mascotConfig = {
       minWidth: 1280,
       size: 84,
       gap: 42,
       speed: 34,
+      minSpeedPercent: 0,
+      maxSpeedPercent: 400,
+      speedStepPercent: 25,
       leftInset: 0,
       rightInset: 0
     };
     const motionModes = {
-      stop: {
-        speedMultiplier: 0,
-        waveGap: 0,
-        waveStep: 0
-      },
       steady: {
-        speedMultiplier: 1,
-        waveGap: 0,
-        waveStep: 0
+        waveStep: 0,
+        springGap: false
       },
       spring: {
-        speedMultiplier: 1,
-        waveGap: 16,
-        waveStep: 0.82
+        waveStep: 0.82,
+        springGap: true
       }
     };
-    const maxWaveGap = Math.max(...Object.values(motionModes).map((mode) => mode.waveGap || 0));
     const slotItemHeight = 72;
     let mascotRafId = null;
     let resizeTimer = null;
     let mascotState = null;
-    let featuredIndex = 0;
     let currentMotionMode = readStoredMotionMode();
+    let currentSpeedPercent = readStoredSpeedPercent();
     const activePaperFilters = new Set();
     const slotState = { spinning: false };
-
-    function readStoredMotionMode() {
-      if (prefersReducedMotion) return 'stop';
-      try {
-        const stored = window.localStorage.getItem(motionStorageKey);
-        return motionModes[stored] ? stored : 'steady';
-      } catch (error) {
-        return 'steady';
-      }
-    }
-
-    function storeMotionMode(mode) {
-      try {
-        window.localStorage.setItem(motionStorageKey, mode);
-      } catch (error) {
-        // Ignore storage failures and keep the in-memory state.
-      }
-    }
 
     function clamp(value, min, max) {
       return Math.min(Math.max(value, min), max);
@@ -226,6 +162,43 @@ redirect_from:
 
     function randomFrom(items) {
       return items[Math.floor(Math.random() * items.length)];
+    }
+
+    function readStoredMotionMode() {
+      try {
+        const stored = window.localStorage.getItem(motionModeStorageKey);
+        return motionModes[stored] ? stored : 'steady';
+      } catch (error) {
+        return 'steady';
+      }
+    }
+
+    function readStoredSpeedPercent() {
+      try {
+        const stored = Number(window.localStorage.getItem(speedStorageKey));
+        if (Number.isFinite(stored)) {
+          return clamp(stored, mascotConfig.minSpeedPercent, mascotConfig.maxSpeedPercent);
+        }
+      } catch (error) {
+        // Ignore storage failures.
+      }
+      return prefersReducedMotion ? 0 : 100;
+    }
+
+    function storeMotionMode(mode) {
+      try {
+        window.localStorage.setItem(motionModeStorageKey, mode);
+      } catch (error) {
+        // Ignore storage failures and keep the in-memory state.
+      }
+    }
+
+    function storeSpeedPercent(speedPercent) {
+      try {
+        window.localStorage.setItem(speedStorageKey, String(speedPercent));
+      } catch (error) {
+        // Ignore storage failures and keep the in-memory state.
+      }
     }
 
     function paintMascot(item) {
@@ -236,18 +209,23 @@ redirect_from:
       item.el.src = randomFrom(mascotSources);
     }
 
-    function laneGapFor(lane, phaseIndex, motion) {
-      return mascotState.spacing + (motion.waveGap ? motion.waveGap * Math.sin(phaseIndex * motion.waveStep + lane.phaseBias) : 0);
+    function laneGapFor(lane, phaseIndex) {
+      const motion = motionModes[currentMotionMode] || motionModes.steady;
+      if (!motion.springGap) {
+        return mascotConfig.size + mascotConfig.gap;
+      }
+      const normalizedGap = 0.5 + 0.5 * Math.sin(phaseIndex * motion.waveStep + lane.phaseBias);
+      return mascotConfig.size + mascotConfig.gap * normalizedGap;
     }
 
     function buildLane(side, height, layer) {
       const items = [];
       const phaseBias = side === 'left' ? 0.35 : 1.15;
-      const denseGap = mascotConfig.size + mascotConfig.gap - maxWaveGap;
+      const denseGap = mascotConfig.size;
       let cursor = -(mascotConfig.size + mascotConfig.gap);
       let phaseIndex = 0;
 
-      while (cursor < height + (mascotConfig.size + mascotConfig.gap) * 2.5) {
+      while (cursor < height + (mascotConfig.size + mascotConfig.gap) * 3) {
         const el = document.createElement('img');
         el.className = `side-mascot side-mascot--${side}`;
         el.alt = '';
@@ -272,17 +250,15 @@ redirect_from:
     }
 
     function paintLane(lane) {
-      const motion = motionModes[currentMotionMode] || motionModes.steady;
       let cursor = lane.headY;
       lane.items.forEach((item) => {
         item.y = cursor;
-        cursor += laneGapFor(lane, item.phaseIndex, motion);
+        cursor += laneGapFor(lane, item.phaseIndex);
         paintMascot(item);
       });
     }
 
     function advanceLane(lane, distance) {
-      const motion = motionModes[currentMotionMode] || motionModes.steady;
       if (lane.direction === 1) {
         lane.headY += distance;
         while (lane.headY >= 0) {
@@ -291,13 +267,13 @@ redirect_from:
           recycled.phaseIndex = newPhase;
           respawnMascot(recycled);
           lane.items.unshift(recycled);
-          lane.headY -= laneGapFor(lane, newPhase, motion);
+          lane.headY -= laneGapFor(lane, newPhase);
         }
       } else {
         lane.headY -= distance;
-        while (lane.items.length && lane.headY <= -laneGapFor(lane, lane.items[0].phaseIndex, motion)) {
+        while (lane.items.length && lane.headY <= -laneGapFor(lane, lane.items[0].phaseIndex)) {
           const outgoing = lane.items.shift();
-          lane.headY += laneGapFor(lane, outgoing.phaseIndex, motion);
+          lane.headY += laneGapFor(lane, outgoing.phaseIndex);
           outgoing.phaseIndex = lane.items[lane.items.length - 1].phaseIndex + 1;
           respawnMascot(outgoing);
           lane.items.push(outgoing);
@@ -308,9 +284,8 @@ redirect_from:
     function mascotStep(now) {
       if (!mascotState) return;
       const dt = Math.min((now - mascotState.lastTime) / 1000, 0.05);
-      const motion = motionModes[currentMotionMode] || motionModes.steady;
-      const distance = mascotState.speed * motion.speedMultiplier * dt;
       mascotState.lastTime = now;
+      const distance = mascotState.speed * (currentSpeedPercent / 100) * dt;
 
       advanceLane(mascotState.left, distance);
       advanceLane(mascotState.right, distance);
@@ -341,7 +316,6 @@ redirect_from:
 
       mascotState = {
         speed: mascotConfig.speed,
-        spacing: mascotConfig.size + mascotConfig.gap,
         lastTime: performance.now(),
         left: buildLane('left', leftHeight, leftLayer),
         right: buildLane('right', rightHeight, rightLayer)
@@ -369,75 +343,53 @@ redirect_from:
       });
     }
 
+    function updateSpeedControls() {
+      const readout = document.getElementById('mascot-speed-readout');
+      const percentText = `${currentSpeedPercent}%`;
+      if (readout) {
+        readout.textContent = percentText;
+      }
+      document.querySelectorAll('[data-speed-action]').forEach((button) => {
+        const action = button.dataset.speedAction;
+        const disabled = (action === 'decrease' && currentSpeedPercent <= mascotConfig.minSpeedPercent) ||
+          (action === 'increase' && currentSpeedPercent >= mascotConfig.maxSpeedPercent);
+        button.disabled = disabled;
+        button.classList.toggle('is-disabled', disabled);
+      });
+    }
+
     function setMotionMode(mode) {
       if (!motionModes[mode]) return;
       currentMotionMode = mode;
       storeMotionMode(mode);
       updateMotionButtons();
+      if (mascotState) {
+        paintLane(mascotState.left);
+        paintLane(mascotState.right);
+      }
     }
 
-    function initMotionButtons() {
+    function setSpeedPercent(nextPercent) {
+      const clamped = clamp(nextPercent, mascotConfig.minSpeedPercent, mascotConfig.maxSpeedPercent);
+      currentSpeedPercent = clamped;
+      storeSpeedPercent(clamped);
+      updateSpeedControls();
+    }
+
+    function initMotionControls() {
       updateMotionButtons();
+      updateSpeedControls();
       document.querySelectorAll('[data-mascot-mode]').forEach((button) => {
         button.addEventListener('click', () => {
           setMotionMode(button.dataset.mascotMode);
         });
       });
-    }
-
-    function getFeaturedPerView() {
-      if (window.innerWidth >= 1180) return 3;
-      if (window.innerWidth >= 760) return 2;
-      return 1;
-    }
-
-    function getFeaturedStep() {
-      const track = document.getElementById('featured-carousel-track');
-      const card = track ? track.querySelector('.featured-work') : null;
-      if (!track || !card) return 0;
-      const styles = window.getComputedStyle(track);
-      const gap = parseFloat(styles.columnGap || styles.gap || '0');
-      return card.getBoundingClientRect().width + gap;
-    }
-
-    function getFeaturedMaxIndex() {
-      const track = document.getElementById('featured-carousel-track');
-      if (!track) return 0;
-      return Math.max(track.children.length - getFeaturedPerView(), 0);
-    }
-
-    function updateFeaturedButtons() {
-      const prev = document.getElementById('featured-carousel-prev');
-      const next = document.getElementById('featured-carousel-next');
-      const maxIndex = getFeaturedMaxIndex();
-      if (!prev || !next) return;
-      prev.disabled = featuredIndex <= 0;
-      next.disabled = featuredIndex >= maxIndex;
-      prev.classList.toggle('is-disabled', prev.disabled);
-      next.classList.toggle('is-disabled', next.disabled);
-    }
-
-    function setFeaturedIndex(nextIndex, animate) {
-      const track = document.getElementById('featured-carousel-track');
-      if (!track) return;
-      const maxIndex = getFeaturedMaxIndex();
-      featuredIndex = clamp(nextIndex, 0, maxIndex);
-      track.style.transitionDuration = animate && !prefersReducedMotion ? '360ms' : '0.01ms';
-      track.style.transform = `translate3d(${-featuredIndex * getFeaturedStep()}px, 0, 0)`;
-      updateFeaturedButtons();
-    }
-
-    function initFeaturedCarousel() {
-      const prev = document.getElementById('featured-carousel-prev');
-      const next = document.getElementById('featured-carousel-next');
-      if (!prev || !next) return;
-      prev.addEventListener('click', () => {
-        setFeaturedIndex(featuredIndex - 1, true);
+      document.querySelectorAll('[data-speed-action]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const delta = button.dataset.speedAction === 'increase' ? mascotConfig.speedStepPercent : -mascotConfig.speedStepPercent;
+          setSpeedPercent(currentSpeedPercent + delta);
+        });
       });
-      next.addEventListener('click', () => {
-        setFeaturedIndex(featuredIndex + 1, true);
-      });
-      setFeaturedIndex(0, false);
     }
 
     function updatePaperFilterButtons() {
@@ -573,25 +525,17 @@ redirect_from:
 
     function handleResize() {
       window.clearTimeout(resizeTimer);
-      resizeTimer = window.setTimeout(() => {
-        renderSideMascots();
-        setFeaturedIndex(featuredIndex, false);
-      }, 180);
+      resizeTimer = window.setTimeout(renderSideMascots, 180);
     }
 
-    initMotionButtons();
-    initFeaturedCarousel();
+    initMotionControls();
     initPaperFilters();
     initSlotMachine();
 
     if (document.readyState === 'complete') {
       renderSideMascots();
-      setFeaturedIndex(0, false);
     } else {
-      window.addEventListener('load', () => {
-        renderSideMascots();
-        setFeaturedIndex(0, false);
-      }, { once: true });
+      window.addEventListener('load', renderSideMascots, { once: true });
     }
 
     window.addEventListener('resize', handleResize);

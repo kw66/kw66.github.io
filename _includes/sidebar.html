@@ -3,19 +3,19 @@
   {% if page.author_profile or layout.author_profile %}{% include author-profile.html %}{% endif %}
   {% if page.permalink == "/" or page.url == "/" %}
     <div class="sidebar-home-tools" id="sidebar-home-tools">
-      <section class="sidebar-tool-panel mascot-motion-panel" id="mascot-motion-panel" aria-labelledby="mascot-motion-title">
-        <p class="sidebar-tool-title" id="mascot-motion-title">Mascot Flow</p>
+      <section class="sidebar-tool-panel mascot-motion-panel" id="mascot-motion-panel">
         <div class="mascot-mode-buttons" role="group" aria-label="Mascot rail motion mode">
-          <button class="mascot-mode-button" type="button" data-mascot-mode="stop" aria-pressed="false">&#20572;&#27490;</button>
           <button class="mascot-mode-button" type="button" data-mascot-mode="steady" aria-pressed="false">&#21248;&#36895;</button>
           <button class="mascot-mode-button" type="button" data-mascot-mode="spring" aria-pressed="false">&#24377;&#31783;</button>
         </div>
+        <div class="mascot-speed-controls" aria-label="Mascot rail speed control">
+          <button class="mascot-speed-button" type="button" data-speed-action="decrease" aria-label="Decrease mascot speed">&#65293;</button>
+          <span class="mascot-speed-readout" id="mascot-speed-readout">100%</span>
+          <button class="mascot-speed-button" type="button" data-speed-action="increase" aria-label="Increase mascot speed">&#65291;</button>
+        </div>
       </section>
 
-      <section class="sidebar-tool-panel mascot-slot-panel" id="mascot-slot-panel" aria-labelledby="mascot-slot-title">
-        <div class="slot-machine-head">
-          <p class="sidebar-tool-title" id="mascot-slot-title">Mascot Slot</p>
-        </div>
+      <section class="sidebar-tool-panel mascot-slot-panel" id="mascot-slot-panel">
         <div class="slot-machine-display" id="mascot-slot-machine">
           <div class="slot-machine-reel" data-slot-reel>
             <div class="slot-machine-track" data-slot-track></div>
