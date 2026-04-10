@@ -647,13 +647,17 @@ redirect_from:
       });
     }
 
-    function setSlotResult(reel, track, src) {
-      const neighbors = [randomFrom(mascotSources), src, randomFrom(mascotSources)];
+    function setSlotResult(reel, track, src, sideSources) {
+      const leftSource = sideSources && sideSources[0] ? sideSources[0] : (track.dataset.leftSource || randomFrom(mascotSources));
+      const rightSource = sideSources && sideSources[1] ? sideSources[1] : (track.dataset.rightSource || randomFrom(mascotSources));
+      const neighbors = [leftSource, src, rightSource];
       renderSlotTrack(track, neighbors);
       applySlotMetrics(reel, track);
       track.style.transition = 'none';
       track.style.transform = 'translate3d(0, 0, 0)';
       track.dataset.currentSource = src;
+      track.dataset.leftSource = leftSource;
+      track.dataset.rightSource = rightSource;
     }
 
     function clearSlotTimers() {
@@ -704,7 +708,7 @@ redirect_from:
           if (settled) return;
           settled = true;
           track.removeEventListener('transitionend', handleSettle);
-          setSlotResult(reel, track, target);
+          setSlotResult(reel, track, target, [randomFrom(mascotSources), randomFrom(mascotSources)]);
           settledCount += 1;
           if (settledCount === tracks.length) {
             slotState.spinning = false;
@@ -740,7 +744,11 @@ redirect_from:
       if (!reels.length || !tracks.length) return;
       tracks.forEach((track, index) => {
         const currentSource = track.dataset.currentSource || randomFrom(mascotSources);
-        setSlotResult(reels[index], track, currentSource);
+        const sideSources = [
+          track.dataset.leftSource || randomFrom(mascotSources),
+          track.dataset.rightSource || randomFrom(mascotSources)
+        ];
+        setSlotResult(reels[index], track, currentSource, sideSources);
       });
     }
 
@@ -754,7 +762,7 @@ redirect_from:
     function handleResize() {
       window.clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(() => {
-        syncDesktopHomeLayout('auto');
+        applyDesktopScale();
       }, 160);
     }
 
@@ -782,9 +790,6 @@ redirect_from:
     }
 
     window.addEventListener('resize', handleResize);
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', handleResize);
-    }
     window.addEventListener('beforeunload', () => {
       if (mascotRafId) {
         window.cancelAnimationFrame(mascotRafId);
