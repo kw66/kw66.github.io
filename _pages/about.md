@@ -48,9 +48,8 @@ redirect_from:
     <a class='paper-link-button' href='https://arxiv.org/pdf/2509.16635'>&#128196; Paper</a>
   </div>
   <div class='paper-tags'>
-    <span class='paper-tag'>Anytime Retrieval</span>
-    <span class='paper-tag'>&#28151;&#21512;&#19987;&#23478;</span>
-    <span class='paper-tag'>&#22810;&#20219;&#21153;&#23398;&#20064;</span>
+    <span class='paper-tag'>Mixture of Experts</span>
+    <span class='paper-tag'>Multi-Task Learning</span>
   </div>
 </div>
 
@@ -62,8 +61,9 @@ redirect_from:
     <a class='paper-link-button' href='https://arxiv.org/abs/2208.00967'>&#128196; Paper</a>
   </div>
   <div class='paper-tags'>
-    <span class='paper-tag'>&#22240;&#26524;&#25512;&#26029;</span>
-    <span class='paper-tag'>&#36328;&#27169;&#24577; ReID</span>
+    <span class='paper-tag'>Causal Inference</span>
+    <span class='paper-tag'>Counterfactual Intervention</span>
+    <span class='paper-tag'>Heterogeneous Graph Neural Network</span>
   </div>
 </div>
 
@@ -75,7 +75,6 @@ redirect_from:
     <a class='paper-link-button' href='https://link.springer.com/chapter/10.1007/978-3-031-18907-4_41'>&#128196; Paper</a>
   </div>
   <div class='paper-tags'>
-    <span class='paper-tag'>&#24230;&#37327;&#23398;&#20064;</span>
-    <span class='paper-tag'>&#26381;&#39280;&#21464;&#21270; ReID</span>
+    <span class='paper-tag'>Metric Learning</span>
   </div>
 </div>
