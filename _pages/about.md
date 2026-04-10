@@ -182,6 +182,7 @@ redirect_from:
     const desktopScalePadding = 10;
     const leftLayerId = 'side-mascot-layer-left';
     const rightLayerId = 'side-mascot-layer-right';
+    const authorAvatarReelId = 'author-avatar-reel';
     const activePaperFilters = new Set(['first-author']);
     const featuredState = {
       index: 0,
@@ -207,6 +208,10 @@ redirect_from:
     let mascotRafId = null;
     let resizeTimer = null;
     let mascotState = null;
+    const avatarState = {
+      animation: null,
+      timerId: null
+    };
 
     function clamp(value, min, max) {
       return Math.min(Math.max(value, min), max);
@@ -392,6 +397,65 @@ redirect_from:
       paintLane(mascotState.left);
       paintLane(mascotState.right);
       mascotRafId = window.requestAnimationFrame(mascotStep);
+    }
+
+    function finishAuthorAvatarSpin() {
+      const reel = document.getElementById(authorAvatarReelId);
+      if (!reel) return;
+      reel.style.transition = 'none';
+      reel.style.transform = 'translateY(0)';
+      reel.offsetWidth;
+      reel.style.transition = '';
+    }
+
+    function spinAuthorAvatar() {
+      const reel = document.getElementById(authorAvatarReelId);
+      if (!reel) return;
+
+      if (avatarState.timerId) {
+        window.clearTimeout(avatarState.timerId);
+        avatarState.timerId = null;
+      }
+      if (avatarState.animation) {
+        avatarState.animation.cancel();
+        avatarState.animation = null;
+      }
+
+      const finalOffset = '-66.6667%';
+      if (prefersReducedMotion || typeof reel.animate !== 'function') {
+        reel.style.transition = 'transform 180ms ease-out';
+        reel.style.transform = `translateY(${finalOffset})`;
+        avatarState.timerId = window.setTimeout(() => {
+          finishAuthorAvatarSpin();
+          avatarState.timerId = null;
+        }, 220);
+        return;
+      }
+
+      const animation = reel.animate([
+        { transform: 'translateY(0%)', offset: 0 },
+        { transform: 'translateY(-8%)', offset: 0.1 },
+        { transform: 'translateY(-24%)', offset: 0.28 },
+        { transform: 'translateY(-40%)', offset: 0.48 },
+        { transform: 'translateY(-54%)', offset: 0.72 },
+        { transform: `translateY(${finalOffset})`, offset: 1 }
+      ], {
+        duration: 960,
+        easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+        fill: 'forwards'
+      });
+
+      avatarState.animation = animation;
+      animation.onfinish = () => {
+        if (avatarState.animation !== animation) return;
+        avatarState.animation = null;
+        finishAuthorAvatarSpin();
+      };
+      animation.oncancel = () => {
+        if (avatarState.animation === animation) {
+          avatarState.animation = null;
+        }
+      };
     }
 
     function updatePaperFilterButtons() {
@@ -684,6 +748,7 @@ redirect_from:
       slotState.spinning = true;
       slotMachine.classList.add('is-spinning');
       lever.classList.add('is-pulled');
+      spinAuthorAvatar();
       let settledCount = 0;
 
       tracks.forEach((track, index) => {
@@ -800,6 +865,12 @@ redirect_from:
     window.addEventListener('beforeunload', () => {
       if (mascotRafId) {
         window.cancelAnimationFrame(mascotRafId);
+      }
+      if (avatarState.animation) {
+        avatarState.animation.cancel();
+      }
+      if (avatarState.timerId) {
+        window.clearTimeout(avatarState.timerId);
       }
       clearSlotTimers();
     });

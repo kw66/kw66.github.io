@@ -1,11 +1,23 @@
 {% if page.author and site.data.authors[page.author] %}
   {% assign author = site.data.authors[page.author] %}{% else %}{% assign author = site.author %}
 {% endif %}
+{% assign primary_avatar = author.avatar | prepend: '/' | relative_url %}
+{% assign secondary_avatar = '/images/avatar-xulin-alt.jpg' | relative_url %}
 
 <div itemscope itemtype="http://schema.org/Person" class="profile_box">
 
   <div class="author__avatar">
-    <img src="{{ author.avatar }}" class="author__avatar" alt="{{ author.name }}">
+    {% if page.permalink == "/" or page.url == "/" %}
+      <div class="author__avatar-slot" id="author-avatar-slot" role="img" aria-label="{{ author.name }}">
+        <div class="author__avatar-reel" id="author-avatar-reel">
+          <img src="{{ primary_avatar }}" class="author__avatar-frame author__avatar-frame--primary" alt="" aria-hidden="true">
+          <img src="{{ secondary_avatar }}" class="author__avatar-frame author__avatar-frame--secondary" alt="" aria-hidden="true">
+          <img src="{{ primary_avatar }}" class="author__avatar-frame author__avatar-frame--primary-clone" alt="" aria-hidden="true">
+        </div>
+      </div>
+    {% else %}
+      <img src="{{ primary_avatar }}" class="author__avatar-image" alt="{{ author.name }}">
+    {% endif %}
   </div>
 
   <div class="author__content">
