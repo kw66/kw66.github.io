@@ -301,6 +301,10 @@
     position: relative;
 }
 
+.sidebar .profile_box {
+    margin-top: -0.55rem;
+}
+
 #main {
     position: relative;
 }
@@ -311,11 +315,17 @@
 
 @include breakpoint($large) {
     .sidebar {
-        @include span(3 of 12);
+        width: 21.75%;
+        margin-right: 0;
     }
 
     .page {
-        @include span(9 of 12 last);
+        width: 78.25%;
+        margin-right: 0;
+    }
+
+    .sidebar.sticky {
+        top: 5.2em;
     }
 }
 
