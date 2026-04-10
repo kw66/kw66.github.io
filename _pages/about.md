@@ -119,18 +119,8 @@ redirect_from:
       return items[Math.floor(Math.random() * items.length)];
     }
 
-    function computeOpacity(y, height) {
-      const fade = config.size * 0.9;
-      const top = y;
-      const bottom = y + config.size;
-      const enter = Math.max(0, Math.min(1, bottom / fade));
-      const exit = Math.max(0, Math.min(1, (height - top) / fade));
-      return Math.min(enter, exit);
-    }
-
     function paintMascot(item) {
       item.el.style.transform = `translate3d(0, ${Math.round(item.y)}px, 0)`;
-      item.el.style.opacity = `${computeOpacity(item.y, item.laneHeight)}`;
     }
 
     function respawnMascot(item) {
@@ -159,7 +149,7 @@ redirect_from:
         el.loading = 'eager';
         el.src = randomFrom(mascotSources);
         layer.appendChild(el);
-        const item = { el, side, y, laneHeight: height };
+        const item = { el, side, y };
         items.push(item);
       });
 
@@ -169,7 +159,7 @@ redirect_from:
     function recycleLane(lane) {
       const { side, items, height } = lane;
       const spacing = state.spacing;
-      const beyond = config.gap;
+      const beyond = config.size + config.gap;
       items.forEach((item) => {
         if (side === 'left' && item.y >= height + beyond) {
           const minY = Math.min(...items.map((entry) => entry.y));

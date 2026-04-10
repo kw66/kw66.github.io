@@ -325,7 +325,7 @@
         position: absolute;
         top: 0;
         bottom: 0;
-        overflow: visible;
+        overflow: hidden;
         pointer-events: none;
     }
 
@@ -350,8 +350,7 @@
     transform-origin: center center;
     will-change: transform;
     backface-visibility: hidden;
-    filter: saturate(1.02);
-    opacity: 0;
+    opacity: 1;
 }
 
 .side-mascot--left {
