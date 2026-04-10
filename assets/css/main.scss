@@ -303,11 +303,11 @@
 
 @include breakpoint($large) {
     .sidebar {
-        @include span(4 of 12);
+        @include span(2.5 of 12);
     }
 
     .page {
-        @include span(8 of 12 last);
+        @include span(9.5 of 12 last);
     }
 }
 
