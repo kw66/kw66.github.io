@@ -130,18 +130,9 @@ redirect_from:
     function buildLane(side, height, layer) {
       const items = [];
       const spacing = config.size + config.gap;
-      const positions = [];
-      if (side === 'left') {
-        for (let y = -(config.size + config.gap); y < height + spacing; y += spacing) {
-          positions.push(y);
-        }
-      } else {
-        for (let y = height + config.gap; y > -(spacing + config.size); y -= spacing) {
-          positions.push(y);
-        }
-      }
+      const slotCount = Math.ceil((height + spacing * 2) / spacing) + 1;
 
-      positions.forEach((y) => {
+      for (let index = 0; index < slotCount; index += 1) {
         const el = document.createElement('img');
         el.className = `side-mascot side-mascot--${side}`;
         el.alt = '';
@@ -149,29 +140,41 @@ redirect_from:
         el.loading = 'eager';
         el.src = randomFrom(mascotSources);
         layer.appendChild(el);
-        const item = { el, side, y };
+        const item = { el, side, y: 0 };
         items.push(item);
-      });
+      }
 
-      return items;
+      return {
+        side,
+        height,
+        items,
+        direction: side === 'left' ? 1 : -1,
+        offset: 0,
+        startY: -spacing
+      };
     }
 
-    function recycleLane(lane) {
-      const { side, items, height } = lane;
-      const spacing = state.spacing;
-      const beyond = config.size + config.gap;
-      items.forEach((item) => {
-        if (side === 'left' && item.y >= height + beyond) {
-          const minY = Math.min(...items.map((entry) => entry.y));
-          item.y = minY - spacing;
-          respawnMascot(item);
-        }
-        if (side === 'right' && item.y <= -(config.size + beyond)) {
-          const maxY = Math.max(...items.map((entry) => entry.y));
-          item.y = maxY + spacing;
-          respawnMascot(item);
-        }
+    function paintLane(lane) {
+      lane.items.forEach((item, index) => {
+        item.y = lane.startY + index * state.spacing + lane.direction * lane.offset;
+        paintMascot(item);
       });
+    }
+
+    function advanceLane(lane, distance) {
+      lane.offset += distance;
+      while (lane.offset >= state.spacing) {
+        lane.offset -= state.spacing;
+        if (lane.direction === 1) {
+          const recycled = lane.items.pop();
+          respawnMascot(recycled);
+          lane.items.unshift(recycled);
+        } else {
+          const recycled = lane.items.shift();
+          respawnMascot(recycled);
+          lane.items.push(recycled);
+        }
+      }
     }
 
     function step(now) {
@@ -179,17 +182,11 @@ redirect_from:
       const dt = Math.min((now - state.lastTime) / 1000, 0.05);
       state.lastTime = now;
 
-      state.left.items.forEach((item) => {
-        item.y += state.speed * dt;
-      });
-      state.right.items.forEach((item) => {
-        item.y -= state.speed * dt;
-      });
-
-      recycleLane(state.left);
-      recycleLane(state.right);
-      state.left.items.forEach((item) => paintMascot(item));
-      state.right.items.forEach((item) => paintMascot(item));
+      const distance = state.speed * dt;
+      advanceLane(state.left, distance);
+      advanceLane(state.right, distance);
+      paintLane(state.left);
+      paintLane(state.right);
 
       rafId = window.requestAnimationFrame(step);
     }
@@ -217,28 +214,20 @@ redirect_from:
         speed: config.speed,
         spacing: config.size + config.gap,
         lastTime: performance.now(),
-        left: {
-          side: 'left',
-          height: leftHeight,
-          items: buildLane('left', leftHeight, leftLayer)
-        },
-        right: {
-          side: 'right',
-          height: rightHeight,
-          items: buildLane('right', rightHeight, rightLayer)
-        }
+        left: buildLane('left', leftHeight, leftLayer),
+        right: buildLane('right', rightHeight, rightLayer)
       };
 
       state.left.items.forEach((item) => {
         item.el.style.width = `${config.size}px`;
         item.el.style.left = `${config.leftInset}px`;
-        paintMascot(item);
       });
       state.right.items.forEach((item) => {
         item.el.style.width = `${config.size}px`;
         item.el.style.right = `${config.rightInset}px`;
-        paintMascot(item);
       });
+      paintLane(state.left);
+      paintLane(state.right);
 
       rafId = window.requestAnimationFrame(step);
     }
