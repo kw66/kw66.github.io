@@ -188,6 +188,10 @@ redirect_from:
       spinning: false,
       timers: []
     };
+    const slotVisual = {
+      itemRatio: 0.38,
+      gapRatio: 0.04
+    };
     const mascotConfig = {
       minWidth: 1280,
       size: 84,
@@ -464,6 +468,28 @@ redirect_from:
       return item;
     }
 
+    function getSlotMetrics(reel) {
+      const reelWidth = Math.max(reel.clientWidth, 180);
+      const itemWidth = reelWidth * slotVisual.itemRatio;
+      const gap = reelWidth * slotVisual.gapRatio;
+      const sidePadding = (reelWidth - itemWidth) / 2;
+      const pitch = itemWidth + gap;
+      return {
+        itemWidth,
+        gap,
+        sidePadding,
+        pitch
+      };
+    }
+
+    function applySlotMetrics(reel, track) {
+      const metrics = getSlotMetrics(reel);
+      reel.style.setProperty('--slot-item-width', `${metrics.itemWidth}px`);
+      reel.style.setProperty('--slot-gap', `${metrics.gap}px`);
+      reel.style.setProperty('--slot-side-padding', `${metrics.sidePadding}px`);
+      return metrics;
+    }
+
     function renderSlotTrack(track, sources) {
       track.innerHTML = '';
       sources.forEach((src) => {
@@ -471,10 +497,12 @@ redirect_from:
       });
     }
 
-    function setSlotResult(track, src) {
-      renderSlotTrack(track, [src]);
+    function setSlotResult(reel, track, src) {
+      const neighbors = [randomFrom(mascotSources), src, randomFrom(mascotSources)];
+      renderSlotTrack(track, neighbors);
+      const metrics = applySlotMetrics(reel, track);
       track.style.transition = 'none';
-      track.style.transform = 'translate3d(0, 0, 0)';
+      track.style.transform = `translate3d(${-metrics.pitch}px, 0, 0)`;
       track.dataset.currentSource = src;
     }
 
@@ -500,13 +528,14 @@ redirect_from:
 
       tracks.forEach((track, index) => {
         const reel = reels[index];
+        const metrics = applySlotMetrics(reel, track);
         const sequenceLength = prefersReducedMotion ? 6 + index : 16 + index * 5;
         const sequence = [];
         for (let pointer = 0; pointer < sequenceLength; pointer += 1) {
           sequence.push(randomFrom(mascotSources));
         }
         const target = randomFrom(mascotSources);
-        sequence.push(target);
+        sequence.push(target, randomFrom(mascotSources));
 
         renderSlotTrack(track, sequence);
         track.style.transition = 'none';
@@ -514,10 +543,10 @@ redirect_from:
         track.offsetWidth;
 
         const duration = prefersReducedMotion ? 80 : 760 + index * 320;
-        const stepWidth = reel.clientWidth;
+        const targetIndex = sequence.length - 2;
         window.requestAnimationFrame(() => {
           track.style.transition = `transform ${duration}ms cubic-bezier(0.08, 0.86, 0.18, 1)`;
-          track.style.transform = `translate3d(${-(sequence.length - 1) * stepWidth}px, 0, 0)`;
+          track.style.transform = `translate3d(${-(targetIndex * metrics.pitch)}px, 0, 0)`;
         });
 
         let settled = false;
@@ -525,7 +554,7 @@ redirect_from:
           if (settled) return;
           settled = true;
           track.removeEventListener('transitionend', handleSettle);
-          setSlotResult(track, target);
+          setSlotResult(reel, track, target);
           settledCount += 1;
           if (settledCount === tracks.length) {
             slotState.spinning = false;
@@ -545,12 +574,23 @@ redirect_from:
 
     function initSlotMachine() {
       const lever = document.getElementById('slot-machine-lever');
+      const reels = Array.from(document.querySelectorAll('[data-slot-reel]'));
       const tracks = Array.from(document.querySelectorAll('[data-slot-track]'));
-      if (!lever || !tracks.length) return;
-      tracks.forEach((track) => {
-        setSlotResult(track, randomFrom(mascotSources));
+      if (!lever || !tracks.length || !reels.length) return;
+      tracks.forEach((track, index) => {
+        setSlotResult(reels[index], track, randomFrom(mascotSources));
       });
       lever.addEventListener('click', spinSlotMachine);
+    }
+
+    function syncSlotMachineLayout() {
+      const reels = Array.from(document.querySelectorAll('[data-slot-reel]'));
+      const tracks = Array.from(document.querySelectorAll('[data-slot-track]'));
+      if (!reels.length || !tracks.length) return;
+      tracks.forEach((track, index) => {
+        const currentSource = track.dataset.currentSource || randomFrom(mascotSources);
+        setSlotResult(reels[index], track, currentSource);
+      });
     }
 
     function handleResize() {
@@ -558,6 +598,7 @@ redirect_from:
       resizeTimer = window.setTimeout(() => {
         renderSideMascots();
         syncFeaturedCarousel('auto');
+        syncSlotMachineLayout();
       }, 160);
     }
 
