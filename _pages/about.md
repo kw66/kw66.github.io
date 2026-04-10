@@ -107,7 +107,8 @@ redirect_from:
       size: 84,
       gap: 84,
       speed: 34,
-      sideInset: 12
+      leftInset: 104,
+      rightInset: 14
     };
     let rafId = null;
     let resizeTimer = null;
@@ -229,12 +230,12 @@ redirect_from:
 
       state.left.forEach((item) => {
         item.el.style.width = `${config.size}px`;
-        item.el.style.left = `${config.sideInset}px`;
+        item.el.style.left = `${config.leftInset}px`;
         paintMascot(item);
       });
       state.right.forEach((item) => {
         item.el.style.width = `${config.size}px`;
-        item.el.style.right = `${config.sideInset}px`;
+        item.el.style.right = `${config.rightInset}px`;
         paintMascot(item);
       });
 
