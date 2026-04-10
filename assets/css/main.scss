@@ -640,17 +640,21 @@
 }
 
 .is-fixed-scale-home .desktop-scale-shell {
+    position: relative;
     width: 100%;
     overflow: hidden;
 }
 
 .is-fixed-scale-home .desktop-scale-stage {
+    position: absolute;
+    top: 0;
+    left: 0;
     display: block;
     width: max-content;
-    margin: 0 auto;
+    margin: 0;
     padding-left: calc(5.24rem + 1.08rem);
     padding-right: calc(5.24rem + 1.08rem);
-    transform-origin: top center;
+    transform-origin: top left;
     will-change: transform;
 }
 

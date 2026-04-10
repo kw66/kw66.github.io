@@ -239,17 +239,18 @@ redirect_from:
       const stage = document.getElementById(desktopScaleStageId);
       if (!shell || !stage) return 1;
 
-      stage.style.transform = 'scale(1)';
-      stage.style.marginBottom = '0px';
+      shell.style.height = 'auto';
+      stage.style.transform = 'translate3d(0, 0, 0) scale(1)';
 
       const stageWidth = Math.max(stage.scrollWidth, stage.offsetWidth, stage.clientWidth, 1);
       const stageHeight = Math.max(stage.scrollHeight, stage.offsetHeight, stage.clientHeight, 1);
       const shellWidth = Math.max(shell.clientWidth, getViewportWidth(), 1);
       const availableWidth = Math.max(shellWidth - desktopScalePadding * 2, 1);
       const scale = clamp(availableWidth / stageWidth, 0.18, 1);
+      const offsetX = Math.max((shellWidth - stageWidth * scale) / 2, 0);
 
-      stage.style.transform = `scale(${scale.toFixed(4)})`;
-      stage.style.marginBottom = `${Math.round(stageHeight * (scale - 1))}px`;
+      stage.style.transform = `translate3d(${offsetX.toFixed(2)}px, 0, 0) scale(${scale.toFixed(4)})`;
+      shell.style.height = `${Math.ceil(stageHeight * scale)}px`;
       shell.dataset.scale = scale.toFixed(4);
       return scale;
     }
