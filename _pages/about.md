@@ -44,7 +44,6 @@ redirect_from:
   <p class='work-title'>&#128196; Towards Anytime Retrieval: A Benchmark for Anytime Person Re-Identification</p>
   <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Jiaze Li, Qinhong Yang, Tao Gong, Qi Chu, Mang Ye, Nenghai Yu</p>
   <p class='work-meta'>&#127970; Venue: IJCAI 2025 (Oral)</p>
-  <p class='work-links'><a href='https://arxiv.org/pdf/2509.16635'>&#128279; Paper</a></p>
 </div>
 
 <div class='paper-list-item'>
@@ -57,12 +56,10 @@ redirect_from:
   <p class='work-title'>&#128196; Counterfactual Intervention Feature Transfer for Visible-Infrared Person Re-identification</p>
   <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Yating Liu, Guojun Yin, Qi Chu, Jingyang Huang, Feng Zhu, Rui Zhao, Nenghai Yu</p>
   <p class='work-meta'>&#127970; Venue: ECCV 2022</p>
-  <p class='work-links'><a href='https://arxiv.org/abs/2208.00967'>&#128279; Paper</a></p>
 </div>
 
 <div class='paper-list-item'>
   <p class='work-title'>&#128196; Cloth-aware Center Cluster Loss for Cloth-Changing Person Re-identification</p>
   <p class='work-authors'><strong>Xulin Li</strong>, Bin Liu, Yan Lu, Qi Chu, Nenghai Yu</p>
   <p class='work-meta'>&#127970; Venue: PRCV 2022</p>
-  <p class='work-links'><a href='https://link.springer.com/chapter/10.1007/978-3-031-18907-4_41'>&#128279; Paper</a></p>
 </div>
