@@ -66,18 +66,17 @@ redirect_from:
     <button class='paper-filter-chip' type='button' data-filter-tag='first-author' aria-pressed='true'>First Author</button>
     <button class='paper-filter-chip' type='button' data-filter-tag='reid' aria-pressed='false'>ReID</button>
     <button class='paper-filter-chip' type='button' data-filter-tag='inpainting' aria-pressed='false'>Inpainting</button>
-    <button class='paper-filter-chip' type='button' data-filter-tag='mixture-of-experts' aria-pressed='false'>Mixture of Experts</button>
-    <button class='paper-filter-chip' type='button' data-filter-tag='frequency-domain' aria-pressed='false'>Frequency-Domain</button>
+    <button class='paper-filter-chip' type='button' data-filter-tag='moe' aria-pressed='false'>MoE</button>
+    <button class='paper-filter-chip' type='button' data-filter-tag='frequency' aria-pressed='false'>Frequency</button>
     <button class='paper-filter-chip' type='button' data-filter-tag='multi-task-learning' aria-pressed='false'>Multi-Task Learning</button>
     <button class='paper-filter-chip' type='button' data-filter-tag='causal-inference' aria-pressed='false'>Causal Inference</button>
-    <button class='paper-filter-chip' type='button' data-filter-tag='counterfactual' aria-pressed='false'>Counterfactual</button>
-    <button class='paper-filter-chip' type='button' data-filter-tag='heterogeneous-graph' aria-pressed='false'>Heterogeneous Graph</button>
+    <button class='paper-filter-chip' type='button' data-filter-tag='graph' aria-pressed='false'>Graph</button>
     <button class='paper-filter-chip' type='button' data-filter-tag='metric-learning' aria-pressed='false'>Metric Learning</button>
   </div>
 </div>
 
 <div class='paper-list' id='paper-list'>
-  <article class='paper-list-item' data-paper-tags='first-author,reid,mixture-of-experts,frequency-domain'>
+  <article class='paper-list-item' data-paper-tags='first-author,reid,moe,frequency'>
     <p class='work-title'>MFEN: Multi-Frequency Expert Network for Visible-Infrared Person Re-ID</p>
     <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Qinhong Yang, Qi Chu, Tao Gong, Nenghai Yu</p>
     <div class='work-meta-row'>
@@ -85,8 +84,8 @@ redirect_from:
       <span class='paper-link-button paper-link-button--disabled' aria-disabled='true'>&#128196; Paper</span>
     </div>
     <div class='paper-tags'>
-      <span class='paper-tag'>Mixture of Experts</span>
-      <span class='paper-tag'>Frequency-Domain</span>
+      <span class='paper-tag'>MoE</span>
+      <span class='paper-tag'>Frequency</span>
     </div>
   </article>
 
@@ -117,7 +116,7 @@ redirect_from:
     </div>
   </article>
 
-  <article class='paper-list-item' data-paper-tags='first-author,reid,mixture-of-experts,multi-task-learning'>
+  <article class='paper-list-item' data-paper-tags='first-author,reid,moe,multi-task-learning'>
     <p class='work-title'>Towards Anytime Retrieval: A Benchmark for Anytime Person Re-Identification</p>
     <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Jiaze Li, Qinhong Yang, Tao Gong, Qi Chu, Mang Ye, Nenghai Yu</p>
     <div class='work-meta-row'>
@@ -125,7 +124,7 @@ redirect_from:
       <a class='paper-link-button' href='https://arxiv.org/pdf/2509.16635' target='_blank' rel='noopener noreferrer'>&#128196; Paper</a>
     </div>
     <div class='paper-tags'>
-      <span class='paper-tag'>Mixture of Experts</span>
+      <span class='paper-tag'>MoE</span>
       <span class='paper-tag'>Multi-Task Learning</span>
     </div>
   </article>
@@ -139,7 +138,7 @@ redirect_from:
     </div>
   </article>
 
-  <article class='paper-list-item' data-paper-tags='first-author,reid,causal-inference,counterfactual,heterogeneous-graph'>
+  <article class='paper-list-item' data-paper-tags='first-author,reid,causal-inference,graph'>
     <p class='work-title'>Counterfactual Intervention Feature Transfer for Visible-Infrared Person Re-identification</p>
     <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Yating Liu, Guojun Yin, Qi Chu, Jingyang Huang, Feng Zhu, Rui Zhao, Nenghai Yu</p>
     <div class='work-meta-row'>
@@ -148,8 +147,7 @@ redirect_from:
     </div>
     <div class='paper-tags'>
       <span class='paper-tag'>Causal Inference</span>
-      <span class='paper-tag'>Counterfactual</span>
-      <span class='paper-tag'>Heterogeneous Graph</span>
+      <span class='paper-tag'>Graph</span>
     </div>
   </article>
 
