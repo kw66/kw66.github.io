@@ -49,7 +49,7 @@ redirect_from:
   </div>
   <div class='paper-tags'>
     <span class='paper-tag'>Mixture of Experts</span>
-    <span class='paper-tag'>Frequency-Domain Transform</span>
+    <span class='paper-tag'>Frequency-Domain</span>
   </div>
 </div>
 
@@ -75,8 +75,8 @@ redirect_from:
   </div>
   <div class='paper-tags'>
     <span class='paper-tag'>Causal Inference</span>
-    <span class='paper-tag'>Counterfactual Intervention</span>
-    <span class='paper-tag'>Heterogeneous Graph Neural Network</span>
+    <span class='paper-tag'>Counterfactual</span>
+    <span class='paper-tag'>Heterogeneous Graph</span>
   </div>
 </div>
 
