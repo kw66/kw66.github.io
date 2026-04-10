@@ -623,14 +623,20 @@ redirect_from:
 
     function getSlotMetrics(reel) {
       const reelWidth = Math.max(reel.clientWidth, 180);
-      const gap = Math.min(slotVisual.gapPx, reelWidth * 0.05);
-      const itemWidth = (reelWidth - gap * 2) / 3;
+      const gap = clamp(reelWidth * 0.035, 7, slotVisual.gapPx);
+      const itemWidth = Math.min(reelWidth * 0.48, reelWidth - gap * 2 - 10);
       const pitch = itemWidth + gap;
+      const centerOffset = (reelWidth - itemWidth) / 2;
       return {
         itemWidth,
         gap,
-        pitch
+        pitch,
+        centerOffset
       };
+    }
+
+    function getSlotTranslate(metrics, targetIndex) {
+      return metrics.centerOffset - targetIndex * metrics.pitch;
     }
 
     function applySlotMetrics(reel, track) {
@@ -652,9 +658,9 @@ redirect_from:
       const rightSource = sideSources && sideSources[1] ? sideSources[1] : (track.dataset.rightSource || randomFrom(mascotSources));
       const neighbors = [leftSource, src, rightSource];
       renderSlotTrack(track, neighbors);
-      applySlotMetrics(reel, track);
+      const metrics = applySlotMetrics(reel, track);
       track.style.transition = 'none';
-      track.style.transform = 'translate3d(0, 0, 0)';
+      track.style.transform = `translate3d(${getSlotTranslate(metrics, 1)}px, 0, 0)`;
       track.dataset.currentSource = src;
       track.dataset.leftSource = leftSource;
       track.dataset.rightSource = rightSource;
@@ -683,24 +689,25 @@ redirect_from:
       tracks.forEach((track, index) => {
         const reel = reels[index];
         const metrics = applySlotMetrics(reel, track);
-        const sequenceLength = prefersReducedMotion ? 6 + index : 16 + index * 5;
+        const sequenceLength = prefersReducedMotion ? 8 + index * 2 : 24 + index * 6;
         const sequence = [];
         for (let pointer = 0; pointer < sequenceLength; pointer += 1) {
           sequence.push(randomFrom(mascotSources));
         }
         const target = randomFrom(mascotSources);
-        sequence.push(target, randomFrom(mascotSources));
+        const finalSideSources = [randomFrom(mascotSources), randomFrom(mascotSources)];
+        sequence.push(finalSideSources[0], target, finalSideSources[1]);
 
         renderSlotTrack(track, sequence);
         track.style.transition = 'none';
-        track.style.transform = 'translate3d(0, 0, 0)';
+        track.style.transform = `translate3d(${getSlotTranslate(metrics, 1)}px, 0, 0)`;
         track.offsetWidth;
 
-        const duration = prefersReducedMotion ? 80 : 760 + index * 320;
+        const duration = prefersReducedMotion ? 120 : 1380 + index * 520;
         const targetIndex = sequence.length - 2;
         window.requestAnimationFrame(() => {
           track.style.transition = `transform ${duration}ms cubic-bezier(0.08, 0.86, 0.18, 1)`;
-          track.style.transform = `translate3d(${-(targetIndex * metrics.pitch)}px, 0, 0)`;
+          track.style.transform = `translate3d(${getSlotTranslate(metrics, targetIndex)}px, 0, 0)`;
         });
 
         let settled = false;
@@ -708,7 +715,7 @@ redirect_from:
           if (settled) return;
           settled = true;
           track.removeEventListener('transitionend', handleSettle);
-          setSlotResult(reel, track, target, [randomFrom(mascotSources), randomFrom(mascotSources)]);
+          setSlotResult(reel, track, target, finalSideSources);
           settledCount += 1;
           if (settledCount === tracks.length) {
             slotState.spinning = false;

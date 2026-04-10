@@ -389,9 +389,9 @@
     position: relative;
     display: grid;
     grid-template-columns: 1fr;
-    gap: 0.58rem;
+    gap: 0.46rem;
     align-items: stretch;
-    padding: 0.82rem 0.78rem 0.88rem;
+    padding: 0.74rem 0.72rem 0.8rem;
     border: 1px solid #d8cdbd;
     border-radius: 1rem;
     background:
@@ -422,7 +422,7 @@
 
 .slot-machine-reel {
     position: relative;
-    height: 92px;
+    height: 78px;
     overflow: hidden;
     border: 1px solid #dbcdb7;
     border-radius: 0.82rem;
@@ -437,10 +437,10 @@
 .slot-machine-reel::before {
     content: "";
     position: absolute;
-    top: 0.34rem;
-    bottom: 0.34rem;
+    top: 0.22rem;
+    bottom: 0.22rem;
     left: 50%;
-    width: calc(var(--slot-item-width, 110px) + 0.52rem);
+    width: calc(var(--slot-item-width, 110px) + 0.28rem);
     transform: translateX(-50%);
     border: 2px solid #d9c296;
     border-radius: 0.64rem;
@@ -479,11 +479,11 @@
 .slot-machine-item {
     flex: 0 0 var(--slot-item-width, 110px);
     width: var(--slot-item-width, 110px);
-    height: 92px;
+    height: 78px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.26rem 0.24rem 0.16rem;
+    padding: 0.08rem 0.04rem;
     z-index: 1;
 
     img {
@@ -494,7 +494,7 @@
         max-height: 100%;
         object-fit: contain;
         transition: none !important;
-        filter: drop-shadow(0 6px 10px rgba(83, 101, 53, 0.12));
+        filter: drop-shadow(0 6px 10px rgba(83, 101, 53, 0.14));
     }
 }
 
