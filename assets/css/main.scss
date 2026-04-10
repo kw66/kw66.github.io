@@ -297,6 +297,36 @@
     object-position: center 18%;
 }
 
+@media (min-width: 925px) {
+    .sidebar .profile_box {
+        max-width: 252px;
+    }
+
+    .sidebar .author__content {
+        max-width: 248px;
+    }
+
+    .sidebar .author__name {
+        max-width: 248px;
+        font-size: 2.12rem;
+        line-height: 1.12;
+        letter-spacing: -0.01em;
+    }
+
+    .sidebar .author__bio {
+        max-width: 238px;
+        font-size: 0.94rem;
+        line-height: 1.46;
+        color: #4f5962;
+        text-wrap: balance;
+    }
+
+    .sidebar .author__urls,
+    .sidebar .author__urls-wrapper {
+        max-width: 238px;
+    }
+}
+
 .page__content {
     position: relative;
 }
