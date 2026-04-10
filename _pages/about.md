@@ -403,7 +403,7 @@ redirect_from:
       const reel = document.getElementById(authorAvatarReelId);
       if (!reel) return;
       reel.style.transition = 'none';
-      reel.style.transform = 'translateY(0)';
+      reel.style.transform = 'translateX(0)';
       reel.offsetWidth;
       reel.style.transition = '';
     }
@@ -424,7 +424,7 @@ redirect_from:
       const finalOffset = '-66.6667%';
       if (prefersReducedMotion || typeof reel.animate !== 'function') {
         reel.style.transition = 'transform 180ms ease-out';
-        reel.style.transform = `translateY(${finalOffset})`;
+        reel.style.transform = `translateX(${finalOffset})`;
         avatarState.timerId = window.setTimeout(() => {
           finishAuthorAvatarSpin();
           avatarState.timerId = null;
@@ -433,12 +433,12 @@ redirect_from:
       }
 
       const animation = reel.animate([
-        { transform: 'translateY(0%)', offset: 0 },
-        { transform: 'translateY(-8%)', offset: 0.1 },
-        { transform: 'translateY(-24%)', offset: 0.28 },
-        { transform: 'translateY(-40%)', offset: 0.48 },
-        { transform: 'translateY(-54%)', offset: 0.72 },
-        { transform: `translateY(${finalOffset})`, offset: 1 }
+        { transform: 'translateX(0%)', offset: 0 },
+        { transform: 'translateX(-8%)', offset: 0.1 },
+        { transform: 'translateX(-24%)', offset: 0.28 },
+        { transform: 'translateX(-40%)', offset: 0.48 },
+        { transform: 'translateX(-54%)', offset: 0.72 },
+        { transform: `translateX(${finalOffset})`, offset: 1 }
       ], {
         duration: 960,
         easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
