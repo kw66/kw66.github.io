@@ -423,25 +423,26 @@ redirect_from:
 
       const finalOffset = '-66.6667%';
       if (prefersReducedMotion || typeof reel.animate !== 'function') {
-        reel.style.transition = 'transform 180ms ease-out';
+        reel.style.transition = 'transform 420ms cubic-bezier(0.22, 1, 0.36, 1)';
         reel.style.transform = `translateX(${finalOffset})`;
         avatarState.timerId = window.setTimeout(() => {
           finishAuthorAvatarSpin();
           avatarState.timerId = null;
-        }, 220);
+        }, 460);
         return;
       }
 
       const animation = reel.animate([
         { transform: 'translateX(0%)', offset: 0 },
-        { transform: 'translateX(-8%)', offset: 0.1 },
-        { transform: 'translateX(-24%)', offset: 0.28 },
-        { transform: 'translateX(-40%)', offset: 0.48 },
-        { transform: 'translateX(-54%)', offset: 0.72 },
+        { transform: 'translateX(-28%)', offset: 0.14 },
+        { transform: 'translateX(-66.6667%)', offset: 0.3 },
+        { transform: 'translateX(-33.3333%)', offset: 0.48 },
+        { transform: 'translateX(-66.6667%)', offset: 0.66 },
+        { transform: 'translateX(-33.3333%)', offset: 0.84 },
         { transform: `translateX(${finalOffset})`, offset: 1 }
       ], {
-        duration: 960,
-        easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+        duration: 1560,
+        easing: 'cubic-bezier(0.18, 0.88, 0.24, 1)',
         fill: 'forwards'
       });
 
