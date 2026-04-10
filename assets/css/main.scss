@@ -496,18 +496,6 @@
     background: linear-gradient(180deg, #d8e5ee 0%, #c4d1db 100%);
 }
 
-.slot-machine-lever::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 1rem;
-    width: 0.22rem;
-    height: 1.95rem;
-    background: linear-gradient(180deg, #7f98ab 0%, #5f7d95 100%);
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18);
-    transform: translateX(-50%);
-}
-
 .slot-machine-lever-stick {
     position: absolute;
     left: 50%;
@@ -515,9 +503,11 @@
     width: 0.22rem;
     height: 2.2rem;
     background: linear-gradient(180deg, #8aa3b5 0%, #617f95 100%);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18);
     transform-origin: bottom center;
     transition: transform 0.28s cubic-bezier(0.18, 0.82, 0.22, 1), top 0.28s cubic-bezier(0.18, 0.82, 0.22, 1);
     transform: translateX(-50%);
+    z-index: 1;
 }
 
 .slot-machine-lever-knob {
@@ -531,6 +521,7 @@
     box-shadow: 0 6px 16px rgba(224, 104, 75, 0.26);
     transition: transform 0.28s cubic-bezier(0.18, 0.82, 0.22, 1), top 0.28s cubic-bezier(0.18, 0.82, 0.22, 1), box-shadow 0.28s ease;
     transform: translateX(-50%);
+    z-index: 2;
 }
 
 .slot-machine-lever:hover .slot-machine-lever-knob {
