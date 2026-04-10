@@ -177,6 +177,9 @@ redirect_from:
       const name = `mascot-${String(index + 1).padStart(2, '0')}.png`;
       return `${mascotBase}${name}`;
     }).filter((src) => !src.endsWith('mascot-43.png'));
+    const desktopScaleShellId = 'desktop-scale-shell';
+    const desktopScaleStageId = 'desktop-scale-stage';
+    const desktopScalePadding = 10;
     const leftLayerId = 'side-mascot-layer-left';
     const rightLayerId = 'side-mascot-layer-right';
     const activePaperFilters = new Set(['first-author']);
@@ -194,7 +197,6 @@ redirect_from:
     const slotImageCache = new Map();
     const slotImageJobs = new Map();
     const mascotConfig = {
-      minWidth: 1280,
       size: 84,
       gap: 42,
       speed: 136,
@@ -216,10 +218,40 @@ redirect_from:
 
     function resetPageScroll() {
       window.requestAnimationFrame(() => {
+        if (document.scrollingElement) {
+          document.scrollingElement.scrollTop = 0;
+        }
         window.scrollTo(0, 0);
         document.documentElement.scrollTop = 0;
         document.body.scrollTop = 0;
       });
+    }
+
+    function getViewportWidth() {
+      if (window.visualViewport && typeof window.visualViewport.width === 'number') {
+        return window.visualViewport.width;
+      }
+      return window.innerWidth;
+    }
+
+    function applyDesktopScale() {
+      const shell = document.getElementById(desktopScaleShellId);
+      const stage = document.getElementById(desktopScaleStageId);
+      if (!shell || !stage) return 1;
+
+      stage.style.transform = 'scale(1)';
+      stage.style.marginBottom = '0px';
+
+      const stageWidth = Math.max(stage.scrollWidth, stage.offsetWidth, stage.clientWidth, 1);
+      const stageHeight = Math.max(stage.scrollHeight, stage.offsetHeight, stage.clientHeight, 1);
+      const shellWidth = Math.max(shell.clientWidth, getViewportWidth(), 1);
+      const availableWidth = Math.max(shellWidth - desktopScalePadding * 2, 1);
+      const scale = clamp(availableWidth / stageWidth, 0.18, 1);
+
+      stage.style.transform = `scale(${scale.toFixed(4)})`;
+      stage.style.marginBottom = `${Math.round(stageHeight * (scale - 1))}px`;
+      shell.dataset.scale = scale.toFixed(4);
+      return scale;
     }
 
     function paintMascot(item) {
@@ -228,6 +260,24 @@ redirect_from:
 
     function respawnMascot(item) {
       item.el.src = randomFrom(mascotSources);
+    }
+
+    function getRailHeight(layer) {
+      const stage = document.getElementById(desktopScaleStageId);
+      const parent = layer.parentElement;
+      return Math.max(
+        layer.clientHeight,
+        layer.offsetHeight,
+        layer.scrollHeight,
+        parent ? parent.clientHeight : 0,
+        parent ? parent.offsetHeight : 0,
+        parent ? parent.scrollHeight : 0,
+        stage ? stage.clientHeight : 0,
+        stage ? stage.offsetHeight : 0,
+        stage ? stage.scrollHeight : 0,
+        window.innerHeight,
+        1080
+      );
     }
 
     function buildLane(side, height, layer) {
@@ -319,21 +369,14 @@ redirect_from:
         mascotRafId = null;
       }
       mascotState = null;
-
-      if (window.innerWidth < mascotConfig.minWidth) return;
-
-      const railHeight = Math.max(
-        document.documentElement.scrollHeight,
-        document.body.scrollHeight,
-        window.innerHeight,
-        1080
-      );
+      const leftRailHeight = getRailHeight(leftLayer);
+      const rightRailHeight = getRailHeight(rightLayer);
 
       mascotState = {
         speed: mascotConfig.speed,
         lastTime: performance.now(),
-        left: buildLane('left', railHeight, leftLayer),
-        right: buildLane('right', railHeight, rightLayer)
+        left: buildLane('left', leftRailHeight, leftLayer),
+        right: buildLane('right', rightRailHeight, rightLayer)
       };
 
       mascotState.left.items.forEach((item) => {
@@ -399,9 +442,7 @@ redirect_from:
     }
 
     function getFeaturedVisibleCount() {
-      if (window.innerWidth >= 1280) return 3;
-      if (window.innerWidth >= 860) return 2;
-      return 1;
+      return 3;
     }
 
     function updateFeaturedButtons() {
@@ -702,12 +743,17 @@ redirect_from:
       });
     }
 
+    function syncDesktopHomeLayout(behavior) {
+      syncFeaturedCarousel(behavior);
+      syncSlotMachineLayout();
+      applyDesktopScale();
+      renderSideMascots();
+    }
+
     function handleResize() {
       window.clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(() => {
-        renderSideMascots();
-        syncFeaturedCarousel('auto');
-        syncSlotMachineLayout();
+        syncDesktopHomeLayout('auto');
       }, 160);
     }
 
@@ -715,25 +761,29 @@ redirect_from:
       window.history.scrollRestoration = 'manual';
     }
     resetPageScroll();
-    window.addEventListener('pageshow', resetPageScroll);
+    window.addEventListener('pageshow', () => {
+      resetPageScroll();
+      syncDesktopHomeLayout('auto');
+    });
 
     initPaperFilters();
     initFeaturedCarousel();
     initSlotMachine();
+    applyDesktopScale();
 
     if (document.readyState === 'complete') {
-      renderSideMascots();
-      syncFeaturedCarousel('auto');
+      syncDesktopHomeLayout('auto');
     } else {
       window.addEventListener('load', () => {
         resetPageScroll();
-        renderSideMascots();
-        syncFeaturedCarousel('auto');
-        syncSlotMachineLayout();
+        syncDesktopHomeLayout('auto');
       }, { once: true });
     }
 
     window.addEventListener('resize', handleResize);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', handleResize);
+    }
     window.addEventListener('beforeunload', () => {
       if (mascotRafId) {
         window.cancelAnimationFrame(mascotRafId);
