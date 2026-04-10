@@ -291,6 +291,54 @@
     white-space: nowrap;
 }
 
+.author__avatar img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center 18%;
+}
+
+.page__content {
+    position: relative;
+}
+
+.side-mascot-layer {
+    display: none;
+}
+
+@media (min-width: 1280px) {
+    .side-mascot-layer {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: -8.2rem;
+        bottom: 0;
+        left: -8.2rem;
+        overflow: visible;
+        pointer-events: none;
+    }
+}
+
+.side-mascot {
+    position: absolute;
+    width: var(--mascot-size, 84px);
+    height: auto;
+    border-radius: 18px;
+    box-shadow: 0 18px 30px rgba(28, 51, 74, 0.14);
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    transform-origin: center center;
+    will-change: transform;
+    backface-visibility: hidden;
+    filter: saturate(1.02);
+}
+
+.side-mascot--left {
+    left: var(--mascot-offset, 10px);
+}
+
+.side-mascot--right {
+    right: var(--mascot-offset, 10px);
+}
+
 $scroll_offset : 2em;
 h1:before, .anchor:before { 
     content: ''; 
