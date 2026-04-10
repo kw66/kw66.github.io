@@ -41,25 +41,55 @@ redirect_from:
 </div>
 
 <div class='paper-list-item'>
-  <p class='work-title'>&#128196; Towards Anytime Retrieval: A Benchmark for Anytime Person Re-Identification</p>
-  <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Jiaze Li, Qinhong Yang, Tao Gong, Qi Chu, Mang Ye, Nenghai Yu</p>
-  <p class='work-meta'>&#127970; Venue: IJCAI 2025 (Oral)</p>
-</div>
-
-<div class='paper-list-item'>
-  <p class='work-title'>&#128196; MFEN: Multi-Frequency Expert Network for Visible-Infrared Person Re-ID</p>
+  <p class='work-title'>MFEN: Multi-Frequency Expert Network for Visible-Infrared Person Re-ID</p>
   <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Qinhong Yang, Qi Chu, Tao Gong, Nenghai Yu</p>
-  <p class='work-meta'>&#127970; Venue: CVPR 2026 (Highlight)</p>
+  <div class='work-meta-row'>
+    <p class='work-meta'>&#127970; Venue: CVPR 2026 &#10024; Highlight</p>
+    <span class='paper-link-button paper-link-button--disabled' aria-disabled='true'>&#128196; Paper</span>
+  </div>
+  <div class='paper-tags'>
+    <span class='paper-tag'>&#28151;&#21512;&#19987;&#23478;</span>
+    <span class='paper-tag'>&#22810;&#20219;&#21153;&#23398;&#20064;</span>
+    <span class='paper-tag'>&#39057;&#22495;&#21464;&#25442;</span>
+  </div>
 </div>
 
 <div class='paper-list-item'>
-  <p class='work-title'>&#128196; Counterfactual Intervention Feature Transfer for Visible-Infrared Person Re-identification</p>
+  <p class='work-title'>Towards Anytime Retrieval: A Benchmark for Anytime Person Re-Identification</p>
+  <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Jiaze Li, Qinhong Yang, Tao Gong, Qi Chu, Mang Ye, Nenghai Yu</p>
+  <div class='work-meta-row'>
+    <p class='work-meta'>&#127970; Venue: IJCAI 2025 &#128293; Oral</p>
+    <a class='paper-link-button' href='https://www.ijcai.org/proceedings/2025/0164.pdf'>&#128196; Paper</a>
+  </div>
+  <div class='paper-tags'>
+    <span class='paper-tag'>Anytime Retrieval</span>
+    <span class='paper-tag'>&#28151;&#21512;&#19987;&#23478;</span>
+    <span class='paper-tag'>&#22810;&#20219;&#21153;&#23398;&#20064;</span>
+  </div>
+</div>
+
+<div class='paper-list-item'>
+  <p class='work-title'>Counterfactual Intervention Feature Transfer for Visible-Infrared Person Re-identification</p>
   <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Yating Liu, Guojun Yin, Qi Chu, Jingyang Huang, Feng Zhu, Rui Zhao, Nenghai Yu</p>
-  <p class='work-meta'>&#127970; Venue: ECCV 2022</p>
+  <div class='work-meta-row'>
+    <p class='work-meta'>&#127970; Venue: ECCV 2022</p>
+    <a class='paper-link-button' href='https://link.springer.com/chapter/10.1007/978-3-031-19809-0_22'>&#128196; Paper</a>
+  </div>
+  <div class='paper-tags'>
+    <span class='paper-tag'>&#22240;&#26524;&#25512;&#26029;</span>
+    <span class='paper-tag'>&#36328;&#27169;&#24577; ReID</span>
+  </div>
 </div>
 
 <div class='paper-list-item'>
-  <p class='work-title'>&#128196; Cloth-aware Center Cluster Loss for Cloth-Changing Person Re-identification</p>
+  <p class='work-title'>Cloth-aware Center Cluster Loss for Cloth-Changing Person Re-identification</p>
   <p class='work-authors'><strong>Xulin Li</strong>, Bin Liu, Yan Lu, Qi Chu, Nenghai Yu</p>
-  <p class='work-meta'>&#127970; Venue: PRCV 2022</p>
+  <div class='work-meta-row'>
+    <p class='work-meta'>&#127970; Venue: PRCV 2022</p>
+    <a class='paper-link-button' href='https://link.springer.com/chapter/10.1007/978-3-031-18907-4_41'>&#128196; Paper</a>
+  </div>
+  <div class='paper-tags'>
+    <span class='paper-tag'>&#24230;&#37327;&#23398;&#20064;</span>
+    <span class='paper-tag'>&#26381;&#39280;&#21464;&#21270; ReID</span>
+  </div>
 </div>
