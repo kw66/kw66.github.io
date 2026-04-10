@@ -10,7 +10,7 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-<div class='side-mascot-layer' id='side-mascot-layer' aria-hidden='true'></div>
+<div class='side-mascot-rail side-mascot-rail--right' id='side-mascot-layer-right' aria-hidden='true'></div>
 
 <div class='featured-grid'>
   <div class='featured-card'>
@@ -101,13 +101,14 @@ redirect_from:
       const name = `mascot-${String(index + 1).padStart(2, '0')}.png`;
       return `${mascotBase}${name}`;
     }).filter((src) => !src.endsWith('mascot-43.png'));
-    const layerId = 'side-mascot-layer';
+    const leftLayerId = 'side-mascot-layer-left';
+    const rightLayerId = 'side-mascot-layer-right';
     const config = {
       minWidth: 1280,
       size: 84,
       gap: 42,
       speed: 34,
-      leftInset: 104,
+      leftInset: 2,
       rightInset: 14
     };
     let rafId = null;
@@ -129,7 +130,7 @@ redirect_from:
 
     function paintMascot(item) {
       item.el.style.transform = `translate3d(0, ${Math.round(item.y)}px, 0)`;
-      item.el.style.opacity = `${computeOpacity(item.y, state.height)}`;
+      item.el.style.opacity = `${computeOpacity(item.y, item.laneHeight)}`;
     }
 
     function respawnMascot(item) {
@@ -158,19 +159,19 @@ redirect_from:
         el.loading = 'eager';
         el.src = randomFrom(mascotSources);
         layer.appendChild(el);
-        const item = { el, side, y };
+        const item = { el, side, y, laneHeight: height };
         items.push(item);
       });
 
       return items;
     }
 
-    function recycleLane(side) {
-      const items = state[side];
+    function recycleLane(lane) {
+      const { side, items, height } = lane;
       const spacing = state.spacing;
       const beyond = config.gap;
       items.forEach((item) => {
-        if (side === 'left' && item.y >= state.height + beyond) {
+        if (side === 'left' && item.y >= height + beyond) {
           const minY = Math.min(...items.map((entry) => entry.y));
           item.y = minY - spacing;
           respawnMascot(item);
@@ -188,26 +189,28 @@ redirect_from:
       const dt = Math.min((now - state.lastTime) / 1000, 0.05);
       state.lastTime = now;
 
-      state.left.forEach((item) => {
+      state.left.items.forEach((item) => {
         item.y += state.speed * dt;
       });
-      state.right.forEach((item) => {
+      state.right.items.forEach((item) => {
         item.y -= state.speed * dt;
       });
 
-      recycleLane('left');
-      recycleLane('right');
-      state.left.forEach(paintMascot);
-      state.right.forEach(paintMascot);
+      recycleLane(state.left);
+      recycleLane(state.right);
+      state.left.items.forEach((item) => paintMascot(item));
+      state.right.items.forEach((item) => paintMascot(item));
 
       rafId = window.requestAnimationFrame(step);
     }
 
     function renderSideMascots() {
-      const layer = document.getElementById(layerId);
-      if (!layer) return;
+      const leftLayer = document.getElementById(leftLayerId);
+      const rightLayer = document.getElementById(rightLayerId);
+      if (!leftLayer || !rightLayer) return;
 
-      layer.innerHTML = '';
+      leftLayer.innerHTML = '';
+      rightLayer.innerHTML = '';
       if (rafId) {
         window.cancelAnimationFrame(rafId);
         rafId = null;
@@ -216,24 +219,31 @@ redirect_from:
 
       if (window.innerWidth < config.minWidth) return;
 
-      const parent = layer.parentElement;
-      const height = Math.max(parent.offsetHeight, 960);
+      const leftHeight = Math.max(leftLayer.parentElement.offsetHeight, 760);
+      const rightHeight = Math.max(rightLayer.parentElement.offsetHeight, 960);
 
       state = {
-        height,
         speed: config.speed,
         spacing: config.size + config.gap,
         lastTime: performance.now(),
-        left: buildLane('left', height, layer),
-        right: buildLane('right', height, layer)
+        left: {
+          side: 'left',
+          height: leftHeight,
+          items: buildLane('left', leftHeight, leftLayer)
+        },
+        right: {
+          side: 'right',
+          height: rightHeight,
+          items: buildLane('right', rightHeight, rightLayer)
+        }
       };
 
-      state.left.forEach((item) => {
+      state.left.items.forEach((item) => {
         item.el.style.width = `${config.size}px`;
         item.el.style.left = `${config.leftInset}px`;
         paintMascot(item);
       });
-      state.right.forEach((item) => {
+      state.right.items.forEach((item) => {
         item.el.style.width = `${config.size}px`;
         item.el.style.right = `${config.rightInset}px`;
         paintMascot(item);
