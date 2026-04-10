@@ -321,6 +321,7 @@
 
 .side-mascot-rail {
     display: none;
+    background: transparent;
 }
 
 @media (min-width: 1280px) {
@@ -330,17 +331,18 @@
         top: 0;
         bottom: 0;
         overflow: hidden;
+        background: transparent;
         pointer-events: none;
     }
 
     .side-mascot-rail--left {
         left: -8.85rem;
-        width: 6.25rem;
+        width: 5.5rem;
     }
 
     .side-mascot-rail--right {
         right: -9.1rem;
-        width: 6.25rem;
+        width: 5.35rem;
     }
 }
 
@@ -349,7 +351,7 @@
     width: 84px;
     height: auto;
     border-radius: 18px;
-    box-shadow: 0 18px 30px rgba(28, 51, 74, 0.14);
+    box-shadow: 0 10px 18px rgba(28, 51, 74, 0.1);
     transform: translate3d(0, 0, 0);
     transform-origin: center center;
     will-change: transform;
