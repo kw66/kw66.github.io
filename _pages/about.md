@@ -45,7 +45,7 @@ redirect_from:
   <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Jiaze Li, Qinhong Yang, Tao Gong, Qi Chu, Mang Ye, Nenghai Yu</p>
   <div class='work-meta-row'>
     <p class='work-meta'>&#127970; Venue: IJCAI 2025 &#128293; Oral</p>
-    <a class='paper-link-button' href='https://www.ijcai.org/proceedings/2025/0164.pdf'>&#128196; Paper</a>
+    <a class='paper-link-button' href='https://arxiv.org/pdf/2509.16635'>&#128196; Paper</a>
   </div>
   <div class='paper-tags'>
     <span class='paper-tag'>Anytime Retrieval</span>
@@ -59,7 +59,7 @@ redirect_from:
   <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Yating Liu, Guojun Yin, Qi Chu, Jingyang Huang, Feng Zhu, Rui Zhao, Nenghai Yu</p>
   <div class='work-meta-row'>
     <p class='work-meta'>&#127970; Venue: ECCV 2022</p>
-    <a class='paper-link-button' href='https://link.springer.com/chapter/10.1007/978-3-031-19809-0_22'>&#128196; Paper</a>
+    <a class='paper-link-button' href='https://arxiv.org/abs/2208.00967'>&#128196; Paper</a>
   </div>
   <div class='paper-tags'>
     <span class='paper-tag'>&#22240;&#26524;&#25512;&#26029;</span>
