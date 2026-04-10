@@ -41,6 +41,19 @@ redirect_from:
 </div>
 
 <div class='paper-list-item'>
+  <p class='work-title'>MFEN: Multi-Frequency Expert Network for Visible-Infrared Person Re-ID</p>
+  <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Qinhong Yang, Qi Chu, Tao Gong, Nenghai Yu</p>
+  <div class='work-meta-row'>
+    <p class='work-meta'>&#127970; Venue: CVPR 2026 &#10024; Highlight</p>
+    <span class='paper-link-button paper-link-button--disabled' aria-disabled='true'>&#128196; Paper</span>
+  </div>
+  <div class='paper-tags'>
+    <span class='paper-tag'>Mixture of Experts</span>
+    <span class='paper-tag'>Frequency-Domain Transform</span>
+  </div>
+</div>
+
+<div class='paper-list-item'>
   <p class='work-title'>Towards Anytime Retrieval: A Benchmark for Anytime Person Re-Identification</p>
   <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Jiaze Li, Qinhong Yang, Tao Gong, Qi Chu, Mang Ye, Nenghai Yu</p>
   <div class='work-meta-row'>
