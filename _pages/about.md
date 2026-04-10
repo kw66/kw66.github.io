@@ -209,7 +209,8 @@ redirect_from:
 
       if (window.innerWidth < config.minWidth) return;
 
-      const leftHeight = Math.max(leftLayer.parentElement.offsetHeight, 760);
+      const mainRoot = document.getElementById('main');
+      const leftHeight = Math.max(mainRoot ? mainRoot.offsetHeight : 0, window.innerHeight, 960);
       const rightHeight = Math.max(rightLayer.parentElement.offsetHeight, 960);
 
       state = {
