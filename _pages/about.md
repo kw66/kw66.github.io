@@ -138,6 +138,8 @@ redirect_from:
         el.alt = '';
         el.decoding = 'async';
         el.loading = 'eager';
+        el.style.transition = 'none';
+        el.style.webkitTransition = 'none';
         el.src = randomFrom(mascotSources);
         layer.appendChild(el);
         const item = { el, side, y: 0 };
