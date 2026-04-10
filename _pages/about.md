@@ -41,6 +41,13 @@ redirect_from:
 </div>
 
 <div class='paper-list-item'>
+  <p class='work-title'>&#128196; Towards Anytime Retrieval: A Benchmark for Anytime Person Re-Identification</p>
+  <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Jiaze Li, Qinhong Yang, Tao Gong, Qi Chu, Mang Ye, Nenghai Yu</p>
+  <p class='work-meta'>&#127970; Venue: IJCAI 2025 (Oral)</p>
+  <p class='work-links'><a href='https://arxiv.org/pdf/2509.16635'>&#128279; Paper</a></p>
+</div>
+
+<div class='paper-list-item'>
   <p class='work-title'>&#128196; MFEN: Multi-Frequency Expert Network for Visible-Infrared Person Re-ID</p>
   <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Qinhong Yang, Qi Chu, Tao Gong, Nenghai Yu</p>
   <p class='work-meta'>&#127970; Venue: CVPR 2026 (Highlight)</p>
@@ -54,40 +61,8 @@ redirect_from:
 </div>
 
 <div class='paper-list-item'>
-  <p class='work-title'>&#128196; Clothes-invariant Feature Learning by Causal Intervention for Clothes-Changing Person Re-identification</p>
-  <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Yuenan Hou, Yating Liu, Qi Chu, Wanli Ouyang, Nenghai Yu</p>
-  <p class='work-meta'>&#127970; Venue: arXiv 2023</p>
-  <p class='work-links'><a href='https://arxiv.org/abs/2305.06145'>&#128279; Paper</a></p>
-</div>
-
-<div class='paper-list-item'>
   <p class='work-title'>&#128196; Cloth-aware Center Cluster Loss for Cloth-Changing Person Re-identification</p>
   <p class='work-authors'><strong>Xulin Li</strong>, Bin Liu, Yan Lu, Qi Chu, Nenghai Yu</p>
   <p class='work-meta'>&#127970; Venue: PRCV 2022</p>
   <p class='work-links'><a href='https://link.springer.com/chapter/10.1007/978-3-031-18907-4_41'>&#128279; Paper</a></p>
-</div>
-
-<div class='paper-list-item'>
-  <p class='work-title'>&#128196; Bridging the Sky and Ground: Towards View-Invariant Feature Learning for Aerial-Ground Person Re-Identification</p>
-  <p class='work-authors'>Wajahat Khalid, Bin Liu, <strong>Xulin Li</strong>, Muhammad Waqas, Muhammad Sher Afgan</p>
-  <p class='work-meta'>&#127970; Venue: ICCV 2025</p>
-  <p class='work-links'><a href='https://openaccess.thecvf.com/content/ICCV2025/html/Khalid_Bridging_the_Sky_and_Ground_Towards_View-Invariant_Feature_Learning_for_ICCV_2025_paper.html'>&#128279; Paper</a></p>
-</div>
-
-<div class='paper-list-item'>
-  <p class='work-title'>&#128396;&#65039; MagicPaint: Operate Anything for Image Inpainting with Diffusion Model</p>
-  <p class='work-authors'>Qinhong Yang, Dongdong Chen, Qi Chu, Tao Gong, Qiankun Liu, Zhentao Tan, <strong>Xulin Li</strong>, HuaMin Feng, Nenghai Yu</p>
-  <p class='work-meta'>&#127970; Venue: AAAI 2026</p>
-</div>
-
-<div class='paper-list-item'>
-  <p class='work-title'>&#128196; Cloth-Independent Feature Learning from Multi-perspective for Cloth-Changing Person Re-Identification</p>
-  <p class='work-authors'>Wajahat Khalid, Bin Liu, <strong>Xulin Li</strong>, Muhammad Ali Qureshi</p>
-  <p class='work-meta'>&#127970; Venue: ICPRAI 2024</p>
-</div>
-
-<div class='paper-list-item'>
-  <p class='work-title'>&#128196; R<sup>2</sup>TUA: Reconstruction-residual Based Targeted and Untargeted Attack Against Text-Image Person Re-Identification</p>
-  <p class='work-authors'>Yubo Wang, Yan Lu, Bin Liu, <strong>Xulin Li</strong>, Jixiang Niu</p>
-  <p class='work-meta'>&#127970; Venue: CVPR 2026</p>
 </div>

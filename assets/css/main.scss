@@ -163,33 +163,61 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 2rem;
-    padding: 0.15rem 0 0.38rem;
-    border: 0;
-    border-bottom: 2px solid rgba(31, 79, 163, 0.22);
-    background: transparent;
+    position: relative;
+    overflow: hidden;
+    min-height: 2.6rem;
+    padding: 0.62rem 1.05rem 0.7rem;
+    border: 1px solid #c8d5df;
+    border-radius: 5px;
+    background: linear-gradient(180deg, #ffffff 0%, #eef5fa 100%);
+    box-shadow: 0 8px 20px rgba(33, 62, 93, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.92);
     color: #234f69;
     font-size: 0.92em;
     font-weight: 600;
     line-height: 1;
     text-decoration: none !important;
-    transition: border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+    letter-spacing: 0.01em;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: -120%;
+        left: -28%;
+        width: 58%;
+        height: 320%;
+        background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.72) 48%, rgba(255,255,255,0) 100%);
+        transform: rotate(20deg);
+        transition: transform 0.45s ease, left 0.45s ease;
+        pointer-events: none;
+    }
 
     &:hover {
-        border-bottom-color: rgba(23, 63, 132, 0.55);
+        border-color: #a8bccb;
+        background: linear-gradient(180deg, #ffffff 0%, #e7f0f7 100%);
+        box-shadow: 0 14px 28px rgba(33, 62, 93, 0.18), 0 0 0 1px rgba(255,255,255,0.55) inset;
         color: #17384d;
         text-decoration: none;
-        transform: translateY(-1px);
+        transform: translateY(-3px);
+
+        &::before {
+            left: 88%;
+            transform: rotate(20deg);
+        }
     }
 }
 
 .featured-button--primary {
-    border-bottom-color: #1f4fa3;
-    color: #1f4fa3;
+    border-color: #1f4fa3;
+    background: linear-gradient(180deg, #2a63c3 0%, #1f4fa3 100%);
+    box-shadow: 0 12px 28px rgba(31, 79, 163, 0.28), inset 0 1px 0 rgba(255,255,255,0.28);
+    color: #fff;
 
     &:hover {
-        border-bottom-color: #173f84;
-        color: #173f84;
+        border-color: #173f84;
+        background: linear-gradient(180deg, #2d6bd4 0%, #173f84 100%);
+        box-shadow: 0 16px 32px rgba(23, 63, 132, 0.34), 0 0 18px rgba(42, 99, 195, 0.22);
+        color: #fff;
     }
 }
 
