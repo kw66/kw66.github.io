@@ -360,7 +360,9 @@ redirect_from:
       }
       applyHomeToolSelection();
       window.requestAnimationFrame(() => {
-        syncDesktopHomeLayout('auto');
+        syncFeaturedCarousel('auto');
+        syncSlotMachineLayout();
+        applyDesktopScale();
       });
     }
 
