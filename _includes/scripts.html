@@ -1,3 +1,5 @@
+{% unless page.permalink == "/" or page.url == "/" %}
 <script src="assets/js/main.min.js"></script>
+{% endunless %}
 
 {% include analytics.html %}

@@ -11,10 +11,10 @@
           {% endfor %}
           <li class="masthead__menu-item masthead__menu-item--stats">
             <span class="masthead__stats" aria-label="Visitor statistics">
-              <span class="masthead__stat" id="local_counter_container_uv" title="Local unique devices">
+              <span class="masthead__stat" id="local_counter_container_uv" title="Unique devices">
                 &#128064; <span id="local_counter_value_uv">--</span>
               </span>
-              <span class="masthead__stat" id="local_counter_container_pv" title="Local visits">
+              <span class="masthead__stat" id="local_counter_container_pv" title="Page visits">
                 &#128433;&#65039; <span id="local_counter_value_pv">--</span>
               </span>
             </span>
@@ -111,9 +111,14 @@
     if (!uvEl || !pvEl) return;
 
     const statsKeys = {
-      visitorSeen: 'kw66_home_visitor_seen_v1',
-      totalUv: 'kw66_home_total_uv_v1',
-      totalPv: 'kw66_home_total_pv_v1'
+      visitorSeen: 'kw66_home_visitor_seen_v2',
+      snapshot: 'kw66_home_counter_snapshot_v1',
+      totalUv: 'kw66_home_uv_total',
+      totalPv: 'kw66_home_pv_total'
+    };
+    const statsApi = {
+      url: 'https://ypefmpeekfucmarbbdov.supabase.co',
+      anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlwZWZtcGVla2Z1Y21hcmJiZG92Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU5NTA2NTYsImV4cCI6MjA4MTUyNjY1Nn0.XTOQNFuuwfu9nwDTnO9-NEqlzZnzdCVnEmYEJh0rXf8'
     };
 
     function parseCount(value) {
@@ -126,26 +131,101 @@
       pvEl.textContent = String(pv);
     }
 
-    try {
-      const path = window.location.pathname || '/';
-      const normalizedPath = path === '/index.html' ? '/' : path;
-      let totalUv = parseCount(window.localStorage.getItem(statsKeys.totalUv));
-      let totalPv = parseCount(window.localStorage.getItem(statsKeys.totalPv));
+    function readSnapshot() {
+      try {
+        const snapshot = window.localStorage.getItem(statsKeys.snapshot);
+        if (!snapshot) return null;
+        const parsed = JSON.parse(snapshot);
+        return {
+          uv: parseCount(parsed && parsed.uv),
+          pv: parseCount(parsed && parsed.pv)
+        };
+      } catch (error) {
+        return null;
+      }
+    }
 
-      if (normalizedPath === '/') {
-        totalPv += 1;
-        window.localStorage.setItem(statsKeys.totalPv, String(totalPv));
+    function writeSnapshot(uv, pv) {
+      try {
+        window.localStorage.setItem(statsKeys.snapshot, JSON.stringify({ uv, pv }));
+      } catch (error) {
+        // ignore storage failures
+      }
+    }
 
-        if (!window.localStorage.getItem(statsKeys.visitorSeen)) {
-          totalUv += 1;
-          window.localStorage.setItem(statsKeys.visitorSeen, 'true');
-          window.localStorage.setItem(statsKeys.totalUv, String(totalUv));
-        }
+    async function postStatsRpc(endpoint, payload) {
+      const response = await window.fetch(`${statsApi.url}/rest/v1/rpc/${endpoint}`, {
+        method: 'POST',
+        headers: {
+          apikey: statsApi.anonKey,
+          Authorization: `Bearer ${statsApi.anonKey}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error(`stats rpc ${endpoint} failed with status ${response.status}`);
       }
 
-      renderCounts(totalUv, totalPv);
-    } catch (error) {
-      renderCounts('--', '--');
+      const text = await response.text();
+      return text ? JSON.parse(text) : null;
     }
+
+    async function incrementCounter(counterId) {
+      return postStatsRpc('increment_counter', { counter_id: counterId });
+    }
+
+    async function fetchCounters(counterIds) {
+      const rows = await postStatsRpc('get_counters', { counter_ids: counterIds });
+      const map = Object.create(null);
+      if (Array.isArray(rows)) {
+        rows.forEach((row) => {
+          if (!row || !row.id) return;
+          map[row.id] = parseCount(row.count);
+        });
+      }
+      return map;
+    }
+
+    async function refreshSharedCounts() {
+      const path = window.location.pathname || '/';
+      const normalizedPath = path === '/index.html' ? '/' : path;
+      const shouldRecordVisit = normalizedPath === '/';
+
+      const snapshot = readSnapshot();
+      if (snapshot) {
+        renderCounts(snapshot.uv, snapshot.pv);
+      }
+
+      try {
+        if (shouldRecordVisit) {
+          await incrementCounter(statsKeys.totalPv);
+
+          if (!window.localStorage.getItem(statsKeys.visitorSeen)) {
+            await incrementCounter(statsKeys.totalUv);
+            try {
+              window.localStorage.setItem(statsKeys.visitorSeen, 'true');
+            } catch (error) {
+              // ignore storage failures
+            }
+          }
+        }
+
+        const counterMap = await fetchCounters([statsKeys.totalUv, statsKeys.totalPv]);
+        const totalUv = parseCount(counterMap[statsKeys.totalUv]);
+        const totalPv = parseCount(counterMap[statsKeys.totalPv]);
+        renderCounts(totalUv, totalPv);
+        writeSnapshot(totalUv, totalPv);
+      } catch (error) {
+        if (snapshot) {
+          renderCounts(snapshot.uv, snapshot.pv);
+        } else {
+          renderCounts('--', '--');
+        }
+      }
+    }
+
+    refreshSharedCounts();
   })();
 </script>
