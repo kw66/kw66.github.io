@@ -1110,6 +1110,10 @@
     min-width: 0;
 }
 
+.greedy-nav .visible-links > .masthead__menu-item--button {
+    flex: 0 0 auto;
+}
+
 .greedy-nav .visible-links > .masthead__menu-item--stats {
     margin-left: auto !important;
 }
@@ -1148,10 +1152,9 @@
     align-items: center;
     margin-left: auto;
     justify-content: flex-end;
-    flex: 1 1 auto;
-    min-width: 0;
+    flex: 0 0 auto;
+    min-width: auto;
     padding-right: 0;
-    overflow: hidden;
 }
 
 .masthead__stats {
@@ -1160,7 +1163,7 @@
     justify-content: flex-end;
     gap: calc(0.9rem * var(--masthead-scale, 1));
     min-height: calc(2rem * var(--masthead-scale, 1));
-    min-width: 0;
+    min-width: auto;
     margin-left: auto;
     padding: 0;
     color: #536775;
