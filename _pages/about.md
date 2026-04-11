@@ -230,12 +230,12 @@ redirect_from:
     };
     const linkupState = {
       board: [],
+      matchedIndices: [],
       faceUpIndices: [],
       solved: false,
       busy: false,
       hideTimerId: 0,
-      lineTimerId: 0,
-      activeLine: null
+      matchTimerId: 0
     };
 
     function clamp(value, min, max) {
@@ -918,7 +918,7 @@ redirect_from:
     }
 
     function getRemainingLinkupPairs() {
-      return Math.floor(linkupState.board.filter(Boolean).length / 2);
+      return Math.max(Math.floor((linkupState.board.length - linkupState.matchedIndices.length) / 2), 0);
     }
 
     function buildLinkupDeck() {
@@ -935,42 +935,10 @@ redirect_from:
         window.clearTimeout(linkupState.hideTimerId);
         linkupState.hideTimerId = 0;
       }
-      if (linkupState.lineTimerId) {
-        window.clearTimeout(linkupState.lineTimerId);
-        linkupState.lineTimerId = 0;
+      if (linkupState.matchTimerId) {
+        window.clearTimeout(linkupState.matchTimerId);
+        linkupState.matchTimerId = 0;
       }
-    }
-
-    function clearLinkupLine(resetState = true) {
-      const lineLayer = document.getElementById('linkup-lines');
-      if (lineLayer) {
-        lineLayer.innerHTML = '';
-      }
-      if (resetState) {
-        linkupState.activeLine = null;
-      }
-    }
-
-    function showLinkupLine(firstIndex, secondIndex) {
-      const wrap = document.getElementById('linkup-board-wrap');
-      const lineLayer = document.getElementById('linkup-lines');
-      if (!wrap || !lineLayer) return;
-
-      const firstCell = wrap.querySelector(`[data-linkup-index="${firstIndex}"]`);
-      const secondCell = wrap.querySelector(`[data-linkup-index="${secondIndex}"]`);
-      if (!firstCell || !secondCell) return;
-
-      const wrapRect = wrap.getBoundingClientRect();
-      const firstRect = firstCell.getBoundingClientRect();
-      const secondRect = secondCell.getBoundingClientRect();
-
-      const x1 = firstRect.left - wrapRect.left + firstRect.width / 2;
-      const y1 = firstRect.top - wrapRect.top + firstRect.height / 2;
-      const x2 = secondRect.left - wrapRect.left + secondRect.width / 2;
-      const y2 = secondRect.top - wrapRect.top + secondRect.height / 2;
-
-      lineLayer.setAttribute('viewBox', `0 0 ${Math.max(wrap.clientWidth, 1)} ${Math.max(wrap.clientHeight, 1)}`);
-      lineLayer.innerHTML = `<line x1="${x1.toFixed(2)}" y1="${y1.toFixed(2)}" x2="${x2.toFixed(2)}" y2="${y2.toFixed(2)}"></line>`;
     }
 
     function buildLinkupCard(src) {
@@ -998,8 +966,6 @@ redirect_from:
       const boardEl = document.getElementById('linkup-board');
       if (!boardEl) return;
 
-      clearLinkupLine(false);
-
       const fragment = document.createDocumentFragment();
       linkupState.board.forEach((src, index) => {
         const cell = document.createElement('button');
@@ -1008,32 +974,26 @@ redirect_from:
         cell.setAttribute('role', 'gridcell');
         cell.dataset.linkupIndex = String(index);
 
-        if (!src) {
-          cell.classList.add('is-cleared');
-          cell.disabled = true;
-        } else {
-          const isFaceUp = linkupState.faceUpIndices.includes(index);
-          if (isFaceUp) {
-            cell.classList.add('is-faceup', 'is-selected');
-          }
-          cell.appendChild(buildLinkupCard(src));
-          cell.addEventListener('click', () => {
-            handleLinkupCellClick(index);
-          });
+        const isMatched = linkupState.matchedIndices.includes(index);
+        const isFaceUp = isMatched || linkupState.faceUpIndices.includes(index);
+        if (isFaceUp) {
+          cell.classList.add('is-faceup');
         }
+        if (isMatched) {
+          cell.classList.add('is-matched');
+        } else if (linkupState.faceUpIndices.includes(index)) {
+          cell.classList.add('is-selected');
+        }
+        cell.appendChild(buildLinkupCard(src));
+        cell.addEventListener('click', () => {
+          handleLinkupCellClick(index);
+        });
 
         fragment.appendChild(cell);
       });
 
       boardEl.innerHTML = '';
       boardEl.appendChild(fragment);
-
-      if (linkupState.activeLine) {
-        window.requestAnimationFrame(() => {
-          if (!linkupState.activeLine) return;
-          showLinkupLine(linkupState.activeLine[0], linkupState.activeLine[1]);
-        });
-      }
     }
 
     function finishLinkupGame() {
@@ -1041,7 +1001,6 @@ redirect_from:
       linkupState.solved = true;
       linkupState.busy = false;
       linkupState.faceUpIndices = [];
-      clearLinkupLine();
       if (shell) {
         shell.classList.add('is-solved');
       }
@@ -1049,16 +1008,11 @@ redirect_from:
     }
 
     function resolveMatchedLinkupPair(firstIndex, secondIndex) {
-      linkupState.activeLine = [firstIndex, secondIndex];
-      renderLinkupBoard();
-
-      linkupState.lineTimerId = window.setTimeout(() => {
-        linkupState.lineTimerId = 0;
-        linkupState.board[firstIndex] = null;
-        linkupState.board[secondIndex] = null;
+      linkupState.matchTimerId = window.setTimeout(() => {
+        linkupState.matchTimerId = 0;
+        linkupState.matchedIndices = linkupState.matchedIndices.concat([firstIndex, secondIndex]);
         linkupState.faceUpIndices = [];
         linkupState.busy = false;
-        clearLinkupLine();
 
         if (getRemainingLinkupPairs() === 0) {
           finishLinkupGame();
@@ -1066,11 +1020,11 @@ redirect_from:
         }
 
         renderLinkupBoard();
-      }, prefersReducedMotion ? 120 : 380);
+      }, prefersReducedMotion ? 120 : 280);
     }
 
     function handleLinkupCellClick(index) {
-      if (linkupState.solved || linkupState.busy || !linkupState.board[index]) return;
+      if (linkupState.solved || linkupState.busy || linkupState.matchedIndices.includes(index)) return;
       if (linkupState.faceUpIndices.includes(index)) return;
 
       linkupState.faceUpIndices = linkupState.faceUpIndices.concat(index);
@@ -1099,8 +1053,8 @@ redirect_from:
     function resetLinkupGame() {
       const shell = document.getElementById('mascot-linkup-shell');
       clearLinkupTimers();
-      clearLinkupLine();
       linkupState.board = buildLinkupDeck();
+      linkupState.matchedIndices = [];
       linkupState.faceUpIndices = [];
       linkupState.solved = false;
       linkupState.busy = false;
@@ -1124,12 +1078,6 @@ redirect_from:
       syncSlotMachineLayout();
       applyDesktopScale();
       renderSideMascots();
-      if (linkupState.activeLine) {
-        window.requestAnimationFrame(() => {
-          if (!linkupState.activeLine) return;
-          showLinkupLine(linkupState.activeLine[0], linkupState.activeLine[1]);
-        });
-      }
     }
 
     function handleResize() {
@@ -1184,7 +1132,6 @@ redirect_from:
       }
       clearSlotTimers();
       clearLinkupTimers();
-      clearLinkupLine();
     });
   })();
 </script>
