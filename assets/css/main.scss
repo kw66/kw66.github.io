@@ -644,7 +644,7 @@
     inset: 0;
     display: flex;
     align-items: stretch;
-    width: 900%;
+    width: calc(var(--avatar-frame-count, 15) * 100%);
     height: 100%;
     transform: translateX(0);
     will-change: transform;
@@ -652,8 +652,8 @@
 
 .author__avatar-slot .author__avatar-frame {
     display: block;
-    flex: 0 0 11.1111%;
-    width: 11.1111%;
+    flex: 0 0 calc(100% / var(--avatar-frame-count, 15));
+    width: calc(100% / var(--avatar-frame-count, 15));
     max-width: none;
     min-width: 0;
     height: 100%;

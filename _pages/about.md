@@ -222,6 +222,11 @@ redirect_from:
       return items[Math.floor(Math.random() * items.length)];
     }
 
+    function smoothstep(value) {
+      const clamped = clamp(value, 0, 1);
+      return clamped * clamped * (3 - 2 * clamped);
+    }
+
     function resetPageScroll() {
       window.requestAnimationFrame(() => {
         if (document.scrollingElement) {
@@ -354,9 +359,17 @@ redirect_from:
       if (!mascotState) return;
       const dt = Math.min((now - mascotState.lastTime) / 1000, 0.05);
       mascotState.lastTime = now;
-      const easing = Math.min(1, dt * mascotConfig.speedLerp);
-      mascotState.currentSpeed += (mascotState.targetSpeed - mascotState.currentSpeed) * easing;
-      const distance = mascotState.currentSpeed * dt;
+      if (mascotState.speedTransition) {
+        const transition = mascotState.speedTransition;
+        const progress = clamp((now - transition.startTime) / transition.duration, 0, 1);
+        const easedProgress = smoothstep(progress);
+        mascotState.speedMultiplier = transition.from + (transition.to - transition.from) * easedProgress;
+        if (progress >= 1) {
+          mascotState.speedMultiplier = transition.to;
+          mascotState.speedTransition = null;
+        }
+      }
+      const distance = mascotConfig.speed * mascotState.speedMultiplier * dt;
 
       advanceLane(mascotState.left, distance);
       advanceLane(mascotState.right, distance);
@@ -382,8 +395,8 @@ redirect_from:
       const rightRailHeight = getRailHeight(rightLayer);
 
       mascotState = {
-        currentSpeed: mascotConfig.speed * (slotState.spinning ? 2 : 1),
-        targetSpeed: mascotConfig.speed * (slotState.spinning ? 2 : 1),
+        speedMultiplier: slotState.spinning ? 4 : 1,
+        speedTransition: null,
         lastTime: performance.now(),
         left: buildLane('left', leftRailHeight, leftLayer),
         right: buildLane('right', rightRailHeight, rightLayer)
@@ -403,9 +416,14 @@ redirect_from:
       mascotRafId = window.requestAnimationFrame(mascotStep);
     }
 
-    function setMascotSpeedMultiplier(multiplier) {
+    function setMascotSpeedMultiplier(multiplier, durationMs) {
       if (!mascotState) return;
-      mascotState.targetSpeed = mascotConfig.speed * multiplier;
+      mascotState.speedTransition = {
+        from: mascotState.speedMultiplier,
+        to: multiplier,
+        startTime: performance.now(),
+        duration: durationMs
+      };
     }
 
     function finishAuthorAvatarSpin() {
@@ -430,29 +448,30 @@ redirect_from:
         avatarState.animation = null;
       }
 
-      const finalOffset = '-88.8889%';
+      const frameCount = Math.max(reel.children.length, 1);
+      const finalOffset = `${-((frameCount - 1) / frameCount * 100).toFixed(4)}%`;
       if (prefersReducedMotion || typeof reel.animate !== 'function') {
-        reel.style.transition = 'transform 700ms linear';
+        const fallbackDuration = Math.max(520, frameCount * 90);
+        reel.style.transition = `transform ${fallbackDuration}ms linear`;
         reel.style.transform = `translateX(${finalOffset})`;
         avatarState.timerId = window.setTimeout(() => {
           finishAuthorAvatarSpin();
           avatarState.timerId = null;
-        }, 740);
+        }, fallbackDuration + 40);
         return;
       }
 
-      const animation = reel.animate([
-        { transform: 'translateX(0%)', offset: 0 },
-        { transform: 'translateX(-11.1111%)', offset: 0.12 },
-        { transform: 'translateX(-22.2222%)', offset: 0.24 },
-        { transform: 'translateX(-33.3333%)', offset: 0.37 },
-        { transform: 'translateX(-44.4444%)', offset: 0.5 },
-        { transform: 'translateX(-55.5556%)', offset: 0.63 },
-        { transform: 'translateX(-66.6667%)', offset: 0.76 },
-        { transform: 'translateX(-77.7778%)', offset: 0.89 },
-        { transform: `translateX(${finalOffset})`, offset: 1 }
-      ], {
-        duration: 1340,
+      const keyframes = Array.from({ length: frameCount }, (_, index) => {
+        const offset = frameCount === 1 ? 1 : index / (frameCount - 1);
+        const translate = -((index / frameCount) * 100);
+        return {
+          transform: `translateX(${translate.toFixed(4)}%)`,
+          offset
+        };
+      });
+
+      const animation = reel.animate(keyframes, {
+        duration: Math.max(1320, frameCount * 95),
         easing: 'linear',
         fill: 'forwards'
       });
@@ -761,7 +780,7 @@ redirect_from:
       slotMachine.classList.add('is-spinning');
       lever.classList.add('is-pulled');
       spinAuthorAvatar();
-      setMascotSpeedMultiplier(4);
+      setMascotSpeedMultiplier(4, 900);
       let settledCount = 0;
 
       tracks.forEach((track, index) => {
@@ -798,7 +817,7 @@ redirect_from:
           if (settledCount === tracks.length) {
             slotState.spinning = false;
             slotMachine.classList.remove('is-spinning');
-            setMascotSpeedMultiplier(1);
+            setMascotSpeedMultiplier(1, 1200);
             const releaseTimer = window.setTimeout(() => {
               lever.classList.remove('is-pulled');
             }, prefersReducedMotion ? 30 : 200);

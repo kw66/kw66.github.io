@@ -3,22 +3,22 @@
 {% endif %}
 {% assign primary_avatar = author.avatar | prepend: '/' | relative_url %}
 {% assign secondary_avatar = '/images/avatar-xulin-alt.jpg' | relative_url %}
+{% assign avatar_frame_count = 15 %}
 
 <div itemscope itemtype="http://schema.org/Person" class="profile_box">
 
   <div class="author__avatar">
     {% if page.permalink == "/" or page.url == "/" %}
-      <div class="author__avatar-slot" id="author-avatar-slot" role="img" aria-label="{{ author.name }}">
+      <div class="author__avatar-slot" id="author-avatar-slot" role="img" aria-label="{{ author.name }}" style="--avatar-frame-count: {{ avatar_frame_count }};">
         <div class="author__avatar-reel" id="author-avatar-reel">
-          <img src="{{ primary_avatar }}" class="author__avatar-frame author__avatar-frame--primary author__avatar-frame--primary-1" alt="" aria-hidden="true">
-          <img src="{{ secondary_avatar }}" class="author__avatar-frame author__avatar-frame--secondary" alt="" aria-hidden="true">
-          <img src="{{ primary_avatar }}" class="author__avatar-frame author__avatar-frame--primary author__avatar-frame--primary-2" alt="" aria-hidden="true">
-          <img src="{{ secondary_avatar }}" class="author__avatar-frame author__avatar-frame--secondary author__avatar-frame--secondary-2" alt="" aria-hidden="true">
-          <img src="{{ primary_avatar }}" class="author__avatar-frame author__avatar-frame--primary author__avatar-frame--primary-3" alt="" aria-hidden="true">
-          <img src="{{ secondary_avatar }}" class="author__avatar-frame author__avatar-frame--secondary author__avatar-frame--secondary-3" alt="" aria-hidden="true">
-          <img src="{{ primary_avatar }}" class="author__avatar-frame author__avatar-frame--primary author__avatar-frame--primary-4" alt="" aria-hidden="true">
-          <img src="{{ secondary_avatar }}" class="author__avatar-frame author__avatar-frame--secondary author__avatar-frame--secondary-4" alt="" aria-hidden="true">
-          <img src="{{ primary_avatar }}" class="author__avatar-frame author__avatar-frame--primary author__avatar-frame--primary-5" alt="" aria-hidden="true">
+          {% for i in (1..avatar_frame_count) %}
+            {% assign avatar_mod = i | modulo: 2 %}
+            {% if avatar_mod == 1 %}
+              <img src="{{ primary_avatar }}" class="author__avatar-frame author__avatar-frame--primary author__avatar-frame--primary-{{ i }}" alt="" aria-hidden="true">
+            {% else %}
+              <img src="{{ secondary_avatar }}" class="author__avatar-frame author__avatar-frame--secondary author__avatar-frame--secondary-{{ i }}" alt="" aria-hidden="true">
+            {% endif %}
+          {% endfor %}
         </div>
       </div>
     {% else %}
