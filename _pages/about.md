@@ -173,7 +173,7 @@ redirect_from:
     const reducedMotionQuery = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
     const prefersReducedMotion = reducedMotionQuery ? reducedMotionQuery.matches : false;
     const mascotBase = "{{ '/images/mascots/' | relative_url }}";
-    const mascotSources = Array.from({ length: 45 }, (_, index) => {
+    const mascotSources = Array.from({ length: 91 }, (_, index) => {
       const name = `mascot-${String(index + 1).padStart(2, '0')}.png`;
       return `${mascotBase}${name}`;
     }).filter((src) => !src.endsWith('mascot-43.png'));
@@ -200,7 +200,7 @@ redirect_from:
     const mascotConfig = {
       size: 84,
       gap: 42,
-      speed: 136,
+      speed: 102,
       leftInset: 0,
       rightInset: 0,
       preloadCount: 6
@@ -353,7 +353,9 @@ redirect_from:
       if (!mascotState) return;
       const dt = Math.min((now - mascotState.lastTime) / 1000, 0.05);
       mascotState.lastTime = now;
-      const distance = mascotState.speed * dt;
+      const easing = Math.min(1, dt * 5);
+      mascotState.currentSpeed += (mascotState.targetSpeed - mascotState.currentSpeed) * easing;
+      const distance = mascotState.currentSpeed * dt;
 
       advanceLane(mascotState.left, distance);
       advanceLane(mascotState.right, distance);
@@ -379,7 +381,8 @@ redirect_from:
       const rightRailHeight = getRailHeight(rightLayer);
 
       mascotState = {
-        speed: mascotConfig.speed,
+        currentSpeed: mascotConfig.speed * (slotState.spinning ? 2 : 1),
+        targetSpeed: mascotConfig.speed * (slotState.spinning ? 2 : 1),
         lastTime: performance.now(),
         left: buildLane('left', leftRailHeight, leftLayer),
         right: buildLane('right', rightRailHeight, rightLayer)
@@ -397,6 +400,11 @@ redirect_from:
       paintLane(mascotState.left);
       paintLane(mascotState.right);
       mascotRafId = window.requestAnimationFrame(mascotStep);
+    }
+
+    function setMascotSpeedMultiplier(multiplier) {
+      if (!mascotState) return;
+      mascotState.targetSpeed = mascotConfig.speed * multiplier;
     }
 
     function finishAuthorAvatarSpin() {
@@ -423,12 +431,12 @@ redirect_from:
 
       const finalOffset = '-85.7143%';
       if (prefersReducedMotion || typeof reel.animate !== 'function') {
-        reel.style.transition = 'transform 620ms cubic-bezier(0.22, 1, 0.36, 1)';
+        reel.style.transition = 'transform 540ms linear';
         reel.style.transform = `translateX(${finalOffset})`;
         avatarState.timerId = window.setTimeout(() => {
           finishAuthorAvatarSpin();
           avatarState.timerId = null;
-        }, 680);
+        }, 580);
         return;
       }
 
@@ -441,8 +449,8 @@ redirect_from:
         { transform: 'translateX(-71.4286%)', offset: 0.84 },
         { transform: `translateX(${finalOffset})`, offset: 1 }
       ], {
-        duration: 1720,
-        easing: 'cubic-bezier(0.16, 0.88, 0.24, 1)',
+        duration: 1280,
+        easing: 'linear',
         fill: 'forwards'
       });
 
@@ -750,6 +758,7 @@ redirect_from:
       slotMachine.classList.add('is-spinning');
       lever.classList.add('is-pulled');
       spinAuthorAvatar();
+      setMascotSpeedMultiplier(2);
       let settledCount = 0;
 
       tracks.forEach((track, index) => {
@@ -786,6 +795,7 @@ redirect_from:
           if (settledCount === tracks.length) {
             slotState.spinning = false;
             slotMachine.classList.remove('is-spinning');
+            setMascotSpeedMultiplier(1);
             const releaseTimer = window.setTimeout(() => {
               lever.classList.remove('is-pulled');
             }, prefersReducedMotion ? 30 : 200);
