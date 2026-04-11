@@ -12,3 +12,7 @@ Original prompt: Implement option 3 with a simple 6x4 mascot linkup game.
 - Removed linkup hint/status/fortune text and kept only the board plus restart control.
 - Added masthead scaling logic so the homepage nav shrinks with narrow viewports instead of staying oversized.
 - Pending: verify the deployed linkup board by clicking through real flip/match/mismatch flows and re-check the masthead at narrow widths.
+
+- Moved the slot/linkup choice into the homepage sidebar tool area so the main profile page now has an inline switcher instead of separate visible nav entries.
+- Changed the embedded linkup board to 4 rows by 3 columns so it fits the same sidebar slot as the slot machine panel.
+- Hid the masthead slot/linkup buttons for now while preserving the existing query-param view logic underneath.
