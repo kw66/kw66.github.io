@@ -579,15 +579,24 @@ redirect_from:
       });
     }
 
-    function createSlotItem(src) {
+    function getSlotImmediateSource(src) {
+      return slotImageCache.get(src) || src;
+    }
+
+    function createSlotItem(src, options = {}) {
+      const processImage = options.process !== false;
       const item = document.createElement('div');
       item.className = 'slot-machine-item';
       const img = document.createElement('img');
       img.alt = '';
       img.decoding = 'async';
-      img.loading = 'eager';
+      img.loading = processImage ? 'eager' : 'lazy';
       img.dataset.source = src;
-      setSlotImageSource(img, src);
+      if (processImage) {
+        setSlotImageSource(img, src);
+      } else {
+        img.src = getSlotImmediateSource(src);
+      }
       item.appendChild(img);
       return item;
     }
@@ -726,18 +735,20 @@ redirect_from:
       return metrics;
     }
 
-    function renderSlotTrack(track, sources) {
+    function renderSlotTrack(track, sources, options = {}) {
+      const fragment = document.createDocumentFragment();
       track.innerHTML = '';
       sources.forEach((src) => {
-        track.appendChild(createSlotItem(src));
+        fragment.appendChild(createSlotItem(src, options));
       });
+      track.appendChild(fragment);
     }
 
     function setSlotResult(reel, track, src, sideSources) {
       const leftSource = sideSources && sideSources[0] ? sideSources[0] : (track.dataset.leftSource || randomFrom(mascotSources));
       const rightSource = sideSources && sideSources[1] ? sideSources[1] : (track.dataset.rightSource || randomFrom(mascotSources));
       const neighbors = [leftSource, src, rightSource];
-      renderSlotTrack(track, neighbors);
+      renderSlotTrack(track, neighbors, { process: true });
       const metrics = applySlotMetrics(reel, track);
       track.style.transition = 'none';
       track.style.transform = `translate3d(${getSlotTranslate(metrics, 1)}px, 0, 0)`;
@@ -779,7 +790,7 @@ redirect_from:
         const finalSideSources = [randomFrom(mascotSources), randomFrom(mascotSources)];
         sequence.push(finalSideSources[0], target, finalSideSources[1]);
 
-        renderSlotTrack(track, sequence);
+        renderSlotTrack(track, sequence, { process: false });
         track.style.transition = 'none';
         track.style.transform = `translate3d(${getSlotTranslate(metrics, 1)}px, 0, 0)`;
         track.offsetWidth;
