@@ -429,7 +429,7 @@ redirect_from:
       const frameCount = Math.max(reel.children.length, 1);
       const finalOffset = `${-((frameCount - 1) / frameCount * 100).toFixed(4)}%`;
       if (prefersReducedMotion || typeof reel.animate !== 'function') {
-        const fallbackDuration = 760;
+        const fallbackDuration = 720;
         reel.style.transition = `transform ${fallbackDuration}ms cubic-bezier(0.2, 0.9, 0.24, 1)`;
         reel.style.transform = `translateX(${finalOffset})`;
         avatarState.timerId = window.setTimeout(() => {
@@ -449,7 +449,7 @@ redirect_from:
         if (index === 0) {
           frame.easing = 'cubic-bezier(0.42, 0, 0.88, 0.46)';
         } else if (index === frameCount - 2) {
-          frame.easing = 'cubic-bezier(0.18, 0.9, 0.28, 1)';
+          frame.easing = 'cubic-bezier(0.22, 0.9, 0.32, 1)';
         } else {
           frame.easing = 'linear';
         }
@@ -457,7 +457,7 @@ redirect_from:
       });
 
       const animation = reel.animate(keyframes, {
-        duration: 940,
+        duration: 900,
         fill: 'forwards'
       });
 
@@ -866,6 +866,7 @@ redirect_from:
     });
     window.addEventListener('popstate', () => {
       updateHomeViewMode();
+      resetPageScroll();
       syncDesktopHomeLayout('auto');
     });
 

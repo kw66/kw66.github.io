@@ -4,14 +4,19 @@
       <nav id="site-nav" class="greedy-nav">
         <button><div class="navicon"></div></button>
         <ul class="visible-links">
-          <li class="masthead__menu-item masthead__menu-item--slot"><a href="{{ '/' | relative_url }}?view=slot">Slot</a></li>
-          <li class="masthead__menu-item masthead__menu-item--lg masthead__menu-home-item"><a href="/#about-me">{{ site.title }}</a></li>
+          <li class="masthead__menu-item masthead__menu-item--button masthead__menu-home-item"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></li>
+          <li class="masthead__menu-item masthead__menu-item--button masthead__menu-item--slot"><a href="{{ '/' | relative_url }}?view=slot">Slot</a></li>
           {% for link in site.data.navigation.main %}
             <li class="masthead__menu-item"><a href="{{ domain }}{{ link.url }}">{{ link.title }}</a></li>
           {% endfor %}
           <li class="masthead__menu-item masthead__menu-item--stats">
             <span class="masthead__stats" aria-label="Visitor statistics">
-              <img src="https://visitor-badge.laobi.icu/badge?page_id=kw66.kw66.github.io&left_text=Visits" alt="Visits">
+              <span class="masthead__stat" id="busuanzi_container_site_uv" title="Unique devices">
+                &#128064; <span id="busuanzi_value_site_uv">0</span>
+              </span>
+              <span class="masthead__stat" id="busuanzi_container_site_pv" title="Total visits">
+                &#128433;&#65039; <span id="busuanzi_value_site_pv">0</span>
+              </span>
             </span>
           </li>
         </ul>
@@ -20,3 +25,4 @@
     </div>
   </div>
 </div>
+<script async src="https://busuanzi.sukap.cn/busuanzi.pure.mini.js"></script>

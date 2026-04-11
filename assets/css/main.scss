@@ -720,10 +720,12 @@
 }
 
 .is-fixed-scale-home.is-slot-mode #main {
-    width: 100%;
-    min-width: 0;
-    max-width: none;
+    width: var(--sidebar-shell-width);
+    min-width: var(--sidebar-shell-width);
+    max-width: var(--sidebar-shell-width);
     justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 7.4rem);
 }
 
 .is-fixed-scale-home .sidebar,
@@ -818,21 +820,36 @@
 }
 
 .is-fixed-scale-home.is-slot-mode .sidebar {
-    flex: 0 0 30rem;
-    width: 30rem;
-    max-width: 30rem;
+    flex: 0 0 var(--sidebar-shell-width);
+    width: var(--sidebar-shell-width);
+    max-width: var(--sidebar-shell-width);
+    display: flex;
+    justify-content: center;
 }
 
 .is-fixed-scale-home.is-slot-mode .sidebar-home-tools {
-    margin-top: 4.8rem;
+    display: flex;
+    justify-content: center;
+    width: var(--sidebar-shell-width);
+    margin-top: 0;
+    transform: scale(1.42);
+    transform-origin: center center;
 }
 
 .is-fixed-scale-home.is-slot-mode .sidebar-tool-panel {
+    width: 100%;
+    display: block;
     padding-top: 0;
     border-top: 0;
+    min-height: 0;
 }
 
-.masthead__menu-item--slot a {
+.is-fixed-scale-home.is-slot-mode .slot-machine-display {
+    width: 100%;
+    transform: none;
+}
+
+.masthead__menu-item--button a {
     display: inline-flex;
     align-items: center;
     min-height: 2rem;
@@ -841,24 +858,38 @@
     border-radius: 999px;
     background: #ffffff;
     box-shadow: 0 6px 14px rgba(33, 55, 76, 0.08);
+    text-decoration: none !important;
 }
 
 .masthead__menu-item--stats {
+    display: flex;
+    align-items: center;
     margin-left: auto;
 }
 
 .masthead__stats {
     display: inline-flex;
     align-items: center;
+    justify-content: flex-end;
+    gap: 0.9rem;
     min-height: 2rem;
-    padding: 0;
+    min-width: 11rem;
+    padding: 0 0 0 0.6rem;
+    color: #536775;
+    font-size: 0.92rem;
+    font-weight: 700;
 }
 
-.masthead__stats img {
-    display: block;
-    height: 20px;
-    width: auto;
-    max-width: none;
+.masthead__stat {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.18rem;
+    white-space: nowrap;
+}
+
+#busuanzi_container_site_uv,
+#busuanzi_container_site_pv {
+    opacity: 0.88;
 }
 
 @include breakpoint($large) {
