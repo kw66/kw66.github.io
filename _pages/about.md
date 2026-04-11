@@ -205,6 +205,21 @@ redirect_from:
       '适合交流',
       '适合审稿'
     ];
+    const linkupFortunes = [
+      '适合改图',
+      '适合投稿',
+      '适合做实验',
+      '适合摸鱼',
+      '适合写代码',
+      '适合写稿',
+      '适合看论文',
+      '适合交流',
+      '适合审稿'
+    ];
+    const linkupConfig = {
+      rows: 6,
+      cols: 4
+    };
     const mascotConfig = {
       size: 84,
       gap: 42,
@@ -220,6 +235,17 @@ redirect_from:
       animation: null,
       timerId: null
     };
+    const linkupState = {
+      board: [],
+      selectedIndex: null,
+      hintPair: [],
+      solved: false,
+      matches: 0,
+      hintsUsed: 0,
+      mistakes: 0,
+      autoShuffleCount: 0,
+      seed: 0
+    };
 
     function clamp(value, min, max) {
       return Math.min(Math.max(value, min), max);
@@ -227,6 +253,14 @@ redirect_from:
 
     function randomFrom(items) {
       return items[Math.floor(Math.random() * items.length)];
+    }
+
+    function shuffleInPlace(items) {
+      for (let index = items.length - 1; index > 0; index -= 1) {
+        const swapIndex = Math.floor(Math.random() * (index + 1));
+        [items[index], items[swapIndex]] = [items[swapIndex], items[index]];
+      }
+      return items;
     }
 
     function getMascotIndex(src) {
@@ -279,8 +313,14 @@ redirect_from:
 
     function updateHomeViewMode() {
       const params = new URLSearchParams(window.location.search);
-      const slotMode = params.get('view') === 'slot';
-      document.body.classList.toggle('is-slot-mode', slotMode);
+      const requestedView = params.get('view');
+      const currentView = requestedView === 'slot' || requestedView === 'linkup' ? requestedView : 'home';
+      document.body.classList.toggle('is-slot-mode', currentView === 'slot');
+      document.body.classList.toggle('is-linkup-mode', currentView === 'linkup');
+      document.body.dataset.homeView = currentView;
+      if (typeof window.updateMastheadViewState === 'function') {
+        window.updateMastheadViewState(currentView);
+      }
     }
 
     function resetPageScroll() {
@@ -790,6 +830,316 @@ redirect_from:
       });
     }
 
+    function getLinkupPairCount() {
+      return (linkupConfig.rows * linkupConfig.cols) / 2;
+    }
+
+    function getRemainingLinkupPairs() {
+      return Math.floor(linkupState.board.filter(Boolean).length / 2);
+    }
+
+    function getLinkupCoords(index) {
+      return {
+        row: Math.floor(index / linkupConfig.cols),
+        col: index % linkupConfig.cols
+      };
+    }
+
+    function buildLinkupDeck() {
+      const sourcePool = mascotSources.slice();
+      shuffleInPlace(sourcePool);
+      const selectedSources = sourcePool.slice(0, getLinkupPairCount());
+      const deck = selectedSources.concat(selectedSources);
+      shuffleInPlace(deck);
+      const seed = selectedSources.reduce((sum, src, index) => (
+        sum + (getMascotIndex(src) + 1) * (index + 3)
+      ), 0);
+      return { deck, seed };
+    }
+
+    function canConnectLinkup(firstIndex, secondIndex) {
+      if (firstIndex === secondIndex) return false;
+      const firstSource = linkupState.board[firstIndex];
+      const secondSource = linkupState.board[secondIndex];
+      if (!firstSource || firstSource !== secondSource) return false;
+
+      const rows = linkupConfig.rows + 2;
+      const cols = linkupConfig.cols + 2;
+      const occupied = Array.from({ length: rows }, () => Array(cols).fill(false));
+
+      linkupState.board.forEach((src, index) => {
+        if (!src || index === firstIndex || index === secondIndex) return;
+        const { row, col } = getLinkupCoords(index);
+        occupied[row + 1][col + 1] = true;
+      });
+
+      const startCoords = getLinkupCoords(firstIndex);
+      const endCoords = getLinkupCoords(secondIndex);
+      const start = { row: startCoords.row + 1, col: startCoords.col + 1 };
+      const target = { row: endCoords.row + 1, col: endCoords.col + 1 };
+      const directions = [
+        { row: -1, col: 0 },
+        { row: 1, col: 0 },
+        { row: 0, col: -1 },
+        { row: 0, col: 1 }
+      ];
+      const visited = Array.from(
+        { length: rows },
+        () => Array.from({ length: cols }, () => Array(directions.length).fill(3))
+      );
+      const queue = directions.map((direction, index) => ({
+        row: start.row,
+        col: start.col,
+        direction: index,
+        turns: 0
+      }));
+
+      while (queue.length) {
+        const state = queue.shift();
+        const delta = directions[state.direction];
+        let nextRow = state.row + delta.row;
+        let nextCol = state.col + delta.col;
+
+        while (
+          nextRow >= 0 &&
+          nextRow < rows &&
+          nextCol >= 0 &&
+          nextCol < cols &&
+          (!occupied[nextRow][nextCol] || (nextRow === target.row && nextCol === target.col))
+        ) {
+          if (visited[nextRow][nextCol][state.direction] > state.turns) {
+            visited[nextRow][nextCol][state.direction] = state.turns;
+            if (nextRow === target.row && nextCol === target.col) {
+              return true;
+            }
+
+            directions.forEach((_, nextDirection) => {
+              if (nextDirection === state.direction) return;
+              const nextTurns = state.turns + 1;
+              if (nextTurns > 2) return;
+              if (visited[nextRow][nextCol][nextDirection] <= nextTurns) return;
+              queue.push({
+                row: nextRow,
+                col: nextCol,
+                direction: nextDirection,
+                turns: nextTurns
+              });
+            });
+          }
+
+          nextRow += delta.row;
+          nextCol += delta.col;
+        }
+      }
+
+      return false;
+    }
+
+    function findLinkupPair() {
+      for (let firstIndex = 0; firstIndex < linkupState.board.length; firstIndex += 1) {
+        const firstSource = linkupState.board[firstIndex];
+        if (!firstSource) continue;
+        for (let secondIndex = firstIndex + 1; secondIndex < linkupState.board.length; secondIndex += 1) {
+          if (linkupState.board[secondIndex] !== firstSource) continue;
+          if (canConnectLinkup(firstIndex, secondIndex)) {
+            return [firstIndex, secondIndex];
+          }
+        }
+      }
+      return null;
+    }
+
+    function shuffleRemainingLinkupTiles() {
+      const remainingSources = linkupState.board.filter(Boolean);
+      shuffleInPlace(remainingSources);
+      let pointer = 0;
+      linkupState.board = linkupState.board.map((src) => (src ? remainingSources[pointer++] : null));
+    }
+
+    function ensureLinkupPlayable() {
+      if (getRemainingLinkupPairs() === 0) return true;
+      if (findLinkupPair()) return true;
+
+      for (let attempt = 0; attempt < 16; attempt += 1) {
+        shuffleRemainingLinkupTiles();
+        if (findLinkupPair()) {
+          linkupState.autoShuffleCount += 1;
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function computeLinkupFortune() {
+      if (linkupState.hintsUsed === 0 && linkupState.mistakes === 0 && linkupState.autoShuffleCount === 0) {
+        return '接 accept';
+      }
+      return linkupFortunes[linkupState.seed % linkupFortunes.length];
+    }
+
+    function updateLinkupStatus(customText) {
+      const statusEl = document.getElementById('linkup-status');
+      if (!statusEl) return;
+      if (customText) {
+        statusEl.textContent = customText;
+        return;
+      }
+      const statusParts = [`剩余 ${getRemainingLinkupPairs()} 对`];
+      if (linkupState.hintsUsed > 0) {
+        statusParts.push(`提示 ${linkupState.hintsUsed} 次`);
+      }
+      if (linkupState.autoShuffleCount > 0) {
+        statusParts.push(`洗牌 ${linkupState.autoShuffleCount} 次`);
+      }
+      statusEl.textContent = statusParts.join(' · ');
+    }
+
+    function updateLinkupResult(text, solved) {
+      const resultEl = document.getElementById('linkup-result');
+      if (!resultEl) return;
+      resultEl.textContent = text;
+      resultEl.classList.toggle('is-solved', Boolean(solved));
+    }
+
+    function renderLinkupBoard() {
+      const boardEl = document.getElementById('linkup-board');
+      if (!boardEl) return;
+
+      const fragment = document.createDocumentFragment();
+      linkupState.board.forEach((src, index) => {
+        const cell = document.createElement('button');
+        cell.type = 'button';
+        cell.className = 'linkup-cell';
+        cell.setAttribute('role', 'gridcell');
+
+        if (!src) {
+          cell.classList.add('is-cleared');
+          cell.disabled = true;
+        } else {
+          if (linkupState.selectedIndex === index) {
+            cell.classList.add('is-selected');
+          }
+          if (linkupState.hintPair.includes(index)) {
+            cell.classList.add('is-hint');
+          }
+
+          const image = document.createElement('img');
+          image.alt = '';
+          image.decoding = 'async';
+          image.loading = 'eager';
+          image.src = src;
+          cell.appendChild(image);
+          cell.addEventListener('click', () => {
+            handleLinkupCellClick(index);
+          });
+        }
+
+        fragment.appendChild(cell);
+      });
+
+      boardEl.innerHTML = '';
+      boardEl.appendChild(fragment);
+    }
+
+    function finishLinkupGame() {
+      linkupState.solved = true;
+      linkupState.selectedIndex = null;
+      linkupState.hintPair = [];
+      updateLinkupStatus('已完成全部配对');
+      updateLinkupResult(`今日科研运势：${computeLinkupFortune()}`, true);
+      renderLinkupBoard();
+    }
+
+    function handleLinkupCellClick(index) {
+      if (linkupState.solved || !linkupState.board[index]) return;
+
+      linkupState.hintPair = [];
+      if (linkupState.selectedIndex === null) {
+        linkupState.selectedIndex = index;
+        updateLinkupStatus('已选中 1 张');
+        renderLinkupBoard();
+        return;
+      }
+
+      if (linkupState.selectedIndex === index) {
+        linkupState.selectedIndex = null;
+        updateLinkupStatus();
+        renderLinkupBoard();
+        return;
+      }
+
+      const selectedIndex = linkupState.selectedIndex;
+      const matched = canConnectLinkup(selectedIndex, index);
+      if (matched) {
+        linkupState.board[selectedIndex] = null;
+        linkupState.board[index] = null;
+        linkupState.selectedIndex = null;
+        linkupState.matches += 1;
+
+        if (getRemainingLinkupPairs() === 0) {
+          finishLinkupGame();
+          return;
+        }
+
+        ensureLinkupPlayable();
+        updateLinkupStatus();
+        updateLinkupResult('通关后揭晓今日科研运势', false);
+        renderLinkupBoard();
+        return;
+      }
+
+      linkupState.mistakes += 1;
+      linkupState.selectedIndex = index;
+      updateLinkupStatus('这一对不能直连，换一张试试');
+      renderLinkupBoard();
+    }
+
+    function showLinkupHint() {
+      if (linkupState.solved) return;
+
+      let pair = findLinkupPair();
+      if (!pair) {
+        ensureLinkupPlayable();
+        pair = findLinkupPair();
+      }
+      if (!pair) return;
+
+      linkupState.hintsUsed += 1;
+      linkupState.selectedIndex = null;
+      linkupState.hintPair = pair;
+      updateLinkupStatus('已高亮一组可消除图案');
+      renderLinkupBoard();
+    }
+
+    function resetLinkupGame() {
+      const { deck, seed } = buildLinkupDeck();
+      linkupState.board = deck;
+      linkupState.selectedIndex = null;
+      linkupState.hintPair = [];
+      linkupState.solved = false;
+      linkupState.matches = 0;
+      linkupState.hintsUsed = 0;
+      linkupState.mistakes = 0;
+      linkupState.autoShuffleCount = 0;
+      linkupState.seed = seed;
+
+      ensureLinkupPlayable();
+      updateLinkupStatus();
+      updateLinkupResult('通关后揭晓今日科研运势', false);
+      renderLinkupBoard();
+    }
+
+    function initLinkupGame() {
+      const boardEl = document.getElementById('linkup-board');
+      const restartButton = document.getElementById('linkup-restart');
+      const hintButton = document.getElementById('linkup-hint');
+      if (!boardEl || !restartButton || !hintButton) return;
+
+      restartButton.addEventListener('click', resetLinkupGame);
+      hintButton.addEventListener('click', showLinkupHint);
+      resetLinkupGame();
+    }
+
     function syncDesktopHomeLayout(behavior) {
       syncFeaturedCarousel(behavior);
       syncSlotMachineLayout();
@@ -823,6 +1173,7 @@ redirect_from:
     initPaperFilters();
     initFeaturedCarousel();
     initSlotMachine();
+    initLinkupGame();
     applyDesktopScale();
 
     if (document.readyState === 'complete') {
