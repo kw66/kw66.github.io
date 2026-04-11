@@ -524,6 +524,34 @@ redirect_from:
       const rightLayer = document.getElementById(rightLayerId);
       if (!leftLayer || !rightLayer) return;
 
+      const canReuseMascots = Boolean(
+        mascotState &&
+        mascotState.left &&
+        mascotState.right &&
+        mascotState.left.items.length &&
+        mascotState.right.items.length &&
+        mascotState.left.items.every((item) => leftLayer.contains(item.el)) &&
+        mascotState.right.items.every((item) => rightLayer.contains(item.el))
+      );
+
+      if (canReuseMascots) {
+        mascotState.lastTime = performance.now();
+        mascotState.left.items.forEach((item) => {
+          item.el.style.width = `${mascotConfig.size}px`;
+          item.el.style.left = `${mascotConfig.leftInset}px`;
+        });
+        mascotState.right.items.forEach((item) => {
+          item.el.style.width = `${mascotConfig.size}px`;
+          item.el.style.right = `${mascotConfig.rightInset}px`;
+        });
+        paintLane(mascotState.left);
+        paintLane(mascotState.right);
+        if (!mascotRafId) {
+          mascotRafId = window.requestAnimationFrame(mascotStep);
+        }
+        return;
+      }
+
       leftLayer.innerHTML = '';
       rightLayer.innerHTML = '';
       if (mascotRafId) {
