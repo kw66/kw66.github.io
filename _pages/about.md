@@ -205,17 +205,6 @@ redirect_from:
       '适合交流',
       '适合审稿'
     ];
-    const linkupFortunes = [
-      '适合改图',
-      '适合投稿',
-      '适合做实验',
-      '适合摸鱼',
-      '适合写代码',
-      '适合写稿',
-      '适合看论文',
-      '适合交流',
-      '适合审稿'
-    ];
     const linkupConfig = {
       rows: 6,
       cols: 4
@@ -237,14 +226,12 @@ redirect_from:
     };
     const linkupState = {
       board: [],
-      selectedIndex: null,
-      hintPair: [],
+      faceUpIndices: [],
       solved: false,
-      matches: 0,
-      hintsUsed: 0,
-      mistakes: 0,
-      autoShuffleCount: 0,
-      seed: 0
+      busy: false,
+      hideTimerId: 0,
+      lineTimerId: 0,
+      activeLine: null
     };
 
     function clamp(value, min, max) {
@@ -838,172 +825,84 @@ redirect_from:
       return Math.floor(linkupState.board.filter(Boolean).length / 2);
     }
 
-    function getLinkupCoords(index) {
-      return {
-        row: Math.floor(index / linkupConfig.cols),
-        col: index % linkupConfig.cols
-      };
-    }
-
     function buildLinkupDeck() {
       const sourcePool = mascotSources.slice();
       shuffleInPlace(sourcePool);
       const selectedSources = sourcePool.slice(0, getLinkupPairCount());
       const deck = selectedSources.concat(selectedSources);
       shuffleInPlace(deck);
-      const seed = selectedSources.reduce((sum, src, index) => (
-        sum + (getMascotIndex(src) + 1) * (index + 3)
-      ), 0);
-      return { deck, seed };
+      return deck;
     }
 
-    function canConnectLinkup(firstIndex, secondIndex) {
-      if (firstIndex === secondIndex) return false;
-      const firstSource = linkupState.board[firstIndex];
-      const secondSource = linkupState.board[secondIndex];
-      if (!firstSource || firstSource !== secondSource) return false;
-
-      const rows = linkupConfig.rows + 2;
-      const cols = linkupConfig.cols + 2;
-      const occupied = Array.from({ length: rows }, () => Array(cols).fill(false));
-
-      linkupState.board.forEach((src, index) => {
-        if (!src || index === firstIndex || index === secondIndex) return;
-        const { row, col } = getLinkupCoords(index);
-        occupied[row + 1][col + 1] = true;
-      });
-
-      const startCoords = getLinkupCoords(firstIndex);
-      const endCoords = getLinkupCoords(secondIndex);
-      const start = { row: startCoords.row + 1, col: startCoords.col + 1 };
-      const target = { row: endCoords.row + 1, col: endCoords.col + 1 };
-      const directions = [
-        { row: -1, col: 0 },
-        { row: 1, col: 0 },
-        { row: 0, col: -1 },
-        { row: 0, col: 1 }
-      ];
-      const visited = Array.from(
-        { length: rows },
-        () => Array.from({ length: cols }, () => Array(directions.length).fill(3))
-      );
-      const queue = directions.map((direction, index) => ({
-        row: start.row,
-        col: start.col,
-        direction: index,
-        turns: 0
-      }));
-
-      while (queue.length) {
-        const state = queue.shift();
-        const delta = directions[state.direction];
-        let nextRow = state.row + delta.row;
-        let nextCol = state.col + delta.col;
-
-        while (
-          nextRow >= 0 &&
-          nextRow < rows &&
-          nextCol >= 0 &&
-          nextCol < cols &&
-          (!occupied[nextRow][nextCol] || (nextRow === target.row && nextCol === target.col))
-        ) {
-          if (visited[nextRow][nextCol][state.direction] > state.turns) {
-            visited[nextRow][nextCol][state.direction] = state.turns;
-            if (nextRow === target.row && nextCol === target.col) {
-              return true;
-            }
-
-            directions.forEach((_, nextDirection) => {
-              if (nextDirection === state.direction) return;
-              const nextTurns = state.turns + 1;
-              if (nextTurns > 2) return;
-              if (visited[nextRow][nextCol][nextDirection] <= nextTurns) return;
-              queue.push({
-                row: nextRow,
-                col: nextCol,
-                direction: nextDirection,
-                turns: nextTurns
-              });
-            });
-          }
-
-          nextRow += delta.row;
-          nextCol += delta.col;
-        }
+    function clearLinkupTimers() {
+      if (linkupState.hideTimerId) {
+        window.clearTimeout(linkupState.hideTimerId);
+        linkupState.hideTimerId = 0;
       }
-
-      return false;
+      if (linkupState.lineTimerId) {
+        window.clearTimeout(linkupState.lineTimerId);
+        linkupState.lineTimerId = 0;
+      }
     }
 
-    function findLinkupPair() {
-      for (let firstIndex = 0; firstIndex < linkupState.board.length; firstIndex += 1) {
-        const firstSource = linkupState.board[firstIndex];
-        if (!firstSource) continue;
-        for (let secondIndex = firstIndex + 1; secondIndex < linkupState.board.length; secondIndex += 1) {
-          if (linkupState.board[secondIndex] !== firstSource) continue;
-          if (canConnectLinkup(firstIndex, secondIndex)) {
-            return [firstIndex, secondIndex];
-          }
-        }
+    function clearLinkupLine(resetState = true) {
+      const lineLayer = document.getElementById('linkup-lines');
+      if (lineLayer) {
+        lineLayer.innerHTML = '';
       }
-      return null;
+      if (resetState) {
+        linkupState.activeLine = null;
+      }
     }
 
-    function shuffleRemainingLinkupTiles() {
-      const remainingSources = linkupState.board.filter(Boolean);
-      shuffleInPlace(remainingSources);
-      let pointer = 0;
-      linkupState.board = linkupState.board.map((src) => (src ? remainingSources[pointer++] : null));
+    function showLinkupLine(firstIndex, secondIndex) {
+      const wrap = document.getElementById('linkup-board-wrap');
+      const lineLayer = document.getElementById('linkup-lines');
+      if (!wrap || !lineLayer) return;
+
+      const firstCell = wrap.querySelector(`[data-linkup-index="${firstIndex}"]`);
+      const secondCell = wrap.querySelector(`[data-linkup-index="${secondIndex}"]`);
+      if (!firstCell || !secondCell) return;
+
+      const wrapRect = wrap.getBoundingClientRect();
+      const firstRect = firstCell.getBoundingClientRect();
+      const secondRect = secondCell.getBoundingClientRect();
+
+      const x1 = firstRect.left - wrapRect.left + firstRect.width / 2;
+      const y1 = firstRect.top - wrapRect.top + firstRect.height / 2;
+      const x2 = secondRect.left - wrapRect.left + secondRect.width / 2;
+      const y2 = secondRect.top - wrapRect.top + secondRect.height / 2;
+
+      lineLayer.setAttribute('viewBox', `0 0 ${Math.max(wrap.clientWidth, 1)} ${Math.max(wrap.clientHeight, 1)}`);
+      lineLayer.innerHTML = `<line x1="${x1.toFixed(2)}" y1="${y1.toFixed(2)}" x2="${x2.toFixed(2)}" y2="${y2.toFixed(2)}"></line>`;
     }
 
-    function ensureLinkupPlayable() {
-      if (getRemainingLinkupPairs() === 0) return true;
-      if (findLinkupPair()) return true;
+    function buildLinkupCard(src) {
+      const card = document.createElement('span');
+      card.className = 'linkup-card';
 
-      for (let attempt = 0; attempt < 16; attempt += 1) {
-        shuffleRemainingLinkupTiles();
-        if (findLinkupPair()) {
-          linkupState.autoShuffleCount += 1;
-          return true;
-        }
-      }
-      return false;
-    }
+      const front = document.createElement('span');
+      front.className = 'linkup-face linkup-face--front';
+      const image = document.createElement('img');
+      image.alt = '';
+      image.decoding = 'async';
+      image.loading = 'eager';
+      image.src = src;
+      front.appendChild(image);
 
-    function computeLinkupFortune() {
-      if (linkupState.hintsUsed === 0 && linkupState.mistakes === 0 && linkupState.autoShuffleCount === 0) {
-        return '接 accept';
-      }
-      return linkupFortunes[linkupState.seed % linkupFortunes.length];
-    }
+      const back = document.createElement('span');
+      back.className = 'linkup-face linkup-face--back';
 
-    function updateLinkupStatus(customText) {
-      const statusEl = document.getElementById('linkup-status');
-      if (!statusEl) return;
-      if (customText) {
-        statusEl.textContent = customText;
-        return;
-      }
-      const statusParts = [`剩余 ${getRemainingLinkupPairs()} 对`];
-      if (linkupState.hintsUsed > 0) {
-        statusParts.push(`提示 ${linkupState.hintsUsed} 次`);
-      }
-      if (linkupState.autoShuffleCount > 0) {
-        statusParts.push(`洗牌 ${linkupState.autoShuffleCount} 次`);
-      }
-      statusEl.textContent = statusParts.join(' · ');
-    }
-
-    function updateLinkupResult(text, solved) {
-      const resultEl = document.getElementById('linkup-result');
-      if (!resultEl) return;
-      resultEl.textContent = text;
-      resultEl.classList.toggle('is-solved', Boolean(solved));
+      card.appendChild(front);
+      card.appendChild(back);
+      return card;
     }
 
     function renderLinkupBoard() {
       const boardEl = document.getElementById('linkup-board');
       if (!boardEl) return;
+
+      clearLinkupLine(false);
 
       const fragment = document.createDocumentFragment();
       linkupState.board.forEach((src, index) => {
@@ -1011,24 +910,17 @@ redirect_from:
         cell.type = 'button';
         cell.className = 'linkup-cell';
         cell.setAttribute('role', 'gridcell');
+        cell.dataset.linkupIndex = String(index);
 
         if (!src) {
           cell.classList.add('is-cleared');
           cell.disabled = true;
         } else {
-          if (linkupState.selectedIndex === index) {
-            cell.classList.add('is-selected');
+          const isFaceUp = linkupState.faceUpIndices.includes(index);
+          if (isFaceUp) {
+            cell.classList.add('is-faceup', 'is-selected');
           }
-          if (linkupState.hintPair.includes(index)) {
-            cell.classList.add('is-hint');
-          }
-
-          const image = document.createElement('img');
-          image.alt = '';
-          image.decoding = 'async';
-          image.loading = 'eager';
-          image.src = src;
-          cell.appendChild(image);
+          cell.appendChild(buildLinkupCard(src));
           cell.addEventListener('click', () => {
             handleLinkupCellClick(index);
           });
@@ -1039,104 +931,95 @@ redirect_from:
 
       boardEl.innerHTML = '';
       boardEl.appendChild(fragment);
+
+      if (linkupState.activeLine) {
+        window.requestAnimationFrame(() => {
+          if (!linkupState.activeLine) return;
+          showLinkupLine(linkupState.activeLine[0], linkupState.activeLine[1]);
+        });
+      }
     }
 
     function finishLinkupGame() {
+      const shell = document.getElementById('mascot-linkup-shell');
       linkupState.solved = true;
-      linkupState.selectedIndex = null;
-      linkupState.hintPair = [];
-      updateLinkupStatus('已完成全部配对');
-      updateLinkupResult(`今日科研运势：${computeLinkupFortune()}`, true);
+      linkupState.busy = false;
+      linkupState.faceUpIndices = [];
+      clearLinkupLine();
+      if (shell) {
+        shell.classList.add('is-solved');
+      }
       renderLinkupBoard();
     }
 
-    function handleLinkupCellClick(index) {
-      if (linkupState.solved || !linkupState.board[index]) return;
+    function resolveMatchedLinkupPair(firstIndex, secondIndex) {
+      linkupState.activeLine = [firstIndex, secondIndex];
+      renderLinkupBoard();
 
-      linkupState.hintPair = [];
-      if (linkupState.selectedIndex === null) {
-        linkupState.selectedIndex = index;
-        updateLinkupStatus('已选中 1 张');
-        renderLinkupBoard();
-        return;
-      }
-
-      if (linkupState.selectedIndex === index) {
-        linkupState.selectedIndex = null;
-        updateLinkupStatus();
-        renderLinkupBoard();
-        return;
-      }
-
-      const selectedIndex = linkupState.selectedIndex;
-      const matched = canConnectLinkup(selectedIndex, index);
-      if (matched) {
-        linkupState.board[selectedIndex] = null;
-        linkupState.board[index] = null;
-        linkupState.selectedIndex = null;
-        linkupState.matches += 1;
+      linkupState.lineTimerId = window.setTimeout(() => {
+        linkupState.lineTimerId = 0;
+        linkupState.board[firstIndex] = null;
+        linkupState.board[secondIndex] = null;
+        linkupState.faceUpIndices = [];
+        linkupState.busy = false;
+        clearLinkupLine();
 
         if (getRemainingLinkupPairs() === 0) {
           finishLinkupGame();
           return;
         }
 
-        ensureLinkupPlayable();
-        updateLinkupStatus();
-        updateLinkupResult('通关后揭晓今日科研运势', false);
         renderLinkupBoard();
+      }, prefersReducedMotion ? 120 : 380);
+    }
+
+    function handleLinkupCellClick(index) {
+      if (linkupState.solved || linkupState.busy || !linkupState.board[index]) return;
+      if (linkupState.faceUpIndices.includes(index)) return;
+
+      linkupState.faceUpIndices = linkupState.faceUpIndices.concat(index);
+      renderLinkupBoard();
+
+      if (linkupState.faceUpIndices.length < 2) {
         return;
       }
 
-      linkupState.mistakes += 1;
-      linkupState.selectedIndex = index;
-      updateLinkupStatus('这一对不能直连，换一张试试');
-      renderLinkupBoard();
-    }
+      const [firstIndex, secondIndex] = linkupState.faceUpIndices;
+      linkupState.busy = true;
 
-    function showLinkupHint() {
-      if (linkupState.solved) return;
-
-      let pair = findLinkupPair();
-      if (!pair) {
-        ensureLinkupPlayable();
-        pair = findLinkupPair();
+      if (linkupState.board[firstIndex] === linkupState.board[secondIndex]) {
+        resolveMatchedLinkupPair(firstIndex, secondIndex);
+        return;
       }
-      if (!pair) return;
 
-      linkupState.hintsUsed += 1;
-      linkupState.selectedIndex = null;
-      linkupState.hintPair = pair;
-      updateLinkupStatus('已高亮一组可消除图案');
-      renderLinkupBoard();
+      linkupState.hideTimerId = window.setTimeout(() => {
+        linkupState.hideTimerId = 0;
+        linkupState.faceUpIndices = [];
+        linkupState.busy = false;
+        renderLinkupBoard();
+      }, prefersReducedMotion ? 120 : 680);
     }
 
     function resetLinkupGame() {
-      const { deck, seed } = buildLinkupDeck();
-      linkupState.board = deck;
-      linkupState.selectedIndex = null;
-      linkupState.hintPair = [];
+      const shell = document.getElementById('mascot-linkup-shell');
+      clearLinkupTimers();
+      clearLinkupLine();
+      linkupState.board = buildLinkupDeck();
+      linkupState.faceUpIndices = [];
       linkupState.solved = false;
-      linkupState.matches = 0;
-      linkupState.hintsUsed = 0;
-      linkupState.mistakes = 0;
-      linkupState.autoShuffleCount = 0;
-      linkupState.seed = seed;
-
-      ensureLinkupPlayable();
-      updateLinkupStatus();
-      updateLinkupResult('通关后揭晓今日科研运势', false);
+      linkupState.busy = false;
+      if (shell) {
+        shell.classList.remove('is-solved');
+      }
       renderLinkupBoard();
     }
 
     function initLinkupGame() {
       const boardEl = document.getElementById('linkup-board');
       const restartButton = document.getElementById('linkup-restart');
-      const hintButton = document.getElementById('linkup-hint');
-      if (!boardEl || !restartButton || !hintButton) return;
+      if (!boardEl || !restartButton) return;
 
       restartButton.addEventListener('click', resetLinkupGame);
-      hintButton.addEventListener('click', showLinkupHint);
       resetLinkupGame();
     }
 
@@ -1145,6 +1028,12 @@ redirect_from:
       syncSlotMachineLayout();
       applyDesktopScale();
       renderSideMascots();
+      if (linkupState.activeLine) {
+        window.requestAnimationFrame(() => {
+          if (!linkupState.activeLine) return;
+          showLinkupLine(linkupState.activeLine[0], linkupState.activeLine[1]);
+        });
+      }
     }
 
     function handleResize() {
@@ -1197,6 +1086,8 @@ redirect_from:
         window.clearTimeout(avatarState.timerId);
       }
       clearSlotTimers();
+      clearLinkupTimers();
+      clearLinkupLine();
     });
   })();
 </script>

@@ -29,6 +29,7 @@
     const uvEl = document.getElementById('local_counter_value_uv');
     const pvEl = document.getElementById('local_counter_value_pv');
     const viewTargets = Array.from(document.querySelectorAll('[data-home-view-target]'));
+    let mastheadScaleRaf = 0;
 
     function getCurrentHomeView() {
       const path = window.location.pathname || '/';
@@ -53,11 +54,59 @@
       });
     }
 
+    function getViewportWidth() {
+      if (window.visualViewport && typeof window.visualViewport.width === 'number') {
+        return window.visualViewport.width;
+      }
+      return window.innerWidth || document.documentElement.clientWidth || 1280;
+    }
+
+    function applyMastheadScale() {
+      const navList = document.querySelector('#site-nav .visible-links');
+      if (!navList) return;
+
+      const currentScale = Number.parseFloat(
+        getComputedStyle(document.documentElement).getPropertyValue('--masthead-scale')
+      ) || 1;
+
+      let naturalWidth = 0;
+      Array.from(navList.children).forEach((item) => {
+        const rect = item.getBoundingClientRect();
+        const styles = getComputedStyle(item);
+        naturalWidth += rect.width / currentScale;
+        naturalWidth += (Number.parseFloat(styles.marginLeft) || 0) / currentScale;
+        naturalWidth += (Number.parseFloat(styles.marginRight) || 0) / currentScale;
+      });
+
+      const availableWidth = Math.max(getViewportWidth() - 20, 320);
+      const nextScale = Math.min(1, Math.max(0.52, availableWidth / Math.max(naturalWidth + 10, 1)));
+      document.documentElement.style.setProperty('--masthead-scale', nextScale.toFixed(4));
+    }
+
+    function scheduleMastheadScale() {
+      if (mastheadScaleRaf) {
+        window.cancelAnimationFrame(mastheadScaleRaf);
+      }
+      mastheadScaleRaf = window.requestAnimationFrame(() => {
+        mastheadScaleRaf = 0;
+        applyMastheadScale();
+      });
+    }
+
     window.updateMastheadViewState = function updateMastheadViewState(view) {
       applyHomeViewState(view || getCurrentHomeView());
+      scheduleMastheadScale();
     };
 
     applyHomeViewState(getCurrentHomeView());
+    scheduleMastheadScale();
+
+    window.addEventListener('resize', scheduleMastheadScale, { passive: true });
+    window.addEventListener('pageshow', scheduleMastheadScale);
+    window.addEventListener('load', scheduleMastheadScale);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', scheduleMastheadScale, { passive: true });
+    }
 
     if (!uvEl || !pvEl) return;
 
