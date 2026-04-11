@@ -385,6 +385,16 @@
     border-top: 1px solid #e7edf1;
 }
 
+.slot-machine-fortune {
+    margin-bottom: 0.5rem;
+    text-align: center;
+    color: #5e7382;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+}
+
 .slot-machine-display {
     position: relative;
     display: grid;
@@ -757,7 +767,7 @@
     align-items: center;
     justify-content: flex-start;
     gap: 0.62rem;
-    margin-top: -2.7rem;
+    margin-top: -3.2rem;
     text-align: center;
 }
 
@@ -855,16 +865,26 @@
     align-items: center;
 }
 
+.masthead__menu,
+.masthead__menu nav {
+    width: 100%;
+}
+
 .greedy-nav .visible-links {
     display: flex !important;
     align-items: center;
     flex: 1 1 auto;
     width: 100%;
+    justify-content: flex-start;
 }
 
 .greedy-nav .visible-links > li {
     display: flex;
     align-items: center;
+}
+
+.greedy-nav .visible-links > .masthead__menu-item--stats {
+    margin-left: auto !important;
 }
 
 .masthead__menu-item--button a {
@@ -885,6 +905,7 @@
     margin-left: auto;
     justify-content: flex-end;
     flex: 1 1 auto;
+    min-width: 0;
     padding-right: 0;
 }
 
@@ -952,7 +973,7 @@
         align-items: center;
         justify-content: flex-start;
         gap: 0.62rem;
-        margin-top: -2.7rem;
+        margin-top: -3.2rem;
         text-align: center;
     }
 

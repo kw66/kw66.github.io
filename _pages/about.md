@@ -195,6 +195,16 @@ redirect_from:
     const slotVisual = {
       gapPx: 12
     };
+    const slotFortunes = [
+      '适合改图',
+      '适合投稿',
+      '适合做实验',
+      '适合写代码',
+      '适合写稿',
+      '适合看论文',
+      '适合交流',
+      '适合审稿'
+    ];
     const mascotConfig = {
       size: 84,
       gap: 42,
@@ -217,6 +227,54 @@ redirect_from:
 
     function randomFrom(items) {
       return items[Math.floor(Math.random() * items.length)];
+    }
+
+    function getMascotIndex(src) {
+      const match = /mascot-(\d+)\.png$/i.exec(src || '');
+      if (!match) return 0;
+      return Math.max(Number.parseInt(match[1], 10) - 1, 0);
+    }
+
+    function buildFortuneText(sources) {
+      if (!Array.isArray(sources) || sources.length < 3) {
+        return '今日科研运势：适合摸鱼';
+      }
+
+      const counts = new Map();
+      sources.forEach((src) => {
+        counts.set(src, (counts.get(src) || 0) + 1);
+      });
+
+      if (counts.size === 1) {
+        return '今日科研运势：接 accept';
+      }
+
+      if (counts.size === 3) {
+        return '今日科研运势：适合摸鱼';
+      }
+
+      let repeatedSource = sources[0];
+      counts.forEach((count, src) => {
+        if (count >= 2) {
+          repeatedSource = src;
+        }
+      });
+
+      const fortune = slotFortunes[getMascotIndex(repeatedSource) % slotFortunes.length];
+      return `今日科研运势：${fortune}`;
+    }
+
+    function updateSlotFortune(sources) {
+      const fortuneEl = document.getElementById('slot-machine-fortune');
+      if (!fortuneEl) return;
+
+      const resultSources = Array.isArray(sources)
+        ? sources
+        : Array.from(document.querySelectorAll('[data-slot-track]'))
+          .map((track) => track.dataset.currentSource)
+          .filter(Boolean);
+
+      fortuneEl.textContent = buildFortuneText(resultSources);
     }
 
     function updateHomeViewMode() {
@@ -689,6 +747,7 @@ redirect_from:
           setSlotResult(reel, track, target, finalSideSources);
           settledCount += 1;
           if (settledCount === tracks.length) {
+            updateSlotFortune(tracks.map((item) => item.dataset.currentSource).filter(Boolean));
             slotState.spinning = false;
             slotMachine.classList.remove('is-spinning');
             const releaseTimer = window.setTimeout(() => {
@@ -712,6 +771,7 @@ redirect_from:
       tracks.forEach((track, index) => {
         setSlotResult(reels[index], track, randomFrom(mascotSources));
       });
+      updateSlotFortune();
       lever.addEventListener('click', spinSlotMachine);
       window.requestAnimationFrame(syncSlotMachineLayout);
     }
