@@ -872,6 +872,7 @@ redirect_from:
       const reels = Array.from(document.querySelectorAll('[data-slot-reel]'));
       const tracks = Array.from(document.querySelectorAll('[data-slot-track]'));
       if (!reels.length || !tracks.length) return;
+      if (slotState.spinning) return;
       tracks.forEach((track, index) => {
         const currentSource = track.dataset.currentSource || randomFrom(mascotSources);
         const sideSources = [
