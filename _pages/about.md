@@ -201,6 +201,7 @@ redirect_from:
       size: 84,
       gap: 42,
       speed: 102,
+      speedLerp: 2.35,
       leftInset: 0,
       rightInset: 0,
       preloadCount: 6
@@ -353,7 +354,7 @@ redirect_from:
       if (!mascotState) return;
       const dt = Math.min((now - mascotState.lastTime) / 1000, 0.05);
       mascotState.lastTime = now;
-      const easing = Math.min(1, dt * 5);
+      const easing = Math.min(1, dt * mascotConfig.speedLerp);
       mascotState.currentSpeed += (mascotState.targetSpeed - mascotState.currentSpeed) * easing;
       const distance = mascotState.currentSpeed * dt;
 
@@ -429,27 +430,29 @@ redirect_from:
         avatarState.animation = null;
       }
 
-      const finalOffset = '-85.7143%';
+      const finalOffset = '-88.8889%';
       if (prefersReducedMotion || typeof reel.animate !== 'function') {
-        reel.style.transition = 'transform 540ms linear';
+        reel.style.transition = 'transform 700ms linear';
         reel.style.transform = `translateX(${finalOffset})`;
         avatarState.timerId = window.setTimeout(() => {
           finishAuthorAvatarSpin();
           avatarState.timerId = null;
-        }, 580);
+        }, 740);
         return;
       }
 
       const animation = reel.animate([
         { transform: 'translateX(0%)', offset: 0 },
-        { transform: 'translateX(-14.2857%)', offset: 0.14 },
-        { transform: 'translateX(-28.5714%)', offset: 0.3 },
-        { transform: 'translateX(-42.8571%)', offset: 0.48 },
-        { transform: 'translateX(-57.1429%)', offset: 0.66 },
-        { transform: 'translateX(-71.4286%)', offset: 0.84 },
+        { transform: 'translateX(-11.1111%)', offset: 0.12 },
+        { transform: 'translateX(-22.2222%)', offset: 0.24 },
+        { transform: 'translateX(-33.3333%)', offset: 0.37 },
+        { transform: 'translateX(-44.4444%)', offset: 0.5 },
+        { transform: 'translateX(-55.5556%)', offset: 0.63 },
+        { transform: 'translateX(-66.6667%)', offset: 0.76 },
+        { transform: 'translateX(-77.7778%)', offset: 0.89 },
         { transform: `translateX(${finalOffset})`, offset: 1 }
       ], {
-        duration: 1280,
+        duration: 1340,
         easing: 'linear',
         fill: 'forwards'
       });
@@ -758,7 +761,7 @@ redirect_from:
       slotMachine.classList.add('is-spinning');
       lever.classList.add('is-pulled');
       spinAuthorAvatar();
-      setMascotSpeedMultiplier(2);
+      setMascotSpeedMultiplier(4);
       let settledCount = 0;
 
       tracks.forEach((track, index) => {
