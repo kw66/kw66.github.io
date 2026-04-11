@@ -206,8 +206,8 @@ redirect_from:
       '适合审稿'
     ];
     const linkupConfig = {
-      rows: 6,
-      cols: 4
+      rows: 4,
+      cols: 3
     };
     const mascotConfig = {
       size: 84,
@@ -217,9 +217,13 @@ redirect_from:
       rightInset: 0,
       preloadCount: 6
     };
+    const homeToolStorageKey = 'kw66_home_sidebar_tool_v1';
     let mascotRafId = null;
     let resizeTimer = null;
     let mascotState = null;
+    const homeToolState = {
+      current: 'slot'
+    };
     const avatarState = {
       animation: null,
       timerId: null
@@ -305,9 +309,70 @@ redirect_from:
       document.body.classList.toggle('is-slot-mode', currentView === 'slot');
       document.body.classList.toggle('is-linkup-mode', currentView === 'linkup');
       document.body.dataset.homeView = currentView;
+      applyHomeToolSelection();
       if (typeof window.updateMastheadViewState === 'function') {
         window.updateMastheadViewState(currentView);
       }
+    }
+
+    function normalizeHomeTool(value) {
+      return value === 'linkup' ? 'linkup' : 'slot';
+    }
+
+    function getStoredHomeTool() {
+      try {
+        return normalizeHomeTool(window.localStorage.getItem(homeToolStorageKey));
+      } catch (error) {
+        return 'slot';
+      }
+    }
+
+    function applyHomeToolSelection() {
+      const container = document.getElementById('sidebar-home-tools');
+      const currentView = document.body?.dataset.homeView || 'home';
+      const effectiveTool = currentView === 'slot'
+        ? 'slot'
+        : currentView === 'linkup'
+          ? 'linkup'
+          : normalizeHomeTool(homeToolState.current);
+
+      if (container) {
+        container.dataset.selectedTool = effectiveTool;
+        container.dataset.viewMode = currentView;
+      }
+      document.body.dataset.homeTool = effectiveTool;
+
+      document.querySelectorAll('[data-home-tool]').forEach((button) => {
+        const isActive = button.dataset.homeTool === effectiveTool;
+        button.classList.toggle('is-active', isActive);
+        button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
+    }
+
+    function setHomeToolSelection(tool, persist = true) {
+      homeToolState.current = normalizeHomeTool(tool);
+      if (persist) {
+        try {
+          window.localStorage.setItem(homeToolStorageKey, homeToolState.current);
+        } catch (error) {
+          // ignore storage failures
+        }
+      }
+      applyHomeToolSelection();
+      window.requestAnimationFrame(() => {
+        syncDesktopHomeLayout('auto');
+      });
+    }
+
+    function initHomeToolSwitcher() {
+      homeToolState.current = getStoredHomeTool();
+      applyHomeToolSelection();
+      document.querySelectorAll('[data-home-tool]').forEach((button) => {
+        button.addEventListener('click', () => {
+          if ((document.body?.dataset.homeView || 'home') !== 'home') return;
+          setHomeToolSelection(button.dataset.homeTool);
+        });
+      });
     }
 
     function resetPageScroll() {
@@ -1063,6 +1128,7 @@ redirect_from:
     initFeaturedCarousel();
     initSlotMachine();
     initLinkupGame();
+    initHomeToolSwitcher();
     applyDesktopScale();
 
     if (document.readyState === 'complete') {

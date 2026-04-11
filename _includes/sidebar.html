@@ -3,6 +3,10 @@
   {% if page.author_profile or layout.author_profile %}{% include author-profile.html %}{% endif %}
   {% if page.permalink == "/" or page.url == "/" %}
     <div class="sidebar-home-tools" id="sidebar-home-tools">
+      <div class="sidebar-tool-switcher" id="sidebar-tool-switcher" role="tablist" aria-label="Sidebar tool switch">
+        <button class="sidebar-tool-switch is-active" id="sidebar-tool-slot" type="button" data-home-tool="slot" aria-pressed="true">老虎机</button>
+        <button class="sidebar-tool-switch" id="sidebar-tool-linkup" type="button" data-home-tool="linkup" aria-pressed="false">连连看</button>
+      </div>
       <section class="sidebar-tool-panel mascot-slot-panel" id="mascot-slot-panel">
         <div class="slot-machine-fortune" id="slot-machine-fortune">&#20170;&#26085;&#31185;&#30740;&#36816;&#21183;&#65306;&#36866;&#21512;&#25720;&#40060;</div>
         <div class="slot-machine-display" id="mascot-slot-machine">
