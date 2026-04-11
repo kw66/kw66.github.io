@@ -1039,12 +1039,20 @@
     transform: none;
 }
 
-.is-linkup-mode .mascot-slot-panel {
-    display: none;
+.is-fixed-scale-home.is-slot-mode .mascot-slot-panel {
+    display: block !important;
 }
 
-.is-linkup-mode .mascot-linkup-panel {
-    display: block;
+.is-fixed-scale-home.is-slot-mode .mascot-linkup-panel {
+    display: none !important;
+}
+
+.is-fixed-scale-home.is-linkup-mode .mascot-slot-panel {
+    display: none !important;
+}
+
+.is-fixed-scale-home.is-linkup-mode .mascot-linkup-panel {
+    display: block !important;
 }
 
 .greedy-nav {
