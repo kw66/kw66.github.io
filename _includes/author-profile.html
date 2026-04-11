@@ -4,6 +4,7 @@
 {% assign primary_avatar = author.avatar | prepend: '/' | relative_url %}
 {% assign secondary_avatar = '/images/avatar-xulin-alt.jpg' | relative_url %}
 {% assign avatar_frame_count = 7 %}
+{% assign display_name = author.name | split: '（' | first | split: '(' | first | strip %}
 
 <div itemscope itemtype="http://schema.org/Person" class="profile_box">
 
@@ -27,7 +28,7 @@
   </div>
 
   <div class="author__content">
-    <h3 class="author__name">{{ author.name }}</h3>
+    <h3 class="author__name">{{ display_name }}</h3>
     {% if author.bio %}<p class="author__bio">{{ author.bio | replace_first: ', ', '<br>' }}</p>{% endif %}
   </div>
 

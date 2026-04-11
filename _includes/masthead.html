@@ -11,11 +11,11 @@
           {% endfor %}
           <li class="masthead__menu-item masthead__menu-item--stats">
             <span class="masthead__stats" aria-label="Visitor statistics">
-              <span class="masthead__stat" id="busuanzi_container_site_uv" title="Unique devices">
-                &#128064; <span id="busuanzi_value_site_uv">--</span>
+              <span class="masthead__stat" id="local_counter_container_uv" title="Local unique devices">
+                &#128064; <span id="local_counter_value_uv">--</span>
               </span>
-              <span class="masthead__stat" id="busuanzi_container_site_pv" title="Total visits">
-                &#128433;&#65039; <span id="busuanzi_value_site_pv">--</span>
+              <span class="masthead__stat" id="local_counter_container_pv" title="Local visits">
+                &#128433;&#65039; <span id="local_counter_value_pv">--</span>
               </span>
             </span>
           </li>
@@ -25,4 +25,48 @@
     </div>
   </div>
 </div>
-<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+  (function () {
+    const uvEl = document.getElementById('local_counter_value_uv');
+    const pvEl = document.getElementById('local_counter_value_pv');
+    if (!uvEl || !pvEl) return;
+
+    const statsKeys = {
+      visitorSeen: 'kw66_home_visitor_seen_v1',
+      totalUv: 'kw66_home_total_uv_v1',
+      totalPv: 'kw66_home_total_pv_v1'
+    };
+
+    function parseCount(value) {
+      const parsed = Number.parseInt(value || '0', 10);
+      return Number.isFinite(parsed) && parsed >= 0 ? parsed : 0;
+    }
+
+    function renderCounts(uv, pv) {
+      uvEl.textContent = String(uv);
+      pvEl.textContent = String(pv);
+    }
+
+    try {
+      const path = window.location.pathname || '/';
+      const normalizedPath = path === '/index.html' ? '/' : path;
+      let totalUv = parseCount(window.localStorage.getItem(statsKeys.totalUv));
+      let totalPv = parseCount(window.localStorage.getItem(statsKeys.totalPv));
+
+      if (normalizedPath === '/') {
+        totalPv += 1;
+        window.localStorage.setItem(statsKeys.totalPv, String(totalPv));
+
+        if (!window.localStorage.getItem(statsKeys.visitorSeen)) {
+          totalUv += 1;
+          window.localStorage.setItem(statsKeys.visitorSeen, 'true');
+          window.localStorage.setItem(statsKeys.totalUv, String(totalUv));
+        }
+      }
+
+      renderCounts(totalUv, totalPv);
+    } catch (error) {
+      renderCounts('--', '--');
+    }
+  })();
+</script>

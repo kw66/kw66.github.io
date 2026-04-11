@@ -757,7 +757,7 @@
     align-items: center;
     justify-content: flex-start;
     gap: 0.62rem;
-    margin-top: -2.08rem;
+    margin-top: -2.7rem;
     text-align: center;
 }
 
@@ -849,6 +849,24 @@
     transform: none;
 }
 
+.greedy-nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.greedy-nav .visible-links {
+    display: flex !important;
+    align-items: center;
+    flex: 1 1 auto;
+    width: 100%;
+}
+
+.greedy-nav .visible-links > li {
+    display: flex;
+    align-items: center;
+}
+
 .masthead__menu-item--button a {
     display: inline-flex;
     align-items: center;
@@ -865,6 +883,9 @@
     display: flex;
     align-items: center;
     margin-left: auto;
+    justify-content: flex-end;
+    flex: 1 1 auto;
+    padding-right: 0;
 }
 
 .masthead__stats {
@@ -873,8 +894,9 @@
     justify-content: flex-end;
     gap: 0.9rem;
     min-height: 2rem;
-    min-width: 11rem;
-    padding: 0 0 0 0.6rem;
+    min-width: 8.6rem;
+    margin-left: auto;
+    padding: 0;
     color: #536775;
     font-size: 0.92rem;
     font-weight: 700;
@@ -887,8 +909,8 @@
     white-space: nowrap;
 }
 
-#busuanzi_container_site_uv,
-#busuanzi_container_site_pv {
+#local_counter_container_uv,
+#local_counter_container_pv {
     opacity: 0.88;
 }
 
@@ -930,7 +952,7 @@
         align-items: center;
         justify-content: flex-start;
         gap: 0.62rem;
-        margin-top: -2.08rem;
+        margin-top: -2.7rem;
         text-align: center;
     }
 

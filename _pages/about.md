@@ -195,8 +195,6 @@ redirect_from:
     const slotVisual = {
       gapPx: 12
     };
-    const slotImageCache = new Map();
-    const slotImageJobs = new Map();
     const mascotConfig = {
       size: 84,
       gap: 42,
@@ -579,135 +577,16 @@ redirect_from:
       });
     }
 
-    function getSlotImmediateSource(src) {
-      return slotImageCache.get(src) || src;
-    }
-
-    function createSlotItem(src, options = {}) {
-      const processImage = options.process !== false;
+    function createSlotItem(src) {
       const item = document.createElement('div');
       item.className = 'slot-machine-item';
       const img = document.createElement('img');
       img.alt = '';
       img.decoding = 'async';
-      img.loading = processImage ? 'eager' : 'lazy';
-      img.dataset.source = src;
-      if (processImage) {
-        setSlotImageSource(img, src);
-      } else {
-        img.src = getSlotImmediateSource(src);
-      }
+      img.loading = 'eager';
+      img.src = src;
       item.appendChild(img);
       return item;
-    }
-
-    function processSlotImageSource(src) {
-      if (slotImageCache.has(src)) {
-        return Promise.resolve(slotImageCache.get(src));
-      }
-      if (slotImageJobs.has(src)) {
-        return slotImageJobs.get(src);
-      }
-
-      const job = new Promise((resolve) => {
-        const image = new Image();
-        image.decoding = 'async';
-        image.onload = () => {
-          try {
-            const canvas = document.createElement('canvas');
-            canvas.width = image.naturalWidth;
-            canvas.height = image.naturalHeight;
-            const context = canvas.getContext('2d', { willReadFrequently: true });
-            if (!context) {
-              slotImageCache.set(src, src);
-              resolve(src);
-              return;
-            }
-
-            context.drawImage(image, 0, 0);
-            const { data, width, height } = context.getImageData(0, 0, canvas.width, canvas.height);
-            let minX = width;
-            let minY = height;
-            let maxX = -1;
-            let maxY = -1;
-
-            for (let y = 0; y < height; y += 1) {
-              for (let x = 0; x < width; x += 1) {
-                const index = (y * width + x) * 4;
-                const r = data[index];
-                const g = data[index + 1];
-                const b = data[index + 2];
-                const a = data[index + 3];
-                const isBackground = a < 16 || (r > 246 && g > 246 && b > 246);
-                if (isBackground) {
-                  continue;
-                }
-                minX = Math.min(minX, x);
-                minY = Math.min(minY, y);
-                maxX = Math.max(maxX, x);
-                maxY = Math.max(maxY, y);
-              }
-            }
-
-            if (maxX < minX || maxY < minY) {
-              slotImageCache.set(src, src);
-              resolve(src);
-              return;
-            }
-
-            const padding = 6;
-            const cropX = Math.max(0, minX - padding);
-            const cropY = Math.max(0, minY - padding);
-            const cropWidth = Math.min(width - cropX, maxX - minX + 1 + padding * 2);
-            const cropHeight = Math.min(height - cropY, maxY - minY + 1 + padding * 2);
-            const cropped = document.createElement('canvas');
-            cropped.width = cropWidth;
-            cropped.height = cropHeight;
-            const croppedContext = cropped.getContext('2d');
-            if (!croppedContext) {
-              slotImageCache.set(src, src);
-              resolve(src);
-              return;
-            }
-            croppedContext.drawImage(
-              image,
-              cropX,
-              cropY,
-              cropWidth,
-              cropHeight,
-              0,
-              0,
-              cropWidth,
-              cropHeight
-            );
-            const processed = cropped.toDataURL('image/png');
-            slotImageCache.set(src, processed);
-            resolve(processed);
-          } catch (error) {
-            slotImageCache.set(src, src);
-            resolve(src);
-          }
-        };
-        image.onerror = () => {
-          slotImageCache.set(src, src);
-          resolve(src);
-        };
-        image.src = src;
-      }).finally(() => {
-        slotImageJobs.delete(src);
-      });
-
-      slotImageJobs.set(src, job);
-      return job;
-    }
-
-    function setSlotImageSource(img, src) {
-      img.src = src;
-      processSlotImageSource(src).then((processed) => {
-        if (img.dataset.source === src) {
-          img.src = processed;
-        }
-      });
     }
 
     function getSlotMetrics(reel) {
@@ -735,11 +614,11 @@ redirect_from:
       return metrics;
     }
 
-    function renderSlotTrack(track, sources, options = {}) {
+    function renderSlotTrack(track, sources) {
       const fragment = document.createDocumentFragment();
       track.innerHTML = '';
       sources.forEach((src) => {
-        fragment.appendChild(createSlotItem(src, options));
+        fragment.appendChild(createSlotItem(src));
       });
       track.appendChild(fragment);
     }
@@ -748,7 +627,7 @@ redirect_from:
       const leftSource = sideSources && sideSources[0] ? sideSources[0] : (track.dataset.leftSource || randomFrom(mascotSources));
       const rightSource = sideSources && sideSources[1] ? sideSources[1] : (track.dataset.rightSource || randomFrom(mascotSources));
       const neighbors = [leftSource, src, rightSource];
-      renderSlotTrack(track, neighbors, { process: true });
+      renderSlotTrack(track, neighbors);
       const metrics = applySlotMetrics(reel, track);
       track.style.transition = 'none';
       track.style.transform = `translate3d(${getSlotTranslate(metrics, 1)}px, 0, 0)`;
@@ -790,7 +669,7 @@ redirect_from:
         const finalSideSources = [randomFrom(mascotSources), randomFrom(mascotSources)];
         sequence.push(finalSideSources[0], target, finalSideSources[1]);
 
-        renderSlotTrack(track, sequence, { process: false });
+        renderSlotTrack(track, sequence);
         track.style.transition = 'none';
         track.style.transform = `translate3d(${getSlotTranslate(metrics, 1)}px, 0, 0)`;
         track.offsetWidth;
