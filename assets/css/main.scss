@@ -652,8 +652,8 @@
 
 .author__avatar-slot .author__avatar-frame {
     display: block;
-    flex: 0 0 calc(100% / var(--avatar-frame-count, 15));
-    width: calc(100% / var(--avatar-frame-count, 15));
+    flex: 0 0 calc(100% / var(--avatar-frame-count, 7));
+    width: calc(100% / var(--avatar-frame-count, 7));
     max-width: none;
     min-width: 0;
     height: 100%;
@@ -702,6 +702,11 @@
     will-change: transform;
 }
 
+.is-fixed-scale-home.is-slot-mode .desktop-scale-stage {
+    padding-left: 0;
+    padding-right: 0;
+}
+
 .is-fixed-scale-home #main {
     --desktop-main-width: 1280px;
     --main-column-gap: 1.08rem;
@@ -712,6 +717,13 @@
     width: var(--desktop-main-width);
     min-width: var(--desktop-main-width);
     max-width: var(--desktop-main-width);
+}
+
+.is-fixed-scale-home.is-slot-mode #main {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    justify-content: center;
 }
 
 .is-fixed-scale-home .sidebar,
@@ -797,6 +809,56 @@
 .is-fixed-scale-home .sidebar .author__urls a,
 .is-fixed-scale-home .sidebar .author__urls_sm a {
     justify-content: center;
+}
+
+.is-fixed-scale-home.is-slot-mode .page,
+.is-fixed-scale-home.is-slot-mode .profile_box,
+.is-fixed-scale-home.is-slot-mode .side-mascot-rail {
+    display: none !important;
+}
+
+.is-fixed-scale-home.is-slot-mode .sidebar {
+    flex: 0 0 30rem;
+    width: 30rem;
+    max-width: 30rem;
+}
+
+.is-fixed-scale-home.is-slot-mode .sidebar-home-tools {
+    margin-top: 4.8rem;
+}
+
+.is-fixed-scale-home.is-slot-mode .sidebar-tool-panel {
+    padding-top: 0;
+    border-top: 0;
+}
+
+.masthead__menu-item--slot a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2rem;
+    padding: 0.22rem 0.78rem;
+    border: 1px solid #d3dddf;
+    border-radius: 999px;
+    background: #ffffff;
+    box-shadow: 0 6px 14px rgba(33, 55, 76, 0.08);
+}
+
+.masthead__menu-item--stats {
+    margin-left: auto;
+}
+
+.masthead__stats {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2rem;
+    padding: 0;
+}
+
+.masthead__stats img {
+    display: block;
+    height: 20px;
+    width: auto;
+    max-width: none;
 }
 
 @include breakpoint($large) {

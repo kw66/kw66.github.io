@@ -201,7 +201,6 @@ redirect_from:
       size: 84,
       gap: 42,
       speed: 102,
-      speedLerp: 2.35,
       leftInset: 0,
       rightInset: 0,
       preloadCount: 6
@@ -222,9 +221,10 @@ redirect_from:
       return items[Math.floor(Math.random() * items.length)];
     }
 
-    function smoothstep(value) {
-      const clamped = clamp(value, 0, 1);
-      return clamped * clamped * (3 - 2 * clamped);
+    function updateHomeViewMode() {
+      const params = new URLSearchParams(window.location.search);
+      const slotMode = params.get('view') === 'slot';
+      document.body.classList.toggle('is-slot-mode', slotMode);
     }
 
     function resetPageScroll() {
@@ -359,17 +359,7 @@ redirect_from:
       if (!mascotState) return;
       const dt = Math.min((now - mascotState.lastTime) / 1000, 0.05);
       mascotState.lastTime = now;
-      if (mascotState.speedTransition) {
-        const transition = mascotState.speedTransition;
-        const progress = clamp((now - transition.startTime) / transition.duration, 0, 1);
-        const easedProgress = smoothstep(progress);
-        mascotState.speedMultiplier = transition.from + (transition.to - transition.from) * easedProgress;
-        if (progress >= 1) {
-          mascotState.speedMultiplier = transition.to;
-          mascotState.speedTransition = null;
-        }
-      }
-      const distance = mascotConfig.speed * mascotState.speedMultiplier * dt;
+      const distance = mascotConfig.speed * dt;
 
       advanceLane(mascotState.left, distance);
       advanceLane(mascotState.right, distance);
@@ -395,8 +385,6 @@ redirect_from:
       const rightRailHeight = getRailHeight(rightLayer);
 
       mascotState = {
-        speedMultiplier: slotState.spinning ? 4 : 1,
-        speedTransition: null,
         lastTime: performance.now(),
         left: buildLane('left', leftRailHeight, leftLayer),
         right: buildLane('right', rightRailHeight, rightLayer)
@@ -414,16 +402,6 @@ redirect_from:
       paintLane(mascotState.left);
       paintLane(mascotState.right);
       mascotRafId = window.requestAnimationFrame(mascotStep);
-    }
-
-    function setMascotSpeedMultiplier(multiplier, durationMs) {
-      if (!mascotState) return;
-      mascotState.speedTransition = {
-        from: mascotState.speedMultiplier,
-        to: multiplier,
-        startTime: performance.now(),
-        duration: durationMs
-      };
     }
 
     function finishAuthorAvatarSpin() {
@@ -451,28 +429,35 @@ redirect_from:
       const frameCount = Math.max(reel.children.length, 1);
       const finalOffset = `${-((frameCount - 1) / frameCount * 100).toFixed(4)}%`;
       if (prefersReducedMotion || typeof reel.animate !== 'function') {
-        const fallbackDuration = Math.max(520, frameCount * 90);
-        reel.style.transition = `transform ${fallbackDuration}ms linear`;
+        const fallbackDuration = 760;
+        reel.style.transition = `transform ${fallbackDuration}ms cubic-bezier(0.2, 0.9, 0.24, 1)`;
         reel.style.transform = `translateX(${finalOffset})`;
         avatarState.timerId = window.setTimeout(() => {
           finishAuthorAvatarSpin();
           avatarState.timerId = null;
-        }, fallbackDuration + 40);
+          }, fallbackDuration + 40);
         return;
       }
 
-      const keyframes = Array.from({ length: frameCount }, (_, index) => {
-        const offset = frameCount === 1 ? 1 : index / (frameCount - 1);
-        const translate = -((index / frameCount) * 100);
-        return {
+      const positions = Array.from({ length: frameCount }, (_, index) => -((index / frameCount) * 100));
+      const keyframes = positions.map((translate, index) => {
+        const offsets = [0, 0.17, 0.34, 0.51, 0.68, 0.84, 1];
+        const frame = {
           transform: `translateX(${translate.toFixed(4)}%)`,
-          offset
+          offset: offsets[Math.min(index, offsets.length - 1)]
         };
+        if (index === 0) {
+          frame.easing = 'cubic-bezier(0.42, 0, 0.88, 0.46)';
+        } else if (index === frameCount - 2) {
+          frame.easing = 'cubic-bezier(0.18, 0.9, 0.28, 1)';
+        } else {
+          frame.easing = 'linear';
+        }
+        return frame;
       });
 
       const animation = reel.animate(keyframes, {
-        duration: Math.max(1320, frameCount * 95),
-        easing: 'linear',
+        duration: 940,
         fill: 'forwards'
       });
 
@@ -780,7 +765,6 @@ redirect_from:
       slotMachine.classList.add('is-spinning');
       lever.classList.add('is-pulled');
       spinAuthorAvatar();
-      setMascotSpeedMultiplier(4, 900);
       let settledCount = 0;
 
       tracks.forEach((track, index) => {
@@ -817,7 +801,6 @@ redirect_from:
           if (settledCount === tracks.length) {
             slotState.spinning = false;
             slotMachine.classList.remove('is-spinning');
-            setMascotSpeedMultiplier(1, 1200);
             const releaseTimer = window.setTimeout(() => {
               lever.classList.remove('is-pulled');
             }, prefersReducedMotion ? 30 : 200);
@@ -874,9 +857,15 @@ redirect_from:
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }
+    updateHomeViewMode();
     resetPageScroll();
     window.addEventListener('pageshow', () => {
+      updateHomeViewMode();
       resetPageScroll();
+      syncDesktopHomeLayout('auto');
+    });
+    window.addEventListener('popstate', () => {
+      updateHomeViewMode();
       syncDesktopHomeLayout('auto');
     });
 
