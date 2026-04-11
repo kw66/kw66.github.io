@@ -1110,6 +1110,10 @@
     min-width: 0;
 }
 
+.greedy-nav .visible-links > .masthead__menu-home-item {
+    display: flex !important;
+}
+
 .greedy-nav .visible-links > .masthead__menu-item--button {
     flex: 0 0 auto;
 }
