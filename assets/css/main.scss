@@ -2210,6 +2210,10 @@ body[data-home-view='home'][data-home-tool='home'] .mascot-linkup-panel {
         flex: 0 0 auto;
     }
 
+    .slot-machine-display .slot-machine-reel + .slot-machine-reel {
+        margin-top: 0.46rem;
+    }
+
     .slot-machine-lever {
         flex: none;
         width: 100%;
