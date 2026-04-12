@@ -956,12 +956,7 @@ redirect_from:
       item.className = 'linkup-shuffle-item';
       const windowEl = document.createElement('span');
       windowEl.className = 'linkup-shuffle-art-window';
-      const image = document.createElement('img');
-      image.alt = '';
-      image.decoding = 'async';
-      image.loading = 'eager';
-      image.src = src;
-      windowEl.appendChild(image);
+      windowEl.style.backgroundImage = `url("${src}")`;
       item.appendChild(windowEl);
       return item;
     }
@@ -1004,14 +999,9 @@ redirect_from:
       front.className = 'linkup-face linkup-face--front';
       const artWindow = document.createElement('span');
       artWindow.className = 'linkup-face-window';
-      const image = document.createElement('img');
-      image.alt = '';
-      image.decoding = 'async';
-      image.loading = 'eager';
-      image.src = src;
       const frame = document.createElement('span');
       frame.className = 'linkup-face-frame';
-      artWindow.appendChild(image);
+      artWindow.style.backgroundImage = `url("${src}")`;
       front.appendChild(artWindow);
       front.appendChild(frame);
 
