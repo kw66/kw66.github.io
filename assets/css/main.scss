@@ -1635,8 +1635,8 @@ body[data-home-view='home'][data-home-tool='home'] .mascot-linkup-panel {
 
     body.is-fixed-scale-home .sidebar {
         display: grid;
-        grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-        gap: 0.56rem;
+        grid-template-columns: minmax(0, 0.76fr) minmax(0, 1.24fr);
+        gap: 0.44rem;
         align-items: stretch;
         margin-bottom: 0.28rem;
         position: relative;
@@ -1763,13 +1763,13 @@ body[data-home-view='home'][data-home-tool='home'] .mascot-linkup-panel {
 
     body.is-fixed-scale-home .sidebar-home-tools {
         --sidebar-tool-stage-height: 13.42rem;
-        --sidebar-tool-control-width: 2.08rem;
-        --sidebar-tool-control-gap: 0.24rem;
+        --sidebar-tool-control-width: 1.92rem;
+        --sidebar-tool-control-gap: 0.18rem;
         --sidebar-tool-shell-gap: 0.16rem;
-        --mobile-tool-core-scale: 0.82;
+        --mobile-tool-core-scale: 1.03;
         --mobile-tool-core-width: calc(8.56rem * var(--mobile-tool-core-scale));
-        --mobile-slot-row-height: calc(4.78rem * var(--mobile-tool-core-scale));
-        --mobile-control-stack-height: calc(var(--mobile-slot-row-height) * 3 + var(--sidebar-tool-shell-gap) * 2);
+        --mobile-slot-row-height: 3.42rem;
+        --mobile-control-stack-height: calc(3 * var(--mobile-slot-row-height) + 0.84rem);
         min-width: 0;
         min-height: 100%;
         margin-top: 0;
@@ -1802,7 +1802,7 @@ body[data-home-view='home'][data-home-tool='home'] .mascot-linkup-panel {
     body.is-fixed-scale-home .linkup-shell {
         min-height: var(--sidebar-tool-stage-height);
         height: auto;
-        padding: 0.24rem 0.24rem 0.26rem;
+        padding: 0.22rem 0.18rem 0.24rem;
         border-radius: 0.92rem;
         column-gap: var(--sidebar-tool-control-gap);
         row-gap: var(--sidebar-tool-shell-gap);
@@ -1884,10 +1884,14 @@ body[data-home-view='home'][data-home-tool='home'] .mascot-linkup-panel {
         border-radius: calc(0.82rem * var(--mobile-tool-core-scale));
     }
 
+    body.is-fixed-scale-home .slot-machine-display .slot-machine-reel + .slot-machine-reel {
+        margin-top: 0.26rem;
+    }
+
     body.is-fixed-scale-home .slot-machine-lever {
         margin-top: 0;
         width: 100%;
-        height: 3.42rem;
+        height: 3.18rem;
         border-radius: 0.7rem;
     }
 
@@ -1935,9 +1939,7 @@ body[data-home-view='home'][data-home-tool='home'] .mascot-linkup-panel {
     }
 
     body.is-fixed-scale-home .linkup-board {
-        gap:
-            calc(0.54rem * var(--mobile-tool-core-scale))
-            calc(0.46rem * var(--mobile-tool-core-scale));
+        gap: 0.34rem 0.3rem;
     }
 
     body.is-fixed-scale-home .linkup-cell {
