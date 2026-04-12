@@ -986,7 +986,8 @@ redirect_from:
     }
 
     function getSlotMetrics(reel) {
-      const reelWidth = Math.max(reel.clientWidth, 180);
+      const minReelWidth = isMobileHomeLayout() ? 1 : 180;
+      const reelWidth = Math.max(reel.clientWidth, minReelWidth);
       const gap = clamp(reelWidth * 0.035, 7, slotVisual.gapPx);
       const itemWidth = Math.min(reelWidth * 0.48, reelWidth - gap * 2 - 10);
       const pitch = itemWidth + gap;
