@@ -13,7 +13,6 @@ redirect_from:
 <div class='side-mascot-rail side-mascot-rail--right' id='side-mascot-layer-right' aria-hidden='true'></div>
 
 <section class='featured-carousel' id='featured-carousel' aria-label='Featured works'>
-  <button class='featured-nav featured-nav--prev' type='button' data-featured-nav='prev' aria-label='Previous featured work'>&lt;</button>
   <div class='featured-viewport' id='featured-viewport'>
     <div class='featured-track' id='featured-track'>
       <article class='featured-item' data-featured-item>
@@ -57,7 +56,6 @@ redirect_from:
       </article>
     </div>
   </div>
-  <button class='featured-nav featured-nav--next' type='button' data-featured-nav='next' aria-label='Next featured work'>&gt;</button>
 </section>
 <div class='paper-filter-toolbar'>
   <div class='paper-filter-row' id='paper-filter-row' role='group' aria-label='Filter papers by tags'>
@@ -189,7 +187,11 @@ redirect_from:
       autoScrollTimerId: 0,
       autoScrollPauseUntil: 0,
       lastViewportScrollLeft: 0,
-      isReordering: false
+      isReordering: false,
+      dragPointerId: null,
+      dragLastClientX: 0,
+      dragMoved: false,
+      suppressClick: false
     };
     const slotState = {
       spinning: false,
@@ -769,7 +771,11 @@ redirect_from:
     }
 
     function getFeaturedVisibleCount() {
-      return isMobileHomeLayout() ? 1 : 3;
+      return isMobileHomeLayout() ? 1 : 2.5;
+    }
+
+    function isFeaturedLoopLayout() {
+      return (document.body?.dataset.homeView || 'home') === 'home';
     }
 
     function getFeaturedItems(options = {}) {
@@ -823,6 +829,12 @@ redirect_from:
       return clamp(targetWidth, getViewportWidth() * 0.34, getViewportWidth() * 0.58);
     }
 
+    function getFeaturedDesktopItemWidth(viewport, track) {
+      const viewportWidth = viewport?.clientWidth || getViewportWidth();
+      const gap = getFeaturedTrackGap(track);
+      return clamp((viewportWidth - gap * 1.5) / 2.5, 240, 430);
+    }
+
     function ensureFeaturedLoopStructure(track) {
       if (!track) return;
 
@@ -830,29 +842,34 @@ redirect_from:
       clones.forEach((clone) => clone.remove());
       markFeaturedOriginalOrder();
 
-      if (!isMobileHomeLayout()) {
+      if (!isFeaturedLoopLayout()) {
         restoreFeaturedOriginalOrder(track);
-        track.classList.remove('is-featured-mobile-loop');
+        track.classList.remove('is-featured-loop');
         return;
       }
 
-      track.classList.add('is-featured-mobile-loop');
+      track.classList.add('is-featured-loop');
     }
 
     function syncFeaturedItemWidths() {
       const originals = getFeaturedItems({ originalsOnly: true });
       if (!originals.length) return;
+      const track = document.getElementById('featured-track');
+      const viewport = document.getElementById('featured-viewport');
 
-      if (!isMobileHomeLayout()) {
+      if (!isFeaturedLoopLayout()) {
         originals.forEach((item) => {
-          item.style.removeProperty('--featured-item-mobile-width');
+          item.style.removeProperty('--featured-item-width');
         });
         return;
       }
 
-      const widths = originals.map((item) => `${getFeaturedMobileItemWidth(item).toFixed(2)}px`);
+      const widths = isMobileHomeLayout()
+        ? originals.map((item) => `${getFeaturedMobileItemWidth(item).toFixed(2)}px`)
+        : originals.map(() => `${getFeaturedDesktopItemWidth(viewport, track).toFixed(2)}px`);
+
       originals.forEach((item, index) => {
-        item.style.setProperty('--featured-item-mobile-width', widths[index]);
+        item.style.setProperty('--featured-item-width', widths[index]);
       });
     }
 
@@ -899,7 +916,7 @@ redirect_from:
     function normalizeFeaturedLoop(viewport, directionHint = 0) {
       if (!viewport) return;
 
-      if (!isMobileHomeLayout() || featuredState.isReordering) {
+      if (!isFeaturedLoopLayout() || featuredState.isReordering) {
         featuredState.lastViewportScrollLeft = viewport.scrollLeft;
         return;
       }
@@ -939,7 +956,7 @@ redirect_from:
     function startFeaturedAutoScroll() {
       const viewport = document.getElementById('featured-viewport');
       clearFeaturedAutoScroll();
-      if (!viewport || !isMobileHomeLayout() || prefersReducedMotion) return;
+      if (!viewport || !isFeaturedLoopLayout() || prefersReducedMotion) return;
 
       featuredState.lastViewportScrollLeft = viewport.scrollLeft;
       featuredState.autoScrollTimerId = window.setInterval(() => {
@@ -955,20 +972,94 @@ redirect_from:
       if (!viewport || viewport.dataset.featuredAutoscrollBound === 'true') return;
       viewport.dataset.featuredAutoscrollBound = 'true';
 
-      ['touchstart', 'pointerdown', 'mousedown', 'wheel'].forEach((eventName) => {
+      ['touchstart', 'wheel'].forEach((eventName) => {
         viewport.addEventListener(eventName, () => {
           pauseFeaturedAutoScroll(3200);
         }, { passive: true });
       });
 
-      ['touchend', 'touchcancel', 'pointerup', 'pointercancel', 'mouseup'].forEach((eventName) => {
+      ['touchend', 'touchcancel'].forEach((eventName) => {
         viewport.addEventListener(eventName, () => {
           pauseFeaturedAutoScroll(2600);
         }, { passive: true });
       });
 
+      viewport.addEventListener('pointerdown', (event) => {
+        if (event.pointerType === 'touch' || event.button !== 0) {
+          pauseFeaturedAutoScroll(3200);
+          return;
+        }
+
+        featuredState.dragPointerId = event.pointerId;
+        featuredState.dragLastClientX = event.clientX;
+        featuredState.dragMoved = false;
+        featuredState.suppressClick = false;
+        viewport.classList.add('is-dragging');
+        pauseFeaturedAutoScroll(3200);
+        if (typeof viewport.setPointerCapture === 'function') {
+          try {
+            viewport.setPointerCapture(event.pointerId);
+          } catch (error) {
+            // Ignore pointer-capture failures on browsers that reject it for scrollers.
+          }
+        }
+        event.preventDefault();
+      });
+
+      viewport.addEventListener('pointermove', (event) => {
+        if (event.pointerId !== featuredState.dragPointerId) return;
+
+        const deltaX = event.clientX - featuredState.dragLastClientX;
+        if (Math.abs(deltaX) < 0.5) return;
+
+        featuredState.dragLastClientX = event.clientX;
+        featuredState.dragMoved = true;
+        featuredState.suppressClick = true;
+        viewport.scrollLeft -= deltaX;
+        event.preventDefault();
+      });
+
+      const finishFeaturedPointerDrag = (pointerId = null) => {
+        if (featuredState.dragPointerId === null) return;
+        if (pointerId !== null && pointerId !== featuredState.dragPointerId) return;
+
+        const activePointerId = featuredState.dragPointerId;
+        const shouldSuppressClick = featuredState.dragMoved;
+        featuredState.dragPointerId = null;
+        featuredState.dragLastClientX = 0;
+        viewport.classList.remove('is-dragging');
+        if (typeof viewport.releasePointerCapture === 'function') {
+          try {
+            viewport.releasePointerCapture(activePointerId);
+          } catch (error) {
+            // Ignore pointer-capture release failures.
+          }
+        }
+        pauseFeaturedAutoScroll(featuredState.dragMoved ? 3000 : 2600);
+        window.setTimeout(() => {
+          featuredState.suppressClick = false;
+        }, shouldSuppressClick ? 240 : 0);
+      };
+
+      ['pointerup', 'pointercancel', 'lostpointercapture'].forEach((eventName) => {
+        viewport.addEventListener(eventName, (event) => {
+          finishFeaturedPointerDrag(typeof event.pointerId === 'number' ? event.pointerId : null);
+        });
+      });
+
+      viewport.addEventListener('dragstart', (event) => {
+        event.preventDefault();
+      });
+
+      viewport.addEventListener('click', (event) => {
+        if (!featuredState.suppressClick) return;
+        featuredState.suppressClick = false;
+        event.preventDefault();
+        event.stopPropagation();
+      }, true);
+
       viewport.addEventListener('scroll', () => {
-        if (!isMobileHomeLayout() || featuredState.isReordering) {
+        if (!isFeaturedLoopLayout() || featuredState.isReordering) {
           featuredState.lastViewportScrollLeft = viewport.scrollLeft;
           return;
         }
@@ -993,7 +1084,7 @@ redirect_from:
       const viewport = document.getElementById('featured-viewport');
       const items = getFeaturedItems({ originalsOnly: true });
       if (!viewport || !items.length) return;
-      if (isMobileHomeLayout()) {
+      if (isFeaturedLoopLayout()) {
         updateFeaturedButtons();
         return;
       }
@@ -1025,7 +1116,7 @@ redirect_from:
       );
       track.style.setProperty('--featured-visible', String(featuredState.visibleCount));
 
-      if (isMobileHomeLayout()) {
+      if (isFeaturedLoopLayout()) {
         bindFeaturedViewportInteractions(viewport);
         featuredState.lastViewportScrollLeft = viewport.scrollLeft;
         if (!prefersReducedMotion) {
