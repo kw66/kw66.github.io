@@ -434,7 +434,7 @@
     justify-content: center;
     width: 100%;
     min-width: 0;
-    min-height: 2.9rem;
+    min-height: 2.52rem;
     padding: 0.28rem 0.16rem 0.32rem;
     font-size: 0.72rem;
     border-color: #d8c8ae;
@@ -469,6 +469,7 @@
     width: 100%;
     min-height: 100%;
     margin: 0;
+    padding-bottom: 0.22rem;
 }
 
 .sidebar-tool-panel {
@@ -481,6 +482,7 @@
 }
 
 .slot-machine-fortune {
+    width: 100%;
     min-height: 1.15rem;
     margin: 0;
     display: flex;
@@ -609,17 +611,36 @@
     align-items: center;
     justify-content: center;
     backface-visibility: hidden;
+    border-radius: inherit;
+    overflow: hidden;
 }
 
 .linkup-face--front {
-    padding: 0.08rem;
+    padding: 0.22rem;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(247, 240, 229, 0.96) 100%),
+        linear-gradient(135deg, #fbf6eb 0%, #f1e4cc 100%);
     transform: rotateY(180deg);
+}
+
+.linkup-face--front::before {
+    content: "";
+    position: absolute;
+    inset: 0.14rem;
+    border: 2px solid #d9c296;
+    border-radius: 0.64rem;
+    background: linear-gradient(180deg, rgba(255, 252, 241, 0.18) 0%, rgba(255, 252, 241, 0) 100%);
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.92),
+        inset 0 0 12px rgba(255, 241, 210, 0.3),
+        0 6px 12px rgba(121, 96, 59, 0.08);
+    pointer-events: none;
 }
 
 .linkup-face--back {
     background:
-        radial-gradient(circle at 50% 50%, rgba(244, 248, 252, 0.96) 0%, rgba(230, 239, 246, 0.96) 48%, rgba(220, 232, 241, 0.98) 100%),
-        linear-gradient(135deg, rgba(255, 255, 255, 0.84) 0%, rgba(232, 240, 247, 0.92) 100%);
+        radial-gradient(circle at 50% 50%, rgba(255, 251, 244, 0.98) 0%, rgba(248, 240, 223, 0.98) 46%, rgba(238, 224, 192, 0.98) 100%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.86) 0%, rgba(244, 235, 217, 0.94) 100%);
 }
 
 .linkup-face--back::before,
@@ -632,18 +653,20 @@
 }
 
 .linkup-face--back::before {
-    border: 2px solid rgba(160, 187, 208, 0.58);
+    border: 2px solid rgba(214, 189, 139, 0.62);
 }
 
 .linkup-face--back::after {
     inset: 31%;
-    border: 2px dashed rgba(141, 174, 199, 0.54);
+    border: 2px dashed rgba(198, 167, 106, 0.5);
 }
 
 .linkup-cell img {
     display: block;
-    width: 92%;
-    height: 92%;
+    position: relative;
+    z-index: 1;
+    width: 88%;
+    height: 88%;
     object-fit: contain;
     filter: drop-shadow(0 6px 10px rgba(83, 101, 53, 0.14));
     pointer-events: none;
@@ -930,7 +953,7 @@
 .slot-machine-lever {
     position: relative;
     width: 100%;
-    height: 4rem;
+    height: 4.72rem;
     border: 1px solid #dacdb8;
     border-radius: 0.84rem;
     background:
@@ -1523,7 +1546,7 @@ body[data-home-view='home'][data-home-tool='home'] .mascot-linkup-panel {
         width: 100%;
         min-height: var(--sidebar-tool-control-height);
         margin: 0;
-        padding: 0;
+        padding: 0 0 0.28rem;
         border: 0;
         border-radius: 0;
         background: none;
