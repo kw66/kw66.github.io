@@ -1405,7 +1405,7 @@ body[data-home-view='home'][data-home-tool='home'] .mascot-linkup-panel {
 
 @include breakpoint($large) {
     .sidebar-home-tools {
-        --sidebar-tool-stage-height: 23.15rem;
+        --sidebar-tool-stage-height: 25.6rem;
         --sidebar-tool-control-height: 4.5rem;
         --sidebar-tool-button-width: 3.02rem;
         --sidebar-tool-shell-gap: 0.56rem;
@@ -1482,6 +1482,10 @@ body[data-home-view='home'][data-home-tool='home'] .mascot-linkup-panel {
         height: var(--sidebar-tool-stage-height);
         gap: var(--sidebar-tool-shell-gap);
         padding: 0.82rem 0.72rem 0.82rem;
+    }
+
+    .slot-machine-display .sidebar-tool-inline-actions {
+        margin-top: auto;
     }
 
     .slot-machine-reel,
