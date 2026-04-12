@@ -26,3 +26,8 @@ Original prompt: Implement option 3 with a simple 6x4 mascot linkup game.
 - Tightened the mobile shell width by shifting more width back to the profile column, while keeping slot and linkup shell heights equal.
 - Adjusted large-screen desktop shells so slot and linkup now share the same fixed outer height; the slot control strip is anchored to the bottom with extra top spacing instead of relying on a near-threshold auto height.
 - Verification in Playwright against the live site with injected CSS: desktop slot/linkup shell heights matched exactly (`329.21px` each, no overflow), and mobile linkup shuffle/front pseudo-frame display was `none` with shell size `204.38px x 201.30px`.
+
+- Reworked the mobile featured-project carousel logic to stop cloning cards for looping. The new logic keeps a constant item count and rotates the real DOM items as a circular queue while the viewport scrolls.
+- The mobile featured carousel now keeps autoplay alive after manual dragging: interaction only pauses autoplay temporarily, and the queue resumes by itself after the pause window.
+- Tightened vertical spacing around the mobile mascot strip and the project/paper boundary, increased the mobile project gap slightly, and made the paper-filter right arrow larger and more visible.
+- Verification: `_pages/about.md` inline script still parses successfully; a Playwright minimal carousel repro confirmed manual forward drag keeps the count at `3` and autoplay resumes afterwards; live-page CSS injection confirmed the mobile project gap is now non-zero (`4.2px` after fixed-scale transform), the paper-filter arrow is larger, and the mascot strip / filter spacing reductions took effect.

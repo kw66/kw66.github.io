@@ -188,7 +188,8 @@ redirect_from:
       visibleCount: 1,
       autoScrollTimerId: 0,
       autoScrollPauseUntil: 0,
-      autoScrollLoopWidth: 0
+      lastViewportScrollLeft: 0,
+      isReordering: false
     };
     const slotState = {
       spinning: false,
@@ -779,12 +780,30 @@ redirect_from:
       });
     }
 
+    function markFeaturedOriginalOrder() {
+      getFeaturedItems({ originalsOnly: true }).forEach((item, index) => {
+        if (!item.dataset.featuredOrder) {
+          item.dataset.featuredOrder = String(index);
+        }
+      });
+    }
+
+    function restoreFeaturedOriginalOrder(track) {
+      if (!track) return;
+      const ordered = getFeaturedItems({ originalsOnly: true }).sort((left, right) => {
+        return Number(left.dataset.featuredOrder || 0) - Number(right.dataset.featuredOrder || 0);
+      });
+      ordered.forEach((item) => {
+        track.appendChild(item);
+      });
+    }
+
     function clearFeaturedAutoScroll() {
       if (featuredState.autoScrollTimerId) {
         window.clearInterval(featuredState.autoScrollTimerId);
         featuredState.autoScrollTimerId = 0;
       }
-      featuredState.autoScrollLoopWidth = 0;
+      featuredState.lastViewportScrollLeft = 0;
     }
 
     function pauseFeaturedAutoScroll(duration = 2400) {
@@ -808,50 +827,113 @@ redirect_from:
       if (!track) return;
 
       const clones = Array.from(track.querySelectorAll('[data-featured-clone=\"true\"]'));
+      clones.forEach((clone) => clone.remove());
+      markFeaturedOriginalOrder();
+
       if (!isMobileHomeLayout()) {
-        clones.forEach((clone) => clone.remove());
+        restoreFeaturedOriginalOrder(track);
         track.classList.remove('is-featured-mobile-loop');
         return;
-      }
-
-      if (!clones.length) {
-        getFeaturedItems({ originalsOnly: true }).forEach((item) => {
-          const clone = item.cloneNode(true);
-          clone.dataset.featuredClone = 'true';
-          track.appendChild(clone);
-        });
       }
 
       track.classList.add('is-featured-mobile-loop');
     }
 
     function syncFeaturedItemWidths() {
-      const allItems = getFeaturedItems();
-      if (!allItems.length) return;
+      const originals = getFeaturedItems({ originalsOnly: true });
+      if (!originals.length) return;
 
       if (!isMobileHomeLayout()) {
-        allItems.forEach((item) => {
+        originals.forEach((item) => {
           item.style.removeProperty('--featured-item-mobile-width');
         });
         return;
       }
 
-      const originals = getFeaturedItems({ originalsOnly: true });
       const widths = originals.map((item) => `${getFeaturedMobileItemWidth(item).toFixed(2)}px`);
       originals.forEach((item, index) => {
         item.style.setProperty('--featured-item-mobile-width', widths[index]);
       });
-
-      Array.from(document.querySelectorAll('[data-featured-clone=\"true\"]')).forEach((item, index) => {
-        item.style.setProperty('--featured-item-mobile-width', widths[index % widths.length]);
-      });
     }
 
-    function getFeaturedLoopWidth() {
+    function getFeaturedTrackGap(track) {
+      if (!track) return 0;
+      const styles = window.getComputedStyle(track);
+      const gapValue = parseFloat(styles.columnGap || styles.gap || '0');
+      return Number.isFinite(gapValue) ? gapValue : 0;
+    }
+
+    function getFeaturedItemStep(item, track) {
+      if (!item || !track) return 0;
+      return item.getBoundingClientRect().width + getFeaturedTrackGap(track);
+    }
+
+    function rotateFeaturedLoopForward(viewport) {
+      const track = document.getElementById('featured-track');
+      const items = getFeaturedItems({ originalsOnly: true });
+      if (!viewport || !track || items.length < 2) return 0;
+
+      const first = items[0];
+      const step = getFeaturedItemStep(first, track);
+      if (step <= 0) return 0;
+
+      track.appendChild(first);
+      viewport.scrollLeft = Math.max(viewport.scrollLeft - step, 0);
+      return step;
+    }
+
+    function rotateFeaturedLoopBackward(viewport) {
+      const track = document.getElementById('featured-track');
+      const items = getFeaturedItems({ originalsOnly: true });
+      if (!viewport || !track || items.length < 2) return 0;
+
+      const last = items[items.length - 1];
+      const step = getFeaturedItemStep(last, track);
+      if (step <= 0) return 0;
+
+      track.insertBefore(last, items[0]);
+      viewport.scrollLeft += step;
+      return step;
+    }
+
+    function normalizeFeaturedLoop(viewport, directionHint = 0) {
+      if (!viewport) return;
+
+      if (!isMobileHomeLayout() || featuredState.isReordering) {
+        featuredState.lastViewportScrollLeft = viewport.scrollLeft;
+        return;
+      }
+
+      const track = document.getElementById('featured-track');
       const originals = getFeaturedItems({ originalsOnly: true });
-      const clones = Array.from(document.querySelectorAll('[data-featured-clone=\"true\"]'));
-      if (!originals.length || !clones.length) return 0;
-      return clones[0].offsetLeft - originals[0].offsetLeft;
+      if (!track || originals.length < 2) {
+        featuredState.lastViewportScrollLeft = viewport.scrollLeft;
+        return;
+      }
+
+      featuredState.isReordering = true;
+      try {
+        let safety = originals.length + 2;
+
+        while (directionHint > 0 && safety > 0) {
+          const currentItems = getFeaturedItems({ originalsOnly: true });
+          const step = getFeaturedItemStep(currentItems[0], track);
+          if (step <= 0 || viewport.scrollLeft < step - 0.5) break;
+          rotateFeaturedLoopForward(viewport);
+          safety -= 1;
+        }
+
+        while (directionHint < 0 && safety > 0) {
+          if (viewport.scrollLeft > 0.5) break;
+          const moved = rotateFeaturedLoopBackward(viewport);
+          if (moved <= 0) break;
+          safety -= 1;
+        }
+      } finally {
+        featuredState.isReordering = false;
+      }
+
+      featuredState.lastViewportScrollLeft = viewport.scrollLeft;
     }
 
     function startFeaturedAutoScroll() {
@@ -859,21 +941,14 @@ redirect_from:
       clearFeaturedAutoScroll();
       if (!viewport || !isMobileHomeLayout() || prefersReducedMotion) return;
 
-      if (!featuredState.autoScrollLoopWidth) {
-        featuredState.autoScrollLoopWidth = getFeaturedLoopWidth();
-      }
-
-      if (featuredState.autoScrollLoopWidth <= 0) return;
-
+      featuredState.lastViewportScrollLeft = viewport.scrollLeft;
       featuredState.autoScrollTimerId = window.setInterval(() => {
-        if (document.hidden || featuredState.autoScrollLoopWidth <= 0) return;
+        if (document.hidden) return;
         if ((window.performance?.now?.() || 0) < featuredState.autoScrollPauseUntil) return;
 
         viewport.scrollLeft += 1;
-        if (viewport.scrollLeft >= featuredState.autoScrollLoopWidth) {
-          viewport.scrollLeft -= featuredState.autoScrollLoopWidth;
-        }
-      }, 80);
+        normalizeFeaturedLoop(viewport, 1);
+      }, 48);
     }
 
     function bindFeaturedViewportInteractions(viewport) {
@@ -891,6 +966,17 @@ redirect_from:
           pauseFeaturedAutoScroll(2600);
         }, { passive: true });
       });
+
+      viewport.addEventListener('scroll', () => {
+        if (!isMobileHomeLayout() || featuredState.isReordering) {
+          featuredState.lastViewportScrollLeft = viewport.scrollLeft;
+          return;
+        }
+
+        const delta = viewport.scrollLeft - featuredState.lastViewportScrollLeft;
+        if (Math.abs(delta) < 0.25) return;
+        normalizeFeaturedLoop(viewport, delta > 0 ? 1 : -1);
+      }, { passive: true });
     }
 
     function updateFeaturedButtons() {
@@ -941,18 +1027,18 @@ redirect_from:
 
       if (isMobileHomeLayout()) {
         bindFeaturedViewportInteractions(viewport);
-        featuredState.autoScrollLoopWidth = getFeaturedLoopWidth();
-        if (viewport.scrollLeft >= featuredState.autoScrollLoopWidth && featuredState.autoScrollLoopWidth > 0) {
-          viewport.scrollLeft -= featuredState.autoScrollLoopWidth;
-        }
+        featuredState.lastViewportScrollLeft = viewport.scrollLeft;
         if (!prefersReducedMotion) {
           pauseFeaturedAutoScroll(1400);
           startFeaturedAutoScroll();
+        } else {
+          clearFeaturedAutoScroll();
         }
         updateFeaturedButtons();
         return;
       }
 
+      featuredState.lastViewportScrollLeft = 0;
       viewport.scrollLeft = 0;
       clearFeaturedAutoScroll();
       scrollFeatured(behavior);
