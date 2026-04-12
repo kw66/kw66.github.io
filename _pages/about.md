@@ -234,9 +234,11 @@ redirect_from:
       faceUpIndices: [],
       solved: false,
       busy: false,
+      shuffling: false,
       hideTimerId: 0,
       matchTimerId: 0,
-      restartLeverTimerId: 0
+      restartLeverTimerId: 0,
+      shuffleTimerIds: []
     };
 
     function clamp(value, min, max) {
@@ -931,6 +933,45 @@ redirect_from:
       return deck;
     }
 
+    function getLinkupShuffleMetrics(cell) {
+      const cellWidth = Math.max(cell.clientWidth, 56);
+      const gap = clamp(cellWidth * 0.08, 4, 8);
+      const itemWidth = Math.min(cellWidth * 0.9, cellWidth - gap * 2 - 4);
+      const pitch = itemWidth + gap;
+      const centerOffset = (cellWidth - itemWidth) / 2;
+      return {
+        itemWidth,
+        gap,
+        pitch,
+        centerOffset
+      };
+    }
+
+    function getLinkupShuffleTranslate(metrics, targetIndex) {
+      return metrics.centerOffset - targetIndex * metrics.pitch;
+    }
+
+    function createLinkupShuffleItem(src) {
+      const item = document.createElement('span');
+      item.className = 'linkup-shuffle-item';
+      const image = document.createElement('img');
+      image.alt = '';
+      image.decoding = 'async';
+      image.loading = 'eager';
+      image.src = src;
+      item.appendChild(image);
+      return item;
+    }
+
+    function renderLinkupShuffleTrack(track, sources) {
+      const fragment = document.createDocumentFragment();
+      track.innerHTML = '';
+      sources.forEach((src) => {
+        fragment.appendChild(createLinkupShuffleItem(src));
+      });
+      track.appendChild(fragment);
+    }
+
     function clearLinkupTimers() {
       if (linkupState.hideTimerId) {
         window.clearTimeout(linkupState.hideTimerId);
@@ -943,6 +984,12 @@ redirect_from:
       if (linkupState.restartLeverTimerId) {
         window.clearTimeout(linkupState.restartLeverTimerId);
         linkupState.restartLeverTimerId = 0;
+      }
+      if (linkupState.shuffleTimerIds.length) {
+        linkupState.shuffleTimerIds.forEach((timerId) => {
+          window.clearTimeout(timerId);
+        });
+        linkupState.shuffleTimerIds = [];
       }
     }
 
@@ -978,6 +1025,7 @@ redirect_from:
         cell.className = 'linkup-cell';
         cell.setAttribute('role', 'gridcell');
         cell.dataset.linkupIndex = String(index);
+        cell.dataset.linkupSource = src;
 
         const isMatched = linkupState.matchedIndices.includes(index);
         const isFaceUp = isMatched || linkupState.faceUpIndices.includes(index);
@@ -999,6 +1047,107 @@ redirect_from:
 
       boardEl.innerHTML = '';
       boardEl.appendChild(fragment);
+    }
+
+    function applyLinkupDeck(nextDeck) {
+      const shell = document.getElementById('mascot-linkup-shell');
+      linkupState.board = nextDeck.slice();
+      linkupState.matchedIndices = [];
+      linkupState.faceUpIndices = [];
+      linkupState.solved = false;
+      linkupState.busy = false;
+      linkupState.shuffling = false;
+      if (shell) {
+        shell.classList.remove('is-solved', 'is-shuffling');
+      }
+      renderLinkupBoard();
+    }
+
+    function animateLinkupShuffle(nextDeck) {
+      const shell = document.getElementById('mascot-linkup-shell');
+      const boardEl = document.getElementById('linkup-board');
+      const cells = boardEl ? Array.from(boardEl.querySelectorAll('.linkup-cell')) : [];
+
+      if (!shell || !boardEl || cells.length !== nextDeck.length || !cells.length) {
+        applyLinkupDeck(nextDeck);
+        return;
+      }
+
+      linkupState.faceUpIndices = [];
+      linkupState.matchedIndices = [];
+      linkupState.solved = false;
+      linkupState.busy = true;
+      linkupState.shuffling = true;
+      shell.classList.remove('is-solved');
+      shell.classList.add('is-shuffling');
+      spinAuthorAvatar();
+
+      let settledCount = 0;
+      cells.forEach((cell, index) => {
+        cell.classList.remove('is-faceup', 'is-selected', 'is-matched', 'is-cleared');
+        cell.classList.add('is-shuffling');
+
+        const layer = document.createElement('span');
+        layer.className = 'linkup-shuffle-layer';
+        const track = document.createElement('span');
+        track.className = 'linkup-shuffle-track';
+        layer.appendChild(track);
+        cell.appendChild(layer);
+
+        const metrics = getLinkupShuffleMetrics(cell);
+        layer.style.setProperty('--linkup-shuffle-item-width', `${metrics.itemWidth}px`);
+        layer.style.setProperty('--linkup-shuffle-gap', `${metrics.gap}px`);
+
+        const sequenceLength = prefersReducedMotion ? 6 + (index % 3) : 15 + (index % 3) * 3 + Math.floor(index / 3) * 2;
+        const sequence = [];
+        for (let pointer = 0; pointer < sequenceLength; pointer += 1) {
+          sequence.push(randomFrom(mascotSources));
+        }
+
+        const target = nextDeck[index];
+        const finalSideSources = [randomFrom(mascotSources), randomFrom(mascotSources)];
+        sequence.push(finalSideSources[0], target, finalSideSources[1]);
+        renderLinkupShuffleTrack(track, sequence);
+
+        track.style.transition = 'none';
+        track.style.transform = `translate3d(${getLinkupShuffleTranslate(metrics, 1)}px, 0, 0)`;
+        track.offsetWidth;
+
+        const duration = prefersReducedMotion ? 150 : 760 + (index % 3) * 110 + Math.floor(index / 3) * 85;
+        const targetIndex = sequence.length - 2;
+        window.requestAnimationFrame(() => {
+          track.style.transition = `transform ${duration}ms cubic-bezier(0.08, 0.86, 0.18, 1)`;
+          track.style.transform = `translate3d(${getLinkupShuffleTranslate(metrics, targetIndex)}px, 0, 0)`;
+        });
+
+        let settled = false;
+        const settle = () => {
+          if (settled) return;
+          settled = true;
+          track.removeEventListener('transitionend', handleSettle);
+          if (layer.parentNode === cell) {
+            cell.removeChild(layer);
+          }
+          cell.classList.remove('is-shuffling');
+          settledCount += 1;
+          if (settledCount === cells.length) {
+            linkupState.shuffleTimerIds.forEach((timerId) => {
+              window.clearTimeout(timerId);
+            });
+            linkupState.shuffleTimerIds = [];
+            applyLinkupDeck(nextDeck);
+          }
+        };
+
+        const handleSettle = (event) => {
+          if (event.target !== track) return;
+          settle();
+        };
+
+        track.addEventListener('transitionend', handleSettle);
+        const fallbackTimer = window.setTimeout(settle, duration + 180);
+        linkupState.shuffleTimerIds.push(fallbackTimer);
+      });
     }
 
     function finishLinkupGame() {
@@ -1029,7 +1178,7 @@ redirect_from:
     }
 
     function handleLinkupCellClick(index) {
-      if (linkupState.solved || linkupState.busy || linkupState.matchedIndices.includes(index)) return;
+      if (linkupState.solved || linkupState.busy || linkupState.shuffling || linkupState.matchedIndices.includes(index)) return;
       if (linkupState.faceUpIndices.includes(index)) return;
 
       linkupState.faceUpIndices = linkupState.faceUpIndices.concat(index);
@@ -1055,18 +1204,14 @@ redirect_from:
       }, prefersReducedMotion ? 120 : 680);
     }
 
-    function resetLinkupGame() {
-      const shell = document.getElementById('mascot-linkup-shell');
+    function resetLinkupGame(options = {}) {
+      const nextDeck = buildLinkupDeck();
       clearLinkupTimers();
-      linkupState.board = buildLinkupDeck();
-      linkupState.matchedIndices = [];
-      linkupState.faceUpIndices = [];
-      linkupState.solved = false;
-      linkupState.busy = false;
-      if (shell) {
-        shell.classList.remove('is-solved');
+      if (options.animate) {
+        animateLinkupShuffle(nextDeck);
+        return;
       }
-      renderLinkupBoard();
+      applyLinkupDeck(nextDeck);
     }
 
     function initLinkupGame() {
@@ -1075,8 +1220,9 @@ redirect_from:
       if (!boardEl || !restartButton) return;
 
       restartButton.addEventListener('click', () => {
+        if (linkupState.shuffling) return;
         restartButton.classList.add('is-pulled');
-        resetLinkupGame();
+        resetLinkupGame({ animate: true });
         if (linkupState.restartLeverTimerId) {
           window.clearTimeout(linkupState.restartLeverTimerId);
         }
