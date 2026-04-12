@@ -829,10 +829,17 @@ redirect_from:
       return clamp(targetWidth, getViewportWidth() * 0.34, getViewportWidth() * 0.58);
     }
 
-    function getFeaturedDesktopItemWidth(viewport, track) {
-      const viewportWidth = viewport?.clientWidth || getViewportWidth();
-      const gap = getFeaturedTrackGap(track);
-      return clamp((viewportWidth - gap * 1.5) / 2.5, 240, 430);
+    function getFeaturedDesktopImageHeight() {
+      return clamp(getViewportWidth() * 0.15, 132, 174);
+    }
+
+    function getFeaturedDesktopItemWidth(item) {
+      const image = item.querySelector('.featured-item-image img');
+      const naturalWidth = image?.naturalWidth || image?.width || 160;
+      const naturalHeight = image?.naturalHeight || image?.height || 100;
+      const aspectRatio = naturalWidth / Math.max(naturalHeight, 1);
+      const targetWidth = getFeaturedDesktopImageHeight() * aspectRatio;
+      return clamp(targetWidth, 240, 352);
     }
 
     function ensureFeaturedLoopStructure(track) {
@@ -854,8 +861,6 @@ redirect_from:
     function syncFeaturedItemWidths() {
       const originals = getFeaturedItems({ originalsOnly: true });
       if (!originals.length) return;
-      const track = document.getElementById('featured-track');
-      const viewport = document.getElementById('featured-viewport');
 
       if (!isFeaturedLoopLayout()) {
         originals.forEach((item) => {
@@ -866,7 +871,7 @@ redirect_from:
 
       const widths = isMobileHomeLayout()
         ? originals.map((item) => `${getFeaturedMobileItemWidth(item).toFixed(2)}px`)
-        : originals.map(() => `${getFeaturedDesktopItemWidth(viewport, track).toFixed(2)}px`);
+        : originals.map((item) => `${getFeaturedDesktopItemWidth(item).toFixed(2)}px`);
 
       originals.forEach((item, index) => {
         item.style.setProperty('--featured-item-width', widths[index]);
