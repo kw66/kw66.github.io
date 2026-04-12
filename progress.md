@@ -20,3 +20,9 @@ Original prompt: Implement option 3 with a simple 6x4 mascot linkup game.
 - Restored the desktop linkup rendering path to the last known working implementation from `d3713e0`: card faces and shuffle track are back to direct `<img>` rendering instead of the later background-window wrappers.
 - Kept only the user-confirmed non-breaking tweaks on top of that restore, specifically the yellow selected-state highlight and the tighter board gap.
 - Verified SCSS compilation with `npx sass`; local Jekyll preview is blocked on this machine because Ruby/Bundler are not installed, so final verification must be done against the deployed GitHub Pages build.
+
+- Adjusted the mobile home game panel again: widened the left control column, narrowed the right core area, increased shell side padding, increased slot lever size, and increased the vertical spacing between the three slot rows.
+- Removed the mobile-only yellow inner frame from both face-up linkup cards and shuffle animation cells; mobile linkup art now fills the outer card window directly with `object-fit: cover`.
+- Tightened the mobile shell width by shifting more width back to the profile column, while keeping slot and linkup shell heights equal.
+- Adjusted large-screen desktop shells so slot and linkup now share the same fixed outer height; the slot control strip is anchored to the bottom with extra top spacing instead of relying on a near-threshold auto height.
+- Verification in Playwright against the live site with injected CSS: desktop slot/linkup shell heights matched exactly (`329.21px` each, no overflow), and mobile linkup shuffle/front pseudo-frame display was `none` with shell size `204.38px x 201.30px`.
