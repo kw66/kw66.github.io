@@ -59,8 +59,6 @@ redirect_from:
   </div>
   <button class='featured-nav featured-nav--next' type='button' data-featured-nav='next' aria-label='Next featured work'>&gt;</button>
 </section>
-<p class='mobile-scroll-hint mobile-scroll-hint--featured'>&#8592; &#24038;&#21491;&#28369;&#21160;&#26597;&#30475;&#26356;&#22810;&#39033;&#30446;&#12289;&#26631;&#31614; &#8594;</p>
-
 <div class='paper-filter-toolbar'>
   <div class='paper-filter-row' id='paper-filter-row' role='group' aria-label='Filter papers by tags'>
     <button class='paper-filter-chip' type='button' data-filter-tag='all' aria-pressed='false'>All</button>
@@ -767,7 +765,7 @@ redirect_from:
     }
 
     function getFeaturedVisibleCount() {
-      return isMobileHomeLayout() ? 1.18 : 3;
+      return isMobileHomeLayout() ? 1.42 : 3;
     }
 
     function updateFeaturedButtons() {
