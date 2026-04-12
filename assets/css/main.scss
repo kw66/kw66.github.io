@@ -627,6 +627,7 @@
     content: "";
     position: absolute;
     inset: 0.14rem;
+    z-index: 2;
     border: 2px solid #d9c296;
     border-radius: 0.64rem;
     background: linear-gradient(180deg, rgba(255, 252, 241, 0.18) 0%, rgba(255, 252, 241, 0) 100%);
