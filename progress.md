@@ -34,3 +34,8 @@ Original prompt: Implement option 3 with a simple 6x4 mascot linkup game.
 
 - Increased the desktop-only game shell stage height again because the slot/linkup bottom control row was sitting too close to the shell edge. The large-breakpoint shell height token moved from `22.72rem` to `23.12rem`.
 - Verification in Playwright against the live site with injected CSS: both desktop shells remained equal in height (`335.01px` each) and the bottom inset under the control row increased to about `6.17px`.
+
+- Tightened the mobile game panel again: the control column is wider, the control-to-core gap is smaller, the mobile shell height is reduced, and the slot/linkup inline button font is slightly smaller.
+- Increased the mobile featured-project gap again so adjacent project cards no longer read as touching.
+- Compacting the mobile shell also required a slightly tighter mobile linkup grid gap so the linkup shell does not grow taller than the slot shell.
+- Verification in Playwright against the live site with injected CSS using the chosen candidate: mobile featured gap reached about `6.30px`; mobile control width increased to about `39.30px`; control-to-core gap dropped to about `30.59px`; slot shell height dropped to about `195.59px`; linkup shell height stayed near `195.73px`; inline button font reduced to about `13.8px`.
