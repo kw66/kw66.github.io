@@ -576,6 +576,9 @@
 }
 
 .linkup-cell {
+    --linkup-window-radius: 0.72rem;
+    --linkup-art-scale: 1.08;
+    --linkup-frame-cover-width: 5px;
     position: relative;
     perspective: 900px;
     display: flex;
@@ -624,6 +627,14 @@
     isolation: isolate;
 }
 
+.linkup-face-window {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    overflow: hidden;
+}
+
 .linkup-face-frame {
     position: absolute;
     inset: 0;
@@ -634,7 +645,7 @@
     background: linear-gradient(180deg, rgba(255, 252, 241, 0.18) 0%, rgba(255, 252, 241, 0) 100%);
     box-shadow:
         inset 0 0 0 1px rgba(255, 255, 255, 0.92),
-        inset 0 0 0 4px rgba(251, 245, 231, 0.5),
+        inset 0 0 0 var(--linkup-frame-cover-width) rgba(250, 242, 226, 0.96),
         inset 0 0 12px rgba(255, 241, 210, 0.3),
         0 6px 12px rgba(121, 96, 59, 0.08);
     pointer-events: none;
@@ -664,14 +675,14 @@
     border: 2px dashed rgba(198, 167, 106, 0.5);
 }
 
-.linkup-cell img {
+.linkup-face-window img,
+.linkup-shuffle-art-window img {
     display: block;
-    position: relative;
-    z-index: 1;
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    clip-path: inset(4px round 0.6rem);
+    object-fit: cover;
+    transform: scale(var(--linkup-art-scale));
+    transform-origin: center;
     filter: none;
     pointer-events: none;
 }
@@ -735,12 +746,12 @@
     position: absolute;
     inset: 0;
     border: 2px solid #d9c296;
-    border-radius: 0.72rem;
+    border-radius: var(--linkup-window-radius);
     box-sizing: border-box;
     background: linear-gradient(180deg, rgba(255, 252, 241, 0.2) 0%, rgba(255, 252, 241, 0) 100%);
     box-shadow:
         inset 0 0 0 1px rgba(255, 255, 255, 0.92),
-        inset 0 0 0 4px rgba(251, 245, 231, 0.5),
+        inset 0 0 0 var(--linkup-frame-cover-width) rgba(250, 242, 226, 0.96),
         inset 0 0 12px rgba(255, 241, 210, 0.34),
         0 8px 16px rgba(121, 96, 59, 0.1);
     pointer-events: none;
@@ -772,6 +783,7 @@
 }
 
 .linkup-shuffle-item {
+    position: relative;
     flex: 0 0 var(--linkup-shuffle-item-width, 52px);
     width: var(--linkup-shuffle-item-width, 52px);
     height: 100%;
@@ -781,13 +793,11 @@
     padding: 0;
 }
 
-.linkup-shuffle-item img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    clip-path: inset(4px round 0.6rem);
-    filter: none;
+.linkup-shuffle-art-window {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--linkup-window-radius);
+    overflow: hidden;
 }
 
 .linkup-toolbar {
@@ -1613,7 +1623,8 @@ body[data-home-view='home'][data-home-tool='home'] .mascot-linkup-panel {
         gap: 0.54rem 0.46rem;
     }
 
-    .linkup-cell img {
+    .linkup-face-window img,
+    .linkup-shuffle-art-window img {
         width: 100%;
         height: 100%;
     }
