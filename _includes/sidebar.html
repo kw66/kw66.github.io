@@ -3,41 +3,51 @@
   {% if page.author_profile or layout.author_profile %}{% include author-profile.html %}{% endif %}
   {% if page.permalink == "/" or page.url == "/" %}
     <div class="sidebar-home-tools" id="sidebar-home-tools">
-      <div class="sidebar-tool-switcher" id="sidebar-tool-switcher" role="tablist" aria-label="Sidebar tool switch">
-        <button class="sidebar-tool-switch is-active" id="sidebar-tool-slot" type="button" data-home-tool="slot" aria-pressed="true">老虎机</button>
-        <button class="sidebar-tool-switch" id="sidebar-tool-linkup" type="button" data-home-tool="linkup" aria-pressed="false">连连看</button>
+      <div class="sidebar-home-tools-layout">
+        <section class="sidebar-tool-panel mascot-slot-panel" id="mascot-slot-panel">
+          <div class="slot-machine-fortune" id="slot-machine-fortune">&#20170;&#26085;&#31185;&#30740;&#36816;&#21183;&#65306;&#36866;&#21512;&#25720;&#40060;</div>
+          <div class="slot-machine-display" id="mascot-slot-machine">
+            <div class="slot-machine-reel" data-slot-reel>
+              <div class="slot-machine-track" data-slot-track></div>
+            </div>
+            <div class="slot-machine-reel" data-slot-reel>
+              <div class="slot-machine-track" data-slot-track></div>
+            </div>
+            <div class="slot-machine-reel" data-slot-reel>
+              <div class="slot-machine-track" data-slot-track></div>
+            </div>
+            <div class="sidebar-tool-inline-actions sidebar-tool-inline-actions--slot">
+              <button class="sidebar-tool-switch sidebar-tool-switch--inline is-active" id="sidebar-tool-slot" type="button" data-home-tool="slot" aria-pressed="true">&#32769;&#34382;&#26426;</button>
+              <button class="slot-machine-lever" id="slot-machine-lever" type="button" aria-label="Spin mascot slot machine">
+                <span class="slot-machine-lever-arm" aria-hidden="true">
+                  <span class="slot-machine-lever-stick"></span>
+                  <span class="slot-machine-lever-knob"></span>
+                </span>
+              </button>
+              <button class="sidebar-tool-switch sidebar-tool-switch--inline" id="sidebar-tool-linkup" type="button" data-home-tool="linkup" aria-pressed="false">&#36830;&#36830;&#30475;</button>
+            </div>
+          </div>
+        </section>
+        <section class="sidebar-tool-panel mascot-linkup-panel" id="mascot-linkup-panel">
+          <div class="slot-machine-fortune" id="linkup-fortune">&#20170;&#26085;&#31185;&#30740;&#36816;&#21183;&#65306;&#36866;&#21512;&#25720;&#40060;</div>
+          <div class="linkup-shell" id="mascot-linkup-shell">
+            <div class="linkup-board-wrap" id="linkup-board-wrap">
+              <svg class="linkup-lines" id="linkup-lines" aria-hidden="true"></svg>
+              <div class="linkup-board" id="linkup-board" role="grid" aria-label="Mascot linkup board"></div>
+            </div>
+            <div class="sidebar-tool-inline-actions sidebar-tool-inline-actions--linkup">
+              <button class="sidebar-tool-switch sidebar-tool-switch--inline" type="button" data-home-tool="slot" aria-pressed="false">&#32769;&#34382;&#26426;</button>
+              <button class="slot-machine-lever linkup-lever" id="linkup-restart" type="button" aria-label="Restart mascot linkup">
+                <span class="slot-machine-lever-arm" aria-hidden="true">
+                  <span class="slot-machine-lever-stick"></span>
+                  <span class="slot-machine-lever-knob"></span>
+                </span>
+              </button>
+              <button class="sidebar-tool-switch sidebar-tool-switch--inline is-active" type="button" data-home-tool="linkup" aria-pressed="true">&#36830;&#36830;&#30475;</button>
+            </div>
+          </div>
+        </section>
       </div>
-      <section class="sidebar-tool-panel mascot-slot-panel" id="mascot-slot-panel">
-        <div class="slot-machine-fortune" id="slot-machine-fortune">&#20170;&#26085;&#31185;&#30740;&#36816;&#21183;&#65306;&#36866;&#21512;&#25720;&#40060;</div>
-        <div class="slot-machine-display" id="mascot-slot-machine">
-          <div class="slot-machine-reel" data-slot-reel>
-            <div class="slot-machine-track" data-slot-track></div>
-          </div>
-          <div class="slot-machine-reel" data-slot-reel>
-            <div class="slot-machine-track" data-slot-track></div>
-          </div>
-          <div class="slot-machine-reel" data-slot-reel>
-            <div class="slot-machine-track" data-slot-track></div>
-          </div>
-          <button class="slot-machine-lever" id="slot-machine-lever" type="button" aria-label="Spin mascot slot machine">
-            <span class="slot-machine-lever-arm" aria-hidden="true">
-              <span class="slot-machine-lever-stick"></span>
-              <span class="slot-machine-lever-knob"></span>
-            </span>
-          </button>
-        </div>
-      </section>
-      <section class="sidebar-tool-panel mascot-linkup-panel" id="mascot-linkup-panel">
-        <div class="linkup-shell" id="mascot-linkup-shell">
-          <div class="linkup-board-wrap" id="linkup-board-wrap">
-            <svg class="linkup-lines" id="linkup-lines" aria-hidden="true"></svg>
-            <div class="linkup-board" id="linkup-board" role="grid" aria-label="Mascot linkup board"></div>
-          </div>
-          <div class="linkup-toolbar">
-            <button class="linkup-button" id="linkup-restart" type="button">&#37325;&#24320;</button>
-          </div>
-        </div>
-      </section>
     </div>
   {% endif %}
   {% if page.sidebar %}

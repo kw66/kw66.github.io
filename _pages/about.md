@@ -235,7 +235,8 @@ redirect_from:
       solved: false,
       busy: false,
       hideTimerId: 0,
-      matchTimerId: 0
+      matchTimerId: 0,
+      restartLeverTimerId: 0
     };
 
     function clamp(value, min, max) {
@@ -290,16 +291,16 @@ redirect_from:
     }
 
     function updateSlotFortune(sources) {
-      const fortuneEl = document.getElementById('slot-machine-fortune');
-      if (!fortuneEl) return;
-
       const resultSources = Array.isArray(sources)
         ? sources
         : Array.from(document.querySelectorAll('[data-slot-track]'))
           .map((track) => track.dataset.currentSource)
           .filter(Boolean);
 
-      fortuneEl.textContent = buildFortuneText(resultSources);
+      const fortuneText = buildFortuneText(resultSources);
+      document.querySelectorAll('#slot-machine-fortune, #linkup-fortune').forEach((element) => {
+        element.textContent = fortuneText;
+      });
     }
 
     function updateHomeViewMode() {
@@ -939,6 +940,10 @@ redirect_from:
         window.clearTimeout(linkupState.matchTimerId);
         linkupState.matchTimerId = 0;
       }
+      if (linkupState.restartLeverTimerId) {
+        window.clearTimeout(linkupState.restartLeverTimerId);
+        linkupState.restartLeverTimerId = 0;
+      }
     }
 
     function buildLinkupCard(src) {
@@ -1069,7 +1074,17 @@ redirect_from:
       const restartButton = document.getElementById('linkup-restart');
       if (!boardEl || !restartButton) return;
 
-      restartButton.addEventListener('click', resetLinkupGame);
+      restartButton.addEventListener('click', () => {
+        restartButton.classList.add('is-pulled');
+        resetLinkupGame();
+        if (linkupState.restartLeverTimerId) {
+          window.clearTimeout(linkupState.restartLeverTimerId);
+        }
+        linkupState.restartLeverTimerId = window.setTimeout(() => {
+          restartButton.classList.remove('is-pulled');
+          linkupState.restartLeverTimerId = 0;
+        }, prefersReducedMotion ? 40 : 220);
+      });
       resetLinkupGame();
     }
 
