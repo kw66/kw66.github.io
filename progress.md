@@ -39,3 +39,15 @@ Original prompt: Implement option 3 with a simple 6x4 mascot linkup game.
 - Increased the mobile featured-project gap again so adjacent project cards no longer read as touching.
 - Compacting the mobile shell also required a slightly tighter mobile linkup grid gap so the linkup shell does not grow taller than the slot shell.
 - Verification in Playwright against the live site with injected CSS using the chosen candidate: mobile featured gap reached about `6.30px`; mobile control width increased to about `39.30px`; control-to-core gap dropped to about `30.59px`; slot shell height dropped to about `195.59px`; linkup shell height stayed near `195.73px`; inline button font reduced to about `13.8px`.
+
+- Follow-up mobile game alignment pass: the real issue in the screenshot was that the slot reels and linkup board were still right-aligned inside the core column, leaving a wide blank seam between the control column and the game area.
+- Fixed by left-aligning the mobile reel/board wrapper inside column 2 and restoring only a tiny explicit column gap (`0.08rem`) instead of letting the core content float to the far right.
+- Verification in Playwright against the live site with injected CSS: mobile control-to-core gap dropped again from about `30.59px` to about `1.19px`, while shell height stayed around `195.6px`.
+
+- The next screenshot revealed the remaining problem: once the core area was left-aligned, the shell itself was still too wide, so the blank area simply moved to the shell's right side.
+- Fixed by narrowing the mobile game column at the sidebar layout level, changing the mobile sidebar split from `0.86fr / 1.14fr` to `0.98fr / 1.02fr` and trimming the inter-column gap slightly.
+- Verification in Playwright against the live site with injected CSS: the mobile shell width dropped from about `204.38px` to about `183.33px`, while the right inset next to the core area dropped to about `12.05px`.
+
+- Another alignment pass was needed after the narrower shell: the user wanted the three control blocks spaced farther apart, the control column bottom aligned with the linkup board bottom, and a slightly taller shell so the bottom edge did not feel cramped.
+- Fixed by raising the mobile shell stage height back up to `13.42rem`, increasing the mobile slot row height to `3.34rem`, increasing the reel-to-reel vertical gap to `0.44rem`, and raising the mobile control stack minimum height to `3 * row + 1.46rem`; the shell bottom padding also increased to `0.24rem`.
+- Verification in Playwright against the live site with injected CSS: mobile shell height became about `201.30px`; control bottom inset became about `8.92px`; linkup board bottom inset became about `9.25px`; and the control-vs-board bottom delta tightened to about `0.33px`.
