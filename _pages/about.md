@@ -1004,7 +1004,10 @@ redirect_from:
       image.decoding = 'async';
       image.loading = 'eager';
       image.src = src;
+      const frame = document.createElement('span');
+      frame.className = 'linkup-face-frame';
       front.appendChild(image);
+      front.appendChild(frame);
 
       const back = document.createElement('span');
       back.className = 'linkup-face linkup-face--back';
@@ -1091,7 +1094,10 @@ redirect_from:
         layer.className = 'linkup-shuffle-layer';
         const track = document.createElement('span');
         track.className = 'linkup-shuffle-track';
+        const windowFrame = document.createElement('span');
+        windowFrame.className = 'linkup-shuffle-window';
         layer.appendChild(track);
+        layer.appendChild(windowFrame);
         cell.appendChild(layer);
 
         const metrics = getLinkupShuffleMetrics(cell);
