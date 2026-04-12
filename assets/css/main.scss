@@ -1484,6 +1484,12 @@ body[data-home-view='home'][data-home-tool='home'] .mascot-linkup-panel {
         padding: 0.82rem 0.72rem 0.82rem;
     }
 
+    .slot-machine-display {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
     .slot-machine-display .sidebar-tool-inline-actions {
         margin-top: auto;
     }
@@ -1491,6 +1497,10 @@ body[data-home-view='home'][data-home-tool='home'] .mascot-linkup-panel {
     .slot-machine-reel,
     .slot-machine-item {
         height: 4.78rem;
+    }
+
+    .slot-machine-reel {
+        flex: 0 0 auto;
     }
 
     .slot-machine-lever {
