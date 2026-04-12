@@ -24,10 +24,16 @@
 </div>
 <script>
   (function () {
-    const uvTargets = Array.from(document.querySelectorAll('[data-counter-role="uv"]'));
-    const pvTargets = Array.from(document.querySelectorAll('[data-counter-role="pv"]'));
     const viewTargets = Array.from(document.querySelectorAll('[data-home-view-target]'));
     let mastheadScaleRaf = 0;
+
+    function getUvTargets() {
+      return Array.from(document.querySelectorAll('[data-counter-role="uv"]'));
+    }
+
+    function getPvTargets() {
+      return Array.from(document.querySelectorAll('[data-counter-role="pv"]'));
+    }
 
     function getCurrentHomeView() {
       const path = window.location.pathname || '/';
@@ -98,8 +104,6 @@
       window.visualViewport.addEventListener('resize', scheduleMastheadScale, { passive: true });
     }
 
-    if (!uvTargets.length && !pvTargets.length) return;
-
     const statsKeys = {
       visitorSeen: 'kw66_home_visitor_seen_v2',
       snapshot: 'kw66_home_counter_snapshot_v1',
@@ -117,12 +121,19 @@
     }
 
     function renderCounts(uv, pv) {
-      uvTargets.forEach((el) => {
+      getUvTargets().forEach((el) => {
         el.textContent = String(uv);
       });
-      pvTargets.forEach((el) => {
+      getPvTargets().forEach((el) => {
         el.textContent = String(pv);
       });
+    }
+
+    function renderSnapshotIfAvailable() {
+      const snapshot = readSnapshot();
+      if (snapshot) {
+        renderCounts(snapshot.uv, snapshot.pv);
+      }
     }
 
     function readSnapshot() {
@@ -219,6 +230,10 @@
         }
       }
     }
+
+    window.addEventListener('DOMContentLoaded', renderSnapshotIfAvailable);
+    window.addEventListener('load', renderSnapshotIfAvailable);
+    window.addEventListener('pageshow', renderSnapshotIfAvailable);
 
     refreshSharedCounts();
   })();
