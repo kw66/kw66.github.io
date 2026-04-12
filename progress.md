@@ -72,3 +72,9 @@ Original prompt: Implement option 3 with a simple 6x4 mascot linkup game.
   - Reduced that outer mascot gap from the old hard-coded `1.08rem` equivalent down to `0.72rem`, and updated both the stage padding and the rail offsets to use the same shared token.
   - At the same time, increased the inner desktop sidebar/page gap from `1.08rem` to `1.32rem` so the profile/game column and the main content column separate a bit more clearly.
   - Verification: source-injected desktop preview confirmed the updated composition visually, and the measured sidebar/page inner gap increased from about `15.76px` to about `19.27px` after fixed-scale transform.
+
+- Featured-carousel mechanism rewrite:
+  - Replaced the old scroll-range-dependent desktop loop with a virtual-offset + DOM-rotation mechanism, so the carousel no longer depends on the small real `scrollLeft` overflow available on desktop when only three project cards are present.
+  - The loop now advances by translating the track and rotating the real DOM items whenever the virtual offset crosses an item step, which restores true bidirectional dragging and prevents the old “teleport then stop” failure mode.
+  - Unified pointer dragging across desktop and mobile under the same loop core, kept click suppression only after meaningful horizontal drag, and added horizontal-wheel support for desktop while leaving vertical page scrolling alone unless the wheel input is clearly horizontal.
+  - Verification: source-injected Playwright checks showed desktop autoplay transform changing from `-43px` to `-69px` over `1.2s`, left drag rotated item order to `小游戏 -> 科研绘图 -> 全时段行人重识别`, right drag restored reverse movement successfully, and after release desktop autoplay resumed again (`-72px -> -85px`). Mobile stayed healthy under the same mechanism, with autoplay and post-drag resume both still progressing (`-33px -> -59px` before drag, then `0px -> -13px` after the pause window).

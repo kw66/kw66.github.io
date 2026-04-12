@@ -187,10 +187,12 @@ redirect_from:
       autoScrollTimerId: 0,
       autoScrollPauseUntil: 0,
       lastViewportScrollLeft: 0,
+      loopOffset: 0,
       isReordering: false,
       dragPointerId: null,
       dragLastClientX: 0,
       dragMoved: false,
+      dragDistance: 0,
       suppressClick: false
     };
     const slotState = {
@@ -890,86 +892,100 @@ redirect_from:
       return item.getBoundingClientRect().width + getFeaturedTrackGap(track);
     }
 
-    function rotateFeaturedLoopForward(viewport) {
+    function applyFeaturedLoopOffset(track) {
+      if (!track) return;
+      if (!isFeaturedLoopLayout()) {
+        track.style.removeProperty('transform');
+        return;
+      }
+      track.style.transform = `translate3d(${-featuredState.loopOffset.toFixed(2)}px, 0, 0)`;
+    }
+
+    function rotateFeaturedLoopForward() {
       const track = document.getElementById('featured-track');
       const items = getFeaturedItems({ originalsOnly: true });
-      if (!viewport || !track || items.length < 2) return 0;
+      if (!track || items.length < 2) return 0;
 
       const first = items[0];
       const step = getFeaturedItemStep(first, track);
       if (step <= 0) return 0;
 
       track.appendChild(first);
-      viewport.scrollLeft = Math.max(viewport.scrollLeft - step, 0);
+      featuredState.loopOffset -= step;
       return step;
     }
 
-    function rotateFeaturedLoopBackward(viewport) {
+    function rotateFeaturedLoopBackward() {
       const track = document.getElementById('featured-track');
       const items = getFeaturedItems({ originalsOnly: true });
-      if (!viewport || !track || items.length < 2) return 0;
+      if (!track || items.length < 2) return 0;
 
       const last = items[items.length - 1];
       const step = getFeaturedItemStep(last, track);
       if (step <= 0) return 0;
 
       track.insertBefore(last, items[0]);
-      viewport.scrollLeft += step;
+      featuredState.loopOffset += step;
       return step;
     }
 
-    function normalizeFeaturedLoop(viewport, directionHint = 0) {
-      if (!viewport) return;
-
+    function normalizeFeaturedLoop(track) {
+      if (!track) return;
       if (!isFeaturedLoopLayout() || featuredState.isReordering) {
-        featuredState.lastViewportScrollLeft = viewport.scrollLeft;
+        applyFeaturedLoopOffset(track);
         return;
       }
 
-      const track = document.getElementById('featured-track');
       const originals = getFeaturedItems({ originalsOnly: true });
       if (!track || originals.length < 2) {
-        featuredState.lastViewportScrollLeft = viewport.scrollLeft;
+        featuredState.loopOffset = 0;
+        applyFeaturedLoopOffset(track);
         return;
       }
 
       featuredState.isReordering = true;
       try {
-        let safety = originals.length + 2;
-
-        while (directionHint > 0 && safety > 0) {
+        let safety = originals.length * 3;
+        while (safety > 0) {
           const currentItems = getFeaturedItems({ originalsOnly: true });
-          const step = getFeaturedItemStep(currentItems[0], track);
-          if (step <= 0 || viewport.scrollLeft < step - 0.5) break;
-          rotateFeaturedLoopForward(viewport);
-          safety -= 1;
-        }
-
-        while (directionHint < 0 && safety > 0) {
-          if (viewport.scrollLeft > 0.5) break;
-          const moved = rotateFeaturedLoopBackward(viewport);
-          if (moved <= 0) break;
-          safety -= 1;
+          const firstStep = getFeaturedItemStep(currentItems[0], track);
+          if (firstStep > 0 && featuredState.loopOffset >= firstStep - 0.5) {
+            rotateFeaturedLoopForward();
+            safety -= 1;
+            continue;
+          }
+          const refreshedItems = getFeaturedItems({ originalsOnly: true });
+          const lastStep = getFeaturedItemStep(refreshedItems[refreshedItems.length - 1], track);
+          if (lastStep > 0 && featuredState.loopOffset < -0.5) {
+            rotateFeaturedLoopBackward();
+            safety -= 1;
+            continue;
+          }
+          break;
         }
       } finally {
         featuredState.isReordering = false;
       }
 
-      featuredState.lastViewportScrollLeft = viewport.scrollLeft;
+      applyFeaturedLoopOffset(track);
+    }
+
+    function advanceFeaturedLoop(deltaPx) {
+      const track = document.getElementById('featured-track');
+      if (!track || !isFeaturedLoopLayout()) return;
+      featuredState.loopOffset += deltaPx;
+      normalizeFeaturedLoop(track);
     }
 
     function startFeaturedAutoScroll() {
-      const viewport = document.getElementById('featured-viewport');
+      const track = document.getElementById('featured-track');
       clearFeaturedAutoScroll();
-      if (!viewport || !isFeaturedLoopLayout() || prefersReducedMotion) return;
+      if (!track || !isFeaturedLoopLayout() || prefersReducedMotion) return;
 
-      featuredState.lastViewportScrollLeft = viewport.scrollLeft;
       featuredState.autoScrollTimerId = window.setInterval(() => {
         if (document.hidden) return;
         if ((window.performance?.now?.() || 0) < featuredState.autoScrollPauseUntil) return;
-
-        viewport.scrollLeft += 1;
-        normalizeFeaturedLoop(viewport, 1);
+        advanceFeaturedLoop(1);
       }, 48);
     }
 
@@ -977,27 +993,15 @@ redirect_from:
       if (!viewport || viewport.dataset.featuredAutoscrollBound === 'true') return;
       viewport.dataset.featuredAutoscrollBound = 'true';
 
-      ['touchstart', 'wheel'].forEach((eventName) => {
-        viewport.addEventListener(eventName, () => {
-          pauseFeaturedAutoScroll(3200);
-        }, { passive: true });
-      });
-
-      ['touchend', 'touchcancel'].forEach((eventName) => {
-        viewport.addEventListener(eventName, () => {
-          pauseFeaturedAutoScroll(2600);
-        }, { passive: true });
-      });
-
       viewport.addEventListener('pointerdown', (event) => {
-        if (event.pointerType === 'touch' || event.button !== 0) {
-          pauseFeaturedAutoScroll(3200);
+        if (event.pointerType === 'mouse' && event.button !== 0) {
           return;
         }
 
         featuredState.dragPointerId = event.pointerId;
         featuredState.dragLastClientX = event.clientX;
         featuredState.dragMoved = false;
+        featuredState.dragDistance = 0;
         featuredState.suppressClick = false;
         viewport.classList.add('is-dragging');
         pauseFeaturedAutoScroll(3200);
@@ -1019,8 +1023,11 @@ redirect_from:
 
         featuredState.dragLastClientX = event.clientX;
         featuredState.dragMoved = true;
-        featuredState.suppressClick = true;
-        viewport.scrollLeft -= deltaX;
+        featuredState.dragDistance += Math.abs(deltaX);
+        if (featuredState.dragDistance > 6) {
+          featuredState.suppressClick = true;
+        }
+        advanceFeaturedLoop(-deltaX);
         event.preventDefault();
       });
 
@@ -1032,6 +1039,7 @@ redirect_from:
         const shouldSuppressClick = featuredState.dragMoved;
         featuredState.dragPointerId = null;
         featuredState.dragLastClientX = 0;
+        featuredState.dragDistance = 0;
         viewport.classList.remove('is-dragging');
         if (typeof viewport.releasePointerCapture === 'function') {
           try {
@@ -1056,23 +1064,23 @@ redirect_from:
         event.preventDefault();
       });
 
+      viewport.addEventListener('wheel', (event) => {
+        if (!isFeaturedLoopLayout()) return;
+        const horizontalDelta = Math.abs(event.deltaX) > 0.5
+          ? event.deltaX
+          : (event.shiftKey && Math.abs(event.deltaY) > 0.5 ? event.deltaY : 0);
+        if (Math.abs(horizontalDelta) < 0.5) return;
+        pauseFeaturedAutoScroll(3200);
+        advanceFeaturedLoop(horizontalDelta);
+        event.preventDefault();
+      }, { passive: false });
+
       viewport.addEventListener('click', (event) => {
         if (!featuredState.suppressClick) return;
         featuredState.suppressClick = false;
         event.preventDefault();
         event.stopPropagation();
       }, true);
-
-      viewport.addEventListener('scroll', () => {
-        if (!isFeaturedLoopLayout() || featuredState.isReordering) {
-          featuredState.lastViewportScrollLeft = viewport.scrollLeft;
-          return;
-        }
-
-        const delta = viewport.scrollLeft - featuredState.lastViewportScrollLeft;
-        if (Math.abs(delta) < 0.25) return;
-        normalizeFeaturedLoop(viewport, delta > 0 ? 1 : -1);
-      }, { passive: true });
     }
 
     function updateFeaturedButtons() {
@@ -1122,8 +1130,9 @@ redirect_from:
       track.style.setProperty('--featured-visible', String(featuredState.visibleCount));
 
       if (isFeaturedLoopLayout()) {
+        featuredState.loopOffset = 0;
+        applyFeaturedLoopOffset(track);
         bindFeaturedViewportInteractions(viewport);
-        featuredState.lastViewportScrollLeft = viewport.scrollLeft;
         if (!prefersReducedMotion) {
           pauseFeaturedAutoScroll(1400);
           startFeaturedAutoScroll();
@@ -1135,6 +1144,8 @@ redirect_from:
       }
 
       featuredState.lastViewportScrollLeft = 0;
+      featuredState.loopOffset = 0;
+      applyFeaturedLoopOffset(track);
       viewport.scrollLeft = 0;
       clearFeaturedAutoScroll();
       scrollFeatured(behavior);

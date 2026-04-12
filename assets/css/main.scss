@@ -98,13 +98,11 @@
 }
 
 .featured-viewport {
-    overflow-x: auto;
-    overflow-y: hidden;
+    overflow: hidden;
     scroll-behavior: auto;
     scroll-snap-type: none;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
     cursor: grab;
+    touch-action: pan-y;
 }
 
 .featured-viewport.is-dragging {
@@ -128,6 +126,7 @@
     align-items: flex-start;
     gap: var(--featured-gap);
     width: max-content;
+    will-change: transform;
 }
 
 .anchor {
@@ -2044,12 +2043,11 @@ body[data-home-view='home'][data-home-tool='home'] .mascot-linkup-panel {
     }
 
     body.is-fixed-scale-home .featured-viewport {
-        overflow-x: auto;
-        overflow-y: hidden;
+        overflow: hidden;
         padding-bottom: 0.08rem;
         scroll-snap-type: none;
         scroll-behavior: auto;
-        -webkit-overflow-scrolling: touch;
+        touch-action: pan-y;
     }
 
     body.is-fixed-scale-home .featured-viewport::-webkit-scrollbar {
