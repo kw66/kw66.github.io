@@ -31,3 +31,6 @@ Original prompt: Implement option 3 with a simple 6x4 mascot linkup game.
 - The mobile featured carousel now keeps autoplay alive after manual dragging: interaction only pauses autoplay temporarily, and the queue resumes by itself after the pause window.
 - Tightened vertical spacing around the mobile mascot strip and the project/paper boundary, increased the mobile project gap slightly, and made the paper-filter right arrow larger and more visible.
 - Verification: `_pages/about.md` inline script still parses successfully; a Playwright minimal carousel repro confirmed manual forward drag keeps the count at `3` and autoplay resumes afterwards; live-page CSS injection confirmed the mobile project gap is now non-zero (`4.2px` after fixed-scale transform), the paper-filter arrow is larger, and the mascot strip / filter spacing reductions took effect.
+
+- Increased the desktop-only game shell stage height again because the slot/linkup bottom control row was sitting too close to the shell edge. The large-breakpoint shell height token moved from `22.72rem` to `23.12rem`.
+- Verification in Playwright against the live site with injected CSS: both desktop shells remained equal in height (`335.01px` each) and the bottom inset under the control row increased to about `6.17px`.
