@@ -768,7 +768,7 @@ redirect_from:
     }
 
     function getFeaturedVisibleCount() {
-      return isMobileHomeLayout() ? 1.55 : 3;
+      return isMobileHomeLayout() ? 1.18 : 3;
     }
 
     function updateFeaturedButtons() {
