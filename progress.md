@@ -66,3 +66,9 @@ Original prompt: Implement option 3 with a simple 6x4 mascot linkup game.
   - Tightened the desktop featured-project gap to match the mobile carousel scale, so the interaction and spacing now read as one design rather than separate desktop/mobile variants.
   - Removed the leftover desktop paper-list horizontal padding and constrained the paper toolbar / paper list / empty state to the same `61.5rem` content width as the featured carousel, so the paper section is now left-aligned directly under the project section with no extra indent.
   - Verification: in Playwright desktop preview, the featured gap measured about `6.3px`, the three featured-card widths became `276.44px / 301.03px / 340.03px` (variable by image ratio instead of equal width), and both `paper-filter-toolbar` and `paper-list` had the same left edge and width as `featured-viewport` (`left delta = 0`, `width = 891.14px` after fixed-scale transform).
+
+- Desktop horizontal-spacing pass:
+  - Added a dedicated `--side-mascot-gap` token for the fixed-scale home shell so the left/right mascot rails can move inward symmetrically without being tied to the main sidebar/page column gap.
+  - Reduced that outer mascot gap from the old hard-coded `1.08rem` equivalent down to `0.72rem`, and updated both the stage padding and the rail offsets to use the same shared token.
+  - At the same time, increased the inner desktop sidebar/page gap from `1.08rem` to `1.32rem` so the profile/game column and the main content column separate a bit more clearly.
+  - Verification: source-injected desktop preview confirmed the updated composition visually, and the measured sidebar/page inner gap increased from about `15.76px` to about `19.27px` after fixed-scale transform.

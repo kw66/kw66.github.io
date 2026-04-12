@@ -1219,6 +1219,7 @@
 
 .is-fixed-scale-home {
     overflow-x: hidden;
+    --side-mascot-gap: 0.72rem;
 }
 
 .is-fixed-scale-home .masthead {
@@ -1238,8 +1239,8 @@
     display: block;
     width: max-content;
     margin: 0;
-    padding-left: calc(5.24rem + 1.08rem);
-    padding-right: calc(5.24rem + 1.08rem);
+    padding-left: calc(5.24rem + var(--side-mascot-gap));
+    padding-right: calc(5.24rem + var(--side-mascot-gap));
     transform-origin: top left;
     will-change: transform;
 }
@@ -1251,7 +1252,7 @@
 
 .is-fixed-scale-home #main {
     --desktop-main-width: 1280px;
-    --main-column-gap: 1.08rem;
+    --main-column-gap: 1.32rem;
     --sidebar-shell-width: 13.2rem;
     display: flex;
     align-items: flex-start;
@@ -2348,7 +2349,7 @@ body[data-home-view='home'][data-home-tool='home'] .mascot-linkup-panel {
     }
 
     #main {
-        --main-column-gap: 1.08rem;
+        --main-column-gap: 1.32rem;
         --sidebar-shell-width: 13.2rem;
         display: flex;
         align-items: flex-start;
@@ -2457,12 +2458,12 @@ body[data-home-view='home'][data-home-tool='home'] .mascot-linkup-panel {
 }
 
 .is-fixed-scale-home .side-mascot-rail--left {
-    left: calc((5.24rem + var(--main-column-gap, 1.08rem)) * -1);
+    left: calc((5.24rem + var(--side-mascot-gap, 0.72rem)) * -1);
     width: 5.24rem;
 }
 
 .is-fixed-scale-home .side-mascot-rail--right {
-    right: calc((5.24rem + var(--main-column-gap, 1.08rem)) * -1);
+    right: calc((5.24rem + var(--side-mascot-gap, 0.72rem)) * -1);
     width: 5.24rem;
 }
 
@@ -2478,12 +2479,12 @@ body[data-home-view='home'][data-home-tool='home'] .mascot-linkup-panel {
     }
 
     .side-mascot-rail--left {
-        left: calc((5.24rem + var(--main-column-gap, 1.08rem)) * -1);
+        left: calc((5.24rem + var(--side-mascot-gap, 0.72rem)) * -1);
         width: 5.24rem;
     }
 
     .side-mascot-rail--right {
-        right: calc((5.24rem + var(--main-column-gap, 1.08rem)) * -1);
+        right: calc((5.24rem + var(--side-mascot-gap, 0.72rem)) * -1);
         width: 5.24rem;
     }
 }
