@@ -195,6 +195,7 @@ redirect_from:
     const slotVisual = {
       gapPx: 12
     };
+    const mobileHomeMaxWidth = 768;
     const slotFortunes = [
       '适合改图',
       '适合投稿',
@@ -306,11 +307,8 @@ redirect_from:
     }
 
     function updateHomeViewMode() {
-      const params = new URLSearchParams(window.location.search);
-      const requestedView = params.get('view');
-      const currentView = requestedView === 'slot' || requestedView === 'linkup' ? requestedView : 'home';
-      document.body.classList.toggle('is-slot-mode', currentView === 'slot');
-      document.body.classList.toggle('is-linkup-mode', currentView === 'linkup');
+      const currentView = 'home';
+      document.body.classList.remove('is-slot-mode', 'is-linkup-mode');
       document.body.dataset.homeView = currentView;
       applyHomeToolSelection();
       if (typeof window.updateMastheadViewState === 'function') {
@@ -332,12 +330,8 @@ redirect_from:
 
     function applyHomeToolSelection() {
       const container = document.getElementById('sidebar-home-tools');
-      const currentView = document.body?.dataset.homeView || 'home';
-      const effectiveTool = currentView === 'slot'
-        ? 'slot'
-        : currentView === 'linkup'
-          ? 'linkup'
-          : normalizeHomeTool(homeToolState.current);
+      const currentView = 'home';
+      const effectiveTool = normalizeHomeTool(homeToolState.current);
 
       if (container) {
         container.dataset.selectedTool = effectiveTool;
@@ -398,10 +392,33 @@ redirect_from:
       return window.innerWidth;
     }
 
+    function isMobileHomeLayout() {
+      const currentView = document.body?.dataset.homeView || 'home';
+      if (currentView !== 'home' || getViewportWidth() > mobileHomeMaxWidth) {
+        return false;
+      }
+      if (!window.matchMedia) {
+        return false;
+      }
+      return window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(hover: none)').matches;
+    }
+
     function applyDesktopScale() {
       const shell = document.getElementById(desktopScaleShellId);
       const stage = document.getElementById(desktopScaleStageId);
       if (!shell || !stage) return 1;
+
+      const mobileLayout = isMobileHomeLayout();
+      if (document.body) {
+        document.body.classList.toggle('is-mobile-home-layout', mobileLayout);
+      }
+
+      if (mobileLayout) {
+        shell.style.height = 'auto';
+        stage.style.transform = 'none';
+        shell.dataset.scale = '1.0000';
+        return 1;
+      }
 
       shell.style.height = 'auto';
       stage.style.transform = 'translate3d(0, 0, 0) scale(1)';
@@ -527,6 +544,17 @@ redirect_from:
       const rightLayer = document.getElementById(rightLayerId);
       if (!leftLayer || !rightLayer) return;
 
+      if (isMobileHomeLayout()) {
+        if (mascotRafId) {
+          window.cancelAnimationFrame(mascotRafId);
+          mascotRafId = null;
+        }
+        leftLayer.innerHTML = '';
+        rightLayer.innerHTML = '';
+        mascotState = null;
+        return;
+      }
+
       const canReuseMascots = Boolean(
         mascotState &&
         mascotState.left &&
@@ -583,6 +611,40 @@ redirect_from:
       paintLane(mascotState.left);
       paintLane(mascotState.right);
       mascotRafId = window.requestAnimationFrame(mascotStep);
+    }
+
+    function createMobileStripGroup(sequence) {
+      const group = document.createElement('div');
+      group.className = 'mobile-mascot-strip__group';
+      sequence.forEach((src) => {
+        const item = document.createElement('div');
+        item.className = 'mobile-mascot-strip__item';
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = '';
+        img.decoding = 'async';
+        img.loading = 'eager';
+        item.appendChild(img);
+        group.appendChild(item);
+      });
+      return group;
+    }
+
+    function renderMobileMascotStrips() {
+      const topTrack = document.getElementById('mobile-mascot-track-top');
+      if (!topTrack) return;
+
+      if (isMobileHomeLayout()) {
+        if (!topTrack.dataset.ready) {
+          const topSequence = shuffleInPlace(mascotSources.slice()).slice(0, Math.min(14, mascotSources.length));
+          topTrack.innerHTML = '';
+          topTrack.appendChild(createMobileStripGroup(topSequence));
+          topTrack.appendChild(createMobileStripGroup(topSequence));
+          topTrack.dataset.ready = 'true';
+        }
+      }
+
+      topTrack.classList.toggle('is-animated', isMobileHomeLayout() && !prefersReducedMotion);
     }
 
     function finishAuthorAvatarSpin() {
@@ -704,7 +766,7 @@ redirect_from:
     }
 
     function getFeaturedVisibleCount() {
-      return 3;
+      return isMobileHomeLayout() ? 1 : 3;
     }
 
     function updateFeaturedButtons() {
@@ -1238,13 +1300,14 @@ redirect_from:
       syncFeaturedCarousel(behavior);
       syncSlotMachineLayout();
       applyDesktopScale();
+      renderMobileMascotStrips();
       renderSideMascots();
     }
 
     function handleResize() {
       window.clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(() => {
-        applyDesktopScale();
+        syncDesktopHomeLayout('auto');
       }, 160);
     }
 

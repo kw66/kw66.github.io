@@ -20,6 +20,13 @@ layout: compress
           <div id="main" role="main">
             <div class="side-mascot-rail side-mascot-rail--left" id="side-mascot-layer-left" aria-hidden="true"></div>
             {% include sidebar.html %}
+            {% if page.permalink == "/" or page.url == "/" %}
+              <section class="mobile-mascot-strip" id="mobile-mascot-strip-top" aria-hidden="true">
+                <div class="mobile-mascot-strip__viewport">
+                  <div class="mobile-mascot-strip__track" id="mobile-mascot-track-top"></div>
+                </div>
+              </section>
+            {% endif %}
           
             <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
               {% if page.title %}<meta itemprop="headline" content="{{ page.title | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}

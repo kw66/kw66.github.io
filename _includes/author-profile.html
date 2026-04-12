@@ -29,10 +29,27 @@
 
   <div class="author__content">
     <h3 class="author__name">{{ display_name }}</h3>
-    {% if author.bio %}<p class="author__bio">{{ author.bio | replace_first: ', ', '<br>' }}</p>{% endif %}
+    {% if page.permalink == "/" or page.url == "/" %}
+      {% if author.bio %}<p class="author__bio author__bio--homepage">{{ author.bio | replace_first: ', ', '<br>' }}</p>{% endif %}
+    {% else %}
+      {% if author.bio %}<p class="author__bio">{{ author.bio | replace_first: ', ', '<br>' }}</p>{% endif %}
+    {% endif %}
   </div>
 
   <div class="author__urls-wrapper">
+    {% if page.permalink == "/" or page.url == "/" %}
+      <div class="author__profile-inline">
+        {% if author.github %}
+          <div class="author__profile-linkrow">
+            <a class="author__profile-link" href="https://github.com/{{ author.github }}" target="_blank" rel="noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a>
+          </div>
+        {% endif %}
+        <span class="author__profile-stats" aria-label="Visitor statistics">
+          <span class="author__profile-stat" title="Unique devices">&#128064; <span data-counter-role="uv">--</span></span>
+          <span class="author__profile-stat" title="Page visits">&#128433;&#65039; <span data-counter-role="pv">--</span></span>
+        </span>
+      </div>
+    {% endif %}
     <!-- <button class="btn btn--inverse">More Info & Contact</button> -->
     <ul class="author__urls social-icons">
       {% if author.github %}

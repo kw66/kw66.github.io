@@ -4,18 +4,16 @@
       <nav id="site-nav" class="greedy-nav">
         <ul class="visible-links">
           <li class="masthead__menu-item masthead__menu-item--button masthead__menu-home-item masthead__menu-item--view" data-home-view-target="home"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></li>
-          <li class="masthead__menu-item masthead__menu-item--button masthead__menu-item--slot masthead__menu-item--view" data-home-view-target="slot"><a href="{{ '/' | relative_url }}?view=slot">&#32769;&#34382;&#26426;</a></li>
-          <li class="masthead__menu-item masthead__menu-item--button masthead__menu-item--linkup masthead__menu-item--view" data-home-view-target="linkup"><a href="{{ '/' | relative_url }}?view=linkup">&#36830;&#36830;&#30475;</a></li>
           {% for link in site.data.navigation.main %}
             <li class="masthead__menu-item"><a href="{{ domain }}{{ link.url }}">{{ link.title }}</a></li>
           {% endfor %}
           <li class="masthead__menu-item masthead__menu-item--stats">
             <span class="masthead__stats" aria-label="Visitor statistics">
               <span class="masthead__stat" id="local_counter_container_uv" title="Unique devices">
-                &#128064; <span id="local_counter_value_uv">--</span>
+                &#128064; <span id="local_counter_value_uv" data-counter-role="uv">--</span>
               </span>
               <span class="masthead__stat" id="local_counter_container_pv" title="Page visits">
-                &#128433;&#65039; <span id="local_counter_value_pv">--</span>
+                &#128433;&#65039; <span id="local_counter_value_pv" data-counter-role="pv">--</span>
               </span>
             </span>
           </li>
@@ -26,23 +24,15 @@
 </div>
 <script>
   (function () {
-    const uvEl = document.getElementById('local_counter_value_uv');
-    const pvEl = document.getElementById('local_counter_value_pv');
+    const uvTargets = Array.from(document.querySelectorAll('[data-counter-role="uv"]'));
+    const pvTargets = Array.from(document.querySelectorAll('[data-counter-role="pv"]'));
     const viewTargets = Array.from(document.querySelectorAll('[data-home-view-target]'));
     let mastheadScaleRaf = 0;
 
     function getCurrentHomeView() {
       const path = window.location.pathname || '/';
       const normalizedPath = path === '/index.html' ? '/' : path;
-      if (normalizedPath !== '/') {
-        return '';
-      }
-      const params = new URLSearchParams(window.location.search);
-      const view = params.get('view');
-      if (view === 'slot' || view === 'linkup') {
-        return view;
-      }
-      return 'home';
+      return normalizedPath === '/' ? 'home' : '';
     }
 
     function applyHomeViewState(view) {
@@ -108,7 +98,7 @@
       window.visualViewport.addEventListener('resize', scheduleMastheadScale, { passive: true });
     }
 
-    if (!uvEl || !pvEl) return;
+    if (!uvTargets.length && !pvTargets.length) return;
 
     const statsKeys = {
       visitorSeen: 'kw66_home_visitor_seen_v2',
@@ -127,8 +117,12 @@
     }
 
     function renderCounts(uv, pv) {
-      uvEl.textContent = String(uv);
-      pvEl.textContent = String(pv);
+      uvTargets.forEach((el) => {
+        el.textContent = String(uv);
+      });
+      pvTargets.forEach((el) => {
+        el.textContent = String(pv);
+      });
     }
 
     function readSnapshot() {
