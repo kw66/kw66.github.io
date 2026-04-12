@@ -936,7 +936,7 @@ redirect_from:
     function getLinkupShuffleMetrics(cell) {
       const cellWidth = Math.max(cell.clientWidth, 56);
       const gap = clamp(cellWidth * 0.08, 4, 8);
-      const itemWidth = cellWidth;
+      const itemWidth = Math.min(cellWidth * 0.9, cellWidth - gap * 2 - 4);
       const pitch = itemWidth + gap;
       const centerOffset = (cellWidth - itemWidth) / 2;
       return {
@@ -954,10 +954,12 @@ redirect_from:
     function createLinkupShuffleItem(src) {
       const item = document.createElement('span');
       item.className = 'linkup-shuffle-item';
-      const windowEl = document.createElement('span');
-      windowEl.className = 'linkup-shuffle-art-window';
-      windowEl.style.backgroundImage = `url("${src}")`;
-      item.appendChild(windowEl);
+      const image = document.createElement('img');
+      image.alt = '';
+      image.decoding = 'async';
+      image.loading = 'eager';
+      image.src = src;
+      item.appendChild(image);
       return item;
     }
 
@@ -997,13 +999,12 @@ redirect_from:
 
       const front = document.createElement('span');
       front.className = 'linkup-face linkup-face--front';
-      const artWindow = document.createElement('span');
-      artWindow.className = 'linkup-face-window';
-      const frame = document.createElement('span');
-      frame.className = 'linkup-face-frame';
-      artWindow.style.backgroundImage = `url("${src}")`;
-      front.appendChild(artWindow);
-      front.appendChild(frame);
+      const image = document.createElement('img');
+      image.alt = '';
+      image.decoding = 'async';
+      image.loading = 'eager';
+      image.src = src;
+      front.appendChild(image);
 
       const back = document.createElement('span');
       back.className = 'linkup-face linkup-face--back';
@@ -1090,10 +1091,7 @@ redirect_from:
         layer.className = 'linkup-shuffle-layer';
         const track = document.createElement('span');
         track.className = 'linkup-shuffle-track';
-        const windowFrame = document.createElement('span');
-        windowFrame.className = 'linkup-shuffle-window';
         layer.appendChild(track);
-        layer.appendChild(windowFrame);
         cell.appendChild(layer);
 
         const metrics = getLinkupShuffleMetrics(cell);

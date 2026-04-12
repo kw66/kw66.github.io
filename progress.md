@@ -16,3 +16,7 @@ Original prompt: Implement option 3 with a simple 6x4 mascot linkup game.
 - Moved the slot/linkup choice into the homepage sidebar tool area so the main profile page now has an inline switcher instead of separate visible nav entries.
 - Changed the embedded linkup board to 4 rows by 3 columns so it fits the same sidebar slot as the slot machine panel.
 - Hid the masthead slot/linkup buttons for now while preserving the existing query-param view logic underneath.
+
+- Restored the desktop linkup rendering path to the last known working implementation from `d3713e0`: card faces and shuffle track are back to direct `<img>` rendering instead of the later background-window wrappers.
+- Kept only the user-confirmed non-breaking tweaks on top of that restore, specifically the yellow selected-state highlight and the tighter board gap.
+- Verified SCSS compilation with `npx sass`; local Jekyll preview is blocked on this machine because Ruby/Bundler are not installed, so final verification must be done against the deployed GitHub Pages build.
