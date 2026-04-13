@@ -48,6 +48,11 @@
           <span class="author__profile-stat" title="Unique devices">&#128064; <span data-counter-role="uv">--</span></span>
           <span class="author__profile-stat" title="Page visits">&#128433;&#65039; <span data-counter-role="pv">--</span></span>
         </span>
+        <div class="author__theme-switcher" aria-label="Mascot theme switcher">
+          <button type="button" class="author__theme-button" data-mascot-theme="frog" aria-pressed="true">青蛙包</button>
+          <button type="button" class="author__theme-button" data-mascot-theme="scientists" aria-pressed="false">科学名人</button>
+          <a class="author__theme-credits" data-mascot-theme-credits href="{{ '/scientists-theme-credits/' | relative_url }}" hidden>Credits</a>
+        </div>
       </div>
     {% endif %}
     <!-- <button class="btn btn--inverse">More Info & Contact</button> -->

@@ -1150,6 +1150,60 @@
     display: none;
 }
 
+.author__theme-switcher {
+    display: none;
+}
+
+.author__theme-button {
+    appearance: none;
+    border: 1px solid rgba(167, 190, 205, 0.92);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.82);
+    color: #4a6474;
+    font: inherit;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+        background-color 0.18s ease,
+        border-color 0.18s ease,
+        color 0.18s ease,
+        transform 0.18s ease,
+        box-shadow 0.18s ease;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.88);
+}
+
+.author__theme-button:hover,
+.author__theme-button:focus-visible {
+    border-color: rgba(126, 158, 180, 0.94);
+    color: #27475d;
+    background: rgba(245, 251, 255, 0.98);
+}
+
+.author__theme-button:focus-visible {
+    outline: none;
+}
+
+.author__theme-button.is-active {
+    border-color: rgba(122, 151, 169, 0.98);
+    background: linear-gradient(180deg, #f7fbff 0%, #e6f2fb 100%);
+    color: #26465c;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.94),
+        0 1px 2px rgba(132, 164, 187, 0.22);
+}
+
+.author__theme-credits {
+    color: #6b8090;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.author__theme-credits:hover,
+.author__theme-credits:focus-visible {
+    color: #27475d;
+}
+
 .author__avatar-image,
 .author__avatar-frame {
     aspect-ratio: 1 / 1;
@@ -1397,6 +1451,27 @@
     justify-content: center;
     gap: 0.22rem;
     width: 100%;
+}
+
+.is-fixed-scale-home .author__theme-switcher {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 0.02rem;
+}
+
+.is-fixed-scale-home .author__theme-button {
+    min-width: 4.3rem;
+    padding: 0.32rem 0.62rem 0.28rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+.is-fixed-scale-home .author__theme-credits {
+    font-size: 0.66rem;
 }
 
 .is-fixed-scale-home .author__profile-linkrow {
@@ -1796,6 +1871,27 @@ body[data-home-view='home'][data-home-tool='home'] .mascot-linkup-panel {
         gap: 0.16rem;
         margin-top: 0.02rem;
         width: 100%;
+    }
+
+    body.is-fixed-scale-home .author__theme-switcher {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.22rem;
+        flex-wrap: wrap;
+        width: 100%;
+        margin-top: 0.02rem;
+    }
+
+    body.is-fixed-scale-home .author__theme-button {
+        min-width: 3.72rem;
+        padding: 0.3rem 0.48rem 0.26rem;
+        font-size: 0.6rem;
+        font-weight: 700;
+    }
+
+    body.is-fixed-scale-home .author__theme-credits {
+        font-size: 0.58rem;
     }
 
     body.is-fixed-scale-home .author__profile-linkrow {
