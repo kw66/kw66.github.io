@@ -1218,7 +1218,7 @@
 
 .is-fixed-scale-home {
     overflow-x: hidden;
-    --side-mascot-gap: 0.42rem;
+    --side-mascot-gap: 2rem;
 }
 
 .is-fixed-scale-home .masthead {
@@ -1251,7 +1251,8 @@
 
 .is-fixed-scale-home #main {
     --desktop-page-width: 61.5rem;
-    --main-column-gap: 2rem;
+    --desktop-content-width: var(--desktop-page-width);
+    --main-column-gap: 3.333333rem;
     --sidebar-shell-width: 13.2rem;
     --desktop-main-width: calc(var(--sidebar-shell-width) + var(--main-column-gap) + var(--desktop-page-width));
     display: flex;
@@ -1311,8 +1312,18 @@
     align-items: center;
     justify-content: flex-start;
     gap: 0.62rem;
-    margin-top: -1.2rem;
+    margin-top: 0.92rem;
     text-align: center;
+}
+
+.is-fixed-scale-home #main > .page .featured-carousel,
+.is-fixed-scale-home #main > .page .paper-filter-toolbar,
+.is-fixed-scale-home #main > .page .paper-list,
+.is-fixed-scale-home #main > .page .paper-filter-empty {
+    width: var(--desktop-content-width);
+    max-width: var(--desktop-content-width);
+    margin-left: auto;
+    margin-right: 0;
 }
 
 .is-fixed-scale-home .sidebar .author__avatar {
@@ -2467,12 +2478,12 @@ body[data-home-view='home'][data-home-tool='home'] .mascot-linkup-panel {
 }
 
 .is-fixed-scale-home .side-mascot-rail--left {
-    left: calc((5.24rem + var(--side-mascot-gap, 0.42rem)) * -1);
+    left: calc((5.24rem + var(--side-mascot-gap, 2rem)) * -1);
     width: 5.24rem;
 }
 
 .is-fixed-scale-home .side-mascot-rail--right {
-    right: calc((5.24rem + var(--side-mascot-gap, 0.42rem)) * -1);
+    right: calc((5.24rem + var(--side-mascot-gap, 2rem)) * -1);
     width: 5.24rem;
 }
 
@@ -2488,12 +2499,12 @@ body[data-home-view='home'][data-home-tool='home'] .mascot-linkup-panel {
     }
 
     .side-mascot-rail--left {
-        left: calc((5.24rem + var(--side-mascot-gap, 0.42rem)) * -1);
+        left: calc((5.24rem + var(--side-mascot-gap, 2rem)) * -1);
         width: 5.24rem;
     }
 
     .side-mascot-rail--right {
-        right: calc((5.24rem + var(--side-mascot-gap, 0.42rem)) * -1);
+        right: calc((5.24rem + var(--side-mascot-gap, 2rem)) * -1);
         width: 5.24rem;
     }
 }

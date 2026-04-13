@@ -84,3 +84,9 @@ Original prompt: Implement option 3 with a simple 6x4 mascot linkup game.
   - Fixed by clearing the inherited `#main` horizontal padding, locking `#main > .page`, `.page__inner-wrap`, and `.page__content` to the same desktop content width token, increasing the inner sidebar/content gap, and shrinking the outer mascot gap token at the same time.
   - Final desktop tokens in this pass: `--main-column-gap: 2rem`, `--side-mascot-gap: 0.42rem`, with the page/content chain constrained to the same width as the featured/paper section.
   - Verification: source-injected desktop preview measured the first requested gap (sidebar -> featured/paper left edge) at `30px`, and the second requested gap (featured/paper right edge -> mascot rail) at `6.30px` on both sides, i.e. the outer left/right gaps matched exactly.
+
+- Desktop gap/width/avatar follow-up:
+  - Restored the featured/paper width back to the normal desktop width while keeping the exact-gap tuning active, instead of leaving the temporary 90% narrower content width.
+  - Moved the profile block further downward by increasing the fixed-scale desktop `profile_box` top margin again.
+  - Final desktop tokens after this pass: `--desktop-page-width: 61.5rem`, `--main-column-gap: 3.333333rem`, `--side-mascot-gap: 2rem`, with featured/paper width following the page width again.
+  - Verification: source-injected desktop preview measured `featured/paper width = 922.5px`, `avatar top = 22.80px`, `inner gap ≈ 49.98px`, and `right outer gap = 30px`, which matches the latest requested geometry.
