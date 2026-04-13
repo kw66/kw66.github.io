@@ -1218,7 +1218,7 @@
 
 .is-fixed-scale-home {
     overflow-x: hidden;
-    --side-mascot-gap: 0.72rem;
+    --side-mascot-gap: 0.42rem;
 }
 
 .is-fixed-scale-home .masthead {
@@ -1250,13 +1250,16 @@
 }
 
 .is-fixed-scale-home #main {
-    --desktop-main-width: 1280px;
-    --main-column-gap: 1.32rem;
+    --desktop-page-width: 61.5rem;
+    --main-column-gap: 2rem;
     --sidebar-shell-width: 13.2rem;
+    --desktop-main-width: calc(var(--sidebar-shell-width) + var(--main-column-gap) + var(--desktop-page-width));
     display: flex;
     align-items: flex-start;
     gap: var(--main-column-gap);
     margin-top: 0;
+    padding-left: 0;
+    padding-right: 0;
     width: var(--desktop-main-width);
     min-width: var(--desktop-main-width);
     max-width: var(--desktop-main-width);
@@ -1283,10 +1286,18 @@
     text-align: center;
 }
 
-.is-fixed-scale-home .page {
-    flex: 1 1 0;
-    width: auto;
-    min-width: 0;
+.is-fixed-scale-home #main > .page {
+    flex: 0 0 var(--desktop-page-width);
+    width: var(--desktop-page-width);
+    min-width: var(--desktop-page-width);
+    max-width: var(--desktop-page-width);
+}
+
+.is-fixed-scale-home #main > .page .page__inner-wrap,
+.is-fixed-scale-home #main > .page .page__content {
+    width: var(--desktop-page-width);
+    min-width: var(--desktop-page-width);
+    max-width: var(--desktop-page-width);
 }
 
 .is-fixed-scale-home .sidebar.sticky {
@@ -2456,12 +2467,12 @@ body[data-home-view='home'][data-home-tool='home'] .mascot-linkup-panel {
 }
 
 .is-fixed-scale-home .side-mascot-rail--left {
-    left: calc((5.24rem + var(--side-mascot-gap, 0.72rem)) * -1);
+    left: calc((5.24rem + var(--side-mascot-gap, 0.42rem)) * -1);
     width: 5.24rem;
 }
 
 .is-fixed-scale-home .side-mascot-rail--right {
-    right: calc((5.24rem + var(--side-mascot-gap, 0.72rem)) * -1);
+    right: calc((5.24rem + var(--side-mascot-gap, 0.42rem)) * -1);
     width: 5.24rem;
 }
 
@@ -2477,12 +2488,12 @@ body[data-home-view='home'][data-home-tool='home'] .mascot-linkup-panel {
     }
 
     .side-mascot-rail--left {
-        left: calc((5.24rem + var(--side-mascot-gap, 0.72rem)) * -1);
+        left: calc((5.24rem + var(--side-mascot-gap, 0.42rem)) * -1);
         width: 5.24rem;
     }
 
     .side-mascot-rail--right {
-        right: calc((5.24rem + var(--side-mascot-gap, 0.72rem)) * -1);
+        right: calc((5.24rem + var(--side-mascot-gap, 0.42rem)) * -1);
         width: 5.24rem;
     }
 }
