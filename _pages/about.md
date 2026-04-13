@@ -170,31 +170,10 @@ redirect_from:
     const reducedMotionQuery = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
     const prefersReducedMotion = reducedMotionQuery ? reducedMotionQuery.matches : false;
     const mascotBase = "{{ '/images/mascots/' | relative_url }}";
-    const frogMascotSources = Array.from({ length: 91 }, (_, index) => {
+    const mascotSources = Array.from({ length: 91 }, (_, index) => {
       const name = `mascot-${String(index + 1).padStart(2, '0')}.png`;
       return `${mascotBase}${name}`;
     }).filter((src) => !src.endsWith('mascot-43.png'));
-    const scientistBase = "{{ '/images/scientists/' | relative_url }}";
-    const scientistMascotSources = [
-      'scientist-01-newton.jpg',
-      'scientist-02-einstein.jpg',
-      'scientist-03-mccarthy.jpg',
-      'scientist-04-hinton.jpg',
-      'scientist-05-lecun.jpg',
-      'scientist-06-bengio.jpg',
-      'scientist-07-feifei-li.jpg',
-      'scientist-08-hassabis.jpg'
-    ].map((name) => `${scientistBase}${name}`);
-    const mascotThemes = Object.freeze({
-      frog: {
-        name: 'frog',
-        sources: frogMascotSources
-      },
-      scientists: {
-        name: 'scientists',
-        sources: scientistMascotSources
-      }
-    });
     const desktopScaleShellId = 'desktop-scale-shell';
     const desktopScaleStageId = 'desktop-scale-stage';
     const desktopScalePadding = 10;
@@ -246,14 +225,10 @@ redirect_from:
       rightInset: 0,
       preloadCount: 6
     };
-    const mascotThemeStorageKey = 'kw66_mascot_theme_v1';
     const homeToolStorageKey = 'kw66_home_sidebar_tool_v1';
     let mascotRafId = null;
     let resizeTimer = null;
     let mascotState = null;
-    const mascotThemeState = {
-      current: 'frog'
-    };
     const homeToolState = {
       current: 'slot'
     };
@@ -279,7 +254,6 @@ redirect_from:
     }
 
     function randomFrom(items) {
-      if (!Array.isArray(items) || !items.length) return '';
       return items[Math.floor(Math.random() * items.length)];
     }
 
@@ -291,38 +265,10 @@ redirect_from:
       return items;
     }
 
-    function normalizeMascotTheme(value) {
-      return value === 'scientists' ? 'scientists' : 'frog';
-    }
-
-    function getStoredMascotTheme() {
-      try {
-        return normalizeMascotTheme(window.localStorage.getItem(mascotThemeStorageKey));
-      } catch (error) {
-        return 'frog';
-      }
-    }
-
-    function getCurrentMascotThemeName() {
-      return normalizeMascotTheme(mascotThemeState.current);
-    }
-
-    function getCurrentMascotTheme() {
-      return mascotThemes[getCurrentMascotThemeName()] || mascotThemes.frog;
-    }
-
-    function getCurrentMascotSources() {
-      return getCurrentMascotTheme().sources;
-    }
-
-    function randomCurrentMascotSource() {
-      return randomFrom(getCurrentMascotSources());
-    }
-
-    function getCurrentThemeSourceIndex(src, themeName = getCurrentMascotThemeName()) {
-      const theme = mascotThemes[normalizeMascotTheme(themeName)] || mascotThemes.frog;
-      const index = theme.sources.indexOf(src);
-      return index >= 0 ? index : 0;
+    function getMascotIndex(src) {
+      const match = /mascot-(\d+)\.png$/i.exec(src || '');
+      if (!match) return 0;
+      return Math.max(Number.parseInt(match[1], 10) - 1, 0);
     }
 
     function buildFortuneText(sources) {
@@ -350,7 +296,7 @@ redirect_from:
         }
       });
 
-      const fortune = slotFortunes[getCurrentThemeSourceIndex(repeatedSource) % slotFortunes.length];
+      const fortune = slotFortunes[getMascotIndex(repeatedSource) % slotFortunes.length];
       return `今日科研运势：${fortune}`;
     }
 
@@ -364,79 +310,6 @@ redirect_from:
       const fortuneText = buildFortuneText(resultSources);
       document.querySelectorAll('#slot-machine-fortune, #linkup-fortune').forEach((element) => {
         element.textContent = fortuneText;
-      });
-    }
-
-    function applyMascotThemeSelectionState() {
-      const themeName = getCurrentMascotThemeName();
-      document.body.dataset.mascotTheme = themeName;
-      document.querySelectorAll('[data-mascot-theme]').forEach((button) => {
-        const isActive = button.dataset.mascotTheme === themeName;
-        button.classList.toggle('is-active', isActive);
-        button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-      });
-      document.querySelectorAll('[data-mascot-theme-credits]').forEach((link) => {
-        link.hidden = themeName !== 'scientists';
-      });
-    }
-
-    function resetSlotMachineTheme() {
-      clearSlotTimers();
-      slotState.spinning = false;
-      const slotMachine = document.getElementById('mascot-slot-machine');
-      const lever = document.getElementById('slot-machine-lever');
-      const reels = Array.from(document.querySelectorAll('[data-slot-reel]'));
-      const tracks = Array.from(document.querySelectorAll('[data-slot-track]'));
-      if (slotMachine) {
-        slotMachine.classList.remove('is-spinning');
-      }
-      if (lever) {
-        lever.classList.remove('is-pulled');
-      }
-      if (!reels.length || !tracks.length) return;
-      tracks.forEach((track, index) => {
-        setSlotResult(reels[index], track, randomCurrentMascotSource(), [
-          randomCurrentMascotSource(),
-          randomCurrentMascotSource()
-        ]);
-      });
-      updateSlotFortune();
-    }
-
-    function applyMascotTheme(theme, options = {}) {
-      mascotThemeState.current = normalizeMascotTheme(theme);
-      if (options.persist !== false) {
-        try {
-          window.localStorage.setItem(mascotThemeStorageKey, mascotThemeState.current);
-        } catch (error) {
-          // ignore storage failures
-        }
-      }
-      applyMascotThemeSelectionState();
-      if (options.refresh === false) return;
-      resetSlotMachineTheme();
-      const restartButton = document.getElementById('linkup-restart');
-      if (restartButton) {
-        restartButton.classList.remove('is-pulled');
-      }
-      resetLinkupGame();
-      renderMobileMascotStrips();
-      renderSideMascots();
-      window.requestAnimationFrame(() => {
-        syncSlotMachineLayout();
-        applyDesktopScale();
-      });
-    }
-
-    function initMascotThemeSwitcher() {
-      mascotThemeState.current = getStoredMascotTheme();
-      applyMascotTheme(mascotThemeState.current, { persist: false, refresh: false });
-      document.querySelectorAll('[data-mascot-theme]').forEach((button) => {
-        if (button.dataset.themeBound === 'true') return;
-        button.dataset.themeBound = 'true';
-        button.addEventListener('click', () => {
-          applyMascotTheme(button.dataset.mascotTheme);
-        });
       });
     }
 
@@ -575,7 +448,7 @@ redirect_from:
     }
 
     function respawnMascot(item) {
-      item.el.src = randomCurrentMascotSource();
+      item.el.src = randomFrom(mascotSources);
     }
 
     function getRailHeight(layer) {
@@ -606,7 +479,7 @@ redirect_from:
         el.alt = '';
         el.decoding = 'async';
         el.loading = 'eager';
-        el.src = randomCurrentMascotSource();
+        el.src = randomFrom(mascotSources);
         layer.appendChild(el);
         items.push({
           el,
@@ -691,7 +564,6 @@ redirect_from:
 
       const canReuseMascots = Boolean(
         mascotState &&
-        mascotState.theme === getCurrentMascotThemeName() &&
         mascotState.left &&
         mascotState.right &&
         mascotState.left.items.length &&
@@ -729,7 +601,6 @@ redirect_from:
       const rightRailHeight = getRailHeight(rightLayer);
 
       mascotState = {
-        theme: getCurrentMascotThemeName(),
         lastTime: performance.now(),
         left: buildLane('left', leftRailHeight, leftLayer),
         right: buildLane('right', rightRailHeight, rightLayer)
@@ -769,17 +640,14 @@ redirect_from:
     function renderMobileMascotStrips() {
       const topTrack = document.getElementById('mobile-mascot-track-top');
       if (!topTrack) return;
-      const themeName = getCurrentMascotThemeName();
-      const currentSources = getCurrentMascotSources();
 
       if (isMobileHomeLayout()) {
-        if (topTrack.dataset.ready !== 'true' || topTrack.dataset.theme !== themeName) {
-          const topSequence = shuffleInPlace(currentSources.slice()).slice(0, Math.min(14, currentSources.length));
+        if (!topTrack.dataset.ready) {
+          const topSequence = shuffleInPlace(mascotSources.slice()).slice(0, Math.min(14, mascotSources.length));
           topTrack.innerHTML = '';
           topTrack.appendChild(createMobileStripGroup(topSequence));
           topTrack.appendChild(createMobileStripGroup(topSequence));
           topTrack.dataset.ready = 'true';
-          topTrack.dataset.theme = themeName;
         }
       }
 
@@ -1346,8 +1214,8 @@ redirect_from:
     }
 
     function setSlotResult(reel, track, src, sideSources) {
-      const leftSource = sideSources && sideSources[0] ? sideSources[0] : (track.dataset.leftSource || randomCurrentMascotSource());
-      const rightSource = sideSources && sideSources[1] ? sideSources[1] : (track.dataset.rightSource || randomCurrentMascotSource());
+      const leftSource = sideSources && sideSources[0] ? sideSources[0] : (track.dataset.leftSource || randomFrom(mascotSources));
+      const rightSource = sideSources && sideSources[1] ? sideSources[1] : (track.dataset.rightSource || randomFrom(mascotSources));
       const neighbors = [leftSource, src, rightSource];
       renderSlotTrack(track, neighbors);
       const metrics = applySlotMetrics(reel, track);
@@ -1385,10 +1253,10 @@ redirect_from:
         const sequenceLength = prefersReducedMotion ? 8 + index * 2 : 24 + index * 6;
         const sequence = [];
         for (let pointer = 0; pointer < sequenceLength; pointer += 1) {
-          sequence.push(randomCurrentMascotSource());
+          sequence.push(randomFrom(mascotSources));
         }
-        const target = randomCurrentMascotSource();
-        const finalSideSources = [randomCurrentMascotSource(), randomCurrentMascotSource()];
+        const target = randomFrom(mascotSources);
+        const finalSideSources = [randomFrom(mascotSources), randomFrom(mascotSources)];
         sequence.push(finalSideSources[0], target, finalSideSources[1]);
 
         renderSlotTrack(track, sequence);
@@ -1433,7 +1301,7 @@ redirect_from:
       const tracks = Array.from(document.querySelectorAll('[data-slot-track]'));
       if (!lever || !tracks.length || !reels.length) return;
       tracks.forEach((track, index) => {
-        setSlotResult(reels[index], track, randomCurrentMascotSource());
+        setSlotResult(reels[index], track, randomFrom(mascotSources));
       });
       updateSlotFortune();
       lever.addEventListener('click', spinSlotMachine);
@@ -1446,10 +1314,10 @@ redirect_from:
       if (!reels.length || !tracks.length) return;
       if (slotState.spinning) return;
       tracks.forEach((track, index) => {
-        const currentSource = track.dataset.currentSource || randomCurrentMascotSource();
+        const currentSource = track.dataset.currentSource || randomFrom(mascotSources);
         const sideSources = [
-          track.dataset.leftSource || randomCurrentMascotSource(),
-          track.dataset.rightSource || randomCurrentMascotSource()
+          track.dataset.leftSource || randomFrom(mascotSources),
+          track.dataset.rightSource || randomFrom(mascotSources)
         ];
         setSlotResult(reels[index], track, currentSource, sideSources);
       });
@@ -1464,7 +1332,7 @@ redirect_from:
     }
 
     function buildLinkupDeck() {
-      const sourcePool = getCurrentMascotSources().slice();
+      const sourcePool = mascotSources.slice();
       shuffleInPlace(sourcePool);
       const selectedSources = sourcePool.slice(0, getLinkupPairCount());
       const deck = selectedSources.concat(selectedSources);
@@ -1640,11 +1508,11 @@ redirect_from:
         const sequenceLength = prefersReducedMotion ? 6 + (index % 3) : 15 + (index % 3) * 3 + Math.floor(index / 3) * 2;
         const sequence = [];
         for (let pointer = 0; pointer < sequenceLength; pointer += 1) {
-          sequence.push(randomCurrentMascotSource());
+          sequence.push(randomFrom(mascotSources));
         }
 
         const target = nextDeck[index];
-        const finalSideSources = [randomCurrentMascotSource(), randomCurrentMascotSource()];
+        const finalSideSources = [randomFrom(mascotSources), randomFrom(mascotSources)];
         sequence.push(finalSideSources[0], target, finalSideSources[1]);
         renderLinkupShuffleTrack(track, sequence);
 
@@ -1806,7 +1674,6 @@ redirect_from:
 
     initPaperFilters();
     initFeaturedCarousel();
-    initMascotThemeSwitcher();
     initSlotMachine();
     initLinkupGame();
     initHomeToolSwitcher();
