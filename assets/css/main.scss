@@ -2066,16 +2066,27 @@ body[data-home-view='home'][data-home-tool='home'] .mascot-linkup-panel {
         object-fit: cover;
     }
 
-    body.is-fixed-scale-home .page {
+    body.is-fixed-scale-home #main > .page {
+        flex: 1 1 auto;
         width: 100%;
         min-width: 0;
+        max-width: 100%;
         position: relative;
         z-index: 1;
     }
 
-    body.is-fixed-scale-home .page__inner-wrap {
+    body.is-fixed-scale-home #main > .page .page__inner-wrap,
+    body.is-fixed-scale-home #main > .page .page__content,
+    body.is-fixed-scale-home #main > .page .featured-carousel,
+    body.is-fixed-scale-home #main > .page .paper-filter-toolbar,
+    body.is-fixed-scale-home #main > .page .paper-list,
+    body.is-fixed-scale-home #main > .page .paper-filter-empty {
         float: none;
         width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
     }
 
     body.is-fixed-scale-home .featured-carousel {
