@@ -238,6 +238,7 @@ redirect_from:
     };
     const linkupState = {
       board: [],
+      cells: [],
       matchedIndices: [],
       faceUpIndices: [],
       solved: false,
@@ -246,7 +247,8 @@ redirect_from:
       hideTimerId: 0,
       matchTimerId: 0,
       restartLeverTimerId: 0,
-      shuffleTimerIds: []
+      shuffleTimerIds: [],
+      shuffleFrameIds: []
     };
 
     function clamp(value, min, max) {
@@ -1340,12 +1342,12 @@ redirect_from:
       return deck;
     }
 
-    function getLinkupShuffleMetrics(cell) {
-      const cellWidth = Math.max(cell.clientWidth, 56);
-      const gap = clamp(cellWidth * 0.08, 4, 8);
-      const itemWidth = Math.min(cellWidth * 0.9, cellWidth - gap * 2 - 4);
+    function getLinkupShuffleMetrics(cellWidth) {
+      const normalizedWidth = Math.max(cellWidth, 56);
+      const gap = clamp(normalizedWidth * 0.08, 4, 8);
+      const itemWidth = Math.min(normalizedWidth * 0.9, normalizedWidth - gap * 2 - 4);
       const pitch = itemWidth + gap;
-      const centerOffset = (cellWidth - itemWidth) / 2;
+      const centerOffset = (normalizedWidth - itemWidth) / 2;
       return {
         itemWidth,
         gap,
@@ -1398,9 +1400,27 @@ redirect_from:
         });
         linkupState.shuffleTimerIds = [];
       }
+      if (linkupState.shuffleFrameIds.length) {
+        linkupState.shuffleFrameIds.forEach((frameId) => {
+          window.cancelAnimationFrame(frameId);
+        });
+        linkupState.shuffleFrameIds = [];
+      }
+      cleanupLinkupShuffleLayers();
     }
 
-    function buildLinkupCard(src) {
+    function cleanupLinkupShuffleLayers() {
+      const boardEl = document.getElementById('linkup-board');
+      if (!boardEl) return;
+      boardEl.querySelectorAll('.linkup-shuffle-layer').forEach((layer) => {
+        layer.remove();
+      });
+      boardEl.querySelectorAll('.linkup-cell.is-shuffling').forEach((cell) => {
+        cell.classList.remove('is-shuffling');
+      });
+    }
+
+    function buildLinkupCard() {
       const card = document.createElement('span');
       card.className = 'linkup-card';
 
@@ -1410,7 +1430,6 @@ redirect_from:
       image.alt = '';
       image.decoding = 'async';
       image.loading = 'eager';
-      image.src = src;
       front.appendChild(image);
 
       const back = document.createElement('span');
@@ -1421,39 +1440,67 @@ redirect_from:
       return card;
     }
 
+    function createLinkupCell(index) {
+      const cell = document.createElement('button');
+      cell.type = 'button';
+      cell.className = 'linkup-cell';
+      cell.setAttribute('role', 'gridcell');
+      cell.dataset.linkupIndex = String(index);
+      const card = buildLinkupCard();
+      cell.appendChild(card);
+      cell._linkupFrontImage = card.querySelector('.linkup-face--front img');
+      return cell;
+    }
+
+    function ensureLinkupBoardStructure(boardEl) {
+      if (!boardEl) return [];
+      if (boardEl.dataset.linkupBound !== 'true') {
+        boardEl.dataset.linkupBound = 'true';
+        boardEl.addEventListener('click', (event) => {
+          const cell = event.target.closest('.linkup-cell');
+          if (!cell || !boardEl.contains(cell)) return;
+          handleLinkupCellClick(Number(cell.dataset.linkupIndex || 0));
+        });
+      }
+
+      const expectedCount = linkupConfig.rows * linkupConfig.cols;
+      let cells = Array.from(boardEl.querySelectorAll('.linkup-cell'));
+      if (cells.length !== expectedCount) {
+        const fragment = document.createDocumentFragment();
+        for (let index = 0; index < expectedCount; index += 1) {
+          fragment.appendChild(createLinkupCell(index));
+        }
+        boardEl.innerHTML = '';
+        boardEl.appendChild(fragment);
+        cells = Array.from(boardEl.querySelectorAll('.linkup-cell'));
+      }
+      linkupState.cells = cells;
+      return cells;
+    }
+
+    function syncLinkupCell(cell, index) {
+      const src = linkupState.board[index] || '';
+      const isMatched = linkupState.matchedIndices.includes(index);
+      const isSelected = linkupState.faceUpIndices.includes(index);
+      const isFaceUp = isMatched || isSelected;
+      cell.dataset.linkupIndex = String(index);
+      cell.dataset.linkupSource = src;
+      cell.classList.toggle('is-faceup', isFaceUp);
+      cell.classList.toggle('is-matched', isMatched);
+      cell.classList.toggle('is-selected', !isMatched && isSelected);
+      cell.classList.remove('is-cleared', 'is-shuffling');
+      if (cell._linkupFrontImage && cell._linkupFrontImage.getAttribute('src') !== src) {
+        cell._linkupFrontImage.setAttribute('src', src);
+      }
+    }
+
     function renderLinkupBoard() {
       const boardEl = document.getElementById('linkup-board');
       if (!boardEl) return;
-
-      const fragment = document.createDocumentFragment();
-      linkupState.board.forEach((src, index) => {
-        const cell = document.createElement('button');
-        cell.type = 'button';
-        cell.className = 'linkup-cell';
-        cell.setAttribute('role', 'gridcell');
-        cell.dataset.linkupIndex = String(index);
-        cell.dataset.linkupSource = src;
-
-        const isMatched = linkupState.matchedIndices.includes(index);
-        const isFaceUp = isMatched || linkupState.faceUpIndices.includes(index);
-        if (isFaceUp) {
-          cell.classList.add('is-faceup');
-        }
-        if (isMatched) {
-          cell.classList.add('is-matched');
-        } else if (linkupState.faceUpIndices.includes(index)) {
-          cell.classList.add('is-selected');
-        }
-        cell.appendChild(buildLinkupCard(src));
-        cell.addEventListener('click', () => {
-          handleLinkupCellClick(index);
-        });
-
-        fragment.appendChild(cell);
+      const cells = ensureLinkupBoardStructure(boardEl);
+      cells.forEach((cell, index) => {
+        syncLinkupCell(cell, index);
       });
-
-      boardEl.innerHTML = '';
-      boardEl.appendChild(fragment);
     }
 
     function applyLinkupDeck(nextDeck) {
@@ -1467,6 +1514,7 @@ redirect_from:
       if (shell) {
         shell.classList.remove('is-solved', 'is-shuffling');
       }
+      cleanupLinkupShuffleLayers();
       renderLinkupBoard();
     }
 
@@ -1489,6 +1537,8 @@ redirect_from:
       shell.classList.add('is-shuffling');
       spinAuthorAvatar();
 
+      const baseMetrics = getLinkupShuffleMetrics(cells[0].clientWidth);
+      const preparedTracks = [];
       let settledCount = 0;
       cells.forEach((cell, index) => {
         cell.classList.remove('is-faceup', 'is-selected', 'is-matched', 'is-cleared');
@@ -1501,9 +1551,8 @@ redirect_from:
         layer.appendChild(track);
         cell.appendChild(layer);
 
-        const metrics = getLinkupShuffleMetrics(cell);
-        layer.style.setProperty('--linkup-shuffle-item-width', `${metrics.itemWidth}px`);
-        layer.style.setProperty('--linkup-shuffle-gap', `${metrics.gap}px`);
+        layer.style.setProperty('--linkup-shuffle-item-width', `${baseMetrics.itemWidth}px`);
+        layer.style.setProperty('--linkup-shuffle-gap', `${baseMetrics.gap}px`);
 
         const sequenceLength = prefersReducedMotion ? 6 + (index % 3) : 15 + (index % 3) * 3 + Math.floor(index / 3) * 2;
         const sequence = [];
@@ -1517,14 +1566,13 @@ redirect_from:
         renderLinkupShuffleTrack(track, sequence);
 
         track.style.transition = 'none';
-        track.style.transform = `translate3d(${getLinkupShuffleTranslate(metrics, 1)}px, 0, 0)`;
-        track.offsetWidth;
+        track.style.transform = `translate3d(${getLinkupShuffleTranslate(baseMetrics, 1)}px, 0, 0)`;
 
         const duration = prefersReducedMotion ? 150 : 760 + (index % 3) * 110 + Math.floor(index / 3) * 85;
         const targetIndex = sequence.length - 2;
-        window.requestAnimationFrame(() => {
+        preparedTracks.push(() => {
           track.style.transition = `transform ${duration}ms cubic-bezier(0.08, 0.86, 0.18, 1)`;
-          track.style.transform = `translate3d(${getLinkupShuffleTranslate(metrics, targetIndex)}px, 0, 0)`;
+          track.style.transform = `translate3d(${getLinkupShuffleTranslate(baseMetrics, targetIndex)}px, 0, 0)`;
         });
 
         let settled = false;
@@ -1555,6 +1603,17 @@ redirect_from:
         const fallbackTimer = window.setTimeout(settle, duration + 180);
         linkupState.shuffleTimerIds.push(fallbackTimer);
       });
+
+      const startFrameId = window.requestAnimationFrame(() => {
+        const playFrameId = window.requestAnimationFrame(() => {
+          linkupState.shuffleFrameIds = [];
+          preparedTracks.forEach((startTrackAnimation) => {
+            startTrackAnimation();
+          });
+        });
+        linkupState.shuffleFrameIds.push(playFrameId);
+      });
+      linkupState.shuffleFrameIds.push(startFrameId);
     }
 
     function finishLinkupGame() {
