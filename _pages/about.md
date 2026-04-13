@@ -994,9 +994,14 @@ redirect_from:
     function bindFeaturedViewportInteractions(viewport) {
       if (!viewport || viewport.dataset.featuredAutoscrollBound === 'true') return;
       viewport.dataset.featuredAutoscrollBound = 'true';
+      const interactiveSelector = 'a, button, input, textarea, select, summary, [role="button"]';
 
       viewport.addEventListener('pointerdown', (event) => {
         if (event.pointerType === 'mouse' && event.button !== 0) {
+          return;
+        }
+        if (event.target.closest(interactiveSelector)) {
+          featuredState.suppressClick = false;
           return;
         }
 
