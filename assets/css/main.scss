@@ -1566,6 +1566,118 @@ body[data-home-view='home'][data-home-tool='home'] .mascot-linkup-panel {
     display: none !important;
 }
 
+body.is-fixed-scale-home:not(.is-mobile-home-layout) .sidebar-home-tools {
+    --sidebar-tool-stage-height: 23.12rem;
+    --sidebar-tool-control-height: 4.5rem;
+    --sidebar-tool-button-width: 3.02rem;
+    --sidebar-tool-shell-gap: 0.56rem;
+}
+
+body.is-fixed-scale-home:not(.is-mobile-home-layout) .sidebar-tool-switch--inline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 var(--sidebar-tool-button-width);
+    width: var(--sidebar-tool-button-width);
+    min-width: var(--sidebar-tool-button-width);
+    min-height: var(--sidebar-tool-control-height);
+    padding: 0.34rem 0.18rem;
+    border-radius: 0.84rem;
+    font-size: 0.82rem;
+    line-height: 1.08;
+}
+
+body.is-fixed-scale-home:not(.is-mobile-home-layout) .sidebar-tool-switch__label {
+    width: auto;
+    line-height: 1.04;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+}
+
+body.is-fixed-scale-home:not(.is-mobile-home-layout) .sidebar-tool-inline-actions {
+    display: grid;
+    grid-template-columns: var(--sidebar-tool-button-width) minmax(0, 1fr) var(--sidebar-tool-button-width);
+    align-items: end;
+    gap: 0.12rem;
+    width: 100%;
+    min-height: var(--sidebar-tool-control-height);
+    margin: 0;
+    padding: 0 0 0.08rem;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+}
+
+body.is-fixed-scale-home:not(.is-mobile-home-layout) .slot-machine-fortune {
+    min-height: 1.32rem;
+    font-size: 0.84rem;
+}
+
+body.is-fixed-scale-home:not(.is-mobile-home-layout) .slot-machine-display,
+body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell {
+    min-height: var(--sidebar-tool-stage-height);
+    height: var(--sidebar-tool-stage-height);
+    box-sizing: border-box;
+    gap: calc(var(--sidebar-tool-shell-gap) * 0.45);
+    padding: 0.28rem 0.72rem 0.36rem;
+}
+
+body.is-fixed-scale-home:not(.is-mobile-home-layout) .slot-machine-display {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+body.is-fixed-scale-home:not(.is-mobile-home-layout) .slot-machine-display .sidebar-tool-inline-actions {
+    margin-top: auto;
+    padding-top: 0.22rem;
+}
+
+body.is-fixed-scale-home:not(.is-mobile-home-layout) .slot-machine-reel,
+body.is-fixed-scale-home:not(.is-mobile-home-layout) .slot-machine-item {
+    height: 4.78rem;
+}
+
+body.is-fixed-scale-home:not(.is-mobile-home-layout) .slot-machine-reel {
+    flex: 0 0 auto;
+}
+
+body.is-fixed-scale-home:not(.is-mobile-home-layout) .slot-machine-display .slot-machine-reel + .slot-machine-reel {
+    margin-top: 0.46rem;
+}
+
+body.is-fixed-scale-home:not(.is-mobile-home-layout) .slot-machine-lever {
+    flex: none;
+    width: 100%;
+    height: var(--sidebar-tool-control-height);
+}
+
+body.is-fixed-scale-home:not(.is-mobile-home-layout) .slot-machine-lever::before {
+    left: 0.76rem;
+    right: 0.76rem;
+}
+
+body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-board-wrap {
+    max-width: none;
+    width: 100%;
+    padding: 0 0.08rem 0.18rem;
+}
+
+body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-board {
+    gap: 0.54rem 0.46rem;
+}
+
+body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool-inline-actions {
+    margin-top: auto;
+}
+
 .greedy-nav {
     width: 100%;
     display: flex;
