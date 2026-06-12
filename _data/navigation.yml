@@ -1,1 +1,10 @@
-main: []
+main:
+  - title: "个人主页"
+    url: /
+    key: home
+  - title: "科研绘图"
+    url: /research-figures/
+    key: figures
+  - title: "小游戏"
+    url: /games/
+    key: games

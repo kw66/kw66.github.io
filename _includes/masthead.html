@@ -3,9 +3,8 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         <ul class="visible-links">
-          <li class="masthead__menu-item masthead__menu-item--button masthead__menu-home-item masthead__menu-item--view" data-home-view-target="home"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></li>
           {% for link in site.data.navigation.main %}
-            <li class="masthead__menu-item"><a href="{{ domain }}{{ link.url }}">{{ link.title }}</a></li>
+            <li class="masthead__menu-item masthead__menu-item--button masthead__menu-item--view" data-home-view-target="{{ link.key | default: link.title }}"><a href="{{ domain }}{{ link.url }}">{{ link.title }}</a></li>
           {% endfor %}
           <li class="masthead__menu-item masthead__menu-item--stats">
             <span class="masthead__stats" aria-label="Visitor statistics">
@@ -38,7 +37,10 @@
     function getCurrentHomeView() {
       const path = window.location.pathname || '/';
       const normalizedPath = path === '/index.html' ? '/' : path;
-      return normalizedPath === '/' ? 'home' : '';
+      if (normalizedPath === '/') return 'home';
+      if (normalizedPath.indexOf('/research-figures/') === 0) return 'figures';
+      if (normalizedPath.indexOf('/games/') === 0) return 'games';
+      return '';
     }
 
     function applyHomeViewState(view) {

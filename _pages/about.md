@@ -22,9 +22,10 @@ redirect_from:
         <div class='featured-item-body'>
           <p class='featured-item-title'>&#128339; &#20840;&#26102;&#27573;&#34892;&#20154;&#37325;&#35782;&#21035;</p>
           <div class='featured-actions'>
-            <a class='featured-button' href='https://arxiv.org/pdf/2509.16635' target='_blank' rel='noopener noreferrer'>Paper</a>
+            <a class='featured-button' href='https://arxiv.org/abs/2509.16635' target='_blank' rel='noopener noreferrer'>Paper</a>
             <a class='featured-button' href='https://github.com/kw66/AT-ReID' target='_blank' rel='noopener noreferrer'>Dataset</a>
             <a class='featured-button' href='https://github.com/kw66/AT-ReID/tree/main/AT-ReID' target='_blank' rel='noopener noreferrer'>Code</a>
+            <a class='featured-button' href='https://github.com/kw66/research-figures/tree/main/AT-ReID' target='_blank' rel='noopener noreferrer'>&#30011;&#22270;PPT</a>
           </div>
         </div>
       </article>
@@ -39,6 +40,32 @@ redirect_from:
             <a class='featured-button' href='https://kw66.github.io/PhD_Simulator/' target='_blank' rel='noopener noreferrer'>Play v1.0</a>
             <a class='featured-button' href='https://github.com/kw66/PhD_Simulator' target='_blank' rel='noopener noreferrer'>Project</a>
             <a class='featured-button' href='https://kw-game-graduate-simulator-v2.vercel.app/' target='_blank' rel='noopener noreferrer'>View v2.0</a>
+          </div>
+        </div>
+      </article>
+
+      <article class='featured-item' data-featured-item>
+        <div class='featured-item-image'>
+          <img src='images/works/photo-hero-cover.jpg' alt='Photo Hero game cover'>
+        </div>
+        <div class='featured-item-body'>
+          <p class='featured-item-title'>&#128247; &#22270;&#29255;&#21191;&#32773;</p>
+          <div class='featured-actions'>
+            <a class='featured-button' href='https://kw66.github.io/photo-hero/' target='_blank' rel='noopener noreferrer'>Play</a>
+            <a class='featured-button' href='https://github.com/kw66/photo-hero' target='_blank' rel='noopener noreferrer'>Project</a>
+          </div>
+        </div>
+      </article>
+
+      <article class='featured-item' data-featured-item>
+        <div class='featured-item-image'>
+          <img src='images/works/kw-chess-cover.webp' alt='KW Chess story game cover'>
+        </div>
+        <div class='featured-item-body'>
+          <p class='featured-item-title'>&#128081; &#31185;&#29579;&#35937;&#26827;</p>
+          <div class='featured-actions'>
+            <a class='featured-button' href='https://kw66.github.io/kw-chess/' target='_blank' rel='noopener noreferrer'>Play</a>
+            <a class='featured-button' href='https://github.com/kw66/kw-chess' target='_blank' rel='noopener noreferrer'>Project</a>
           </div>
         </div>
       </article>
@@ -78,11 +105,26 @@ redirect_from:
     <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Qinhong Yang, Qi Chu, Tao Gong, Nenghai Yu</p>
     <div class='work-meta-row'>
       <p class='work-meta'>Venue: CVPR 2026 &#10024; Highlight</p>
-      <span class='paper-link-button paper-link-button--disabled' aria-disabled='true'>&#128196; Paper</span>
+      <a class='paper-link-button' href='https://arxiv.org/abs/2606.12051' target='_blank' rel='noopener noreferrer'>&#128196; Paper</a>
+      <a class='paper-link-button' href='https://github.com/kw66/research-figures/tree/main/MFEN' target='_blank' rel='noopener noreferrer'>&#127912; &#30011;&#22270;PPT</a>
     </div>
     <div class='paper-tags'>
       <span class='paper-tag'>MoE</span>
       <span class='paper-tag'>Frequency</span>
+    </div>
+  </article>
+
+  <article class='paper-list-item' data-paper-tags='first-author,reid,causal-inference'>
+    <p class='work-title'>Causal Clothes-Invariant Feature Learning for Cloth-Changing Person Re-ID</p>
+    <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Jiaze Li, Yating Liu, Qi Chu, Mang Ye, Wanli Ouyang, Nenghai Yu</p>
+    <div class='work-meta-row'>
+      <p class='work-meta'>Venue: IEEE TCSVT 2026</p>
+      <a class='paper-link-button' href='https://arxiv.org/abs/2305.06145' target='_blank' rel='noopener noreferrer'>&#128196; Paper</a>
+      <a class='paper-link-button' href='https://github.com/kw66/research-figures/tree/main/CCIL' target='_blank' rel='noopener noreferrer'>&#127912; &#30011;&#22270;PPT</a>
+    </div>
+    <div class='paper-tags'>
+      <span class='paper-tag'>ReID</span>
+      <span class='paper-tag'>Causal Inference</span>
     </div>
   </article>
 
@@ -91,7 +133,7 @@ redirect_from:
     <p class='work-authors'>Yubo Wang, Yan Lu, Bin Liu, <strong>Xulin Li</strong>, Jixiang Niu</p>
     <div class='work-meta-row'>
       <p class='work-meta'>Venue: CVPR 2026</p>
-      <span class='paper-link-button paper-link-button--disabled' aria-disabled='true'>&#128196; Paper</span>
+      <a class='paper-link-button' href='https://openaccess.thecvf.com/content/CVPR2026/html/Wang_R2TUA_Reconstruction-residual_Based_Targeted_and_Untargeted_Attack_Against_Text-Image_Person_CVPR_2026_paper.html' target='_blank' rel='noopener noreferrer'>&#128196; Paper</a>
     </div>
   </article>
 
@@ -102,6 +144,7 @@ redirect_from:
       <p class='work-meta'>Venue: AAAI 2026</p>
       <a class='paper-link-button' href='https://doi.org/10.1609/aaai.v40i14.38151' target='_blank' rel='noopener noreferrer'>&#128196; Paper</a>
       <a class='paper-link-button' href='https://github.com/littleYaang/MagicPaint' target='_blank' rel='noopener noreferrer'>Project</a>
+      <a class='paper-link-button' href='https://github.com/kw66/research-figures/tree/main/MagicPaint' target='_blank' rel='noopener noreferrer'>&#127912; &#30011;&#22270;PPT</a>
     </div>
   </article>
 
@@ -119,8 +162,9 @@ redirect_from:
     <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Jiaze Li, Qinhong Yang, Tao Gong, Qi Chu, Mang Ye, Nenghai Yu</p>
     <div class='work-meta-row'>
       <p class='work-meta'>Venue: IJCAI 2025 &#128266; Oral</p>
-      <a class='paper-link-button' href='https://arxiv.org/pdf/2509.16635' target='_blank' rel='noopener noreferrer'>&#128196; Paper</a>
+      <a class='paper-link-button' href='https://arxiv.org/abs/2509.16635' target='_blank' rel='noopener noreferrer'>&#128196; Paper</a>
       <a class='paper-link-button' href='https://github.com/kw66/AT-ReID' target='_blank' rel='noopener noreferrer'>Project</a>
+      <a class='paper-link-button' href='https://github.com/kw66/research-figures/tree/main/AT-ReID' target='_blank' rel='noopener noreferrer'>&#127912; &#30011;&#22270;PPT</a>
     </div>
     <div class='paper-tags'>
       <span class='paper-tag'>MoE</span>
@@ -143,6 +187,7 @@ redirect_from:
     <div class='work-meta-row'>
       <p class='work-meta'>Venue: ECCV 2022</p>
       <a class='paper-link-button' href='https://arxiv.org/abs/2208.00967' target='_blank' rel='noopener noreferrer'>&#128196; Paper</a>
+      <a class='paper-link-button' href='https://github.com/kw66/research-figures/tree/main/CIFT' target='_blank' rel='noopener noreferrer'>&#127912; &#30011;&#22270;PPT</a>
     </div>
     <div class='paper-tags'>
       <span class='paper-tag'>Causal Inference</span>
@@ -156,6 +201,7 @@ redirect_from:
     <div class='work-meta-row'>
       <p class='work-meta'>Venue: PRCV 2022</p>
       <a class='paper-link-button' href='https://link.springer.com/chapter/10.1007/978-3-031-18907-4_41' target='_blank' rel='noopener noreferrer'>&#128196; Paper</a>
+      <a class='paper-link-button' href='https://github.com/kw66/research-figures/tree/main/CACC' target='_blank' rel='noopener noreferrer'>&#127912; &#30011;&#22270;PPT</a>
     </div>
     <div class='paper-tags'>
       <span class='paper-tag'>Metric Learning</span>
@@ -180,6 +226,8 @@ redirect_from:
     const leftLayerId = 'side-mascot-layer-left';
     const rightLayerId = 'side-mascot-layer-right';
     const authorAvatarReelId = 'author-avatar-reel';
+    const enableAmbientMascotRails = false;
+    const enableMobileMascotStrip = false;
     const activePaperFilters = new Set(['first-author']);
     const featuredState = {
       index: 0,
@@ -197,7 +245,9 @@ redirect_from:
     };
     const slotState = {
       spinning: false,
-      timers: []
+      timers: [],
+      leverPulled: false,
+      idleFrameId: 0
     };
     const slotVisual = {
       gapPx: 12
@@ -248,7 +298,12 @@ redirect_from:
       matchTimerId: 0,
       restartLeverTimerId: 0,
       shuffleTimerIds: [],
-      shuffleFrameIds: []
+      shuffleFrameIds: [],
+      previewTimerIds: [],
+      previewActive: false,
+      previewIndex: -1,
+      previewToken: 0,
+      playerStarted: false
     };
 
     function clamp(value, min, max) {
@@ -315,6 +370,10 @@ redirect_from:
       });
     }
 
+    function isSlotToolVisible() {
+      return (document.body?.dataset.homeTool || homeToolState.current) === 'slot';
+    }
+
     function updateHomeViewMode() {
       const currentView = 'home';
       document.body.classList.remove('is-slot-mode', 'is-linkup-mode');
@@ -352,6 +411,16 @@ redirect_from:
         const isActive = button.dataset.homeTool === effectiveTool;
         button.classList.toggle('is-active', isActive);
         button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
+
+      window.requestAnimationFrame(() => {
+        if (effectiveTool === 'linkup') {
+          stopSlotIdleDrift();
+          startLinkupPreview();
+          return;
+        }
+        stopLinkupPreview(true);
+        startSlotIdleDrift();
       });
     }
 
@@ -548,19 +617,32 @@ redirect_from:
       mascotRafId = window.requestAnimationFrame(mascotStep);
     }
 
+    function clearSideMascots(leftLayer, rightLayer) {
+      if (mascotRafId) {
+        window.cancelAnimationFrame(mascotRafId);
+        mascotRafId = null;
+      }
+      if (leftLayer) {
+        leftLayer.innerHTML = '';
+      }
+      if (rightLayer) {
+        rightLayer.innerHTML = '';
+      }
+      mascotState = null;
+    }
+
     function renderSideMascots() {
       const leftLayer = document.getElementById(leftLayerId);
       const rightLayer = document.getElementById(rightLayerId);
       if (!leftLayer || !rightLayer) return;
 
+      if (!enableAmbientMascotRails) {
+        clearSideMascots(leftLayer, rightLayer);
+        return;
+      }
+
       if (isMobileHomeLayout()) {
-        if (mascotRafId) {
-          window.cancelAnimationFrame(mascotRafId);
-          mascotRafId = null;
-        }
-        leftLayer.innerHTML = '';
-        rightLayer.innerHTML = '';
-        mascotState = null;
+        clearSideMascots(leftLayer, rightLayer);
         return;
       }
 
@@ -639,9 +721,21 @@ redirect_from:
       return group;
     }
 
+    function clearMobileMascotStrip(topTrack) {
+      if (!topTrack) return;
+      topTrack.classList.remove('is-animated');
+      topTrack.innerHTML = '';
+      delete topTrack.dataset.ready;
+    }
+
     function renderMobileMascotStrips() {
       const topTrack = document.getElementById('mobile-mascot-track-top');
       if (!topTrack) return;
+
+      if (!enableMobileMascotStrip) {
+        clearMobileMascotStrip(topTrack);
+        return;
+      }
 
       if (isMobileHomeLayout()) {
         if (!topTrack.dataset.ready) {
@@ -1233,6 +1327,50 @@ redirect_from:
       track.dataset.rightSource = rightSource;
     }
 
+    function stopSlotIdleDrift() {
+      if (slotState.idleFrameId) {
+        window.cancelAnimationFrame(slotState.idleFrameId);
+        slotState.idleFrameId = 0;
+      }
+      document.querySelectorAll('[data-slot-track]').forEach((track) => {
+        delete track.dataset.idlePhase;
+      });
+    }
+
+    function paintSlotIdleDrift(now) {
+      if (!isSlotToolVisible() || slotState.leverPulled || slotState.spinning || prefersReducedMotion) {
+        stopSlotIdleDrift();
+        return;
+      }
+
+      const reels = Array.from(document.querySelectorAll('[data-slot-reel]'));
+      const tracks = Array.from(document.querySelectorAll('[data-slot-track]'));
+      if (!reels.length || !tracks.length) {
+        stopSlotIdleDrift();
+        return;
+      }
+
+      tracks.forEach((track, index) => {
+        const reel = reels[index];
+        if (!reel) return;
+        const metrics = applySlotMetrics(reel, track);
+        const baseTranslate = getSlotTranslate(metrics, 1);
+        const phase = Number(track.dataset.idlePhase || index * 0.42);
+        track.dataset.idlePhase = String(phase);
+        const wave = Math.sin(now / 1250 + phase);
+        const offset = wave * Math.min(metrics.pitch * 0.16, 18);
+        track.style.transition = 'none';
+        track.style.transform = `translate3d(${(baseTranslate + offset).toFixed(2)}px, 0, 0)`;
+      });
+
+      slotState.idleFrameId = window.requestAnimationFrame(paintSlotIdleDrift);
+    }
+
+    function startSlotIdleDrift() {
+      if (!isSlotToolVisible() || slotState.leverPulled || slotState.spinning || prefersReducedMotion || slotState.idleFrameId) return;
+      slotState.idleFrameId = window.requestAnimationFrame(paintSlotIdleDrift);
+    }
+
     function clearSlotTimers() {
       slotState.timers.forEach((timerId) => {
         window.clearTimeout(timerId);
@@ -1247,6 +1385,8 @@ redirect_from:
       const tracks = Array.from(document.querySelectorAll('[data-slot-track]'));
       if (!slotMachine || !lever || !reels.length || slotState.spinning) return;
 
+      slotState.leverPulled = true;
+      stopSlotIdleDrift();
       clearSlotTimers();
       slotState.spinning = true;
       slotMachine.classList.add('is-spinning');
@@ -1313,6 +1453,7 @@ redirect_from:
       updateSlotFortune();
       lever.addEventListener('click', spinSlotMachine);
       window.requestAnimationFrame(syncSlotMachineLayout);
+      startSlotIdleDrift();
     }
 
     function syncSlotMachineLayout() {
@@ -1320,6 +1461,14 @@ redirect_from:
       const tracks = Array.from(document.querySelectorAll('[data-slot-track]'));
       if (!reels.length || !tracks.length) return;
       if (slotState.spinning) return;
+      if (slotState.idleFrameId && !slotState.leverPulled) {
+        tracks.forEach((track, index) => {
+          if (reels[index]) {
+            applySlotMetrics(reels[index], track);
+          }
+        });
+        return;
+      }
       tracks.forEach((track, index) => {
         const currentSource = track.dataset.currentSource || randomFrom(mascotSources);
         const sideSources = [
@@ -1328,6 +1477,7 @@ redirect_from:
         ];
         setSlotResult(reels[index], track, currentSource, sideSources);
       });
+      startSlotIdleDrift();
     }
 
     function getLinkupPairCount() {
@@ -1387,6 +1537,10 @@ redirect_from:
     }
 
     function clearLinkupTimers() {
+      clearLinkupPreviewTimers();
+      linkupState.previewActive = false;
+      linkupState.previewIndex = -1;
+      linkupState.previewToken += 1;
       if (linkupState.hideTimerId) {
         window.clearTimeout(linkupState.hideTimerId);
         linkupState.hideTimerId = 0;
@@ -1508,6 +1662,87 @@ redirect_from:
       });
     }
 
+    function isLinkupToolVisible() {
+      return (document.body?.dataset.homeTool || homeToolState.current) === 'linkup';
+    }
+
+    function canRunLinkupPreview() {
+      return isLinkupToolVisible()
+        && !prefersReducedMotion
+        && !document.hidden
+        && linkupState.board.length > 0
+        && !linkupState.playerStarted
+        && !linkupState.solved
+        && !linkupState.busy
+        && !linkupState.shuffling
+        && linkupState.matchedIndices.length === 0
+        && linkupState.faceUpIndices.length === 0;
+    }
+
+    function clearLinkupPreviewTimers() {
+      if (linkupState.previewTimerIds.length) {
+        linkupState.previewTimerIds.forEach((timerId) => {
+          window.clearTimeout(timerId);
+        });
+        linkupState.previewTimerIds = [];
+      }
+    }
+
+    function stopLinkupPreview(resetPreviewFace = false) {
+      const hadPreviewFace = linkupState.previewActive && linkupState.previewIndex >= 0;
+      linkupState.previewToken += 1;
+      clearLinkupPreviewTimers();
+      linkupState.previewActive = false;
+      linkupState.previewIndex = -1;
+
+      if (resetPreviewFace && hadPreviewFace && !linkupState.playerStarted) {
+        linkupState.faceUpIndices = [];
+        renderLinkupBoard();
+      }
+    }
+
+    function queueLinkupPreviewStep(token, index, delay) {
+      const timerId = window.setTimeout(() => {
+        linkupState.previewTimerIds = linkupState.previewTimerIds.filter((item) => item !== timerId);
+        runLinkupPreviewStep(token, index);
+      }, delay);
+      linkupState.previewTimerIds.push(timerId);
+    }
+
+    function runLinkupPreviewStep(token, index) {
+      if (!linkupState.previewActive || linkupState.previewToken !== token) return;
+      if (index >= linkupState.board.length) {
+        stopLinkupPreview(true);
+        return;
+      }
+      if (!canRunLinkupPreview()) {
+        stopLinkupPreview(true);
+        return;
+      }
+
+      linkupState.previewIndex = index;
+      linkupState.faceUpIndices = [index];
+      renderLinkupBoard();
+
+      const revealTimerId = window.setTimeout(() => {
+        linkupState.previewTimerIds = linkupState.previewTimerIds.filter((item) => item !== revealTimerId);
+        if (!linkupState.previewActive || linkupState.previewToken !== token || linkupState.playerStarted) return;
+        linkupState.faceUpIndices = [];
+        linkupState.previewIndex = -1;
+        renderLinkupBoard();
+        queueLinkupPreviewStep(token, index + 1, 120);
+      }, 380);
+      linkupState.previewTimerIds.push(revealTimerId);
+    }
+
+    function startLinkupPreview() {
+      if (linkupState.previewActive || !canRunLinkupPreview()) return;
+      linkupState.previewActive = true;
+      linkupState.previewToken += 1;
+      const token = linkupState.previewToken;
+      queueLinkupPreviewStep(token, 0, 520);
+    }
+
     function applyLinkupDeck(nextDeck) {
       const shell = document.getElementById('mascot-linkup-shell');
       linkupState.board = nextDeck.slice();
@@ -1516,11 +1751,13 @@ redirect_from:
       linkupState.solved = false;
       linkupState.busy = false;
       linkupState.shuffling = false;
+      linkupState.playerStarted = false;
       if (shell) {
         shell.classList.remove('is-solved', 'is-shuffling');
       }
       cleanupLinkupShuffleLayers();
       renderLinkupBoard();
+      startLinkupPreview();
     }
 
     function animateLinkupShuffle(nextDeck) {
@@ -1533,11 +1770,13 @@ redirect_from:
         return;
       }
 
+      stopLinkupPreview(true);
       linkupState.faceUpIndices = [];
       linkupState.matchedIndices = [];
       linkupState.solved = false;
       linkupState.busy = true;
       linkupState.shuffling = true;
+      linkupState.playerStarted = false;
       shell.classList.remove('is-solved');
       shell.classList.add('is-shuffling');
       spinAuthorAvatar();
@@ -1649,6 +1888,10 @@ redirect_from:
     }
 
     function handleLinkupCellClick(index) {
+      if (linkupState.previewActive) {
+        stopLinkupPreview(true);
+      }
+      linkupState.playerStarted = true;
       if (linkupState.solved || linkupState.busy || linkupState.shuffling || linkupState.matchedIndices.includes(index)) return;
       if (linkupState.faceUpIndices.includes(index)) return;
 
@@ -1756,6 +1999,14 @@ redirect_from:
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
         pauseFeaturedAutoScroll(4000);
+        stopSlotIdleDrift();
+        stopLinkupPreview(true);
+        return;
+      }
+      if ((document.body?.dataset.homeTool || homeToolState.current) === 'linkup') {
+        startLinkupPreview();
+      } else {
+        startSlotIdleDrift();
       }
     });
     window.addEventListener('beforeunload', () => {
@@ -1769,6 +2020,7 @@ redirect_from:
         window.clearTimeout(avatarState.timerId);
       }
       clearSlotTimers();
+      stopSlotIdleDrift();
       clearLinkupTimers();
       clearFeaturedAutoScroll();
     });
