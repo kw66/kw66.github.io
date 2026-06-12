@@ -246,11 +246,19 @@ redirect_from:
     const slotState = {
       spinning: false,
       timers: [],
-      leverPulled: false,
-      idleFrameId: 0
+      idleFrameId: 0,
+      idleLastTime: 0,
+      idleResumeTimerId: 0
     };
     const slotVisual = {
       gapPx: 12
+    };
+    const slotIdleVisual = {
+      baseIndex: 3,
+      trackLength: 9,
+      desktopSpeed: 78,
+      mobileSpeed: 64,
+      resumeDelay: 10000
     };
     const mobileHomeMaxWidth = 768;
     const slotFortunes = [
@@ -266,6 +274,11 @@ redirect_from:
     const linkupConfig = {
       rows: 4,
       cols: 3
+    };
+    const linkupPreviewTiming = {
+      initialDelay: 680,
+      faceUpDuration: 620,
+      betweenDelay: 240
     };
     const mascotConfig = {
       size: 84,
@@ -1322,24 +1335,96 @@ redirect_from:
       const metrics = applySlotMetrics(reel, track);
       track.style.transition = 'none';
       track.style.transform = `translate3d(${getSlotTranslate(metrics, 1)}px, 0, 0)`;
+      delete track.dataset.idleMode;
+      delete track.dataset.idleOffset;
       track.dataset.currentSource = src;
       track.dataset.leftSource = leftSource;
       track.dataset.rightSource = rightSource;
     }
 
-    function stopSlotIdleDrift() {
+    function clearSlotIdleResumeTimer() {
+      if (slotState.idleResumeTimerId) {
+        window.clearTimeout(slotState.idleResumeTimerId);
+        slotState.idleResumeTimerId = 0;
+      }
+    }
+
+    function getSlotIdleSpeed() {
+      return isMobileHomeLayout() ? slotIdleVisual.mobileSpeed : slotIdleVisual.desktopSpeed;
+    }
+
+    function getSlotIdleCenterSource(track) {
+      const centerItem = track.children[slotIdleVisual.baseIndex];
+      const centerImage = centerItem ? centerItem.querySelector('img') : null;
+      return centerImage ? centerImage.getAttribute('src') : (track.dataset.currentSource || randomFrom(mascotSources));
+    }
+
+    function ensureSlotIdleTrack(reel, track) {
+      const metrics = applySlotMetrics(reel, track);
+      if (track.dataset.idleMode === 'true' && track.children.length >= slotIdleVisual.trackLength) {
+        return metrics;
+      }
+
+      const sources = [];
+      for (let index = 0; index < slotIdleVisual.trackLength; index += 1) {
+        if (index === slotIdleVisual.baseIndex && track.dataset.currentSource) {
+          sources.push(track.dataset.currentSource);
+        } else {
+          sources.push(randomFrom(mascotSources));
+        }
+      }
+
+      renderSlotTrack(track, sources);
+      track.dataset.idleMode = 'true';
+      track.dataset.idleOffset = '0';
+      track.dataset.currentSource = sources[slotIdleVisual.baseIndex];
+      track.dataset.leftSource = sources[slotIdleVisual.baseIndex - 1] || randomFrom(mascotSources);
+      track.dataset.rightSource = sources[slotIdleVisual.baseIndex + 1] || randomFrom(mascotSources);
+      track.style.transition = 'none';
+      track.style.transform = `translate3d(${getSlotTranslate(metrics, slotIdleVisual.baseIndex)}px, 0, 0)`;
+      return metrics;
+    }
+
+    function settleSlotIdleTrack(reel, track) {
+      if (track.dataset.idleMode !== 'true') return;
+      const currentSource = getSlotIdleCenterSource(track);
+      const leftItem = track.children[slotIdleVisual.baseIndex - 1];
+      const rightItem = track.children[slotIdleVisual.baseIndex + 1];
+      const leftImage = leftItem ? leftItem.querySelector('img') : null;
+      const rightImage = rightItem ? rightItem.querySelector('img') : null;
+      const sideSources = [
+        leftImage ? leftImage.getAttribute('src') : randomFrom(mascotSources),
+        rightImage ? rightImage.getAttribute('src') : randomFrom(mascotSources)
+      ];
+      delete track.dataset.idleMode;
+      delete track.dataset.idleOffset;
+      setSlotResult(reel, track, currentSource, sideSources);
+    }
+
+    function stopSlotIdleDrift(options = {}) {
       if (slotState.idleFrameId) {
         window.cancelAnimationFrame(slotState.idleFrameId);
         slotState.idleFrameId = 0;
       }
-      document.querySelectorAll('[data-slot-track]').forEach((track) => {
-        delete track.dataset.idlePhase;
-      });
+      slotState.idleLastTime = 0;
+      if (options.clearResumeTimer !== false) {
+        clearSlotIdleResumeTimer();
+      }
+
+      if (options.settle) {
+        const reels = Array.from(document.querySelectorAll('[data-slot-reel]'));
+        const tracks = Array.from(document.querySelectorAll('[data-slot-track]'));
+        tracks.forEach((track, index) => {
+          if (reels[index]) {
+            settleSlotIdleTrack(reels[index], track);
+          }
+        });
+      }
     }
 
     function paintSlotIdleDrift(now) {
-      if (!isSlotToolVisible() || slotState.leverPulled || slotState.spinning || prefersReducedMotion) {
-        stopSlotIdleDrift();
+      if (!isSlotToolVisible() || slotState.spinning || prefersReducedMotion || document.hidden) {
+        stopSlotIdleDrift({ settle: true });
         return;
       }
 
@@ -1350,25 +1435,48 @@ redirect_from:
         return;
       }
 
+      const lastTime = slotState.idleLastTime || now;
+      const elapsedSeconds = Math.min(Math.max((now - lastTime) / 1000, 0), 0.08);
+      slotState.idleLastTime = now;
+      const speed = getSlotIdleSpeed();
+
       tracks.forEach((track, index) => {
         const reel = reels[index];
         if (!reel) return;
-        const metrics = applySlotMetrics(reel, track);
-        const baseTranslate = getSlotTranslate(metrics, 1);
-        const phase = Number(track.dataset.idlePhase || index * 0.42);
-        track.dataset.idlePhase = String(phase);
-        const wave = Math.sin(now / 1250 + phase);
-        const offset = wave * Math.min(metrics.pitch * 0.16, 18);
+        const metrics = ensureSlotIdleTrack(reel, track);
+        let offset = Number(track.dataset.idleOffset || '0') - speed * elapsedSeconds;
+        while (Math.abs(offset) >= metrics.pitch && track.children.length) {
+          track.removeChild(track.firstElementChild);
+          track.appendChild(createSlotItem(randomFrom(mascotSources)));
+          offset += metrics.pitch;
+        }
+
+        const currentSource = getSlotIdleCenterSource(track);
+        track.dataset.idleOffset = String(offset);
+        track.dataset.currentSource = currentSource;
+        track.dataset.leftSource = randomFrom(mascotSources);
+        track.dataset.rightSource = randomFrom(mascotSources);
         track.style.transition = 'none';
-        track.style.transform = `translate3d(${(baseTranslate + offset).toFixed(2)}px, 0, 0)`;
+        track.style.transform = `translate3d(${(getSlotTranslate(metrics, slotIdleVisual.baseIndex) + offset).toFixed(2)}px, 0, 0)`;
       });
 
       slotState.idleFrameId = window.requestAnimationFrame(paintSlotIdleDrift);
     }
 
     function startSlotIdleDrift() {
-      if (!isSlotToolVisible() || slotState.leverPulled || slotState.spinning || prefersReducedMotion || slotState.idleFrameId) return;
+      if (slotState.idleResumeTimerId) return;
+      if (!isSlotToolVisible() || slotState.spinning || prefersReducedMotion || document.hidden || slotState.idleFrameId) return;
+      slotState.idleLastTime = 0;
       slotState.idleFrameId = window.requestAnimationFrame(paintSlotIdleDrift);
+    }
+
+    function scheduleSlotIdleResume() {
+      clearSlotIdleResumeTimer();
+      if (prefersReducedMotion || !isSlotToolVisible() || document.hidden) return;
+      slotState.idleResumeTimerId = window.setTimeout(() => {
+        slotState.idleResumeTimerId = 0;
+        startSlotIdleDrift();
+      }, slotIdleVisual.resumeDelay);
     }
 
     function clearSlotTimers() {
@@ -1376,6 +1484,7 @@ redirect_from:
         window.clearTimeout(timerId);
       });
       slotState.timers = [];
+      clearSlotIdleResumeTimer();
     }
 
     function spinSlotMachine() {
@@ -1385,8 +1494,7 @@ redirect_from:
       const tracks = Array.from(document.querySelectorAll('[data-slot-track]'));
       if (!slotMachine || !lever || !reels.length || slotState.spinning) return;
 
-      slotState.leverPulled = true;
-      stopSlotIdleDrift();
+      stopSlotIdleDrift({ clearResumeTimer: true });
       clearSlotTimers();
       slotState.spinning = true;
       slotMachine.classList.add('is-spinning');
@@ -1411,7 +1519,7 @@ redirect_from:
         track.style.transform = `translate3d(${getSlotTranslate(metrics, 1)}px, 0, 0)`;
         track.offsetWidth;
 
-        const duration = prefersReducedMotion ? 120 : 1380 + index * 520;
+        const duration = prefersReducedMotion ? 120 : 1080 + index * 360;
         const targetIndex = sequence.length - 2;
         window.requestAnimationFrame(() => {
           track.style.transition = `transform ${duration}ms cubic-bezier(0.08, 0.86, 0.18, 1)`;
@@ -1433,6 +1541,7 @@ redirect_from:
               lever.classList.remove('is-pulled');
             }, prefersReducedMotion ? 30 : 200);
             slotState.timers.push(releaseTimer);
+            scheduleSlotIdleResume();
           }
         };
 
@@ -1461,10 +1570,12 @@ redirect_from:
       const tracks = Array.from(document.querySelectorAll('[data-slot-track]'));
       if (!reels.length || !tracks.length) return;
       if (slotState.spinning) return;
-      if (slotState.idleFrameId && !slotState.leverPulled) {
+      if (slotState.idleFrameId) {
         tracks.forEach((track, index) => {
           if (reels[index]) {
-            applySlotMetrics(reels[index], track);
+            const metrics = ensureSlotIdleTrack(reels[index], track);
+            const offset = Number(track.dataset.idleOffset || '0');
+            track.style.transform = `translate3d(${(getSlotTranslate(metrics, slotIdleVisual.baseIndex) + offset).toFixed(2)}px, 0, 0)`;
           }
         });
         return;
@@ -1667,6 +1778,12 @@ redirect_from:
     }
 
     function canRunLinkupPreview() {
+      const previewOwnsFace = linkupState.previewActive
+        && linkupState.previewIndex >= 0
+        && linkupState.faceUpIndices.length === 1
+        && linkupState.faceUpIndices[0] === linkupState.previewIndex;
+      const allCardsCovered = linkupState.faceUpIndices.length === 0 || previewOwnsFace;
+
       return isLinkupToolVisible()
         && !prefersReducedMotion
         && !document.hidden
@@ -1676,7 +1793,7 @@ redirect_from:
         && !linkupState.busy
         && !linkupState.shuffling
         && linkupState.matchedIndices.length === 0
-        && linkupState.faceUpIndices.length === 0;
+        && allCardsCovered;
     }
 
     function clearLinkupPreviewTimers() {
@@ -1711,17 +1828,14 @@ redirect_from:
 
     function runLinkupPreviewStep(token, index) {
       if (!linkupState.previewActive || linkupState.previewToken !== token) return;
-      if (index >= linkupState.board.length) {
-        stopLinkupPreview(true);
-        return;
-      }
       if (!canRunLinkupPreview()) {
         stopLinkupPreview(true);
         return;
       }
 
-      linkupState.previewIndex = index;
-      linkupState.faceUpIndices = [index];
+      const normalizedIndex = index % linkupState.board.length;
+      linkupState.previewIndex = normalizedIndex;
+      linkupState.faceUpIndices = [normalizedIndex];
       renderLinkupBoard();
 
       const revealTimerId = window.setTimeout(() => {
@@ -1730,8 +1844,8 @@ redirect_from:
         linkupState.faceUpIndices = [];
         linkupState.previewIndex = -1;
         renderLinkupBoard();
-        queueLinkupPreviewStep(token, index + 1, 120);
-      }, 380);
+        queueLinkupPreviewStep(token, normalizedIndex + 1, linkupPreviewTiming.betweenDelay);
+      }, linkupPreviewTiming.faceUpDuration);
       linkupState.previewTimerIds.push(revealTimerId);
     }
 
@@ -1740,7 +1854,7 @@ redirect_from:
       linkupState.previewActive = true;
       linkupState.previewToken += 1;
       const token = linkupState.previewToken;
-      queueLinkupPreviewStep(token, 0, 520);
+      queueLinkupPreviewStep(token, 0, linkupPreviewTiming.initialDelay);
     }
 
     function applyLinkupDeck(nextDeck) {
