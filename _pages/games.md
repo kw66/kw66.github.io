@@ -16,11 +16,6 @@ page_class: project-hub-page
         <div class="project-card__kicker">模拟经营</div>
         <h2>研究生模拟器</h2>
         <p>研究生日常主题的网页小游戏，有初版和新版两个入口。</p>
-        <div class="project-card__tags" aria-label="标签">
-          <span>模拟</span>
-          <span>校园</span>
-          <span>网页游戏</span>
-        </div>
         <div class="project-card__actions">
           <a href="https://kw66.github.io/PhD_Simulator/" target="_blank" rel="noopener noreferrer">游玩初版</a>
           <a href="https://kw-game-graduate-simulator-v2.vercel.app/" target="_blank" rel="noopener noreferrer">查看新版</a>
@@ -37,11 +32,6 @@ page_class: project-hub-page
         <div class="project-card__kicker">图片冒险</div>
         <h2>图片勇者</h2>
         <p>围绕图片理解和互动展开的轻量网页游戏。</p>
-        <div class="project-card__tags" aria-label="标签">
-          <span>图片</span>
-          <span>冒险</span>
-          <span>智能识图</span>
-        </div>
         <div class="project-card__actions">
           <a href="https://kw66.github.io/photo-hero/" target="_blank" rel="noopener noreferrer">开始游玩</a>
           <a href="https://github.com/kw66/photo-hero" target="_blank" rel="noopener noreferrer">项目源码</a>
@@ -57,11 +47,6 @@ page_class: project-hub-page
         <div class="project-card__kicker">象棋对弈</div>
         <h2>科王象棋</h2>
         <p>中国象棋题材的网页小游戏项目。</p>
-        <div class="project-card__tags" aria-label="标签">
-          <span>象棋</span>
-          <span>策略</span>
-          <span>网页游戏</span>
-        </div>
         <div class="project-card__actions">
           <a href="https://kw66.github.io/kw-chess/" target="_blank" rel="noopener noreferrer">开始游玩</a>
           <a href="https://github.com/kw66/kw-chess" target="_blank" rel="noopener noreferrer">项目源码</a>
