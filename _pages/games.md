@@ -3,6 +3,7 @@ permalink: /games/
 title: "小游戏"
 excerpt: "Small web games"
 author_profile: false
+page_class: project-hub-page
 ---
 
 <section class="project-hub project-hub--games" aria-labelledby="games-hub-title">

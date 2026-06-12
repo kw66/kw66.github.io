@@ -3,6 +3,7 @@ permalink: /research-figures/
 title: "科研绘图"
 excerpt: "Research figure resources"
 author_profile: false
+page_class: project-hub-page
 ---
 
 <section class="project-hub project-hub--figures" aria-labelledby="figures-hub-title">

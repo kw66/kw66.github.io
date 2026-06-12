@@ -2665,6 +2665,25 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
     display: none !important;
 }
 
+.project-hub-page {
+    float: none;
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.project-hub-page .page__inner-wrap,
+.project-hub-page .page__content {
+    float: none;
+    width: 100%;
+    max-width: none;
+}
+
+.project-hub-page .page__content > p:empty {
+    display: none;
+}
+
 .project-hub {
     --hub-accent: #4b7f86;
     --hub-accent-soft: #e4eff0;
