@@ -1,76 +1,70 @@
 ---
 permalink: /games/
 title: "小游戏"
-excerpt: "Small web games"
+excerpt: "小游戏入口"
 author_profile: false
 page_class: project-hub-page
 ---
 
-<section class="project-hub project-hub--games" aria-labelledby="games-hub-title">
-  <header class="project-hub__header">
-    <p class="project-hub__eyebrow">Small Games</p>
-    <h1 id="games-hub-title">小游戏入口</h1>
-    <p class="project-hub__intro">这里集中放可以直接玩的网页小游戏；想放松一下时从这里进入，不需要穿过论文列表。</p>
-  </header>
-
+<section class="project-hub project-hub--games" aria-label="小游戏入口">
   <div class="project-hub__grid">
-    <article class="project-card project-card--wide">
-      <a class="project-card__media" href="https://kw66.github.io/PhD_Simulator/" target="_blank" rel="noopener noreferrer" aria-label="Play PhD Simulator">
-        <img src="{{ '/images/works/phd-simulator-cover.jpg' | relative_url }}" alt="PhD Simulator game cover">
+    <article class="project-card">
+      <a class="project-card__media" href="https://kw66.github.io/PhD_Simulator/" target="_blank" rel="noopener noreferrer" aria-label="打开研究生模拟器">
+        <img src="{{ '/images/works/phd-simulator-cover.jpg' | relative_url }}" alt="研究生模拟器封面">
       </a>
       <div class="project-card__body">
-        <div class="project-card__kicker">Simulation Game</div>
+        <div class="project-card__kicker">模拟经营</div>
         <h2>研究生模拟器</h2>
-        <p>研究生日常主题的网页小游戏，有 v1.0 和 v2.0 两个入口。</p>
-        <div class="project-card__tags" aria-label="Tags">
-          <span>Simulation</span>
-          <span>Campus</span>
-          <span>Web Game</span>
+        <p>研究生日常主题的网页小游戏，有初版和新版两个入口。</p>
+        <div class="project-card__tags" aria-label="标签">
+          <span>模拟</span>
+          <span>校园</span>
+          <span>网页游戏</span>
         </div>
         <div class="project-card__actions">
-          <a href="https://kw66.github.io/PhD_Simulator/" target="_blank" rel="noopener noreferrer">Play v1.0</a>
-          <a href="https://kw-game-graduate-simulator-v2.vercel.app/" target="_blank" rel="noopener noreferrer">View v2.0</a>
-          <a href="https://github.com/kw66/PhD_Simulator" target="_blank" rel="noopener noreferrer">Project</a>
+          <a href="https://kw66.github.io/PhD_Simulator/" target="_blank" rel="noopener noreferrer">游玩初版</a>
+          <a href="https://kw-game-graduate-simulator-v2.vercel.app/" target="_blank" rel="noopener noreferrer">查看新版</a>
+          <a href="https://github.com/kw66/PhD_Simulator" target="_blank" rel="noopener noreferrer">项目源码</a>
         </div>
       </div>
     </article>
 
     <article class="project-card">
-      <a class="project-card__media" href="https://kw66.github.io/photo-hero/" target="_blank" rel="noopener noreferrer" aria-label="Play Photo Hero">
-        <img src="{{ '/images/works/photo-hero-cover.jpg' | relative_url }}" alt="Photo Hero game cover">
+      <a class="project-card__media" href="https://kw66.github.io/photo-hero/" target="_blank" rel="noopener noreferrer" aria-label="打开图片勇者">
+        <img src="{{ '/images/works/photo-hero-cover.jpg' | relative_url }}" alt="图片勇者封面">
       </a>
       <div class="project-card__body">
-        <div class="project-card__kicker">Image Game</div>
+        <div class="project-card__kicker">图片冒险</div>
         <h2>图片勇者</h2>
         <p>围绕图片理解和互动展开的轻量网页游戏。</p>
-        <div class="project-card__tags" aria-label="Tags">
-          <span>Image</span>
-          <span>Adventure</span>
-          <span>AI</span>
+        <div class="project-card__tags" aria-label="标签">
+          <span>图片</span>
+          <span>冒险</span>
+          <span>智能识图</span>
         </div>
         <div class="project-card__actions">
-          <a href="https://kw66.github.io/photo-hero/" target="_blank" rel="noopener noreferrer">Play</a>
-          <a href="https://github.com/kw66/photo-hero" target="_blank" rel="noopener noreferrer">Project</a>
+          <a href="https://kw66.github.io/photo-hero/" target="_blank" rel="noopener noreferrer">开始游玩</a>
+          <a href="https://github.com/kw66/photo-hero" target="_blank" rel="noopener noreferrer">项目源码</a>
         </div>
       </div>
     </article>
 
     <article class="project-card">
-      <a class="project-card__media" href="https://kw66.github.io/kw-chess/" target="_blank" rel="noopener noreferrer" aria-label="Play KW Chess">
-        <img src="{{ '/images/works/kw-chess-cover.webp' | relative_url }}" alt="KW Chess game cover">
+      <a class="project-card__media" href="https://kw66.github.io/kw-chess/" target="_blank" rel="noopener noreferrer" aria-label="打开科王象棋">
+        <img src="{{ '/images/works/kw-chess-cover.webp' | relative_url }}" alt="科王象棋封面">
       </a>
       <div class="project-card__body">
-        <div class="project-card__kicker">Chess Game</div>
+        <div class="project-card__kicker">象棋对弈</div>
         <h2>科王象棋</h2>
         <p>中国象棋题材的网页小游戏项目。</p>
-        <div class="project-card__tags" aria-label="Tags">
-          <span>Chess</span>
-          <span>Strategy</span>
-          <span>Web Game</span>
+        <div class="project-card__tags" aria-label="标签">
+          <span>象棋</span>
+          <span>策略</span>
+          <span>网页游戏</span>
         </div>
         <div class="project-card__actions">
-          <a href="https://kw66.github.io/kw-chess/" target="_blank" rel="noopener noreferrer">Play</a>
-          <a href="https://github.com/kw66/kw-chess" target="_blank" rel="noopener noreferrer">Project</a>
+          <a href="https://kw66.github.io/kw-chess/" target="_blank" rel="noopener noreferrer">开始游玩</a>
+          <a href="https://github.com/kw66/kw-chess" target="_blank" rel="noopener noreferrer">项目源码</a>
         </div>
       </div>
     </article>

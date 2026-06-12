@@ -32,40 +32,40 @@ redirect_from:
 
       <article class='featured-item' data-featured-item>
         <div class='featured-item-image'>
-          <img src='images/works/phd-simulator-cover.jpg' alt='PhD Simulator cover'>
+          <img src='images/works/phd-simulator-cover.jpg' alt='研究生模拟器封面'>
         </div>
         <div class='featured-item-body'>
           <p class='featured-item-title'>&#127918; &#30740;&#31350;&#29983;&#27169;&#25311;&#22120;&#23567;&#28216;&#25103;</p>
           <div class='featured-actions'>
-            <a class='featured-button' href='https://kw66.github.io/PhD_Simulator/' target='_blank' rel='noopener noreferrer'>Play v1.0</a>
-            <a class='featured-button' href='https://github.com/kw66/PhD_Simulator' target='_blank' rel='noopener noreferrer'>Project</a>
-            <a class='featured-button' href='https://kw-game-graduate-simulator-v2.vercel.app/' target='_blank' rel='noopener noreferrer'>View v2.0</a>
+            <a class='featured-button' href='https://kw66.github.io/PhD_Simulator/' target='_blank' rel='noopener noreferrer'>游玩初版</a>
+            <a class='featured-button' href='https://github.com/kw66/PhD_Simulator' target='_blank' rel='noopener noreferrer'>项目源码</a>
+            <a class='featured-button' href='https://kw-game-graduate-simulator-v2.vercel.app/' target='_blank' rel='noopener noreferrer'>查看新版</a>
           </div>
         </div>
       </article>
 
       <article class='featured-item' data-featured-item>
         <div class='featured-item-image'>
-          <img src='images/works/photo-hero-cover.jpg' alt='Photo Hero game cover'>
+          <img src='images/works/photo-hero-cover.jpg' alt='图片勇者封面'>
         </div>
         <div class='featured-item-body'>
           <p class='featured-item-title'>&#128247; &#22270;&#29255;&#21191;&#32773;</p>
           <div class='featured-actions'>
-            <a class='featured-button' href='https://kw66.github.io/photo-hero/' target='_blank' rel='noopener noreferrer'>Play</a>
-            <a class='featured-button' href='https://github.com/kw66/photo-hero' target='_blank' rel='noopener noreferrer'>Project</a>
+            <a class='featured-button' href='https://kw66.github.io/photo-hero/' target='_blank' rel='noopener noreferrer'>开始游玩</a>
+            <a class='featured-button' href='https://github.com/kw66/photo-hero' target='_blank' rel='noopener noreferrer'>项目源码</a>
           </div>
         </div>
       </article>
 
       <article class='featured-item' data-featured-item>
         <div class='featured-item-image'>
-          <img src='images/works/kw-chess-cover.webp' alt='KW Chess story game cover'>
+          <img src='images/works/kw-chess-cover.webp' alt='科王象棋封面'>
         </div>
         <div class='featured-item-body'>
           <p class='featured-item-title'>&#128081; &#31185;&#29579;&#35937;&#26827;</p>
           <div class='featured-actions'>
-            <a class='featured-button' href='https://kw66.github.io/kw-chess/' target='_blank' rel='noopener noreferrer'>Play</a>
-            <a class='featured-button' href='https://github.com/kw66/kw-chess' target='_blank' rel='noopener noreferrer'>Project</a>
+            <a class='featured-button' href='https://kw66.github.io/kw-chess/' target='_blank' rel='noopener noreferrer'>开始游玩</a>
+            <a class='featured-button' href='https://github.com/kw66/kw-chess' target='_blank' rel='noopener noreferrer'>项目源码</a>
           </div>
         </div>
       </article>
