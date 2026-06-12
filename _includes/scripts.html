@@ -1,5 +1,5 @@
 {% unless page.permalink == "/" or page.url == "/" %}
-<script src="assets/js/main.min.js"></script>
+<script src="{{ '/assets/js/main.min.js' | relative_url }}"></script>
 {% endunless %}
 
 {% include analytics.html %}
