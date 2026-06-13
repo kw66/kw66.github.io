@@ -10,7 +10,7 @@ page_class: project-hub-page
   <div class="project-hub__grid">
     <article class="project-card">
       <a class="project-card__media" href="https://kw66.github.io/PhD_Simulator/" target="_blank" rel="noopener noreferrer" aria-label="打开研究生模拟器">
-        <img src="{{ '/images/works/phd-simulator-cover.jpg' | relative_url }}" alt="研究生模拟器封面">
+        <img src="{{ '/images/works/phd-simulator-cover-card.webp' | relative_url }}" alt="研究生模拟器封面" width="1100" height="614" decoding="async" fetchpriority="high">
         <span class="project-card__kicker">模拟经营</span>
       </a>
       <div class="project-card__body">
@@ -28,7 +28,7 @@ page_class: project-hub-page
 
     <article class="project-card">
       <a class="project-card__media" href="https://kw66.github.io/photo-hero/" target="_blank" rel="noopener noreferrer" aria-label="打开图片勇者">
-        <img src="{{ '/images/works/photo-hero-cover.jpg' | relative_url }}" alt="图片勇者封面">
+        <img src="{{ '/images/works/photo-hero-cover-card.webp' | relative_url }}" alt="图片勇者封面" width="580" height="368" loading="lazy" decoding="async">
         <span class="project-card__kicker">图片冒险</span>
       </a>
       <div class="project-card__body">
@@ -45,7 +45,7 @@ page_class: project-hub-page
 
     <article class="project-card">
       <a class="project-card__media" href="https://kw66.github.io/kw-chess/" target="_blank" rel="noopener noreferrer" aria-label="打开科王象棋">
-        <img src="{{ '/images/works/kw-chess-cover.webp' | relative_url }}" alt="科王象棋封面">
+        <img src="{{ '/images/works/kw-chess-cover-card.webp' | relative_url }}" alt="科王象棋封面" width="900" height="506" loading="lazy" decoding="async">
         <span class="project-card__kicker">象棋对弈</span>
       </a>
       <div class="project-card__body">

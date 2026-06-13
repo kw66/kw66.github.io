@@ -10,7 +10,7 @@ page_class: project-hub-page
   <div class="project-hub__grid">
     <article class="project-card">
       <a class="project-card__media" href="https://github.com/kw66/research-figures/tree/main/MFEN" target="_blank" rel="noopener noreferrer" aria-label="打开 MFEN 绘图资源">
-        <img src="{{ '/images/works/research-figures/mfen.png' | relative_url }}" alt="MFEN 科研绘图封面">
+        <img src="{{ '/images/works/research-figures/mfen-card.webp' | relative_url }}" alt="MFEN 科研绘图封面" width="1100" height="538" decoding="async" fetchpriority="high">
         <span class="project-card__kicker">CVPR 2026 Highlight</span>
       </a>
       <div class="project-card__body">
@@ -26,7 +26,7 @@ page_class: project-hub-page
 
     <article class="project-card">
       <a class="project-card__media" href="https://github.com/kw66/research-figures/tree/main/CCIL" target="_blank" rel="noopener noreferrer" aria-label="打开 CCIL 绘图资源">
-        <img src="{{ '/images/works/research-figures/ccil.png' | relative_url }}" alt="CCIL 科研绘图封面">
+        <img src="{{ '/images/works/research-figures/ccil-card.webp' | relative_url }}" alt="CCIL 科研绘图封面" width="1100" height="685" loading="lazy" decoding="async">
         <span class="project-card__kicker">IEEE TCSVT 2026</span>
       </a>
       <div class="project-card__body">
@@ -42,7 +42,7 @@ page_class: project-hub-page
 
     <article class="project-card">
       <a class="project-card__media" href="https://github.com/kw66/research-figures/tree/main/AT-ReID" target="_blank" rel="noopener noreferrer" aria-label="打开 AT-ReID 绘图资源">
-        <img src="{{ '/images/works/research-figures/at-reid.png' | relative_url }}" alt="AT-ReID 科研绘图封面">
+        <img src="{{ '/images/works/research-figures/at-reid-card.webp' | relative_url }}" alt="AT-ReID 科研绘图封面" width="1100" height="458" loading="lazy" decoding="async">
         <span class="project-card__kicker">IJCAI 2025 Oral</span>
       </a>
       <div class="project-card__body">
@@ -58,7 +58,7 @@ page_class: project-hub-page
 
     <article class="project-card">
       <a class="project-card__media" href="https://github.com/kw66/research-figures/tree/main/MagicPaint" target="_blank" rel="noopener noreferrer" aria-label="打开 MagicPaint 绘图资源">
-        <img src="{{ '/images/works/research-figures/magicpaint.png' | relative_url }}" alt="MagicPaint 科研绘图封面">
+        <img src="{{ '/images/works/research-figures/magicpaint-card.webp' | relative_url }}" alt="MagicPaint 科研绘图封面" width="971" height="483" loading="lazy" decoding="async">
         <span class="project-card__kicker">AAAI 2026</span>
       </a>
       <div class="project-card__body">
@@ -74,7 +74,7 @@ page_class: project-hub-page
 
     <article class="project-card">
       <a class="project-card__media" href="https://github.com/kw66/research-figures/tree/main/CIFT" target="_blank" rel="noopener noreferrer" aria-label="打开 CIFT 绘图资源">
-        <img src="{{ '/images/works/research-figures/cift.png' | relative_url }}" alt="CIFT 科研绘图封面">
+        <img src="{{ '/images/works/research-figures/cift-card.webp' | relative_url }}" alt="CIFT 科研绘图封面" width="1100" height="475" loading="lazy" decoding="async">
         <span class="project-card__kicker">ECCV 2022</span>
       </a>
       <div class="project-card__body">
@@ -90,7 +90,7 @@ page_class: project-hub-page
 
     <article class="project-card">
       <a class="project-card__media" href="https://github.com/kw66/research-figures/tree/main/CACC" target="_blank" rel="noopener noreferrer" aria-label="打开 CACC 绘图资源">
-        <img src="{{ '/images/works/research-figures/cacc.png' | relative_url }}" alt="CACC 科研绘图封面">
+        <img src="{{ '/images/works/research-figures/cacc-card.webp' | relative_url }}" alt="CACC 科研绘图封面" width="892" height="525" loading="lazy" decoding="async">
         <span class="project-card__kicker">PRCV 2022</span>
       </a>
       <div class="project-card__body">
@@ -106,7 +106,7 @@ page_class: project-hub-page
 
     <article class="project-card">
       <a class="project-card__media" href="https://github.com/kw66/research-figures/tree/main/ColorAnalysis" target="_blank" rel="noopener noreferrer" aria-label="打开科研绘图配色分析资源">
-        <img src="{{ '/images/works/research-figures/color-analysis.png' | relative_url }}" alt="科研绘图配色分析封面">
+        <img src="{{ '/images/works/research-figures/color-analysis-card.webp' | relative_url }}" alt="科研绘图配色分析封面" width="1100" height="472" loading="lazy" decoding="async">
       </a>
       <div class="project-card__body">
         <div class="project-card__main">
@@ -121,7 +121,7 @@ page_class: project-hub-page
 
     <article class="project-card">
       <a class="project-card__media" href="https://github.com/kw66/research-figures/tree/main/ColorPalette" target="_blank" rel="noopener noreferrer" aria-label="打开科研绘图配色模板资源">
-        <img src="{{ '/images/works/research-figures/color-palette.png' | relative_url }}" alt="科研绘图配色模板封面">
+        <img src="{{ '/images/works/research-figures/color-palette-card.webp' | relative_url }}" alt="科研绘图配色模板封面" width="1100" height="472" loading="lazy" decoding="async">
       </a>
       <div class="project-card__body">
         <div class="project-card__main">

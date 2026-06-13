@@ -17,7 +17,7 @@ redirect_from:
     <div class='featured-track' id='featured-track'>
       <article class='featured-item' data-featured-item>
         <div class='featured-item-image'>
-          <img src='images/works/atreid-featured.png' alt='Anytime person re-identification overview'>
+          <img src='images/works/atreid-featured-card.webp' alt='Anytime person re-identification overview' width='750' height='456' decoding='async' fetchpriority='high'>
         </div>
         <div class='featured-item-body'>
           <p class='featured-item-title'>&#128339; &#20840;&#26102;&#27573;&#34892;&#20154;&#37325;&#35782;&#21035;</p>
@@ -32,7 +32,7 @@ redirect_from:
 
       <article class='featured-item' data-featured-item>
         <div class='featured-item-image'>
-          <img src='images/works/phd-simulator-cover.jpg' alt='研究生模拟器封面'>
+          <img src='images/works/phd-simulator-cover-card.webp' alt='研究生模拟器封面' width='1100' height='614' loading='lazy' decoding='async'>
         </div>
         <div class='featured-item-body'>
           <p class='featured-item-title'>&#127918; &#30740;&#31350;&#29983;&#27169;&#25311;&#22120;&#23567;&#28216;&#25103;</p>
@@ -46,7 +46,7 @@ redirect_from:
 
       <article class='featured-item' data-featured-item>
         <div class='featured-item-image'>
-          <img src='images/works/photo-hero-cover.jpg' alt='图片勇者封面'>
+          <img src='images/works/photo-hero-cover-card.webp' alt='图片勇者封面' width='580' height='368' loading='lazy' decoding='async'>
         </div>
         <div class='featured-item-body'>
           <p class='featured-item-title'>&#128247; &#22270;&#29255;&#21191;&#32773;</p>
@@ -59,7 +59,7 @@ redirect_from:
 
       <article class='featured-item' data-featured-item>
         <div class='featured-item-image'>
-          <img src='images/works/kw-chess-cover.webp' alt='科王象棋封面'>
+          <img src='images/works/kw-chess-cover-card.webp' alt='科王象棋封面' width='900' height='506' loading='lazy' decoding='async'>
         </div>
         <div class='featured-item-body'>
           <p class='featured-item-title'>&#128081; &#31185;&#29579;&#35937;&#26827;</p>
@@ -72,7 +72,7 @@ redirect_from:
 
       <article class='featured-item' data-featured-item>
         <div class='featured-item-image'>
-          <img src='images/works/research-figures-cover.jpg' alt='Research figures project cover'>
+          <img src='images/works/research-figures-cover-card.webp' alt='Research figures project cover' width='1100' height='534' loading='lazy' decoding='async'>
         </div>
         <div class='featured-item-body'>
           <p class='featured-item-title'>&#128396;&#65039; &#20174;&#33609;&#22270;&#21040;&#25104;&#21697;&#20043;&#31185;&#30740;&#32472;&#22270;</p>
@@ -215,11 +215,11 @@ redirect_from:
   (function () {
     const reducedMotionQuery = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
     const prefersReducedMotion = reducedMotionQuery ? reducedMotionQuery.matches : false;
-    const mascotBase = "{{ '/images/mascots/' | relative_url }}";
+    const mascotBase = "{{ '/images/mascots-webp/' | relative_url }}";
     const mascotSources = Array.from({ length: 91 }, (_, index) => {
-      const name = `mascot-${String(index + 1).padStart(2, '0')}.png`;
+      const name = `mascot-${String(index + 1).padStart(2, '0')}.webp`;
       return `${mascotBase}${name}`;
-    }).filter((src) => !src.endsWith('mascot-43.png'));
+    }).filter((src) => !src.endsWith('mascot-43.webp'));
     const desktopScaleShellId = 'desktop-scale-shell';
     const desktopScaleStageId = 'desktop-scale-stage';
     const desktopScalePadding = 10;
@@ -336,7 +336,7 @@ redirect_from:
     }
 
     function getMascotIndex(src) {
-      const match = /mascot-(\d+)\.png$/i.exec(src || '');
+      const match = /mascot-(\d+)\.(?:png|webp)$/i.exec(src || '');
       if (!match) return 0;
       return Math.max(Number.parseInt(match[1], 10) - 1, 0);
     }
