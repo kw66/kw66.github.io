@@ -9,20 +9,35 @@ page_class: project-hub-page
 <section class="project-hub project-hub--games" aria-label="小游戏入口">
   <div class="project-hub__grid">
     <article class="project-card">
-      <a class="project-card__media" href="https://kw66.github.io/PhD_Simulator/" target="_blank" rel="noopener noreferrer" aria-label="打开研究生模拟器">
-        <img src="{{ '/images/works/phd-simulator-cover-card.webp' | relative_url }}" alt="研究生模拟器封面" width="1100" height="614" decoding="async" fetchpriority="high">
+      <a class="project-card__media" href="https://kw66.github.io/PhD_Simulator/" target="_blank" rel="noopener noreferrer" aria-label="打开研究生模拟器v1.0">
+        <img src="{{ '/images/works/phd-simulator-cover-card.webp' | relative_url }}" alt="研究生模拟器v1.0封面" width="1100" height="614" decoding="async" fetchpriority="high">
         <span class="project-card__kicker">模拟经营</span>
       </a>
       <div class="project-card__body">
         <div class="project-card__main">
-          <h2>研究生模拟器</h2>
+          <h2>研究生模拟器v1.0</h2>
           <div class="project-card__actions">
-            <a href="https://kw66.github.io/PhD_Simulator/" target="_blank" rel="noopener noreferrer" aria-label="游玩研究生模拟器初版">游玩</a>
-            <a href="https://kw-game-graduate-simulator-v2.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="查看研究生模拟器新版">新版</a>
-            <a href="https://github.com/kw66/PhD_Simulator" target="_blank" rel="noopener noreferrer" aria-label="查看研究生模拟器项目源码">项目</a>
+            <a href="https://kw66.github.io/PhD_Simulator/" target="_blank" rel="noopener noreferrer" aria-label="游玩研究生模拟器v1.0">游玩</a>
+            <a href="https://github.com/kw66/PhD_Simulator" target="_blank" rel="noopener noreferrer" aria-label="查看研究生模拟器v1.0项目源码">项目</a>
           </div>
         </div>
-        <p>研究生日常主题的网页小游戏，有初版和新版两个入口。</p>
+        <p>研究生日常主题的网页小游戏初版。</p>
+      </div>
+    </article>
+
+    <article class="project-card">
+      <a class="project-card__media" href="https://kw-game-graduate-simulator-v2.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="打开研究生模拟器v2.0">
+        <img src="{{ '/images/works/phd-simulator-v2-cover-card.webp' | relative_url }}" alt="研究生模拟器v2.0角色封面" width="1100" height="614" loading="lazy" decoding="async">
+        <span class="project-card__kicker">角色新篇</span>
+      </a>
+      <div class="project-card__body">
+        <div class="project-card__main">
+          <h2>研究生模拟器v2.0</h2>
+          <div class="project-card__actions">
+            <a href="https://kw-game-graduate-simulator-v2.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="游玩研究生模拟器v2.0">游玩</a>
+          </div>
+        </div>
+        <p>新版角色选择与成长玩法。</p>
       </div>
     </article>
 

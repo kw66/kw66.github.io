@@ -2786,6 +2786,10 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
     grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.project-hub--games .project-hub__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .project-card {
     position: relative;
     display: flex;
@@ -2983,6 +2987,10 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
     .project-hub__grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
+    .project-hub--games .project-hub__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 @media (max-width: 640px) {
@@ -2999,6 +3007,10 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
     }
 
     .project-hub--figures .project-hub__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-hub--games .project-hub__grid {
         grid-template-columns: 1fr;
     }
 

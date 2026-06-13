@@ -32,14 +32,25 @@ redirect_from:
 
       <article class='featured-item' data-featured-item>
         <div class='featured-item-image'>
-          <img src='images/works/phd-simulator-cover-card.webp' alt='研究生模拟器封面' width='1100' height='614' loading='lazy' decoding='async'>
+          <img src='images/works/phd-simulator-cover-card.webp' alt='研究生模拟器v1.0封面' width='1100' height='614' loading='lazy' decoding='async'>
         </div>
         <div class='featured-item-body'>
-          <p class='featured-item-title'>&#127918; &#30740;&#31350;&#29983;&#27169;&#25311;&#22120;&#23567;&#28216;&#25103;</p>
+          <p class='featured-item-title'>&#127918; &#30740;&#31350;&#29983;&#27169;&#25311;&#22120;v1.0</p>
           <div class='featured-actions'>
-            <a class='featured-button' href='https://kw66.github.io/PhD_Simulator/' target='_blank' rel='noopener noreferrer'>游玩初版</a>
+            <a class='featured-button' href='https://kw66.github.io/PhD_Simulator/' target='_blank' rel='noopener noreferrer'>开始游玩</a>
             <a class='featured-button' href='https://github.com/kw66/PhD_Simulator' target='_blank' rel='noopener noreferrer'>项目源码</a>
-            <a class='featured-button' href='https://kw-game-graduate-simulator-v2.vercel.app/' target='_blank' rel='noopener noreferrer'>查看新版</a>
+          </div>
+        </div>
+      </article>
+
+      <article class='featured-item' data-featured-item>
+        <div class='featured-item-image'>
+          <img src='images/works/phd-simulator-v2-cover-card.webp' alt='研究生模拟器v2.0角色封面' width='1100' height='614' loading='lazy' decoding='async'>
+        </div>
+        <div class='featured-item-body'>
+          <p class='featured-item-title'>&#127918; &#30740;&#31350;&#29983;&#27169;&#25311;&#22120;v2.0</p>
+          <div class='featured-actions'>
+            <a class='featured-button' href='https://kw-game-graduate-simulator-v2.vercel.app/' target='_blank' rel='noopener noreferrer'>开始游玩</a>
           </div>
         </div>
       </article>
