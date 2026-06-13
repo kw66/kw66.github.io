@@ -20,7 +20,7 @@ page_class: project-hub-page
             <a href="https://github.com/kw66/PhD_Simulator" target="_blank" rel="noopener noreferrer" aria-label="查看研究生模拟器v1.0项目">项目</a>
           </div>
         </div>
-        <p>研究生日常主题的网页小游戏初版。</p>
+        <p>研究生日常模拟游戏，要管理科研、生活和导师关系，发表论文并顺利毕业。</p>
       </div>
     </article>
 
@@ -33,9 +33,10 @@ page_class: project-hub-page
           <h2>研究生模拟器v2.0</h2>
           <div class="project-card__actions">
             <a href="https://kw-game-graduate-simulator-v2.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="游玩研究生模拟器v2.0">游玩</a>
+            <span class="project-card__action is-disabled" aria-disabled="true">项目</span>
           </div>
         </div>
-        <p>研究生日常主题的网页小游戏新版。</p>
+        <p>多角色研究生模拟游戏，要选择身份开局，写论文、参加会议并完成毕业目标。</p>
       </div>
     </article>
 
@@ -51,7 +52,7 @@ page_class: project-hub-page
             <a href="https://github.com/kw66/photo-hero" target="_blank" rel="noopener noreferrer" aria-label="查看图片勇者项目">项目</a>
           </div>
         </div>
-        <p>围绕图片理解和互动展开的轻量网页游戏。</p>
+        <p>照片装备爬塔游戏，要拍照或画出身边小物，把它们鉴定成装备后闯塔。</p>
       </div>
     </article>
 
@@ -67,7 +68,7 @@ page_class: project-hub-page
             <a href="https://github.com/kw66/kw-chess" target="_blank" rel="noopener noreferrer" aria-label="查看科王象棋项目">项目</a>
           </div>
         </div>
-        <p>中国象棋题材的网页小游戏项目。</p>
+        <p>象棋剧情游戏，要在人机大战中下棋、推进剧情，并见证棋魂觉醒。</p>
       </div>
     </article>
   </div>
