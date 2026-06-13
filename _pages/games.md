@@ -36,7 +36,7 @@ page_class: project-hub-page
             <span class="project-card__action is-disabled" aria-disabled="true">项目</span>
           </div>
         </div>
-        <p>多角色研究生模拟游戏，要选择身份开局，写论文、参加会议并完成毕业目标。</p>
+        <p>研究生日常模拟游戏新版，新增局外成长系统和两个特殊角色，要写论文、参加会议并完成毕业目标。</p>
       </div>
     </article>
 
