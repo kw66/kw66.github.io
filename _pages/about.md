@@ -25,7 +25,6 @@ redirect_from:
             <a class='featured-button' href='https://arxiv.org/abs/2509.16635' target='_blank' rel='noopener noreferrer'>Paper</a>
             <a class='featured-button' href='https://github.com/kw66/AT-ReID' target='_blank' rel='noopener noreferrer'>Dataset</a>
             <a class='featured-button' href='https://github.com/kw66/AT-ReID/tree/main/AT-ReID' target='_blank' rel='noopener noreferrer'>Code</a>
-            <a class='featured-button' href='https://github.com/kw66/research-figures/tree/main/AT-ReID' target='_blank' rel='noopener noreferrer'>&#30011;&#22270;PPT</a>
           </div>
         </div>
       </article>
@@ -37,8 +36,8 @@ redirect_from:
         <div class='featured-item-body'>
           <p class='featured-item-title'>&#127918; &#30740;&#31350;&#29983;&#27169;&#25311;&#22120;v1.0</p>
           <div class='featured-actions'>
-            <a class='featured-button' href='https://kw66.github.io/PhD_Simulator/' target='_blank' rel='noopener noreferrer'>开始游玩</a>
-            <a class='featured-button' href='https://github.com/kw66/PhD_Simulator' target='_blank' rel='noopener noreferrer'>项目源码</a>
+            <a class='featured-button' href='https://kw66.github.io/PhD_Simulator/' target='_blank' rel='noopener noreferrer'>游玩</a>
+            <a class='featured-button' href='https://github.com/kw66/PhD_Simulator' target='_blank' rel='noopener noreferrer'>项目</a>
           </div>
         </div>
       </article>
@@ -50,7 +49,7 @@ redirect_from:
         <div class='featured-item-body'>
           <p class='featured-item-title'>&#127918; &#30740;&#31350;&#29983;&#27169;&#25311;&#22120;v2.0</p>
           <div class='featured-actions'>
-            <a class='featured-button' href='https://kw-game-graduate-simulator-v2.vercel.app/' target='_blank' rel='noopener noreferrer'>开始游玩</a>
+            <a class='featured-button' href='https://kw-game-graduate-simulator-v2.vercel.app/' target='_blank' rel='noopener noreferrer'>游玩</a>
           </div>
         </div>
       </article>
@@ -62,8 +61,8 @@ redirect_from:
         <div class='featured-item-body'>
           <p class='featured-item-title'>&#128247; &#22270;&#29255;&#21191;&#32773;</p>
           <div class='featured-actions'>
-            <a class='featured-button' href='https://kw66.github.io/photo-hero/' target='_blank' rel='noopener noreferrer'>开始游玩</a>
-            <a class='featured-button' href='https://github.com/kw66/photo-hero' target='_blank' rel='noopener noreferrer'>项目源码</a>
+            <a class='featured-button' href='https://kw66.github.io/photo-hero/' target='_blank' rel='noopener noreferrer'>游玩</a>
+            <a class='featured-button' href='https://github.com/kw66/photo-hero' target='_blank' rel='noopener noreferrer'>项目</a>
           </div>
         </div>
       </article>
@@ -75,8 +74,8 @@ redirect_from:
         <div class='featured-item-body'>
           <p class='featured-item-title'>&#128081; &#31185;&#29579;&#35937;&#26827;</p>
           <div class='featured-actions'>
-            <a class='featured-button' href='https://kw66.github.io/kw-chess/' target='_blank' rel='noopener noreferrer'>开始游玩</a>
-            <a class='featured-button' href='https://github.com/kw66/kw-chess' target='_blank' rel='noopener noreferrer'>项目源码</a>
+            <a class='featured-button' href='https://kw66.github.io/kw-chess/' target='_blank' rel='noopener noreferrer'>游玩</a>
+            <a class='featured-button' href='https://github.com/kw66/kw-chess' target='_blank' rel='noopener noreferrer'>项目</a>
           </div>
         </div>
       </article>
@@ -88,7 +87,7 @@ redirect_from:
         <div class='featured-item-body'>
           <p class='featured-item-title'>&#128396;&#65039; &#20174;&#33609;&#22270;&#21040;&#25104;&#21697;&#20043;&#31185;&#30740;&#32472;&#22270;</p>
           <div class='featured-actions'>
-            <a class='featured-button' href='https://github.com/kw66/research-figures' target='_blank' rel='noopener noreferrer'>Project</a>
+            <a class='featured-button' href='https://github.com/kw66/research-figures' target='_blank' rel='noopener noreferrer'>项目</a>
           </div>
         </div>
       </article>
@@ -154,7 +153,7 @@ redirect_from:
     <div class='work-meta-row'>
       <p class='work-meta'>Venue: AAAI 2026</p>
       <a class='paper-link-button' href='https://doi.org/10.1609/aaai.v40i14.38151' target='_blank' rel='noopener noreferrer'>&#128196; Paper</a>
-      <a class='paper-link-button' href='https://github.com/littleYaang/MagicPaint' target='_blank' rel='noopener noreferrer'>Project</a>
+      <a class='paper-link-button' href='https://github.com/littleYaang/MagicPaint' target='_blank' rel='noopener noreferrer'>项目</a>
       <a class='paper-link-button' href='https://github.com/kw66/research-figures/tree/main/MagicPaint' target='_blank' rel='noopener noreferrer'>&#127912; &#30011;&#22270;PPT</a>
     </div>
   </article>
@@ -174,7 +173,7 @@ redirect_from:
     <div class='work-meta-row'>
       <p class='work-meta'>Venue: IJCAI 2025 &#128266; Oral</p>
       <a class='paper-link-button' href='https://arxiv.org/abs/2509.16635' target='_blank' rel='noopener noreferrer'>&#128196; Paper</a>
-      <a class='paper-link-button' href='https://github.com/kw66/AT-ReID' target='_blank' rel='noopener noreferrer'>Project</a>
+      <a class='paper-link-button' href='https://github.com/kw66/AT-ReID' target='_blank' rel='noopener noreferrer'>项目</a>
       <a class='paper-link-button' href='https://github.com/kw66/research-figures/tree/main/AT-ReID' target='_blank' rel='noopener noreferrer'>&#127912; &#30011;&#22270;PPT</a>
     </div>
     <div class='paper-tags'>

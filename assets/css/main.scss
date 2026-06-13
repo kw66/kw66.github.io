@@ -2787,7 +2787,7 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
 }
 
 .project-hub--games .project-hub__grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .project-card {
@@ -2939,28 +2939,29 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 2.02rem;
-    padding: 0.34rem 0.82rem 0.38rem;
-    border: 1px solid rgba(95, 123, 128, 0.22);
-    border-radius: 0.5rem;
+    min-height: 2.05rem;
+    padding: 0.36rem 0.7rem 0.42rem;
+    border: 1px solid #d1d9df;
+    border-radius: 0;
     background: #ffffff;
-    color: var(--hub-ink);
-    font-size: 0.78rem;
-    font-weight: 800;
+    color: #21465e;
+    font-size: 0.8rem;
+    font-weight: 700;
     line-height: 1;
     text-decoration: none !important;
-    box-shadow: 0 0.45rem 1rem rgba(35, 58, 65, 0.08);
+    letter-spacing: 0.01em;
+    box-shadow: 0 8px 18px rgba(33, 55, 76, 0.08);
     transition:
-        transform 0.18s cubic-bezier(0.22, 1, 0.36, 1),
-        border-color 0.18s cubic-bezier(0.22, 1, 0.36, 1),
-        background 0.18s cubic-bezier(0.22, 1, 0.36, 1),
-        color 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
 }
 
 .project-card__actions a:first-child {
-    border-color: transparent;
-    background: var(--hub-accent);
-    color: #ffffff;
+    border-color: #d1d9df;
+    background: #ffffff;
+    color: #21465e;
 }
 
 .project-card:hover {
@@ -2977,10 +2978,11 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
 }
 
 .project-card__actions a:hover {
-    border-color: var(--hub-accent-border);
-    background: var(--hub-accent-soft);
-    color: var(--hub-ink);
-    transform: translateY(-1px);
+    border-color: #bac8d0;
+    background: #ffffff;
+    color: #17384d;
+    box-shadow: 0 12px 22px rgba(33, 55, 76, 0.12);
+    transform: translateY(-2px);
 }
 
 @media (max-width: 980px) {
