@@ -47,7 +47,7 @@ redirect_from:
           <img src='images/works/phd-simulator-v2-cover-card.webp' alt='研究生模拟器v2.0角色封面' width='1100' height='614' loading='lazy' decoding='async'>
         </div>
         <div class='featured-item-body'>
-          <p class='featured-item-title'>&#127918; &#30740;&#31350;&#29983;&#27169;&#25311;&#22120;v2.0</p>
+          <p class='featured-item-title'>&#127918; &#30740;&#31350;&#29983;&#27169;&#25311;&#22120;v2.0 <span class='featured-status'>开发中</span></p>
           <div class='featured-actions'>
             <a class='featured-button' href='https://kw-game-graduate-simulator-v2.vercel.app/' target='_blank' rel='noopener noreferrer'>游玩</a>
             <span class='featured-button is-disabled' aria-disabled='true'>项目</span>
@@ -73,7 +73,7 @@ redirect_from:
           <img src='images/works/kw-chess-cover-card.webp' alt='科王象棋封面' width='900' height='506' loading='lazy' decoding='async'>
         </div>
         <div class='featured-item-body'>
-          <p class='featured-item-title'>&#128081; &#31185;&#29579;&#35937;&#26827;</p>
+          <p class='featured-item-title'>&#128081; &#31185;&#29579;&#35937;&#26827; <span class='featured-status'>开发中</span></p>
           <div class='featured-actions'>
             <a class='featured-button' href='https://kw66.github.io/kw-chess/' target='_blank' rel='noopener noreferrer'>游玩</a>
             <a class='featured-button' href='https://github.com/kw66/kw-chess' target='_blank' rel='noopener noreferrer'>项目</a>

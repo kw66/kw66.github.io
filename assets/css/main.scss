@@ -170,6 +170,23 @@
     line-height: 1.34;
 }
 
+.featured-status {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.16rem;
+    margin-left: 0.34rem;
+    padding: 0.14rem 0.42rem 0.17rem;
+    border: 1px solid rgba(190, 133, 77, 0.34);
+    border-radius: 999px;
+    background: #fff5e4;
+    color: #8c5a2f;
+    font-size: 0.62rem;
+    font-weight: 800;
+    line-height: 1;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
 .featured-actions {
     display: flex;
     flex-wrap: wrap;
@@ -2912,6 +2929,12 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
 .project-hub--figures .project-card__kicker {
     padding: 0.3rem 0.72rem 0.34rem;
     font-size: 0.78rem;
+}
+
+.project-card__kicker--status {
+    border-color: rgba(255, 255, 255, 0.8);
+    background: color-mix(in srgb, #b97842 90%, #ffffff);
+    box-shadow: 0 0.46rem 1.1rem rgba(112, 71, 31, 0.18);
 }
 
 .project-card h2 {
