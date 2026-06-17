@@ -58,6 +58,23 @@ page_class: project-hub-page
     </article>
 
     <article class="project-card">
+      <a class="project-card__media" href="https://kw66.github.io/campus-memoir/" target="_blank" rel="noopener noreferrer" aria-label="打开校园回忆录">
+        <img src="{{ '/images/works/campus-memoir-cover-card.jpg' | relative_url }}" alt="校园回忆录封面" width="1570" height="800" loading="lazy" decoding="async">
+        <span class="project-card__kicker project-card__kicker--status">开发中</span>
+      </a>
+      <div class="project-card__body">
+        <div class="project-card__main">
+          <h2>校园回忆录</h2>
+          <div class="project-card__actions">
+            <a href="https://kw66.github.io/campus-memoir/" target="_blank" rel="noopener noreferrer">游玩</a>
+            <a href="https://github.com/kw66/campus-memoir" target="_blank" rel="noopener noreferrer" aria-label="查看校园回忆录项目">项目</a>
+          </div>
+        </div>
+        <p>校园拍照打卡与个人回忆录游戏，可以导入校区地图、点亮拍照点、整理建筑与人物记忆。</p>
+      </div>
+    </article>
+
+    <article class="project-card">
       <a class="project-card__media" href="https://kw66.github.io/kw-chess/" target="_blank" rel="noopener noreferrer" aria-label="打开科王象棋">
         <img src="{{ '/images/works/kw-chess-cover-card.webp' | relative_url }}" alt="科王象棋封面" width="900" height="506" loading="lazy" decoding="async">
         <span class="project-card__kicker project-card__kicker--status">开发中</span>

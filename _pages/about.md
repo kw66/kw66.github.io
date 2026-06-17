@@ -70,6 +70,19 @@ redirect_from:
 
       <article class='featured-item' data-featured-item>
         <div class='featured-item-image'>
+          <img src='images/works/campus-memoir-cover-card.jpg' alt='校园回忆录封面' width='1570' height='800' loading='lazy' decoding='async'>
+        </div>
+        <div class='featured-item-body'>
+          <p class='featured-item-title'>&#127979; 校园回忆录 <span class='featured-status'>开发中</span></p>
+          <div class='featured-actions'>
+            <a class='featured-button' href='https://kw66.github.io/campus-memoir/' target='_blank' rel='noopener noreferrer'>游玩</a>
+            <a class='featured-button' href='https://github.com/kw66/campus-memoir' target='_blank' rel='noopener noreferrer'>项目</a>
+          </div>
+        </div>
+      </article>
+
+      <article class='featured-item' data-featured-item>
+        <div class='featured-item-image'>
           <img src='images/works/kw-chess-cover-card.webp' alt='科王象棋封面' width='900' height='506' loading='lazy' decoding='async'>
         </div>
         <div class='featured-item-body'>
