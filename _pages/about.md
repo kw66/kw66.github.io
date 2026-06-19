@@ -138,6 +138,20 @@ redirect_from:
     </div>
   </article>
 
+  <article class='paper-list-item' data-paper-tags='first-author,reid,graph'>
+    <p class='work-title'>ANFI: Rethinking Neighbor Feature Interaction in Person Re-ID</p>
+    <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Jiaze Li, Qinhong Yang, Tao Gong, Qi Chu, Nenghai Yu</p>
+    <div class='work-meta-row'>
+      <p class='work-meta'>Venue: ECCV 2026</p>
+      <span class='paper-link-button paper-link-button--disabled' aria-disabled='true'>&#128196; Paper</span>
+      <span class='paper-link-button paper-link-button--disabled' aria-disabled='true'>&#127912; &#30011;&#22270;PPT</span>
+    </div>
+    <div class='paper-tags'>
+      <span class='paper-tag'>Graph</span>
+      <span class='paper-tag'>ReID</span>
+    </div>
+  </article>
+
   <article class='paper-list-item' data-paper-tags='first-author,reid,causal-inference'>
     <p class='work-title'>Causal Clothes-Invariant Feature Learning for Cloth-Changing Person Re-ID</p>
     <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Jiaze Li, Yating Liu, Qi Chu, Mang Ye, Wanli Ouyang, Nenghai Yu</p>
@@ -149,6 +163,15 @@ redirect_from:
     <div class='paper-tags'>
       <span class='paper-tag'>ReID</span>
       <span class='paper-tag'>Causal Inference</span>
+    </div>
+  </article>
+
+  <article class='paper-list-item' data-paper-tags='reid'>
+    <p class='work-title'>MCVL: Multi-Space Cross-View Learning for Aerial-Ground Person Re-Identification</p>
+    <p class='work-authors'>Wajahat Khalid, Bin Liu, <strong>Xulin Li</strong>, Yubo Wang, MUHAMMAD SHER AFGAN</p>
+    <div class='work-meta-row'>
+      <p class='work-meta'>Venue: ECCV 2026</p>
+      <span class='paper-link-button paper-link-button--disabled' aria-disabled='true'>&#128196; Paper</span>
     </div>
   </article>
 
