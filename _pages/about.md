@@ -148,7 +148,6 @@ redirect_from:
     </div>
     <div class='paper-tags'>
       <span class='paper-tag'>Graph</span>
-      <span class='paper-tag'>ReID</span>
     </div>
   </article>
 
@@ -161,7 +160,6 @@ redirect_from:
       <a class='paper-link-button' href='https://github.com/kw66/research-figures/tree/main/CCIL' target='_blank' rel='noopener noreferrer'>&#127912; &#30011;&#22270;PPT</a>
     </div>
     <div class='paper-tags'>
-      <span class='paper-tag'>ReID</span>
       <span class='paper-tag'>Causal Inference</span>
     </div>
   </article>
