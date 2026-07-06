@@ -60,7 +60,6 @@ page_class: project-hub-page
     <article class="project-card">
       <a class="project-card__media" href="https://kw66.github.io/campus-memoir/" target="_blank" rel="noopener noreferrer" aria-label="打开校园回忆录">
         <img src="{{ '/images/works/campus-memoir-cover-card.jpg' | relative_url }}" alt="校园回忆录封面" width="1570" height="800" loading="lazy" decoding="async">
-        <span class="project-card__kicker project-card__kicker--status">开发中</span>
       </a>
       <div class="project-card__body">
         <div class="project-card__main">
@@ -77,7 +76,6 @@ page_class: project-hub-page
     <article class="project-card">
       <a class="project-card__media" href="https://kw66.github.io/kw-chess/" target="_blank" rel="noopener noreferrer" aria-label="打开科王象棋">
         <img src="{{ '/images/works/kw-chess-cover-card.webp' | relative_url }}" alt="科王象棋封面" width="900" height="506" loading="lazy" decoding="async">
-        <span class="project-card__kicker project-card__kicker--status">开发中</span>
       </a>
       <div class="project-card__body">
         <div class="project-card__main">
