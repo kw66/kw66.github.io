@@ -59,9 +59,21 @@
       return window.innerWidth || document.documentElement.clientWidth || 1280;
     }
 
+    function usesStaticMobileMasthead() {
+      if (!window.matchMedia || !window.matchMedia('(max-width: 768px)').matches) {
+        return false;
+      }
+      return window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(hover: none)').matches;
+    }
+
     function applyMastheadScale() {
       const navList = document.querySelector('#site-nav .visible-links');
       if (!navList) return;
+
+      if (usesStaticMobileMasthead()) {
+        document.documentElement.style.removeProperty('--masthead-scale');
+        return;
+      }
 
       const currentScale = Number.parseFloat(
         getComputedStyle(document.documentElement).getPropertyValue('--masthead-scale')

@@ -571,6 +571,7 @@ redirect_from:
       if (document.body) {
         document.body.classList.toggle('is-mobile-home-layout', mobileLayout);
       }
+      stage.style.removeProperty('--desktop-scrollbar-extension');
 
       if (mobileLayout) {
         shell.style.height = 'auto';
@@ -595,6 +596,13 @@ redirect_from:
       const stageViewportHeight = availableHeight / scale;
 
       stage.style.transform = `translate3d(${offsetX.toFixed(2)}px, 0, 0) scale(${scale.toFixed(4)})`;
+      const pageScroller = stage.querySelector('#main > .page');
+      if (pageScroller) {
+        const shellRight = Math.min(shell.getBoundingClientRect().right, getViewportWidth());
+        const scrollbarGap = Math.max(shellRight - pageScroller.getBoundingClientRect().right, 0);
+        const scrollbarExtension = scrollbarGap / Math.max(scale, 0.001);
+        stage.style.setProperty('--desktop-scrollbar-extension', `${scrollbarExtension.toFixed(2)}px`);
+      }
       stage.style.height = `${stageViewportHeight.toFixed(2)}px`;
       stage.style.setProperty('--desktop-home-viewport-height', `${stageViewportHeight.toFixed(2)}px`);
       shell.style.height = `${Math.ceil(availableHeight)}px`;

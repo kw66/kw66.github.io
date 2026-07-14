@@ -1344,10 +1344,11 @@
 }
 
 .is-fixed-scale-home #main > .page {
-    flex: 0 0 var(--desktop-page-width);
-    width: var(--desktop-page-width);
-    min-width: var(--desktop-page-width);
-    max-width: var(--desktop-page-width);
+    flex: 0 0 calc(var(--desktop-page-width) + var(--desktop-scrollbar-extension, 0px));
+    width: calc(var(--desktop-page-width) + var(--desktop-scrollbar-extension, 0px));
+    min-width: calc(var(--desktop-page-width) + var(--desktop-scrollbar-extension, 0px));
+    max-width: calc(var(--desktop-page-width) + var(--desktop-scrollbar-extension, 0px));
+    margin-right: calc(0px - var(--desktop-scrollbar-extension, 0px));
 }
 
 .is-fixed-scale-home:not(.is-mobile-home-layout) #main > .page {
@@ -1935,6 +1936,24 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
 #local_counter_container_uv,
 #local_counter_container_pv {
     opacity: 0.78;
+}
+
+@media (max-width: 768px) and (pointer: coarse), (max-width: 768px) and (hover: none) {
+    :root {
+        --masthead-scale: 0.93;
+    }
+}
+
+@media (max-width: 370px) and (pointer: coarse), (max-width: 370px) and (hover: none) {
+    :root {
+        --masthead-scale: 0.9;
+    }
+}
+
+@media (max-width: 340px) and (pointer: coarse), (max-width: 340px) and (hover: none) {
+    :root {
+        --masthead-scale: 0.82;
+    }
 }
 
 @media (max-width: 768px) and (pointer: coarse), (max-width: 768px) and (hover: none) {
