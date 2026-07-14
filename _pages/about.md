@@ -49,8 +49,8 @@ redirect_from:
         <div class='featured-item-body'>
           <p class='featured-item-title'>&#127918; &#30740;&#31350;&#29983;&#27169;&#25311;&#22120;v2.0 <span class='featured-status'>开发中</span></p>
           <div class='featured-actions'>
-            <a class='featured-button' href='https://kw-game-graduate-simulator-v2.vercel.app/' target='_blank' rel='noopener noreferrer'>游玩</a>
-            <span class='featured-button is-disabled' aria-disabled='true'>项目</span>
+            <a class='featured-button' href='https://kw66.github.io/PhD_Simulator_V2/' target='_blank' rel='noopener noreferrer'>游玩</a>
+            <a class='featured-button' href='https://github.com/kw66/PhD_Simulator_V2' target='_blank' rel='noopener noreferrer'>项目</a>
           </div>
         </div>
       </article>

@@ -25,7 +25,7 @@ page_class: project-hub-page
     </article>
 
     <article class="project-card">
-      <a class="project-card__media" href="https://kw-game-graduate-simulator-v2.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="打开研究生模拟器v2.0">
+      <a class="project-card__media" href="https://kw66.github.io/PhD_Simulator_V2/" target="_blank" rel="noopener noreferrer" aria-label="打开研究生模拟器v2.0">
         <img src="{{ '/images/works/phd-simulator-v2-cover-card.webp' | relative_url }}" alt="研究生模拟器v2.0角色封面" width="1100" height="614" loading="lazy" decoding="async">
         <span class="project-card__kicker project-card__kicker--status">开发中</span>
       </a>
@@ -33,8 +33,8 @@ page_class: project-hub-page
         <div class="project-card__main">
           <h2>研究生模拟器v2.0</h2>
           <div class="project-card__actions">
-            <a href="https://kw-game-graduate-simulator-v2.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="游玩研究生模拟器v2.0">游玩</a>
-            <span class="project-card__action is-disabled" aria-disabled="true">项目</span>
+            <a href="https://kw66.github.io/PhD_Simulator_V2/" target="_blank" rel="noopener noreferrer" aria-label="游玩研究生模拟器v2.0">游玩</a>
+            <a href="https://github.com/kw66/PhD_Simulator_V2" target="_blank" rel="noopener noreferrer" aria-label="查看研究生模拟器v2.0项目">项目</a>
           </div>
         </div>
         <p>研究生日常模拟游戏新版，新增局外成长系统和两个特殊角色。</p>
