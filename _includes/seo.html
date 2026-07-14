@@ -13,7 +13,7 @@
   {% assign browser_title = seo_title | append: " | " | append: site.title %}
 {% endif %}
 
-<title>{{ browser_title | markdownify | strip_html | strip_newlines | escape_once }}</title>
+<title>{{ browser_title | strip_html | strip_newlines | escape_once }}</title>
 
 {% assign seo_description = page.description | default: page.excerpt | default: site.description %}
 {% if seo_description %}
@@ -44,7 +44,7 @@
 
 <meta property="og:locale" content="zh_CN">
 <meta property="og:site_name" content="{{ site.title }}">
-<meta property="og:title" content="{{ seo_title | markdownify | strip_html | strip_newlines | escape_once }}">
+<meta property="og:title" content="{{ seo_title | strip_html | strip_newlines | escape_once }}">
 <meta property="og:type" content="website">
 
 {% if seo_url %}
@@ -61,7 +61,7 @@
 {% endif %}
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{{ seo_title | markdownify | strip_html | strip_newlines | escape_once }}">
+<meta name="twitter:title" content="{{ seo_title | strip_html | strip_newlines | escape_once }}">
 <meta name="twitter:description" content="{{ seo_description }}">
 <meta name="twitter:url" content="{{ canonical_url }}">
 {% if seo_image_url %}<meta name="twitter:image" content="{{ seo_image_url }}">{% endif %}
