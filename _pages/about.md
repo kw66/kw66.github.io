@@ -1,18 +1,21 @@
 ---
 permalink: /
-title: ""
-excerpt: ""
+title: "个人主页"
+excerpt: "李旭霖，中国科学技术大学博士生，研究行人重识别与视觉表征学习，并分享科研绘图资源和网页小游戏。"
+og_image: "/images/works/atreid-featured-card.webp"
 author_profile: true
 redirect_from:
   - /about/
   - /about.html
 ---
 
+<h1 class='visually-hidden'>Xulin Li（李旭霖）个人主页</h1>
 <span class='anchor' id='about-me'></span>
 
 <div class='side-mascot-rail side-mascot-rail--right' id='side-mascot-layer-right' aria-hidden='true'></div>
 
-<section class='featured-carousel' id='featured-carousel' aria-label='Featured works'>
+<section class='featured-carousel' id='featured-carousel' aria-labelledby='featured-heading'>
+  <h2 class='visually-hidden' id='featured-heading'>精选作品</h2>
   <div class='featured-viewport' id='featured-viewport'>
     <div class='featured-track' id='featured-track'>
       <article class='featured-item' data-featured-item>
@@ -20,7 +23,7 @@ redirect_from:
           <img src='images/works/atreid-featured-card.webp' alt='Anytime person re-identification overview' width='750' height='456' decoding='async' fetchpriority='high'>
         </div>
         <div class='featured-item-body'>
-          <p class='featured-item-title'>&#128339; &#20840;&#26102;&#27573;&#34892;&#20154;&#37325;&#35782;&#21035;</p>
+          <h3 class='featured-item-title'>&#128339; &#20840;&#26102;&#27573;&#34892;&#20154;&#37325;&#35782;&#21035;</h3>
           <div class='featured-actions'>
             <a class='featured-button' href='https://arxiv.org/abs/2509.16635' target='_blank' rel='noopener noreferrer'>Paper</a>
             <a class='featured-button' href='https://github.com/kw66/AT-ReID' target='_blank' rel='noopener noreferrer'>Dataset</a>
@@ -34,7 +37,7 @@ redirect_from:
           <img src='images/works/phd-simulator-cover-card.webp' alt='研究生模拟器v1.0封面' width='1100' height='614' loading='lazy' decoding='async'>
         </div>
         <div class='featured-item-body'>
-          <p class='featured-item-title'>&#127918; &#30740;&#31350;&#29983;&#27169;&#25311;&#22120;v1.0</p>
+          <h3 class='featured-item-title'>&#127918; &#30740;&#31350;&#29983;&#27169;&#25311;&#22120;v1.0</h3>
           <div class='featured-actions'>
             <a class='featured-button' href='https://kw66.github.io/PhD_Simulator/' target='_blank' rel='noopener noreferrer'>游玩</a>
             <a class='featured-button' href='https://github.com/kw66/PhD_Simulator' target='_blank' rel='noopener noreferrer'>项目</a>
@@ -47,7 +50,7 @@ redirect_from:
           <img src='images/works/phd-simulator-v2-cover-card.webp' alt='研究生模拟器v2.0角色封面' width='1100' height='614' loading='lazy' decoding='async'>
         </div>
         <div class='featured-item-body'>
-          <p class='featured-item-title'>&#127918; &#30740;&#31350;&#29983;&#27169;&#25311;&#22120;v2.0 <span class='featured-status'>开发中</span></p>
+          <h3 class='featured-item-title'>&#127918; &#30740;&#31350;&#29983;&#27169;&#25311;&#22120;v2.0 <span class='featured-status'>开发中</span></h3>
           <div class='featured-actions'>
             <a class='featured-button' href='https://kw66.github.io/PhD_Simulator_V2/' target='_blank' rel='noopener noreferrer'>游玩</a>
             <a class='featured-button' href='https://github.com/kw66/PhD_Simulator_V2' target='_blank' rel='noopener noreferrer'>项目</a>
@@ -60,7 +63,7 @@ redirect_from:
           <img src='images/works/photo-hero-cover-card.webp' alt='图片勇者封面' width='580' height='368' loading='lazy' decoding='async'>
         </div>
         <div class='featured-item-body'>
-          <p class='featured-item-title'>&#128247; &#22270;&#29255;&#21191;&#32773;</p>
+          <h3 class='featured-item-title'>&#128247; &#22270;&#29255;&#21191;&#32773;</h3>
           <div class='featured-actions'>
             <a class='featured-button' href='https://kw66.github.io/photo-hero/' target='_blank' rel='noopener noreferrer'>游玩</a>
             <a class='featured-button' href='https://github.com/kw66/photo-hero' target='_blank' rel='noopener noreferrer'>项目</a>
@@ -70,10 +73,10 @@ redirect_from:
 
       <article class='featured-item' data-featured-item>
         <div class='featured-item-image'>
-          <img src='images/works/campus-memoir-cover-card.jpg' alt='校园回忆录封面' width='1570' height='800' loading='lazy' decoding='async'>
+          <img src='images/works/campus-memoir-cover-card.webp' alt='校园回忆录封面' width='1100' height='561' loading='lazy' decoding='async'>
         </div>
         <div class='featured-item-body'>
-          <p class='featured-item-title'>&#127979; 校园回忆录</p>
+          <h3 class='featured-item-title'>&#127979; 校园回忆录</h3>
           <div class='featured-actions'>
             <a class='featured-button' href='https://kw66.github.io/campus-memoir/' target='_blank' rel='noopener noreferrer'>游玩</a>
             <a class='featured-button' href='https://github.com/kw66/campus-memoir' target='_blank' rel='noopener noreferrer'>项目</a>
@@ -86,7 +89,7 @@ redirect_from:
           <img src='images/works/kw-chess-cover-card.webp' alt='科王象棋封面' width='900' height='506' loading='lazy' decoding='async'>
         </div>
         <div class='featured-item-body'>
-          <p class='featured-item-title'>&#128081; &#31185;&#29579;&#35937;&#26827;</p>
+          <h3 class='featured-item-title'>&#128081; &#31185;&#29579;&#35937;&#26827;</h3>
           <div class='featured-actions'>
             <a class='featured-button' href='https://kw66.github.io/kw-chess/' target='_blank' rel='noopener noreferrer'>游玩</a>
             <a class='featured-button' href='https://github.com/kw66/kw-chess' target='_blank' rel='noopener noreferrer'>项目</a>
@@ -99,7 +102,7 @@ redirect_from:
           <img src='images/works/research-figures-cover-card.webp' alt='Research figures project cover' width='1100' height='534' loading='lazy' decoding='async'>
         </div>
         <div class='featured-item-body'>
-          <p class='featured-item-title'>&#128396;&#65039; &#20174;&#33609;&#22270;&#21040;&#25104;&#21697;&#20043;&#31185;&#30740;&#32472;&#22270;</p>
+          <h3 class='featured-item-title'>&#128396;&#65039; &#20174;&#33609;&#22270;&#21040;&#25104;&#21697;&#20043;&#31185;&#30740;&#32472;&#22270;</h3>
           <div class='featured-actions'>
             <a class='featured-button' href='https://github.com/kw66/research-figures' target='_blank' rel='noopener noreferrer'>项目</a>
           </div>
@@ -108,8 +111,9 @@ redirect_from:
     </div>
   </div>
 </section>
+<h2 class='visually-hidden' id='publications-heading'>论文</h2>
 <div class='paper-filter-toolbar'>
-  <div class='paper-filter-row' id='paper-filter-row' role='group' aria-label='Filter papers by tags'>
+  <div class='paper-filter-row' id='paper-filter-row' role='group' aria-label='按标签筛选论文'>
     <button class='paper-filter-chip' type='button' data-filter-tag='all' aria-pressed='false'>All</button>
     <button class='paper-filter-chip' type='button' data-filter-tag='first-author' aria-pressed='true'>First Author</button>
     <button class='paper-filter-chip' type='button' data-filter-tag='reid' aria-pressed='false'>ReID</button>
@@ -123,12 +127,12 @@ redirect_from:
   </div>
 </div>
 
-<div class='paper-list' id='paper-list'>
+<section class='paper-list' id='paper-list' aria-labelledby='publications-heading'>
   <article class='paper-list-item' data-paper-tags='first-author,reid,moe,frequency'>
-    <p class='work-title'>MFEN: Multi-Frequency Expert Network for Visible-Infrared Person Re-ID</p>
+    <h3 class='work-title' lang='en'>MFEN: Multi-Frequency Expert Network for Visible-Infrared Person Re-ID</h3>
     <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Qinhong Yang, Qi Chu, Tao Gong, Nenghai Yu</p>
     <div class='work-meta-row'>
-      <p class='work-meta'>Venue: CVPR 2026 &#10024; Highlight</p>
+      <p class='work-meta'>CVPR 2026 &#10024; Highlight</p>
       <a class='paper-link-button' href='https://arxiv.org/abs/2606.12051' target='_blank' rel='noopener noreferrer'>&#128196; Paper</a>
       <a class='paper-link-button' href='https://github.com/kw66/research-figures/tree/main/MFEN' target='_blank' rel='noopener noreferrer'>&#127912; &#30011;&#22270;PPT</a>
     </div>
@@ -139,10 +143,10 @@ redirect_from:
   </article>
 
   <article class='paper-list-item' data-paper-tags='first-author,reid,graph'>
-    <p class='work-title'>ANFI: Rethinking Neighbor Feature Interaction in Person Re-ID</p>
+    <h3 class='work-title' lang='en'>ANFI: Rethinking Neighbor Feature Interaction in Person Re-ID</h3>
     <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Jiaze Li, Qinhong Yang, Tao Gong, Qi Chu, Nenghai Yu</p>
     <div class='work-meta-row'>
-      <p class='work-meta'>Venue: ECCV 2026</p>
+      <p class='work-meta'>ECCV 2026</p>
       <span class='paper-link-button paper-link-button--disabled' aria-disabled='true'>&#128196; Paper</span>
       <span class='paper-link-button paper-link-button--disabled' aria-disabled='true'>&#127912; &#30011;&#22270;PPT</span>
     </div>
@@ -152,10 +156,10 @@ redirect_from:
   </article>
 
   <article class='paper-list-item' data-paper-tags='first-author,reid,causal-inference'>
-    <p class='work-title'>Causal Clothes-Invariant Feature Learning for Cloth-Changing Person Re-ID</p>
+    <h3 class='work-title' lang='en'>Causal Clothes-Invariant Feature Learning for Cloth-Changing Person Re-ID</h3>
     <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Jiaze Li, Yating Liu, Qi Chu, Mang Ye, Wanli Ouyang, Nenghai Yu</p>
     <div class='work-meta-row'>
-      <p class='work-meta'>Venue: IEEE TCSVT 2026</p>
+      <p class='work-meta'>IEEE TCSVT 2026</p>
       <a class='paper-link-button' href='https://arxiv.org/abs/2305.06145' target='_blank' rel='noopener noreferrer'>&#128196; Paper</a>
       <a class='paper-link-button' href='https://github.com/kw66/research-figures/tree/main/CCIL' target='_blank' rel='noopener noreferrer'>&#127912; &#30011;&#22270;PPT</a>
     </div>
@@ -165,28 +169,28 @@ redirect_from:
   </article>
 
   <article class='paper-list-item' data-paper-tags='reid'>
-    <p class='work-title'>MCVL: Multi-Space Cross-View Learning for Aerial-Ground Person Re-Identification</p>
+    <h3 class='work-title' lang='en'>MCVL: Multi-Space Cross-View Learning for Aerial-Ground Person Re-Identification</h3>
     <p class='work-authors'>Wajahat Khalid, Bin Liu, <strong>Xulin Li</strong>, Yubo Wang, MUHAMMAD SHER AFGAN</p>
     <div class='work-meta-row'>
-      <p class='work-meta'>Venue: ECCV 2026</p>
+      <p class='work-meta'>ECCV 2026</p>
       <span class='paper-link-button paper-link-button--disabled' aria-disabled='true'>&#128196; Paper</span>
     </div>
   </article>
 
   <article class='paper-list-item' data-paper-tags='reid'>
-    <p class='work-title'>R<sup>2</sup>TUA: Reconstruction-residual Based Targeted and Untargeted Attack Against Text-Image Person Re-Identification</p>
+    <h3 class='work-title' lang='en'>R<sup>2</sup>TUA: Reconstruction-residual Based Targeted and Untargeted Attack Against Text-Image Person Re-Identification</h3>
     <p class='work-authors'>Yubo Wang, Yan Lu, Bin Liu, <strong>Xulin Li</strong>, Jixiang Niu</p>
     <div class='work-meta-row'>
-      <p class='work-meta'>Venue: CVPR 2026</p>
+      <p class='work-meta'>CVPR 2026</p>
       <a class='paper-link-button' href='https://openaccess.thecvf.com/content/CVPR2026/html/Wang_R2TUA_Reconstruction-residual_Based_Targeted_and_Untargeted_Attack_Against_Text-Image_Person_CVPR_2026_paper.html' target='_blank' rel='noopener noreferrer'>&#128196; Paper</a>
     </div>
   </article>
 
   <article class='paper-list-item' data-paper-tags='inpainting'>
-    <p class='work-title'>MagicPaint: Operate Anything for Image Inpainting with Diffusion Model</p>
+    <h3 class='work-title' lang='en'>MagicPaint: Operate Anything for Image Inpainting with Diffusion Model</h3>
     <p class='work-authors'>Qinhong Yang, Dongdong Chen, Qi Chu, Tao Gong, Qiankun Liu, Zhentao Tan, <strong>Xulin Li</strong>, Huamin Feng, Nenghai Yu</p>
     <div class='work-meta-row'>
-      <p class='work-meta'>Venue: AAAI 2026</p>
+      <p class='work-meta'>AAAI 2026</p>
       <a class='paper-link-button' href='https://doi.org/10.1609/aaai.v40i14.38151' target='_blank' rel='noopener noreferrer'>&#128196; Paper</a>
       <a class='paper-link-button' href='https://github.com/littleYaang/MagicPaint' target='_blank' rel='noopener noreferrer'>项目</a>
       <a class='paper-link-button' href='https://github.com/kw66/research-figures/tree/main/MagicPaint' target='_blank' rel='noopener noreferrer'>&#127912; &#30011;&#22270;PPT</a>
@@ -194,19 +198,19 @@ redirect_from:
   </article>
 
   <article class='paper-list-item' data-paper-tags='reid'>
-    <p class='work-title'>Bridging the Sky and Ground: Towards View-Invariant Feature Learning for Aerial-Ground Person Re-Identification</p>
+    <h3 class='work-title' lang='en'>Bridging the Sky and Ground: Towards View-Invariant Feature Learning for Aerial-Ground Person Re-Identification</h3>
     <p class='work-authors'>Wajahat Khalid, Bin Liu, <strong>Xulin Li</strong>, Muhammad Waqas, Muhammad Sher Afgan</p>
     <div class='work-meta-row'>
-      <p class='work-meta'>Venue: ICCV 2025</p>
+      <p class='work-meta'>ICCV 2025</p>
       <a class='paper-link-button' href='https://openaccess.thecvf.com/content/ICCV2025/html/Khalid_Bridging_the_Sky_and_Ground_Towards_View-Invariant_Feature_Learning_for_ICCV_2025_paper.html' target='_blank' rel='noopener noreferrer'>&#128196; Paper</a>
     </div>
   </article>
 
   <article class='paper-list-item' data-paper-tags='first-author,reid,moe,multi-task-learning'>
-    <p class='work-title'>Towards Anytime Retrieval: A Benchmark for Anytime Person Re-Identification</p>
+    <h3 class='work-title' lang='en'>Towards Anytime Retrieval: A Benchmark for Anytime Person Re-Identification</h3>
     <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Jiaze Li, Qinhong Yang, Tao Gong, Qi Chu, Mang Ye, Nenghai Yu</p>
     <div class='work-meta-row'>
-      <p class='work-meta'>Venue: IJCAI 2025 &#128266; Oral</p>
+      <p class='work-meta'>IJCAI 2025 &#128266; Oral</p>
       <a class='paper-link-button' href='https://arxiv.org/abs/2509.16635' target='_blank' rel='noopener noreferrer'>&#128196; Paper</a>
       <a class='paper-link-button' href='https://github.com/kw66/AT-ReID' target='_blank' rel='noopener noreferrer'>项目</a>
       <a class='paper-link-button' href='https://github.com/kw66/research-figures/tree/main/AT-ReID' target='_blank' rel='noopener noreferrer'>&#127912; &#30011;&#22270;PPT</a>
@@ -218,19 +222,19 @@ redirect_from:
   </article>
 
   <article class='paper-list-item' data-paper-tags='reid'>
-    <p class='work-title'>Cloth-Independent Feature Learning from Multi-perspective for Cloth-Changing Person Re-Identification</p>
+    <h3 class='work-title' lang='en'>Cloth-Independent Feature Learning from Multi-perspective for Cloth-Changing Person Re-Identification</h3>
     <p class='work-authors'>Wajahat Khalid, Bin Liu, <strong>Xulin Li</strong>, Muhammad Ali Qureshi</p>
     <div class='work-meta-row'>
-      <p class='work-meta'>Venue: ICPRAI 2024</p>
+      <p class='work-meta'>ICPRAI 2024</p>
       <a class='paper-link-button' href='https://dblp.org/rec/conf/icprai/KhalidLLQ24.html' target='_blank' rel='noopener noreferrer'>&#128196; Paper</a>
     </div>
   </article>
 
   <article class='paper-list-item' data-paper-tags='first-author,reid,causal-inference,graph'>
-    <p class='work-title'>Counterfactual Intervention Feature Transfer for Visible-Infrared Person Re-identification</p>
+    <h3 class='work-title' lang='en'>Counterfactual Intervention Feature Transfer for Visible-Infrared Person Re-identification</h3>
     <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Yating Liu, Guojun Yin, Qi Chu, Jingyang Huang, Feng Zhu, Rui Zhao, Nenghai Yu</p>
     <div class='work-meta-row'>
-      <p class='work-meta'>Venue: ECCV 2022</p>
+      <p class='work-meta'>ECCV 2022</p>
       <a class='paper-link-button' href='https://arxiv.org/abs/2208.00967' target='_blank' rel='noopener noreferrer'>&#128196; Paper</a>
       <a class='paper-link-button' href='https://github.com/kw66/research-figures/tree/main/CIFT' target='_blank' rel='noopener noreferrer'>&#127912; &#30011;&#22270;PPT</a>
     </div>
@@ -241,10 +245,10 @@ redirect_from:
   </article>
 
   <article class='paper-list-item' data-paper-tags='first-author,reid,metric-learning'>
-    <p class='work-title'>Cloth-aware Center Cluster Loss for Cloth-Changing Person Re-identification</p>
+    <h3 class='work-title' lang='en'>Cloth-aware Center Cluster Loss for Cloth-Changing Person Re-identification</h3>
     <p class='work-authors'><strong>Xulin Li</strong>, Bin Liu, Yan Lu, Qi Chu, Nenghai Yu</p>
     <div class='work-meta-row'>
-      <p class='work-meta'>Venue: PRCV 2022</p>
+      <p class='work-meta'>PRCV 2022</p>
       <a class='paper-link-button' href='https://link.springer.com/chapter/10.1007/978-3-031-18907-4_41' target='_blank' rel='noopener noreferrer'>&#128196; Paper</a>
       <a class='paper-link-button' href='https://github.com/kw66/research-figures/tree/main/CACC' target='_blank' rel='noopener noreferrer'>&#127912; &#30011;&#22270;PPT</a>
     </div>
@@ -252,9 +256,9 @@ redirect_from:
       <span class='paper-tag'>Metric Learning</span>
     </div>
   </article>
-</div>
+</section>
 
-<p class='paper-filter-empty' id='paper-filter-empty' hidden>No papers match the selected tags.</p>
+<p class='paper-filter-empty' id='paper-filter-empty' hidden>没有符合当前筛选条件的论文。</p>
 
 <script>
   (function () {
@@ -510,8 +514,27 @@ redirect_from:
       });
     }
 
+    function initDesktopHomeScroller() {
+      const sidebar = document.querySelector('.is-fixed-scale-home #main > .sidebar');
+      const pageScroller = document.querySelector('.is-fixed-scale-home #main > .page');
+      if (!sidebar || !pageScroller) return;
+
+      sidebar.addEventListener('wheel', (event) => {
+        if (isMobileHomeLayout() || Math.abs(event.deltaY) < 0.5) return;
+        const previousScrollTop = pageScroller.scrollTop;
+        pageScroller.scrollTop += event.deltaY;
+        if (pageScroller.scrollTop !== previousScrollTop) {
+          event.preventDefault();
+        }
+      }, { passive: false });
+    }
+
     function resetPageScroll() {
       window.requestAnimationFrame(() => {
+        const pageScroller = document.querySelector('.is-fixed-scale-home #main > .page');
+        if (pageScroller) {
+          pageScroller.scrollTop = 0;
+        }
         if (document.scrollingElement) {
           document.scrollingElement.scrollTop = 0;
         }
@@ -551,7 +574,9 @@ redirect_from:
 
       if (mobileLayout) {
         shell.style.height = 'auto';
+        stage.style.height = 'auto';
         stage.style.transform = 'none';
+        stage.style.removeProperty('--desktop-home-viewport-height');
         shell.dataset.scale = '1.0000';
         return 1;
       }
@@ -560,14 +585,19 @@ redirect_from:
       stage.style.transform = 'translate3d(0, 0, 0) scale(1)';
 
       const stageWidth = Math.max(stage.scrollWidth, stage.offsetWidth, stage.clientWidth, 1);
-      const stageHeight = Math.max(stage.scrollHeight, stage.offsetHeight, stage.clientHeight, 1);
       const shellWidth = Math.max(shell.clientWidth, getViewportWidth(), 1);
       const availableWidth = Math.max(shellWidth - desktopScalePadding * 2, 1);
       const scale = clamp(availableWidth / stageWidth, 0.18, 1);
       const offsetX = Math.max((shellWidth - stageWidth * scale) / 2, 0);
+      const masthead = document.querySelector('.masthead');
+      const mastheadHeight = masthead ? masthead.getBoundingClientRect().height : 0;
+      const availableHeight = Math.max(window.innerHeight - mastheadHeight, 320);
+      const stageViewportHeight = availableHeight / scale;
 
       stage.style.transform = `translate3d(${offsetX.toFixed(2)}px, 0, 0) scale(${scale.toFixed(4)})`;
-      shell.style.height = `${Math.ceil(stageHeight * scale)}px`;
+      stage.style.height = `${stageViewportHeight.toFixed(2)}px`;
+      stage.style.setProperty('--desktop-home-viewport-height', `${stageViewportHeight.toFixed(2)}px`);
+      shell.style.height = `${Math.ceil(availableHeight)}px`;
       shell.dataset.scale = scale.toFixed(4);
       return scale;
     }
@@ -1292,12 +1322,7 @@ redirect_from:
         featuredState.loopOffset = 0;
         applyFeaturedLoopOffset(track);
         bindFeaturedViewportInteractions(viewport);
-        if (!prefersReducedMotion) {
-          pauseFeaturedAutoScroll(1400);
-          startFeaturedAutoScroll();
-        } else {
-          clearFeaturedAutoScroll();
-        }
+        clearFeaturedAutoScroll();
         updateFeaturedButtons();
         return;
       }
@@ -2143,6 +2168,7 @@ redirect_from:
     initSlotMachine();
     initLinkupGame();
     initHomeToolSwitcher();
+    initDesktopHomeScroller();
     applyDesktopScale();
 
     if (document.readyState === 'complete') {

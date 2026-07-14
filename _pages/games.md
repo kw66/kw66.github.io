@@ -1,12 +1,14 @@
 ---
 permalink: /games/
 title: "小游戏"
-excerpt: "小游戏入口"
+excerpt: "李旭霖制作的网页小游戏，包括研究生模拟器、图片勇者、校园回忆录和科王象棋。"
+og_image: "/images/works/phd-simulator-v2-cover-card.webp"
 author_profile: false
 page_class: project-hub-page
 ---
 
-<section class="project-hub project-hub--games" aria-label="小游戏入口">
+<h1 class="visually-hidden" id="games-heading">小游戏</h1>
+<section class="project-hub project-hub--games" aria-labelledby="games-heading">
   <div class="project-hub__grid">
     <article class="project-card">
       <a class="project-card__media" href="https://kw66.github.io/PhD_Simulator/" target="_blank" rel="noopener noreferrer" aria-label="打开研究生模拟器v1.0">
@@ -59,7 +61,7 @@ page_class: project-hub-page
 
     <article class="project-card">
       <a class="project-card__media" href="https://kw66.github.io/campus-memoir/" target="_blank" rel="noopener noreferrer" aria-label="打开校园回忆录">
-        <img src="{{ '/images/works/campus-memoir-cover-card.jpg' | relative_url }}" alt="校园回忆录封面" width="1570" height="800" loading="lazy" decoding="async">
+        <img src="{{ '/images/works/campus-memoir-cover-card.webp' | relative_url }}" alt="校园回忆录封面" width="1100" height="561" loading="lazy" decoding="async">
       </a>
       <div class="project-card__body">
         <div class="project-card__main">

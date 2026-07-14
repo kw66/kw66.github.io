@@ -1,12 +1,14 @@
 ---
 permalink: /research-figures/
 title: "科研绘图"
-excerpt: "Research figure resources"
+excerpt: "科研论文绘图资源，包括论文结构图、画图 PPT、配色分析与常用配色模板。"
+og_image: "/images/works/research-figures/mfen-card.webp"
 author_profile: false
 page_class: project-hub-page
 ---
 
-<section class="project-hub project-hub--figures" aria-label="科研绘图资源">
+<h1 class="visually-hidden" id="research-figures-heading">科研绘图</h1>
+<section class="project-hub project-hub--figures" aria-labelledby="research-figures-heading">
   <div class="project-hub__grid">
     <article class="project-card">
       <a class="project-card__media" href="https://github.com/kw66/research-figures/tree/main/MFEN" target="_blank" rel="noopener noreferrer" aria-label="打开 MFEN 绘图资源">

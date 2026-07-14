@@ -3,7 +3,7 @@ layout: compress
 ---
 
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="{{ page.lang | default: site.locale | default: 'zh-CN' }}" class="no-js">
   <head>
     {% include head.html %}
     {% include head/custom.html %}
@@ -28,7 +28,7 @@ layout: compress
               </section>
             {% endif %}
           
-            <article class="page{% if page.page_class %} {{ page.page_class }}{% endif %}" itemscope itemtype="http://schema.org/CreativeWork">
+            <article class="page{% if page.page_class %} {{ page.page_class }}{% endif %}" itemscope itemtype="https://schema.org/{% if page.permalink == '/' or page.url == '/' %}ProfilePage{% elsif page.page_class == 'project-hub-page' %}CollectionPage{% else %}CreativeWork{% endif %}"{% if page.permalink == "/" or page.url == "/" %} tabindex="0" aria-label="主页内容"{% endif %}>
               {% if page.title %}<meta itemprop="headline" content="{{ page.title | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
               <div class="page__inner-wrap">
                 <section class="page__content" itemprop="text">

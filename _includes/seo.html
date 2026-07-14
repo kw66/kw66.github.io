@@ -4,15 +4,28 @@
 {% endif %}
 {% assign seo_url = seo_url | default: site.github.url %}
 
-{% if site.url %}
-  {% assign canonical_url = page.url | replace: "index.html", "" | prepend: site.url %}
+{% assign canonical_url = page.url | replace: "index.html", "" | prepend: seo_url %}
+{% assign seo_title = page.title | default: site.title %}
+{% if page.url == "/" %}
+  {% assign seo_title = site.title | append: "（李旭霖）" %}
+  {% assign browser_title = site.title | append: " | 个人主页" %}
+{% else %}
+  {% assign browser_title = seo_title | append: " | " | append: site.title %}
 {% endif %}
 
-<title>{{ site.title }} - Homepage</title>
+<title>{{ browser_title | markdownify | strip_html | strip_newlines | escape_once }}</title>
 
 {% assign seo_description = page.description | default: page.excerpt | default: site.description %}
 {% if seo_description %}
   {% assign seo_description = seo_description | markdownify | strip_html | strip_newlines | escape_once %}
+  <meta name="description" content="{{ seo_description }}">
+{% endif %}
+
+{% assign seo_image = page.og_image | default: site.og_image %}
+{% if seo_image and seo_image contains "://" %}
+  {% assign seo_image_url = seo_image %}
+{% elsif seo_image %}
+  {% assign seo_image_url = seo_image | prepend: seo_url %}
 {% endif %}
 
 {% assign seo_author = page.author | default: page.author[0] | default: site.author[0] %}
@@ -29,9 +42,10 @@
   {% assign seo_author_twitter = seo_author_twitter | replace: "@", "" %}
 {% endif %}
 
-<meta property="og:locale" content="en">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:site_name" content="{{ site.title }}">
-<meta property="og:title" content="{{ site.title }}">
+<meta property="og:title" content="{{ seo_title | markdownify | strip_html | strip_newlines | escape_once }}">
+<meta property="og:type" content="website">
 
 {% if seo_url %}
   <link rel="canonical" href="{{ page.url | prepend: seo_url | replace: "/index.html", "/" }}">
@@ -42,15 +56,43 @@
   <meta property="og:description" content="{{ seo_description }}">
 {% endif %}
 
+{% if seo_image_url %}
+  <meta property="og:image" content="{{ seo_image_url }}">
+{% endif %}
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ seo_title | markdownify | strip_html | strip_newlines | escape_once }}">
+<meta name="twitter:description" content="{{ seo_description }}">
+<meta name="twitter:url" content="{{ canonical_url }}">
+{% if seo_image_url %}<meta name="twitter:image" content="{{ seo_image_url }}">{% endif %}
+
 {% if site.twitter.username %}
   <meta name="twitter:site" content="@{{ site.twitter.username | replace: "@", "" }}">
-  <meta name="twitter:title" content="{{ page.title | default: site.title | markdownify | strip_html | strip_newlines | escape_once }}">
-  <meta name="twitter:description" content="{{ seo_description }}">
-  <meta name="twitter:url" content="{{ canonical_url }}">
-
   {% if seo_author_twitter %}
     <meta name="twitter:creator" content="@{{ seo_author_twitter }}">
   {% endif %}
+{% endif %}
+
+{% if page.url == "/" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Xulin Li",
+  "alternateName": "李旭霖",
+  "url": "{{ seo_url }}",
+  "image": "{{ '/images/avatar-xulin.jpg' | prepend: seo_url }}",
+  "jobTitle": "PhD Student",
+  "affiliation": {
+    "@type": "CollegeOrUniversity",
+    "name": "University of Science and Technology of China"
+  },
+  "sameAs": [
+    "https://github.com/kw66",
+    "https://xhslink.com/m/9r4YTAwGXkL"
+  ]
+}
+</script>
 {% endif %}
 
 {% if site.facebook %}

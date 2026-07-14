@@ -7,11 +7,11 @@
             <li class="masthead__menu-item masthead__menu-item--button masthead__menu-item--view" data-home-view-target="{{ link.key | default: link.title }}"><a href="{{ domain }}{{ link.url }}">{{ link.title }}</a></li>
           {% endfor %}
           <li class="masthead__menu-item masthead__menu-item--stats">
-            <span class="masthead__stats" aria-label="Visitor statistics">
-              <span class="masthead__stat" id="local_counter_container_uv" title="Unique devices">
+            <span class="masthead__stats" aria-label="访问统计">
+              <span class="masthead__stat" id="local_counter_container_uv" title="访客数">
                 &#128064; <span id="local_counter_value_uv" data-counter-role="uv">--</span>
               </span>
-              <span class="masthead__stat" id="local_counter_container_pv" title="Page visits">
+              <span class="masthead__stat" id="local_counter_container_pv" title="访问次数">
                 &#128433;&#65039; <span id="local_counter_value_pv" data-counter-role="pv">--</span>
               </span>
             </span>
