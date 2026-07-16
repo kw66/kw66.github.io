@@ -46,6 +46,11 @@
     --kw-font-editorial: "Palatino Linotype", "Book Antiqua", "Noto Serif SC", Georgia, serif;
 }
 
+:focus,
+:focus-visible {
+    outline: none !important;
+}
+
 .masthead,
 .sidebar,
 .featured-carousel,
