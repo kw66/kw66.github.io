@@ -148,7 +148,7 @@ redirect_from:
     <div class='work-meta-row'>
       <p class='work-meta'>ECCV 2026</p>
       <span class='paper-link-button paper-link-button--disabled' aria-disabled='true'>&#128196; Paper</span>
-      <span class='paper-link-button paper-link-button--disabled' aria-disabled='true'>&#127912; &#30011;&#22270;PPT</span>
+      <a class='paper-link-button' href='https://github.com/kw66/research-figures/tree/main/ANFI' target='_blank' rel='noopener noreferrer'>&#127912; &#30011;&#22270;PPT</a>
     </div>
     <div class='paper-tags'>
       <span class='paper-tag'>Graph</span>

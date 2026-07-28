@@ -8,6 +8,7 @@ page_class: project-hub-page
 ---
 
 <h1 class="visually-hidden" id="research-figures-heading">科研绘图</h1>
+<p class="project-hub__intro">这里整理了论文绘图源文件与可编辑 PPT。部分 PPT 保留了从草稿到成品的逐步修改过程，便于查看结构调整、视觉层级、配色和排版如何一步一步完善。</p>
 <section class="project-hub project-hub--figures" aria-labelledby="research-figures-heading">
   <div class="project-hub__grid">
     <article class="project-card">
@@ -21,6 +22,21 @@ page_class: project-hub-page
           <div class="project-card__actions">
             <a href="https://github.com/kw66/research-figures/tree/main/MFEN" target="_blank" rel="noopener noreferrer">画图PPT</a>
             <a href="https://arxiv.org/abs/2606.12051" target="_blank" rel="noopener noreferrer">论文</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="project-card">
+      <a class="project-card__media" href="https://github.com/kw66/research-figures/tree/main/ANFI" target="_blank" rel="noopener noreferrer" aria-label="打开 ANFI 绘图资源">
+        <img src="{{ '/images/works/research-figures/anfi-card.png' | relative_url }}" alt="ANFI 科研绘图封面" width="1026" height="455" loading="lazy" decoding="async">
+        <span class="project-card__kicker">ECCV 2026</span>
+      </a>
+      <div class="project-card__body">
+        <div class="project-card__main">
+          <h2>ANFI</h2>
+          <div class="project-card__actions">
+            <a href="https://github.com/kw66/research-figures/tree/main/ANFI" target="_blank" rel="noopener noreferrer">画图PPT</a>
           </div>
         </div>
       </div>
