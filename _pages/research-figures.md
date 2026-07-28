@@ -12,8 +12,23 @@ page_class: project-hub-page
 <section class="project-hub project-hub--figures" aria-labelledby="research-figures-heading">
   <div class="project-hub__grid">
     <article class="project-card">
+      <a class="project-card__media" href="https://github.com/kw66/research-figures/tree/main/FigureCollection" target="_blank" rel="noopener noreferrer" aria-label="打开画图合集资源">
+        <img src="{{ '/images/works/research-figures-cover-card.webp' | relative_url }}" alt="画图合集封面" width="1100" height="534" decoding="async" fetchpriority="high">
+        <span class="project-card__kicker">PPT Collection</span>
+      </a>
+      <div class="project-card__body">
+        <div class="project-card__main">
+          <h2>画图合集</h2>
+          <div class="project-card__actions">
+            <a href="https://github.com/kw66/research-figures/tree/main/FigureCollection" target="_blank" rel="noopener noreferrer">画图PPT</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="project-card">
       <a class="project-card__media" href="https://github.com/kw66/research-figures/tree/main/MFEN" target="_blank" rel="noopener noreferrer" aria-label="打开 MFEN 绘图资源">
-        <img src="{{ '/images/works/research-figures/mfen-card.webp' | relative_url }}" alt="MFEN 科研绘图封面" width="1100" height="538" decoding="async" fetchpriority="high">
+        <img src="{{ '/images/works/research-figures/mfen-card.webp' | relative_url }}" alt="MFEN 科研绘图封面" width="1100" height="538" loading="lazy" decoding="async">
         <span class="project-card__kicker">CVPR 2026 Highlight</span>
       </a>
       <div class="project-card__body">
