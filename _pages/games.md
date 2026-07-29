@@ -1,7 +1,7 @@
 ---
 permalink: /games/
 title: "小游戏"
-excerpt: "李旭霖制作的网页小游戏，包括研究生模拟器、图片勇者、校园回忆录和科王象棋。"
+excerpt: "李旭霖制作的网页小游戏，包括研究生模拟器、学习成仙、图片勇者、校园回忆录和科王象棋。"
 og_image: "/images/works/phd-simulator-v2-cover-card.webp"
 author_profile: false
 page_class: project-hub-page
@@ -40,6 +40,23 @@ page_class: project-hub-page
           </div>
         </div>
         <p>研究生日常模拟游戏新版，新增局外成长系统和两个特殊角色。</p>
+      </div>
+    </article>
+
+    <article class="project-card">
+      <a class="project-card__media" href="https://kw66.github.io/study-ascension/" target="_blank" rel="noopener noreferrer" aria-label="打开学习成仙">
+        <img src="{{ '/images/works/study-ascension-cover-card.png' | relative_url }}" alt="学习成仙水墨游戏界面" width="1440" height="805" loading="lazy" decoding="async">
+        <span class="project-card__kicker project-card__kicker--status">开发中</span>
+      </a>
+      <div class="project-card__body">
+        <div class="project-card__main">
+          <h2>学习成仙</h2>
+          <div class="project-card__actions">
+            <a href="https://kw66.github.io/study-ascension/" target="_blank" rel="noopener noreferrer">游玩</a>
+            <a href="https://github.com/kw66/study-ascension" target="_blank" rel="noopener noreferrer" aria-label="查看学习成仙项目">项目</a>
+          </div>
+        </div>
+        <p>水墨风剧情向肉鸽文字游戏，把从幼儿园到博士及更远阶段化为境界、竞争与渡劫。</p>
       </div>
     </article>
 

@@ -60,6 +60,19 @@ redirect_from:
 
       <article class='featured-item' data-featured-item>
         <div class='featured-item-image'>
+          <img src='images/works/study-ascension-cover-card.png' alt='学习成仙水墨游戏界面' width='1440' height='805' loading='lazy' decoding='async'>
+        </div>
+        <div class='featured-item-body'>
+          <h3 class='featured-item-title'>&#128218; 学习成仙 <span class='featured-status'>开发中</span></h3>
+          <div class='featured-actions'>
+            <a class='featured-button' href='https://kw66.github.io/study-ascension/' target='_blank' rel='noopener noreferrer'>游玩</a>
+            <a class='featured-button' href='https://github.com/kw66/study-ascension' target='_blank' rel='noopener noreferrer'>项目</a>
+          </div>
+        </div>
+      </article>
+
+      <article class='featured-item' data-featured-item>
+        <div class='featured-item-image'>
           <img src='images/works/photo-hero-cover-card.webp' alt='图片勇者封面' width='580' height='368' loading='lazy' decoding='async'>
         </div>
         <div class='featured-item-body'>
