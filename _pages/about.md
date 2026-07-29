@@ -147,7 +147,7 @@ redirect_from:
     <p class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Jiaze Li, Qinhong Yang, Tao Gong, Qi Chu, Nenghai Yu</p>
     <div class='work-meta-row'>
       <p class='work-meta'>ECCV 2026</p>
-      <span class='paper-link-button paper-link-button--disabled' aria-disabled='true'>&#128196; Paper</span>
+      <a class='paper-link-button' href='https://arxiv.org/abs/2607.25407' target='_blank' rel='noopener noreferrer'>&#128196; Paper</a>
       <a class='paper-link-button' href='https://github.com/kw66/research-figures/tree/main/ANFI' target='_blank' rel='noopener noreferrer'>&#127912; &#30011;&#22270;PPT</a>
     </div>
     <div class='paper-tags'>

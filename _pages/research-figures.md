@@ -51,6 +51,7 @@ page_class: project-hub-page
         <div class="project-card__main">
           <h2>ANFI</h2>
           <div class="project-card__actions">
+            <a href="https://arxiv.org/abs/2607.25407" target="_blank" rel="noopener noreferrer">论文</a>
             <a href="https://github.com/kw66/research-figures/tree/main/ANFI" target="_blank" rel="noopener noreferrer">画图PPT</a>
           </div>
         </div>
