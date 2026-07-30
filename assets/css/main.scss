@@ -1427,16 +1427,16 @@ body {
 }
 
 .slot-machine-lever-knob {
-    background: radial-gradient(circle at 34% 30%, #f1dda8 0%, #c9a24f 42%, #a37a2d 72%, #7c591c 100%);
+    background: radial-gradient(circle at 34% 30%, #f2c5bd 0%, #d47d70 42%, #b45b51 72%, #873f3a 100%);
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.48),
-        0 8px 18px rgba(124, 89, 28, 0.22);
+        0 8px 18px rgba(135, 63, 58, 0.22);
 }
 
 .slot-machine-lever:hover .slot-machine-lever-knob {
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.54),
-        0 10px 20px rgba(124, 89, 28, 0.26);
+        0 10px 20px rgba(135, 63, 58, 0.28);
 }
 
 .slot-machine-lever:focus-visible {
