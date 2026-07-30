@@ -908,10 +908,21 @@ redirect_from:
     function initAuthorAvatarRecord() {
       const turntable = document.getElementById('author-avatar-turntable');
       const trigger = document.getElementById('author-avatar-slot');
+      const audio = document.getElementById('author-avatar-audio');
       if (!turntable || !trigger) return;
 
-      trigger.addEventListener('click', () => {
-        const isPlaying = turntable.classList.toggle('is-playing');
+      if (audio) {
+        audio.volume = 0.42;
+      }
+
+      const setPlaying = (isPlaying) => {
+        turntable.classList.toggle('is-playing', isPlaying);
+        trigger.setAttribute('aria-pressed', String(isPlaying));
+        trigger.setAttribute('aria-label', isPlaying ? '暂停头像唱片' : '播放头像唱片');
+      };
+
+      trigger.addEventListener('click', async () => {
+        const isPlaying = !turntable.classList.contains('is-playing');
         if (isPlaying) {
           if (avatarState.timerId) {
             window.clearTimeout(avatarState.timerId);
@@ -922,10 +933,24 @@ redirect_from:
             avatarState.animation = null;
           }
           finishAuthorAvatarSpin();
+          setPlaying(true);
+          if (audio) {
+            try {
+              await audio.play();
+            } catch (error) {
+              setPlaying(false);
+            }
+          }
+          return;
         }
-        trigger.setAttribute('aria-pressed', String(isPlaying));
-        trigger.setAttribute('aria-label', isPlaying ? '暂停头像唱片' : '播放头像唱片');
+
+        if (audio) audio.pause();
+        setPlaying(false);
       });
+
+      if (audio) {
+        audio.addEventListener('pause', () => setPlaying(false));
+      }
     }
 
     function updatePaperFilterButtons() {

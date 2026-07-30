@@ -1567,7 +1567,16 @@ body {
     opacity: 0.48;
 }
 
-.author__avatar-turntable.is-playing .author__avatar-slot {
+.author__avatar-disc {
+    position: absolute;
+    inset: 0;
+    display: block;
+    overflow: hidden;
+    border-radius: inherit;
+    will-change: transform;
+}
+
+.author__avatar-turntable.is-playing .author__avatar-disc {
     animation: author-avatar-record-spin 6.4s linear infinite;
 }
 
@@ -1625,7 +1634,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .author__avatar-turntable.is-playing .author__avatar-slot {
+    .author__avatar-turntable.is-playing .author__avatar-disc {
         animation: none;
     }
 
