@@ -486,7 +486,6 @@ redirect_from:
       }
       applyHomeToolSelection();
       window.requestAnimationFrame(() => {
-        syncFeaturedCarousel('auto');
         syncSlotMachineLayout();
         applyDesktopScale();
       });
