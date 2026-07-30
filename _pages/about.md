@@ -143,7 +143,7 @@ redirect_from:
 <section class='paper-list' id='paper-list' aria-labelledby='publications-heading'>
   <article class='paper-list-item' data-paper-tags='selected,reid,moe,frequency'>
     <p class='paper-entry'>
-      <span class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Qinhong Yang, Qi Chu, Tao Gong, Nenghai Yu</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
+      <span class='work-authors'><strong class='author-name'><span class='author-name__xu'>Xu</span><span class='author-name__lin'>lin</span> <span class='author-name__li'>Li</span></strong>, Yan Lu, Bin Liu, Qinhong Yang, Qi Chu, Tao Gong, Nenghai Yu</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <cite class='work-title' lang='en'>&ldquo;MFEN: Multi-Frequency Expert Network for Visible-Infrared Person Re-ID&rdquo;</cite><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <span class='work-meta'>CVPR 2026 &#10024; Highlight</span>
       <span class='paper-tags'><span class='paper-tag'>MoE</span><span class='paper-tag'>Frequency</span></span>
@@ -153,7 +153,7 @@ redirect_from:
 
   <article class='paper-list-item' data-paper-tags='selected,reid,graph'>
     <p class='paper-entry'>
-      <span class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Jiaze Li, Qinhong Yang, Tao Gong, Qi Chu, Nenghai Yu</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
+      <span class='work-authors'><strong class='author-name'><span class='author-name__xu'>Xu</span><span class='author-name__lin'>lin</span> <span class='author-name__li'>Li</span></strong>, Yan Lu, Bin Liu, Jiaze Li, Qinhong Yang, Tao Gong, Qi Chu, Nenghai Yu</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <cite class='work-title' lang='en'>&ldquo;ANFI: Rethinking Neighbor Feature Interaction in Person Re-ID&rdquo;</cite><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <span class='work-meta'>ECCV 2026</span>
       <span class='paper-tags'><span class='paper-tag'>Graph</span></span>
@@ -163,7 +163,7 @@ redirect_from:
 
   <article class='paper-list-item' data-paper-tags='selected,reid,causal-inference'>
     <p class='paper-entry'>
-      <span class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Jiaze Li, Yating Liu, Qi Chu, Mang Ye, Wanli Ouyang, Nenghai Yu</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
+      <span class='work-authors'><strong class='author-name'><span class='author-name__xu'>Xu</span><span class='author-name__lin'>lin</span> <span class='author-name__li'>Li</span></strong>, Yan Lu, Bin Liu, Jiaze Li, Yating Liu, Qi Chu, Mang Ye, Wanli Ouyang, Nenghai Yu</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <cite class='work-title' lang='en'>&ldquo;Causal Clothes-Invariant Feature Learning for Cloth-Changing Person Re-ID&rdquo;</cite><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <span class='work-meta'>IEEE TCSVT 2026</span>
       <span class='paper-tags'><span class='paper-tag'>Causal Inference</span></span>
@@ -173,7 +173,7 @@ redirect_from:
 
   <article class='paper-list-item' data-paper-tags='reid'>
     <p class='paper-entry'>
-      <span class='work-authors'>Wajahat Khalid, Bin Liu, <strong>Xulin Li</strong>, Yubo Wang, Muhammad Sher Afgan</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
+      <span class='work-authors'>Wajahat Khalid, Bin Liu, <strong class='author-name'><span class='author-name__xu'>Xu</span><span class='author-name__lin'>lin</span> <span class='author-name__li'>Li</span></strong>, Yubo Wang, Muhammad Sher Afgan</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <cite class='work-title' lang='en'>&ldquo;MCVL: Multi-Space Cross-View Learning for Aerial-Ground Person Re-Identification&rdquo;</cite><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <span class='work-meta'>ECCV 2026</span>
       <span class='paper-actions'><span class='paper-link-button paper-link-button--disabled' aria-disabled='true'>&#128196; 论文</span></span>
@@ -182,7 +182,7 @@ redirect_from:
 
   <article class='paper-list-item' data-paper-tags='reid'>
     <p class='paper-entry'>
-      <span class='work-authors'>Yubo Wang, Yan Lu, Bin Liu, <strong>Xulin Li</strong>, Jixiang Niu</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
+      <span class='work-authors'>Yubo Wang, Yan Lu, Bin Liu, <strong class='author-name'><span class='author-name__xu'>Xu</span><span class='author-name__lin'>lin</span> <span class='author-name__li'>Li</span></strong>, Jixiang Niu</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <cite class='work-title' lang='en'>&ldquo;R<sup>2</sup>TUA: Reconstruction-residual Based Targeted and Untargeted Attack Against Text-Image Person Re-Identification&rdquo;</cite><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <span class='work-meta'>CVPR 2026</span>
       <span class='paper-actions'><a class='paper-link-button' href='https://openaccess.thecvf.com/content/CVPR2026/html/Wang_R2TUA_Reconstruction-residual_Based_Targeted_and_Untargeted_Attack_Against_Text-Image_Person_CVPR_2026_paper.html' target='_blank' rel='noopener noreferrer'>&#128196; 论文</a></span>
@@ -191,7 +191,7 @@ redirect_from:
 
   <article class='paper-list-item' data-paper-tags='inpainting'>
     <p class='paper-entry'>
-      <span class='work-authors'>Qinhong Yang, Dongdong Chen, Qi Chu, Tao Gong, Qiankun Liu, Zhentao Tan, <strong>Xulin Li</strong>, Huamin Feng, Nenghai Yu</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
+      <span class='work-authors'>Qinhong Yang, Dongdong Chen, Qi Chu, Tao Gong, Qiankun Liu, Zhentao Tan, <strong class='author-name'><span class='author-name__xu'>Xu</span><span class='author-name__lin'>lin</span> <span class='author-name__li'>Li</span></strong>, Huamin Feng, Nenghai Yu</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <cite class='work-title' lang='en'>&ldquo;MagicPaint: Operate Anything for Image Inpainting with Diffusion Model&rdquo;</cite><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <span class='work-meta'>AAAI 2026</span>
       <span class='paper-actions'><a class='paper-link-button' href='https://doi.org/10.1609/aaai.v40i14.38151' target='_blank' rel='noopener noreferrer'>&#128196; 论文</a> <a class='paper-link-button' href='https://github.com/littleYaang/MagicPaint' target='_blank' rel='noopener noreferrer'>&#128736;&#65039; 项目</a> <a class='paper-link-button' href='https://github.com/kw66/research-figures/tree/main/MagicPaint' target='_blank' rel='noopener noreferrer'>&#127912; 画图PPT</a></span>
@@ -200,7 +200,7 @@ redirect_from:
 
   <article class='paper-list-item' data-paper-tags='reid'>
     <p class='paper-entry'>
-      <span class='work-authors'>Wajahat Khalid, Bin Liu, <strong>Xulin Li</strong>, Muhammad Waqas, Muhammad Sher Afgan</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
+      <span class='work-authors'>Wajahat Khalid, Bin Liu, <strong class='author-name'><span class='author-name__xu'>Xu</span><span class='author-name__lin'>lin</span> <span class='author-name__li'>Li</span></strong>, Muhammad Waqas, Muhammad Sher Afgan</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <cite class='work-title' lang='en'>&ldquo;Bridging the Sky and Ground: Towards View-Invariant Feature Learning for Aerial-Ground Person Re-Identification&rdquo;</cite><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <span class='work-meta'>ICCV 2025</span>
       <span class='paper-actions'><a class='paper-link-button' href='https://openaccess.thecvf.com/content/ICCV2025/html/Khalid_Bridging_the_Sky_and_Ground_Towards_View-Invariant_Feature_Learning_for_ICCV_2025_paper.html' target='_blank' rel='noopener noreferrer'>&#128196; 论文</a></span>
@@ -209,7 +209,7 @@ redirect_from:
 
   <article class='paper-list-item' data-paper-tags='selected,reid,moe,multi-task-learning'>
     <p class='paper-entry'>
-      <span class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Jiaze Li, Qinhong Yang, Tao Gong, Qi Chu, Mang Ye, Nenghai Yu</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
+      <span class='work-authors'><strong class='author-name'><span class='author-name__xu'>Xu</span><span class='author-name__lin'>lin</span> <span class='author-name__li'>Li</span></strong>, Yan Lu, Bin Liu, Jiaze Li, Qinhong Yang, Tao Gong, Qi Chu, Mang Ye, Nenghai Yu</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <cite class='work-title' lang='en'>&ldquo;Towards Anytime Retrieval: A Benchmark for Anytime Person Re-Identification&rdquo;</cite><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <span class='work-meta'>IJCAI 2025 &#128266; Oral</span>
       <span class='paper-tags'><span class='paper-tag'>MoE</span><span class='paper-tag'>Multi-Task Learning</span></span>
@@ -219,7 +219,7 @@ redirect_from:
 
   <article class='paper-list-item' data-paper-tags='reid'>
     <p class='paper-entry'>
-      <span class='work-authors'>Wajahat Khalid, Bin Liu, <strong>Xulin Li</strong>, Muhammad Ali Qureshi</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
+      <span class='work-authors'>Wajahat Khalid, Bin Liu, <strong class='author-name'><span class='author-name__xu'>Xu</span><span class='author-name__lin'>lin</span> <span class='author-name__li'>Li</span></strong>, Muhammad Ali Qureshi</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <cite class='work-title' lang='en'>&ldquo;Cloth-Independent Feature Learning from Multi-perspective for Cloth-Changing Person Re-Identification&rdquo;</cite><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <span class='work-meta'>ICPRAI 2024</span>
       <span class='paper-actions'><a class='paper-link-button' href='https://dblp.org/rec/conf/icprai/KhalidLLQ24.html' target='_blank' rel='noopener noreferrer'>&#128196; 论文</a></span>
@@ -228,7 +228,7 @@ redirect_from:
 
   <article class='paper-list-item' data-paper-tags='selected,reid,causal-inference,graph'>
     <p class='paper-entry'>
-      <span class='work-authors'><strong>Xulin Li</strong>, Yan Lu, Bin Liu, Yating Liu, Guojun Yin, Qi Chu, Jingyang Huang, Feng Zhu, Rui Zhao, Nenghai Yu</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
+      <span class='work-authors'><strong class='author-name'><span class='author-name__xu'>Xu</span><span class='author-name__lin'>lin</span> <span class='author-name__li'>Li</span></strong>, Yan Lu, Bin Liu, Yating Liu, Guojun Yin, Qi Chu, Jingyang Huang, Feng Zhu, Rui Zhao, Nenghai Yu</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <cite class='work-title' lang='en'>&ldquo;Counterfactual Intervention Feature Transfer for Visible-Infrared Person Re-identification&rdquo;</cite><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <span class='work-meta'>ECCV 2022</span>
       <span class='paper-tags'><span class='paper-tag'>Causal Inference</span><span class='paper-tag'>Graph</span></span>
@@ -238,7 +238,7 @@ redirect_from:
 
   <article class='paper-list-item' data-paper-tags='selected,reid,metric-learning'>
     <p class='paper-entry'>
-      <span class='work-authors'><strong>Xulin Li</strong>, Bin Liu, Yan Lu, Qi Chu, Nenghai Yu</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
+      <span class='work-authors'><strong class='author-name'><span class='author-name__xu'>Xu</span><span class='author-name__lin'>lin</span> <span class='author-name__li'>Li</span></strong>, Bin Liu, Yan Lu, Qi Chu, Nenghai Yu</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <cite class='work-title' lang='en'>&ldquo;Cloth-aware Center Cluster Loss for Cloth-Changing Person Re-identification&rdquo;</cite><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <span class='work-meta'>PRCV 2022</span>
       <span class='paper-tags'><span class='paper-tag'>Metric Learning</span></span>

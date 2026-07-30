@@ -410,6 +410,22 @@ body {
     font-weight: 750;
 }
 
+.author-name {
+    white-space: nowrap;
+}
+
+.author-name__xu {
+    color: #9b5d62;
+}
+
+.author-name__lin {
+    color: #4f7762;
+}
+
+.author-name__li {
+    color: #557493;
+}
+
 .paper-entry-separator {
     color: var(--kw-muted);
 }
