@@ -379,7 +379,8 @@ body {
 
 .paper-list {
     --paper-timeline-x: 0.7rem;
-    --paper-dot-size: 0.56rem;
+    --paper-dot-size: 0.64rem;
+    --paper-content-inset: 1.95rem;
     position: relative;
     max-width: 61.5rem;
     padding-top: 0.12rem;
@@ -410,17 +411,7 @@ body {
 }
 
 .paper-list::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    height: 5px;
-    background: linear-gradient(180deg, transparent 0%, rgba(10, 10, 10, 0.18) 24%, rgba(10, 10, 10, 0.68) 46%, rgba(10, 10, 10, 0.4) 68%, transparent 100%);
-    clip-path: polygon(0 42%, 9% 31%, 27% 34%, 45% 26%, 63% 35%, 82% 28%, 97% 34%, 100% 51%, 98% 66%, 78% 63%, 58% 72%, 38% 65%, 17% 71%, 2% 61%, 0 53%);
-    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 1%, #000 99%, transparent 100%);
-    mask-image: linear-gradient(90deg, transparent 0%, #000 1%, #000 99%, transparent 100%);
-    pointer-events: none;
+    content: none;
 }
 
 .paper-filter-empty {
@@ -429,7 +420,7 @@ body {
 
 .paper-list-item {
     position: relative;
-    padding: 0.86rem 0.14rem 0.82rem 1.78rem;
+    padding: 0.86rem 0.14rem 0.82rem var(--paper-content-inset);
     border-bottom: 0;
     transition: background-color 0.22s ease, box-shadow 0.22s ease;
 }
@@ -438,34 +429,34 @@ body {
     content: "";
     position: absolute;
     top: 1.42rem;
-    left: calc(var(--paper-timeline-x) - 0.12rem);
+    left: calc(var(--paper-timeline-x) + 2.5px);
     z-index: 2;
     width: var(--paper-dot-size);
     height: var(--paper-dot-size);
     border-radius: 58% 42% 52% 48% / 46% 57% 43% 54%;
     background: rgba(10, 10, 10, 0.88);
     box-shadow: 1px 0 1px rgba(0, 0, 0, 0.2);
-    transform: rotate(-5deg);
+    transform: translateX(-50%) rotate(-5deg);
 }
 
 .paper-list-item:nth-child(3n + 2)::before {
     border-radius: 47% 53% 61% 39% / 58% 43% 57% 42%;
     opacity: 0.82;
-    transform: translateX(0.06rem) rotate(8deg) scale(0.88, 0.94);
+    transform: translateX(-50%) rotate(8deg) scale(0.88, 0.94);
 }
 
 .paper-list-item:nth-child(3n)::before {
     border-radius: 65% 35% 48% 52% / 41% 62% 38% 59%;
     opacity: 0.9;
-    transform: translateX(-0.04rem) rotate(-7deg) scale(1.06, 1.02);
+    transform: translateX(-50%) rotate(-7deg) scale(1.06, 1.02);
 }
 
 .paper-list-item::after {
     content: "";
     position: absolute;
-    right: 0;
+    right: 0.3rem;
     bottom: -1px;
-    left: 0;
+    left: var(--paper-content-inset);
     height: 4px;
     background: linear-gradient(180deg, transparent 0%, rgba(10, 10, 10, 0.04) 18%, rgba(10, 10, 10, 0.16) 43%, rgba(10, 10, 10, 0.11) 67%, transparent 100%);
     clip-path: polygon(0 44%, 8% 31%, 25% 37%, 43% 29%, 62% 36%, 81% 28%, 97% 35%, 100% 50%, 98% 65%, 79% 61%, 58% 71%, 37% 64%, 16% 70%, 2% 60%, 0 52%);
@@ -2823,11 +2814,12 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
 
     body.is-fixed-scale-home .paper-list {
         --paper-timeline-x: 0.5rem;
-        --paper-dot-size: 0.44rem;
+        --paper-dot-size: 0.5rem;
+        --paper-content-inset: 1.44rem;
     }
 
     body.is-fixed-scale-home .paper-list-item {
-        padding: 0.58rem 0 0.56rem 1.28rem;
+        padding: 0.58rem 0 0.56rem var(--paper-content-inset);
     }
 
     body.is-fixed-scale-home .paper-list-item::before {
@@ -3461,6 +3453,9 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
 
     .paper-list-item:hover {
         background: linear-gradient(90deg, rgba(36, 108, 105, 0.045), rgba(36, 108, 105, 0.015) 68%, transparent 100%);
+        background-position: right center;
+        background-repeat: no-repeat;
+        background-size: calc(100% - var(--paper-timeline-x) - 0.2rem) 100%;
         box-shadow: none;
     }
 }
