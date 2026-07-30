@@ -1343,7 +1343,7 @@ redirect_from:
         featuredState.loopOffset = 0;
         applyFeaturedLoopOffset(track);
         bindFeaturedViewportInteractions(viewport);
-        clearFeaturedAutoScroll();
+        startFeaturedAutoScroll();
         updateFeaturedButtons();
         return;
       }
