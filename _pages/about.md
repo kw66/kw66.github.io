@@ -151,16 +151,6 @@ redirect_from:
     </p>
   </article>
 
-  <article class='paper-list-item' data-paper-tags='selected,reid,graph'>
-    <p class='paper-entry'>
-      <span class='work-authors'><strong class='author-name'><span class='author-name__xu'>Xu</span><span class='author-name__lin'>lin</span> <span class='author-name__li'>Li</span></strong>, Yan Lu, Bin Liu, Jiaze Li, Qinhong Yang, Tao Gong, Qi Chu, Nenghai Yu</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
-      <cite class='work-title' lang='en'>&ldquo;ANFI: Rethinking Neighbor Feature Interaction in Person Re-ID&rdquo;</cite><span class='paper-entry-separator' aria-hidden='true'>,</span>
-      <span class='work-meta'>ECCV 2026</span>
-      <span class='paper-tags'><span class='paper-tag'>Graph</span></span>
-      <span class='paper-actions'><a class='paper-link-button' href='https://arxiv.org/abs/2607.25407' target='_blank' rel='noopener noreferrer'>&#128196; 论文</a> <a class='paper-link-button' href='https://github.com/kw66/research-figures/tree/main/ANFI' target='_blank' rel='noopener noreferrer'>&#127912; 画图PPT</a></span>
-    </p>
-  </article>
-
   <article class='paper-list-item' data-paper-tags='selected,reid,causal-inference'>
     <p class='paper-entry'>
       <span class='work-authors'><strong class='author-name'><span class='author-name__xu'>Xu</span><span class='author-name__lin'>lin</span> <span class='author-name__li'>Li</span></strong>, Yan Lu, Bin Liu, Jiaze Li, Yating Liu, Qi Chu, Mang Ye, Wanli Ouyang, Nenghai Yu</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
@@ -168,6 +158,16 @@ redirect_from:
       <span class='work-meta'>IEEE TCSVT 2026</span>
       <span class='paper-tags'><span class='paper-tag'>Causal Inference</span></span>
       <span class='paper-actions'><a class='paper-link-button' href='https://arxiv.org/abs/2305.06145' target='_blank' rel='noopener noreferrer'>&#128196; 论文</a> <a class='paper-link-button' href='https://github.com/kw66/research-figures/tree/main/CCIL' target='_blank' rel='noopener noreferrer'>&#127912; 画图PPT</a></span>
+    </p>
+  </article>
+
+  <article class='paper-list-item' data-paper-tags='selected,reid,graph'>
+    <p class='paper-entry'>
+      <span class='work-authors'><strong class='author-name'><span class='author-name__xu'>Xu</span><span class='author-name__lin'>lin</span> <span class='author-name__li'>Li</span></strong>, Yan Lu, Bin Liu, Jiaze Li, Qinhong Yang, Tao Gong, Qi Chu, Nenghai Yu</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
+      <cite class='work-title' lang='en'>&ldquo;ANFI: Rethinking Neighbor Feature Interaction in Person Re-ID&rdquo;</cite><span class='paper-entry-separator' aria-hidden='true'>,</span>
+      <span class='work-meta'>ECCV 2026</span>
+      <span class='paper-tags'><span class='paper-tag'>Graph</span></span>
+      <span class='paper-actions'><a class='paper-link-button' href='https://arxiv.org/abs/2607.25407' target='_blank' rel='noopener noreferrer'>&#128196; 论文</a> <a class='paper-link-button' href='https://github.com/kw66/research-figures/tree/main/ANFI' target='_blank' rel='noopener noreferrer'>&#127912; 画图PPT</a></span>
     </p>
   </article>
 
