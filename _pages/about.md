@@ -936,6 +936,28 @@ redirect_from:
       updatePaperFilterButtons();
     }
 
+    function colorizeProfileAuthorName() {
+      document.querySelectorAll('.author__name').forEach((name) => {
+        if (name.dataset.authorNameColored === 'true' || name.textContent.trim() !== 'Xulin Li') return;
+
+        const fragment = document.createDocumentFragment();
+        [
+          ['Xu', 'author-name__xu'],
+          ['lin', 'author-name__lin'],
+          [' Li', 'author-name__li']
+        ].forEach(([text, className]) => {
+          const segment = document.createElement('span');
+          segment.className = className;
+          segment.textContent = text;
+          fragment.appendChild(segment);
+        });
+
+        name.replaceChildren(fragment);
+        name.classList.add('author-name');
+        name.dataset.authorNameColored = 'true';
+      });
+    }
+
     function initPaperFilters() {
       document.querySelectorAll('[data-filter-tag]').forEach((button) => {
         button.addEventListener('click', () => {
@@ -2160,6 +2182,7 @@ redirect_from:
       syncDesktopHomeLayout('auto');
     });
 
+    colorizeProfileAuthorName();
     initPaperFilters();
     initFeaturedCarousel();
     initSlotMachine();
