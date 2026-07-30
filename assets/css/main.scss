@@ -51,14 +51,14 @@
     --kw-muted: #7a7a74;
     --kw-line: #d8d5cf;
     --kw-line-soft: #e9e7e2;
-    --kw-accent: #955851;
-    --kw-accent-strong: #743f3a;
-    --kw-accent-soft: #f7efed;
+    --kw-accent: #8c6a2d;
+    --kw-accent-strong: #674b17;
+    --kw-accent-soft: #fbf5e7;
     --kw-secondary: #586b5d;
     --kw-secondary-strong: #405247;
     --kw-secondary-soft: #eef2ee;
-    --kw-warm: #806a3e;
-    --kw-warm-soft: #f6f1e7;
+    --kw-warm: #8a5d55;
+    --kw-warm-soft: #f6efed;
 }
 
 html,
@@ -246,7 +246,7 @@ body {
     min-height: 1.16rem;
     margin-left: 0.34rem;
     padding: 0.14rem 0.42rem 0.17rem;
-    border: 1px solid #dfcfad;
+    border: 1px solid #dec4bf;
     border-radius: 999px;
     background: var(--kw-warm-soft);
     color: var(--kw-warm);
@@ -306,7 +306,7 @@ body {
 }
 
 .featured-button:focus-visible {
-    outline: 2px solid rgba(149, 88, 81, 0.46);
+    outline: 2px solid rgba(140, 106, 45, 0.46);
     outline-offset: 2px;
 }
 
@@ -368,7 +368,7 @@ body {
     }
 
     &.is-active {
-        border-color: #d3aaa5;
+        border-color: #d8c48f;
         background: var(--kw-accent-soft);
         color: var(--kw-accent-strong);
         box-shadow: none;
@@ -581,7 +581,7 @@ body {
 }
 
 .paper-link-button:focus-visible {
-    outline: 2px solid rgba(149, 88, 81, 0.46);
+    outline: 2px solid rgba(140, 106, 45, 0.46);
     outline-offset: 2px;
 }
 
@@ -1308,12 +1308,12 @@ body {
 }
 
 .sidebar-tool-switch--inline.is-active {
-    border-color: #d1aaa5;
-    background: linear-gradient(180deg, #fffafa 0%, var(--kw-accent-soft) 100%);
+    border-color: #d8c48f;
+    background: linear-gradient(180deg, #fffdf8 0%, var(--kw-accent-soft) 100%);
     color: var(--kw-accent-strong);
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.96),
-        0 6px 14px rgba(116, 63, 58, 0.06);
+        0 6px 14px rgba(103, 75, 23, 0.06);
 }
 
 .linkup-cell,
@@ -1360,11 +1360,11 @@ body {
 }
 
 .linkup-cell.is-selected {
-    border-color: #bd817a;
+    border-color: #c7a453;
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.96),
-        0 0 0 3px rgba(149, 88, 81, 0.13),
-        0 8px 18px rgba(116, 63, 58, 0.09);
+        0 0 0 3px rgba(140, 106, 45, 0.13),
+        0 8px 18px rgba(103, 75, 23, 0.09);
 }
 
 .linkup-cell.is-matched {
@@ -1414,20 +1414,20 @@ body {
 }
 
 .slot-machine-lever-knob {
-    background: radial-gradient(circle at 34% 30%, #e8b2aa 0%, #cf786c 42%, #b65f57 72%, #9d504b 100%);
+    background: radial-gradient(circle at 34% 30%, #f1dda8 0%, #c9a24f 42%, #a37a2d 72%, #7c591c 100%);
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.48),
-        0 8px 18px rgba(157, 80, 75, 0.22);
+        0 8px 18px rgba(124, 89, 28, 0.22);
 }
 
 .slot-machine-lever:hover .slot-machine-lever-knob {
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.54),
-        0 10px 20px rgba(157, 80, 75, 0.26);
+        0 10px 20px rgba(124, 89, 28, 0.26);
 }
 
 .slot-machine-lever:focus-visible {
-    outline-color: rgba(149, 88, 81, 0.46);
+    outline-color: rgba(140, 106, 45, 0.46);
 }
 
 .mobile-mascot-strip {
@@ -1678,7 +1678,7 @@ body {
 }
 
 .is-fixed-scale-home #main > .page:focus-visible {
-    outline: 2px solid rgba(149, 88, 81, 0.44);
+    outline: 2px solid rgba(140, 106, 45, 0.44);
     outline-offset: -2px;
 }
 
@@ -2183,7 +2183,7 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
 }
 
 .masthead__menu-item--button a:focus-visible {
-    outline: 2px solid rgba(149, 88, 81, 0.5);
+    outline: 2px solid rgba(140, 106, 45, 0.5);
     outline-offset: 2px;
 }
 
@@ -3185,12 +3185,12 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
     --hub-accent: var(--kw-accent);
     --hub-accent-2: var(--kw-warm);
     --hub-accent-soft: var(--kw-accent-soft);
-    --hub-accent-border: #d7b4af;
-    --hub-card-bg: var(--kw-surface);
+    --hub-accent-border: #ddcfa5;
+    --hub-card-bg: #fffefb;
     --hub-card-inset: 0;
     --hub-ink: var(--kw-ink);
     --hub-muted: var(--kw-text);
-    --hub-media-bg: #f2f2ee;
+    --hub-media-bg: #f5f4ef;
     --hub-media-ratio: 16 / 10;
     position: relative;
     z-index: 0;
@@ -3205,8 +3205,8 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
     --hub-accent: var(--kw-accent);
     --hub-accent-2: var(--kw-warm);
     --hub-accent-soft: var(--kw-accent-soft);
-    --hub-accent-border: #d7b4af;
-    --hub-media-bg: #f4f3ef;
+    --hub-accent-border: #ddcfa5;
+    --hub-media-bg: #f6f5f1;
 }
 
 .project-hub--games {
@@ -3214,8 +3214,8 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
     --hub-accent: var(--kw-accent);
     --hub-accent-2: var(--kw-warm);
     --hub-accent-soft: var(--kw-accent-soft);
-    --hub-accent-border: #d7b4af;
-    --hub-media-bg: #f1f2ef;
+    --hub-accent-border: #ddcfa5;
+    --hub-media-bg: #f3f4f1;
 }
 
 .project-hub__grid {
@@ -3242,10 +3242,10 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
     min-width: 0;
     height: 100%;
     overflow: hidden;
-    border: 1px solid #dedbd5;
+    border: 1px solid #e6e2da;
     border-radius: 0.42rem;
     background: var(--hub-card-bg);
-    box-shadow: 0 5px 18px rgba(32, 34, 31, 0.045);
+    box-shadow: 0 14px 38px rgba(45, 41, 32, 0.065);
     isolation: isolate;
     transition:
         transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
@@ -3281,7 +3281,7 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
 }
 
 .project-card__media:focus-visible {
-    outline: 2px solid rgba(149, 88, 81, 0.46);
+    outline: 2px solid rgba(140, 106, 45, 0.46);
     outline-offset: 2px;
 }
 
@@ -3362,8 +3362,8 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
 }
 
 .project-card__kicker--status {
-    border-color: #dfcfad;
-    background: rgba(251, 244, 229, 0.95);
+    border-color: #dec4bf;
+    background: rgba(248, 241, 239, 0.96);
     color: var(--kw-warm);
     box-shadow: none;
 }
@@ -3447,8 +3447,8 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
 
 @media (hover: hover) {
     .project-card:hover {
-        border-color: #c9c5bd;
-        box-shadow: 0 13px 28px rgba(32, 34, 31, 0.09);
+        border-color: #d8d3c9;
+        box-shadow: 0 22px 50px rgba(45, 41, 32, 0.1);
         transform: translate3d(0, -0.14rem, 0);
     }
 
@@ -3479,7 +3479,7 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
 }
 
 .project-card__actions a:focus-visible {
-    outline: 2px solid rgba(149, 88, 81, 0.46);
+    outline: 2px solid rgba(140, 106, 45, 0.46);
     outline-offset: 2px;
 }
 
