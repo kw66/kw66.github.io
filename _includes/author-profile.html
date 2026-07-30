@@ -10,17 +10,20 @@
 
   <div class="author__avatar">
     {% if page.permalink == "/" or page.url == "/" %}
-      <div class="author__avatar-slot" id="author-avatar-slot" role="img" aria-label="{{ author.name }}" style="--avatar-frame-count: {{ avatar_frame_count }};">
-        <div class="author__avatar-reel" id="author-avatar-reel">
-          {% for i in (1..avatar_frame_count) %}
-            {% assign avatar_mod = i | modulo: 2 %}
-            {% if avatar_mod == 1 %}
-              <img src="{{ primary_avatar }}" class="author__avatar-frame author__avatar-frame--primary author__avatar-frame--primary-{{ i }}" alt="" aria-hidden="true">
-            {% else %}
-              <img src="{{ secondary_avatar }}" class="author__avatar-frame author__avatar-frame--secondary author__avatar-frame--secondary-{{ i }}" alt="" aria-hidden="true">
-            {% endif %}
-          {% endfor %}
-        </div>
+      <div class="author__avatar-turntable" id="author-avatar-turntable">
+        <button class="author__avatar-slot" id="author-avatar-slot" type="button" aria-label="播放头像唱片" aria-pressed="false" style="--avatar-frame-count: {{ avatar_frame_count }};">
+          <div class="author__avatar-reel" id="author-avatar-reel">
+            {% for i in (1..avatar_frame_count) %}
+              {% assign avatar_mod = i | modulo: 2 %}
+              {% if avatar_mod == 1 %}
+                <img src="{{ primary_avatar }}" class="author__avatar-frame author__avatar-frame--primary author__avatar-frame--primary-{{ i }}" alt="" aria-hidden="true">
+              {% else %}
+                <img src="{{ secondary_avatar }}" class="author__avatar-frame author__avatar-frame--secondary author__avatar-frame--secondary-{{ i }}" alt="" aria-hidden="true">
+              {% endif %}
+            {% endfor %}
+          </div>
+        </button>
+        <span class="author__avatar-tonearm" aria-hidden="true"></span>
       </div>
     {% else %}
       <img src="{{ primary_avatar }}" class="author__avatar-image" alt="{{ author.name }}">

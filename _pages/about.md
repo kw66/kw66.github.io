@@ -844,8 +844,9 @@ redirect_from:
     }
 
     function spinAuthorAvatar() {
+      const turntable = document.getElementById('author-avatar-turntable');
       const reel = document.getElementById(authorAvatarReelId);
-      if (!reel) return;
+      if (!reel || turntable?.classList.contains('is-playing')) return;
 
       if (avatarState.timerId) {
         window.clearTimeout(avatarState.timerId);
@@ -902,6 +903,29 @@ redirect_from:
           avatarState.animation = null;
         }
       };
+    }
+
+    function initAuthorAvatarRecord() {
+      const turntable = document.getElementById('author-avatar-turntable');
+      const trigger = document.getElementById('author-avatar-slot');
+      if (!turntable || !trigger) return;
+
+      trigger.addEventListener('click', () => {
+        const isPlaying = turntable.classList.toggle('is-playing');
+        if (isPlaying) {
+          if (avatarState.timerId) {
+            window.clearTimeout(avatarState.timerId);
+            avatarState.timerId = null;
+          }
+          if (avatarState.animation) {
+            avatarState.animation.cancel();
+            avatarState.animation = null;
+          }
+          finishAuthorAvatarSpin();
+        }
+        trigger.setAttribute('aria-pressed', String(isPlaying));
+        trigger.setAttribute('aria-label', isPlaying ? '暂停头像唱片' : '播放头像唱片');
+      });
     }
 
     function updatePaperFilterButtons() {
@@ -2182,6 +2206,7 @@ redirect_from:
     });
 
     colorizeProfileAuthorName();
+    initAuthorAvatarRecord();
     initPaperFilters();
     initFeaturedCarousel();
     initSlotMachine();
