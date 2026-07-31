@@ -276,7 +276,10 @@ redirect_from:
       loopOffset: 0,
       isReordering: false,
       dragPointerId: null,
+      dragStartClientX: 0,
+      dragStartClientY: 0,
       dragLastClientX: 0,
+      dragAxis: null,
       dragMoved: false,
       dragDistance: 0,
       suppressClick: false
@@ -329,6 +332,7 @@ redirect_from:
     const homeToolStorageKey = 'kw66_home_sidebar_tool_v1';
     let mascotRafId = null;
     let resizeTimer = null;
+    let lastLayoutViewportWidth = Math.round(window.visualViewport?.width || window.innerWidth || 0);
     let mascotState = null;
     const homeToolState = {
       current: 'slot'
@@ -1255,24 +1259,62 @@ redirect_from:
         }
 
         featuredState.dragPointerId = event.pointerId;
+        featuredState.dragStartClientX = event.clientX;
+        featuredState.dragStartClientY = event.clientY;
         featuredState.dragLastClientX = event.clientX;
+        featuredState.dragAxis = event.pointerType === 'mouse' ? 'horizontal' : 'pending';
         featuredState.dragMoved = false;
         featuredState.dragDistance = 0;
         featuredState.suppressClick = false;
-        viewport.classList.add('is-dragging');
-        pauseFeaturedAutoScroll(3200);
-        if (typeof viewport.setPointerCapture === 'function') {
-          try {
-            viewport.setPointerCapture(event.pointerId);
-          } catch (error) {
-            // Ignore pointer-capture failures on browsers that reject it for scrollers.
+        if (featuredState.dragAxis === 'horizontal') {
+          viewport.classList.add('is-dragging');
+          pauseFeaturedAutoScroll(3200);
+          if (typeof viewport.setPointerCapture === 'function') {
+            try {
+              viewport.setPointerCapture(event.pointerId);
+            } catch (error) {
+              // Ignore pointer-capture failures on browsers that reject it for scrollers.
+            }
           }
+          event.preventDefault();
         }
-        event.preventDefault();
       });
 
       viewport.addEventListener('pointermove', (event) => {
         if (event.pointerId !== featuredState.dragPointerId) return;
+
+        if (featuredState.dragAxis === 'pending') {
+          const totalX = event.clientX - featuredState.dragStartClientX;
+          const totalY = event.clientY - featuredState.dragStartClientY;
+          const absoluteX = Math.abs(totalX);
+          const absoluteY = Math.abs(totalY);
+          if (Math.max(absoluteX, absoluteY) < 8) return;
+
+          if (absoluteY >= absoluteX) {
+            featuredState.dragPointerId = null;
+            featuredState.dragStartClientX = 0;
+            featuredState.dragStartClientY = 0;
+            featuredState.dragLastClientX = 0;
+            featuredState.dragAxis = null;
+            featuredState.dragMoved = false;
+            featuredState.dragDistance = 0;
+            return;
+          }
+
+          featuredState.dragAxis = 'horizontal';
+          featuredState.dragLastClientX = featuredState.dragStartClientX;
+          viewport.classList.add('is-dragging');
+          pauseFeaturedAutoScroll(3200);
+          if (typeof viewport.setPointerCapture === 'function') {
+            try {
+              viewport.setPointerCapture(event.pointerId);
+            } catch (error) {
+              // Ignore pointer-capture failures on browsers that reject it for scrollers.
+            }
+          }
+        }
+
+        if (featuredState.dragAxis !== 'horizontal') return;
 
         const deltaX = event.clientX - featuredState.dragLastClientX;
         if (Math.abs(deltaX) < 0.5) return;
@@ -1292,9 +1334,13 @@ redirect_from:
         if (pointerId !== null && pointerId !== featuredState.dragPointerId) return;
 
         const activePointerId = featuredState.dragPointerId;
-        const shouldSuppressClick = featuredState.dragMoved;
+        const wasHorizontalDrag = featuredState.dragAxis === 'horizontal';
+        const shouldSuppressClick = wasHorizontalDrag && featuredState.dragMoved;
         featuredState.dragPointerId = null;
+        featuredState.dragStartClientX = 0;
+        featuredState.dragStartClientY = 0;
         featuredState.dragLastClientX = 0;
+        featuredState.dragAxis = null;
         featuredState.dragDistance = 0;
         viewport.classList.remove('is-dragging');
         if (typeof viewport.releasePointerCapture === 'function') {
@@ -1304,7 +1350,10 @@ redirect_from:
             // Ignore pointer-capture release failures.
           }
         }
-        pauseFeaturedAutoScroll(featuredState.dragMoved ? 3000 : 2600);
+        if (wasHorizontalDrag) {
+          pauseFeaturedAutoScroll(featuredState.dragMoved ? 3000 : 2600);
+        }
+        featuredState.dragMoved = false;
         window.setTimeout(() => {
           featuredState.suppressClick = false;
         }, shouldSuppressClick ? 240 : 0);
@@ -2210,7 +2259,18 @@ redirect_from:
     function handleResize() {
       window.clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(() => {
-        syncDesktopHomeLayout('auto');
+        const currentWidth = Math.round(getViewportWidth());
+        const widthChanged = Math.abs(currentWidth - lastLayoutViewportWidth) > 1;
+        if (isMobileHomeLayout() && !widthChanged) return;
+
+        lastLayoutViewportWidth = currentWidth;
+        if (widthChanged) {
+          syncDesktopHomeLayout('auto');
+          return;
+        }
+
+        applyDesktopScale();
+        renderSideMascots();
       }, 160);
     }
 
