@@ -3313,6 +3313,16 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
     display: none;
 }
 
+.project-hub__intro {
+    width: min(86rem, calc(100% - clamp(1.2rem, 4vw, 3rem)));
+    margin: clamp(0.9rem, 2vw, 1.35rem) auto 0;
+    padding-left: 0.82rem;
+    border-left: 2px solid var(--kw-accent);
+    color: var(--kw-text);
+    font-size: 0.94rem;
+    line-height: 1.72;
+}
+
 .project-hub {
     --hub-accent: var(--kw-accent);
     --hub-accent-2: var(--kw-warm);
@@ -3640,6 +3650,15 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
 }
 
 @media (max-width: 640px) {
+    .project-hub__intro {
+        width: calc(100% - 1.2rem);
+        max-width: 25rem;
+        margin-top: 0.8rem;
+        padding-left: 0.68rem;
+        font-size: 0.88rem;
+        line-height: 1.62;
+    }
+
     .project-hub {
         --hub-card-inset: 0;
         width: calc(100% - 1.2rem);
@@ -3678,6 +3697,10 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
 }
 
 @media (max-width: 520px) {
+    .project-hub__intro {
+        width: calc(100% - 0.9rem);
+    }
+
     .project-hub {
         width: calc(100% - 0.9rem);
         max-width: 25rem;

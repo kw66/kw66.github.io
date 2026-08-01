@@ -8,6 +8,7 @@ page_class: project-hub-page
 ---
 
 <h1 class="visually-hidden" id="research-figures-heading">科研绘图</h1>
+<p class="project-hub__intro">这里整理了论文绘图源文件与可编辑 PPT。部分 PPT 保留了从草稿到成品的逐步修改过程，便于查看结构调整、视觉层级、配色和排版如何一步一步完善。</p>
 <section class="project-hub project-hub--figures" aria-labelledby="research-figures-heading">
   <div class="project-hub__grid">
     <article class="project-card">
