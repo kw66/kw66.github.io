@@ -2451,7 +2451,7 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
         grid-template-columns: minmax(0, 0.98fr) minmax(0, 1.02fr);
         gap: 0.28rem;
         align-items: stretch;
-        margin-bottom: 0.12rem;
+        margin-bottom: 0;
         position: relative;
         z-index: 2;
         text-align: left;
@@ -2483,7 +2483,7 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
     body.is-fixed-scale-home .sidebar .author__avatar {
         width: 5.9rem;
         flex: 0 0 5.9rem;
-        margin-top: 0.18rem;
+        margin-top: 0.36rem;
         text-align: center;
     }
 
@@ -2504,7 +2504,7 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
     }
 
     body.is-fixed-scale-home .sidebar .author__content {
-        margin-top: 0.12rem;
+        margin-top: 0.24rem;
     }
 
     body.is-fixed-scale-home .sidebar .author__name {
@@ -2826,7 +2826,7 @@ body.is-fixed-scale-home:not(.is-mobile-home-layout) .linkup-shell .sidebar-tool
     }
 
     body.is-fixed-scale-home .featured-carousel::after {
-        bottom: -0.12rem;
+        bottom: -0.24rem;
     }
 
     body.is-fixed-scale-home .featured-viewport {
