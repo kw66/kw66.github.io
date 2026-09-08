@@ -173,15 +173,6 @@ redirect_from:
 
   <article class='paper-list-item' data-paper-tags='reid'>
     <p class='paper-entry'>
-      <span class='work-authors'>Chenyang Wang, Bin Liu, <strong class='author-name'><span class='author-name__xu'>Xu</span><span class='author-name__lin'>lin</span> <span class='author-name__li'>Li</span></strong>, Nenghai Yu</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
-      <cite class='work-title' lang='en'>&ldquo;PID-Level Dense Text and Attribute-Indexed Semantic Prototypes for Exemplar-Free Lifelong Person Re-Identification&rdquo;</cite><span class='paper-entry-separator' aria-hidden='true'>,</span>
-      <span class='work-meta'>PRCV 2026</span>
-      <span class='paper-actions'><span class='paper-link-button paper-link-button--disabled' aria-disabled='true'>&#128196; 论文</span> <a class='paper-link-button' href='https://github.com/kw66/ReID-text-annotation' target='_blank' rel='noopener noreferrer'>&#128736;&#65039; 项目</a></span>
-    </p>
-  </article>
-
-  <article class='paper-list-item' data-paper-tags='reid'>
-    <p class='paper-entry'>
       <span class='work-authors'>Wajahat Khalid, Bin Liu, <strong class='author-name'><span class='author-name__xu'>Xu</span><span class='author-name__lin'>lin</span> <span class='author-name__li'>Li</span></strong>, Yubo Wang, Muhammad Sher Afgan</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <cite class='work-title' lang='en'>&ldquo;MCVL: Multi-Space Cross-View Learning for Aerial-Ground Person Re-Identification&rdquo;</cite><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <span class='work-meta'>ECCV 2026</span>
@@ -204,6 +195,15 @@ redirect_from:
       <cite class='work-title' lang='en'>&ldquo;MagicPaint: Operate Anything for Image Inpainting with Diffusion Model&rdquo;</cite><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <span class='work-meta'>AAAI 2026</span>
       <span class='paper-actions'><a class='paper-link-button' href='https://doi.org/10.1609/aaai.v40i14.38151' target='_blank' rel='noopener noreferrer'>&#128196; 论文</a> <a class='paper-link-button' href='https://github.com/littleYaang/MagicPaint' target='_blank' rel='noopener noreferrer'>&#128736;&#65039; 项目</a> <a class='paper-link-button' href='https://github.com/kw66/research-figures/tree/main/MagicPaint' target='_blank' rel='noopener noreferrer'>&#127912; 画图PPT</a></span>
+    </p>
+  </article>
+
+  <article class='paper-list-item' data-paper-tags='reid'>
+    <p class='paper-entry'>
+      <span class='work-authors'>Chenyang Wang, Bin Liu, <strong class='author-name'><span class='author-name__xu'>Xu</span><span class='author-name__lin'>lin</span> <span class='author-name__li'>Li</span></strong>, Nenghai Yu</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
+      <cite class='work-title' lang='en'>&ldquo;PID-Level Dense Text and Attribute-Indexed Semantic Prototypes for Exemplar-Free Lifelong Person Re-Identification&rdquo;</cite><span class='paper-entry-separator' aria-hidden='true'>,</span>
+      <span class='work-meta'>PRCV 2026</span>
+      <span class='paper-actions'><span class='paper-link-button paper-link-button--disabled' aria-disabled='true'>&#128196; 论文</span> <a class='paper-link-button' href='https://github.com/kw66/ReID-text-annotation' target='_blank' rel='noopener noreferrer'>&#128736;&#65039; 项目</a></span>
     </p>
   </article>
 
