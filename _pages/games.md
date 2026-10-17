@@ -29,7 +29,6 @@ page_class: project-hub-page
     <article class="project-card">
       <a class="project-card__media" href="https://kw66.github.io/PhD_Simulator_V2/" target="_blank" rel="noopener noreferrer" aria-label="打开研究生模拟器v2.0">
         <img src="{{ '/images/works/phd-simulator-v2-cover-card.webp' | relative_url }}" alt="研究生模拟器v2.0角色封面" width="1100" height="614" loading="lazy" decoding="async">
-        <span class="project-card__kicker project-card__kicker--status">开发中</span>
       </a>
       <div class="project-card__body">
         <div class="project-card__main">
@@ -39,7 +38,7 @@ page_class: project-hub-page
             <a href="https://github.com/kw66/PhD_Simulator_V2" target="_blank" rel="noopener noreferrer" aria-label="查看研究生模拟器v2.0项目">项目</a>
           </div>
         </div>
-        <p>研究生日常模拟游戏新版，新增局外成长系统和两个特殊角色。</p>
+        <p>研究生日常模拟游戏正式版，18位角色、分支天赋与成就成长，加入毕业盲审、求职和存档回溯。</p>
       </div>
     </article>
 

@@ -1,7 +1,7 @@
 ---
 permalink: /
 title: "个人主页"
-excerpt: "李旭霖，中国科学技术大学博士生，研究行人重识别与视觉表征学习，并分享科研绘图资源和网页小游戏。"
+excerpt: "李旭霖，获USTC博士学位，研究行人重识别与视觉表征学习，并分享科研绘图资源和网页小游戏。"
 og_image: "/images/works/atreid-featured-card.webp"
 author_profile: true
 redirect_from:
@@ -50,7 +50,7 @@ redirect_from:
           <img src='images/works/phd-simulator-v2-cover-card.webp' alt='研究生模拟器v2.0角色封面' width='1100' height='614' loading='lazy' decoding='async'>
         </div>
         <div class='featured-item-body'>
-          <h3 class='featured-item-title'>&#127918; &#30740;&#31350;&#29983;&#27169;&#25311;&#22120;v2.0 <span class='featured-status'>开发中</span></h3>
+          <h3 class='featured-item-title'>&#127918; &#30740;&#31350;&#29983;&#27169;&#25311;&#22120;v2.0</h3>
           <div class='featured-actions'>
             <a class='featured-button' href='https://kw66.github.io/PhD_Simulator_V2/' target='_blank' rel='noopener noreferrer'>游玩</a>
             <a class='featured-button' href='https://github.com/kw66/PhD_Simulator_V2' target='_blank' rel='noopener noreferrer'>&#128736;&#65039; 项目</a>
