@@ -176,7 +176,7 @@ redirect_from:
       <span class='work-authors'>Wajahat Khalid, Bin Liu, <strong class='author-name'><span class='author-name__xu'>Xu</span><span class='author-name__lin'>lin</span> <span class='author-name__li'>Li</span></strong>, Yubo Wang, Muhammad Sher Afgan</span><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <cite class='work-title' lang='en'>&ldquo;MCVL: Multi-Space Cross-View Learning for Aerial-Ground Person Re-Identification&rdquo;</cite><span class='paper-entry-separator' aria-hidden='true'>,</span>
       <span class='work-meta'>ECCV 2026</span>
-      <span class='paper-actions'><span class='paper-link-button paper-link-button--disabled' aria-disabled='true'>&#128196; 论文</span></span>
+      <span class='paper-actions'><a class='paper-link-button' href='https://media.eventhosts.cc/Conferences/ECCV2026/pdfs/7411.pdf' target='_blank' rel='noopener noreferrer'>&#128196; 论文</a></span>
     </p>
   </article>
 
