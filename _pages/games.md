@@ -1,7 +1,7 @@
 ---
 permalink: /games/
 title: "小游戏"
-excerpt: "李旭霖制作的网页小游戏，包括研究生模拟器、学习成仙、图片勇者、校园回忆录和科王象棋。"
+excerpt: "李旭霖制作的网页小游戏，包括研究生模拟器、研究生塔防、学习成仙、图片勇者、校园回忆录和科王象棋。"
 og_image: "/images/works/phd-simulator-v2-cover-card.webp"
 author_profile: false
 page_class: project-hub-page
@@ -39,6 +39,23 @@ page_class: project-hub-page
           </div>
         </div>
         <p>研究生日常模拟游戏正式版，18位角色、分支天赋与成就成长，加入毕业盲审、求职和存档回溯。</p>
+      </div>
+    </article>
+
+    <article class="project-card">
+      <a class="project-card__media" href="https://kw66.github.io/phd-td/" target="_blank" rel="noopener noreferrer" aria-label="打开研究生塔防">
+        <img src="{{ '/images/works/phd-td-cover-card.webp' | relative_url }}" alt="研究生塔防游戏画面，六种学生在实验室协作处理论文" width="1100" height="725" loading="lazy" decoding="async">
+        <span class="project-card__kicker project-card__kicker--status">开发中</span>
+      </a>
+      <div class="project-card__body">
+        <div class="project-card__main">
+          <h2>研究生塔防</h2>
+          <div class="project-card__actions">
+            <a href="https://kw66.github.io/phd-td/" target="_blank" rel="noopener noreferrer" aria-label="游玩研究生塔防">游玩</a>
+            <a href="https://github.com/kw66/phd-td" target="_blank" rel="noopener noreferrer" aria-label="查看研究生塔防项目">项目</a>
+          </div>
+        </div>
+        <p>科研主题塔防试玩版，安排六种学生入座，在三个月内协作处理论文、触发 SAN 特性并维持实验室经费。</p>
       </div>
     </article>
 

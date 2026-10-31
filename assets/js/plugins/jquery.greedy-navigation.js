@@ -14,6 +14,9 @@ var breaks = [];
 
 function updateNav() {
 
+  // The current masthead uses a fixed menu without the legacy overflow controls.
+  if (!$nav.length || !$btn.length || !$vlinks.length || !$hlinks.length) return;
+
   var availableSpace = $btn.hasClass('hidden') ? $nav.width() : $nav.width() - $btn.width() - 30;
 
   // The visible list is overflowing the nav

@@ -60,6 +60,19 @@ redirect_from:
 
       <article class='featured-item' data-featured-item>
         <div class='featured-item-image'>
+          <img src='images/works/phd-td-cover-card.webp' alt='研究生塔防游戏画面' width='1100' height='725' loading='lazy' decoding='async'>
+        </div>
+        <div class='featured-item-body'>
+          <h3 class='featured-item-title'>&#127918; 研究生塔防 <span class='featured-status'>开发中</span></h3>
+          <div class='featured-actions'>
+            <a class='featured-button' href='https://kw66.github.io/phd-td/' target='_blank' rel='noopener noreferrer'>游玩</a>
+            <a class='featured-button' href='https://github.com/kw66/phd-td' target='_blank' rel='noopener noreferrer'>&#128736;&#65039; 项目</a>
+          </div>
+        </div>
+      </article>
+
+      <article class='featured-item' data-featured-item>
+        <div class='featured-item-image'>
           <img src='images/works/study-ascension-cover-card.png' alt='学习成仙水墨游戏界面' width='1440' height='805' loading='lazy' decoding='async'>
         </div>
         <div class='featured-item-body'>
